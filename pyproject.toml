@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=75"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "grid-project"
+version = "0.1.0"
+description = "Local PJM and EIA energy data pipeline"
+requires-python = ">=3.11"
+dependencies = ["duckdb>=1.2,<2", "httpx>=0.28,<1"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8,<10", "dbt-duckdb>=1.9,<2"]
+
+[project.scripts]
+grid = "grid_pipeline.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
