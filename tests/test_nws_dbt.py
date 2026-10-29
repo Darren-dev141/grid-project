@@ -22,10 +22,11 @@ def run_dbt(root):
     args = [str(executable), 'build', '--project-dir', str(PROJECT),
             '--profiles-dir', str(PROJECT), '--target-path', str(root / 'target'),
             '--log-path', str(root / 'logs'), '--select', 'nws_*']
-    result = subprocess.run(args, env=env, capture_output=True, text=True, timeout=120)
-    if 'concurrent send_bytes() calls are not supported' in result.stdout + result.stderr:
-        warnings.warn('dbt concurrent send_bytes() failure: retrying once', RuntimeWarning)
+    for _ in range(3):
         result = subprocess.run(args, env=env, capture_output=True, text=True, timeout=120)
+        if 'concurrent send_bytes() calls are not supported' not in result.stdout + result.stderr:
+            return result
+        warnings.warn('dbt concurrent send_bytes() failure: retrying', RuntimeWarning)
     return result
 
 
