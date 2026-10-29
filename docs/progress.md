@@ -211,3 +211,17 @@ thresholds, BGE separation, and the live counts in the evidence file.
 Final verification: **85 passed in 162.07s** (one retried dbt `send_bytes()` flake
 reported as a warning); live demand build PASS=24 WARN=1 ERROR=0, 0 invalid rows;
 `git diff --check` clean.
+
+The S1 and S2 tree landed as 60194df, committed and pushed at 08:38 by another
+session from what I had staged while the suite ran. The first full run failed two NWS dbt tests;
+both passed when rerun in isolation and twice more with the full dbt test files.
+The probable cause is the known dbt `send_bytes()` flake hitting twice, which
+outran the single retry; this is likely, not proven. The NWS test helper now
+gets up to three attempts. Full suite: **85 passed in 140.79s**.
+
+S2 closed: the alert whitelist was checked against NWS's own `/alerts/types` list
+(111 types). All six current heat/cold names are present. The Excessive Heat and
+Wind Chill names are no longer listed and are kept only for older alerts. Freeze
+and Frost are excluded as crop warnings. Evidence:
+`evidence/nws-alert-types-2026-10-29.json`. Deferred to S3: confirm that "the low
+for a date is the night starting that date" is the convention the stress index wants.

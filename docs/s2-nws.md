@@ -58,10 +58,14 @@ appear in cleaned models.
 `nws_alerts` retains heat/cold alert observations and their identity, event, timing,
 severity, headline and description. Its whitelist is Heat Advisory; Extreme Heat
 Watch/Warning; Excessive Heat Watch/Warning; Cold Weather Advisory; Extreme Cold
-Watch/Warning; Wind Chill Advisory/Watch/Warning. These names are configured from
-the requested current and historical terminology, **not verified by the live
-response**: no active alerts were returned. New event naming needs an explicit
-whitelist update. This is alert history, not a current-active view; disappearance
+Watch/Warning; Wind Chill Advisory/Watch/Warning. No active alerts were returned
+live, so the names were checked against NWS's own event list instead
+(`/alerts/types`, 111 types, October 29; see
+[evidence](evidence/nws-alert-types-2026-10-29.json)). All six current heat/cold
+names are present. The Excessive Heat and Wind Chill names are no longer listed;
+they stay in the whitelist only to match older alerts. Freeze Watch/Warning and Frost
+Advisory are excluded because they are crop warnings, not grid-stress signals.
+A new event name needs an explicit whitelist update. This is alert history, not a current-active view; disappearance
 from later snapshots does not delete history. An empty snapshot is visible in
 raw.batches, not as a fabricated alert row.
 
@@ -106,7 +110,7 @@ Client tests use httpx.MockTransport; integration tests execute real dbt against
 synthetic temporary DuckDB databases and select only nws_* (no price-node variable).
 They exercise issuance revisions, local dates/DST, stale arrivals, latest selection,
 partial days, pending batches, alert history/filtering and bad data failures.
-The known Python 3.14/Windows send_bytes subprocess error is retried once only,
+The known Python 3.14/Windows send_bytes subprocess error gets at most three attempts,
 with a warning when encountered.
 
 Observed RED messages before implementation:

@@ -1,0 +1,26 @@
+{
+  "source": "https://api.weather.gov/alerts/types",
+  "fetched_utc_date": "2026-10-29",
+  "response_sha256": "b04067365493a4d53f4b94e2b0fec938173a1ccc0ee98f87c9338bc90fd10fbd",
+  "event_type_count": 111,
+  "whitelist_current": [
+    "Heat Advisory",
+    "Extreme Heat Watch",
+    "Extreme Heat Warning",
+    "Cold Weather Advisory",
+    "Extreme Cold Watch",
+    "Extreme Cold Warning"
+  ],
+  "whitelist_not_in_current_list": [
+    "Excessive Heat Watch",
+    "Excessive Heat Warning",
+    "Wind Chill Advisory",
+    "Wind Chill Watch",
+    "Wind Chill Warning"
+  ],
+  "temperature_types_excluded": [
+    "Freeze Warning",
+    "Freeze Watch",
+    "Frost Advisory"
+  ]
+}
