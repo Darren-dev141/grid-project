@@ -1,0 +1,51 @@
+version: 2
+models:
+  - name: nws_forecast_periods
+    description: All committed NWS 12-hour forecast issuance observations; timestamps retain UTC instants and dates use America/New_York.
+    columns:
+      - name: issuance_id
+        data_tests: [not_null]
+      - name: issued_at_utc
+        data_tests: [not_null]
+      - name: generated_at_utc
+        data_tests: [not_null]
+      - name: fetched_at_utc
+        data_tests: [not_null]
+      - name: period_number
+        data_tests: [not_null]
+      - name: start_time_utc
+        data_tests: [not_null]
+      - name: end_time_utc
+        data_tests: [not_null]
+      - name: local_date
+        data_tests: [not_null]
+      - name: is_daytime
+        data_tests: [not_null]
+      - name: temperature_f
+        data_tests: [not_null]
+      - name: temperature_unit
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['F']
+  - name: nws_forecast_daily
+    description: High from daytime periods and low from nights starting on each local date, retained per issuance. Partial dates may have a null high or low.
+    columns:
+      - name: issuance_id
+        data_tests: [not_null]
+      - name: local_date
+        data_tests: [not_null]
+  - name: nws_forecast_latest
+    description: Daily rows of the latest updateTime, then generatedAt, fetch time and digest; historical issuances remain in the other views.
+  - name: nws_alerts
+    description: Heat and cold alert snapshots retained by response digest; absence in a later snapshot does not delete historical alerts.
+    columns:
+      - name: alert_id
+        data_tests: [not_null]
+      - name: event
+        data_tests: [not_null]
+      - name: sent_at_utc
+        data_tests: [not_null]
+      - name: expires_at_utc
+        data_tests: [not_null]

@@ -1,5 +1,6 @@
-"""Bounded API loads. Live provider contracts still require verification."""
+"""Bounded EIA-930 API loads with durable checkpoints."""
 
+from dataclasses import dataclass
 from datetime import datetime, timedelta, timezone
 import json
 import os
@@ -23,6 +24,28 @@ def utc_hour(value: str) -> datetime:
     if parsed.minute or parsed.second or parsed.microsecond:
         raise ValueError('timestamps must align to an hour')
     return parsed.astimezone(timezone.utc)
+
+
+@dataclass(frozen=True)
+class Dataset:
+    route: str
+    facets: tuple[tuple[str, str], ...]
+    stream: str
+    scope: tuple[tuple[str, str], ...]
+    sort: tuple[str, ...]
+
+
+DATASETS = {
+    'fuel-mix': Dataset('electricity/rto/fuel-type-data', (('respondent', 'PJM'),),
+                        'eia:electricity/rto/fuel-type-data:PJM', (('respondent', 'PJM'),),
+                        ('period', 'fueltype')),
+    'pjm-demand': Dataset('electricity/rto/region-data', (('respondent', 'PJM'), ('type', 'D')),
+                          'eia:electricity/rto/region-data:PJM:D', (('respondent', 'PJM'), ('type', 'D')),
+                          ('period',)),
+    'bge-demand': Dataset('electricity/rto/region-sub-ba-data', (('parent', 'PJM'), ('subba', 'BC')),
+                         'eia:electricity/rto/region-sub-ba-data:PJM:BC', (('parent', 'PJM'), ('subba', 'BC')),
+                         ('period',)),
+}
 
 
 def request_page(client, url, params, headers, key, sleep):
@@ -55,52 +78,35 @@ def request_page(client, url, params, headers, key, sleep):
     raise AssertionError('unreachable')
 
 
-def validate_scope(rows, source, node, start, end):
-    """Refuse a provider that ignores date or geography filters."""
+def validate_scope(rows, spec, start, end):
+    """Refuse an upstream response outside requested hours or dataset facets."""
     try:
         for row in rows:
-            if source == 'eia':
-                hour = datetime.strptime(row['period'], '%Y-%m-%dT%H').replace(tzinfo=timezone.utc)
-                matches = row['respondent'] == 'PJM'
-            else:
-                hour = None
-                for pattern in ('%m/%d/%Y %H:%M:%S', '%m/%d/%Y %H:%M', '%Y-%m-%dT%H:%M:%S'):
-                    try:
-                        hour = datetime.strptime(row['datetime_beginning_utc'], pattern).replace(tzinfo=timezone.utc)
-                        break
-                    except ValueError:
-                        continue
-                matches = str(row['pnode_id']) == str(node)
-            if hour is None or not start <= hour < end or hour.minute or hour.second or not matches:
+            hour = datetime.strptime(row['period'], '%Y-%m-%dT%H').replace(tzinfo=timezone.utc)
+            if not start <= hour < end or hour.minute or hour.second or any(row[key] != value for key, value in spec.scope):
                 raise ValueError('out of scope')
     except (KeyError, TypeError, ValueError):
         raise LoadError('upstream rows violate the requested UTC interval or geography; checkpoint unchanged') from None
 
 
 def fetch(root: Path, source: str, start: datetime, end: datetime, *,
-          node: int | None = None, overlap_hours: int = 48,
-          page_size: int = 5000, client=None, sleep=time.sleep) -> dict:
-    """Fetch [start,end), resuming from a durable checkpoint with revision overlap.
-
-    A persistent DuckDB connection excludes another process writer for the run.
-    Run only one ingestion job per process. Errors never advance the watermark.
-    """
-    if source not in {'eia', 'pjm'}:
-        raise ValueError('source must be eia or pjm')
+          overlap_hours: int = 48, page_size: int = 5000, client=None,
+          sleep=time.sleep, max_days: int = 31) -> dict:
+    """Fetch a named EIA-930 dataset in [start,end), resuming its checkpoint."""
+    if source not in DATASETS:
+        raise ValueError(f'dataset must be one of {", ".join(DATASETS)}')
     for value in (start, end):
         if utc_hour(value.isoformat()) != value:
             raise ValueError('expected UTC hour')
-    if not start < end or end - start > timedelta(days=31):
-        raise ValueError('request interval must be positive and at most 31 days')
+    if not start < end or max_days < 1 or end - start > timedelta(days=max_days):
+        raise ValueError(f'request interval must be positive and at most {max_days} days')
     if not 0 <= overlap_hours <= 744 or not 1 <= page_size <= 5000:
         raise ValueError('invalid overlap or page size')
-    if source == 'pjm' and (not isinstance(node, int) or isinstance(node, bool) or node <= 0):
-        raise ValueError('PJM requires a verified positive BGE node ID')
-    key = os.environ.get('EIA_API_KEY' if source == 'eia' else 'PJM_API_KEY')
+    key = os.environ.get('EIA_API_KEY')
     if not key:
-        raise LoadError(f'missing {source.upper()}_API_KEY environment variable')
-    dataset = 'electricity/rto/fuel-type-data' if source == 'eia' else 'rt_hrl_lmps'
-    stream = f'{source}:{dataset}:{node if source == "pjm" else "PJM"}'
+        raise LoadError('missing EIA_API_KEY environment variable')
+    spec = DATASETS[source]
+    provider, dataset, stream = 'eia', spec.route, spec.stream
     root.mkdir(parents=True, exist_ok=True)
     database = root / 'grid.duckdb'
     with duckdb.connect(str(database)) as conn:
@@ -122,18 +128,16 @@ def fetch(root: Path, source: str, start: datetime, end: datetime, *,
         if owned_client:
             client = httpx.Client(timeout=30)
         try:
-            pages = download(root, source, dataset, node, effective_start, end,
-                             page_size, client, key, sleep)
+            pages = download(root, spec, effective_start, end, page_size, client, key, sleep)
         finally:
             if owned_client:
                 client.close()
-        indexed = sum(ingest(database, root, source, dataset, path.read_bytes(),
-                             committed=False) for path in pages)
+        indexed = sum(ingest(database, root, provider, dataset, path.read_bytes(), committed=False) for path in pages)
         conn.execute('BEGIN TRANSACTION')
         try:
             conn.executemany('''UPDATE raw.batches SET committed=TRUE, observed_at=current_timestamp
                 WHERE source=? AND dataset=? AND digest=?''',
-                [(source, dataset, path.stem) for path in pages])
+                [(provider, dataset, path.stem) for path in pages])
             conn.execute('''INSERT INTO ops.checkpoints VALUES (?, ?, ?, current_timestamp)
                 ON CONFLICT(stream) DO UPDATE SET completed_until=excluded.completed_until,
                 updated_at=excluded.updated_at''', [stream, start, end])
@@ -145,34 +149,23 @@ def fetch(root: Path, source: str, start: datetime, end: datetime, *,
             'start': effective_start.isoformat(), 'end': end.isoformat()}
 
 
-def download(root, source, dataset, node, start, end, page_size, client, key, sleep):
+def download(root, spec, start, end, page_size, client, key, sleep):
     offset, total, pages, seen = 0, None, [], set()
-    # Both upstream endpoints use inclusive end boundaries; our contract is exclusive.
     last_hour = end - timedelta(hours=1)
     for _ in range(10000):
-        if source == 'eia':
-            url = f'https://api.eia.gov/v2/{dataset}/data/'
-            params = {'api_key': key, 'frequency': 'hourly', 'data[0]': 'value',
-                      'facets[respondent][]': 'PJM', 'start': start.strftime('%Y-%m-%dT%H'),
-                      'end': last_hour.strftime('%Y-%m-%dT%H'),
-                      'sort[0][column]': 'period', 'sort[0][direction]': 'asc',
-                      'sort[1][column]': 'fueltype', 'sort[1][direction]': 'asc',
-                      'offset': offset, 'length': page_size}
-            headers = {}
-        else:
-            url = f'https://api.pjm.com/api/v1/{dataset}'
-            params = {'pnode_id': node, 'datetime_beginning_utc':
-                      f'{start:%m/%d/%Y %H:%M} to {last_hour:%m/%d/%Y %H:%M}',
-                      'startRow': offset + 1, 'rowCount': page_size,
-                      'sort': 'datetime_beginning_utc', 'order': 'Asc'}
-            headers = {'Ocp-Apim-Subscription-Key': key}
-        body = request_page(client, url, params, headers, key, sleep)
-        path = land(root, source, body)
+        url = f'https://api.eia.gov/v2/{spec.route}/data/'
+        params = {'api_key': key, 'frequency': 'hourly', 'data[0]': 'value',
+                  'start': start.strftime('%Y-%m-%dT%H'), 'end': last_hour.strftime('%Y-%m-%dT%H'),
+                  'offset': offset, 'length': page_size}
+        params.update({f'facets[{name}][]': value for name, value in spec.facets})
+        for index, column in enumerate(spec.sort):
+            params.update({f'sort[{index}][column]': column, f'sort[{index}][direction]': 'asc'})
+        body = request_page(client, url, params, {}, key, sleep)
+        path = land(root, 'eia', body)
         try:
-            payload = json.loads(body)
-            envelope = payload['response'] if source == 'eia' else payload
-            rows = envelope['data' if source == 'eia' else 'items']
-            raw_total = envelope['total' if source == 'eia' else 'totalRows']
+            envelope = json.loads(body)['response']
+            rows = envelope['data']
+            raw_total = envelope['total']
             current_total = int(raw_total)
             if str(current_total) != str(raw_total):
                 raise ValueError('noninteger total')
@@ -186,7 +179,7 @@ def download(root, source, dataset, node, start, end, page_size, client, key, sl
             raise LoadError('upstream returned no records; checkpoint unchanged')
         if current_total != total or not rows or len(rows) > page_size or offset + len(rows) > total:
             raise LoadError('upstream pagination inconsistent; checkpoint unchanged')
-        validate_scope(rows, source, node, start, end)
+        validate_scope(rows, spec, start, end)
         if path.stem in seen:
             raise LoadError('upstream repeated a page; checkpoint unchanged')
         seen.add(path.stem)

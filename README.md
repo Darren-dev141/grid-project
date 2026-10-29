@@ -50,23 +50,54 @@ verification. See [progress evidence](docs/progress.md).
 
 ## Fetch a bounded interval
 
-`grid-fetch` uses `EIA_API_KEY` or `PJM_API_KEY` from the local environment. Keys
-are never command arguments. Register free keys for regular operation; EIA's
-generation endpoint has passed a bounded live sample using its public DEMO_KEY.
-PJM endpoint compatibility remains unverified. Reinstall the editable package after updating it.
+`grid-fetch` reads `EIA_API_KEY` from the local environment; keys are never
+command arguments. All data comes from EIA-930. The direct PJM route is retired
+(plan v2). Reinstall the editable package after updating it.
 
 ```powershell
-.venv/Scripts/grid-fetch.exe eia --start 2026-10-01T00:00Z --end 2026-10-02T00:00Z
-.venv/Scripts/grid-fetch.exe pjm --start 2026-10-01T00:00Z --end 2026-10-02T00:00Z --bge-node VERIFIED_NODE_ID
+.venv/Scripts/grid-fetch.exe pjm-demand --start 2026-10-27T00:00Z --end 2026-10-29T00:00Z
+.venv/Scripts/grid-fetch.exe bge-demand --start 2026-10-20T00:00Z --end 2026-10-27T00:00Z
+.venv/Scripts/grid-fetch.exe fuel-mix --start 2026-10-27T00:00Z --end 2026-10-29T00:00Z
 ```
 
-Intervals are UTC, start-inclusive/end-exclusive, at most 31 days. The same
-warehouse stores separate stream checkpoints for EIA PJM generation and each PJM
-price node. Extend `--end` to load newer data; the default 48-hour overlap refetches
+Datasets: `pjm-demand` (PJM hourly demand, about 1 hour behind), `bge-demand` (BGE
+zone demand, about 47 hours behind, trailing local context only, never blended
+with PJM-wide scoring) and `fuel-mix` (PJM generation by fuel, about 22 hours
+behind). Lags are single measurements from October 29, 2026.
+
+Intervals are UTC, start-inclusive/end-exclusive, at most 31 days. Each dataset
+has its own stream checkpoint. Extend `--end` to load newer data; the default 48-hour overlap refetches
 recent observations. Advance `--start` as needed to keep each request within 31
 days, but never beyond the previous completed end. It is the lower bound on
 overlap, so retaining it through the overlap window allows correction fetching.
-Already completed intervals are a no-op. Historical backfills use another `--root`
+Already completed intervals are a no-op.
+
+Load history in larger windows with the resumable backfill. Hourly history starts
+2019-01-01. A failed run keeps its checkpoint; rerunning continues where it stopped.
+
+```powershell
+.venv/Scripts/grid-backfill.exe pjm-demand --start 2019-01-01T00:00Z --end 2026-10-29T00:00Z --window-days 180
+```
+
+EIA's DEMO_KEY allows only about 10 requests before a roughly 20-hour lockout
+(measured October 29), so full history needs the personal key.
+
+Cleaned demand keeps every value as reported and adds `quality`: `ok`, `missing`
+(provider null) or `implausible` (PJM above 200,000 MWh, or a one-hour jump more
+than 10% above both adjacent hours or 15% below both; thresholds come from the
+2019-2026 profile in `docs/evidence/eia-demand-live-2026-10-29.json`). A non-null value
+that is not a number is `invalid` and fails the build: that is a format change, not a gap. A warn-level
+dbt test lists every non-ok hour. Downstream steps use `quality = 'ok'` rows.
+
+## Fetch NWS weather
+
+```powershell
+$env:NWS_USER_AGENT = 'grid-project/0.1 (github.com/Darren-dev141/grid-project)'
+.venv/Scripts/grid-weather.exe
+```
+
+Lands the Reisterstown gridpoint (LWX 100,98) 12-hour forecast and active heat/cold
+alerts. Every forecast issuance is kept. Design: [docs/s2-nws.md](docs/s2-nws.md). Historical backfills use another `--root`
 until a dedicated backfill/merge workflow is implemented.
 
 Run one ingestion job at a time, then `dbt build`. A checkpoint advances only

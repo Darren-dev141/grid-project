@@ -7,7 +7,7 @@ registered by this build. Keep the address out of tracked project files.
 - PJM Data Miner: https://dataminer2.pjm.com/ and https://apiportal.pjm.com/
 
 Use the free access route and review the current provider terms and quotas.
-Keep keys in local environment variables `EIA_API_KEY` and `PJM_API_KEY`; do not
+Keep the key in the local environment variable `EIA_API_KEY` (the direct PJM route is retired in plan v2); do not
 paste them into chat or commit them. If a key must be transferred to the agent,
 use the application's private secret-entry card.
 

@@ -1,0 +1,108 @@
+{
+  "recorded_at_utc": "2026-10-29T03:29:04.120711+00:00",
+  "location": {
+    "latitude": 39.4696,
+    "longitude": -76.8294,
+    "office": "LWX",
+    "gridX": 100,
+    "gridY": 98
+  },
+  "points_sha256": "a9f89f1267aecda90f8978d00144b7c0293222028cf13f8069057f268bdda1b6",
+  "endpoints": [
+    "https://api.weather.gov/points/39.4696,-76.8294",
+    "https://api.weather.gov/gridpoints/LWX/100,98/forecast",
+    "https://api.weather.gov/alerts/active?point=39.4696,-76.8294"
+  ],
+  "requests_total": 4,
+  "request_note": "One initial point resolution, then CLI point verification + forecast + alerts. No API calls in tests.",
+  "batches": [
+    {
+      "dataset": "alerts",
+      "sha256": "bb5d40e0efbc364c0b6728d5886c2dc9bd69c6ff175166787b48459409549fff",
+      "fetched_at_utc": "2026-10-29T03:27:32.226394Z",
+      "raw_records": 0
+    },
+    {
+      "dataset": "forecast",
+      "sha256": "cffc8ef64ce73150eb5c93e7e981916115d29c9d6dbfc19a4653c6a02d2560ba",
+      "fetched_at_utc": "2026-10-29T03:27:32.061698Z",
+      "raw_records": 1
+    }
+  ],
+  "model_counts": {
+    "nws_forecast_periods": 14,
+    "nws_forecast_daily": 8,
+    "nws_forecast_latest": 8,
+    "nws_alerts": 0
+  },
+  "measurements": {
+    "first_local_date": "2026-10-28",
+    "last_local_date": "2026-11-04",
+    "days_with_high": 7,
+    "days_with_low": 7,
+    "days_with_both": 6,
+    "update_time_utc": "2026-10-28T23:52:47Z",
+    "generated_at_utc": "2026-10-29T02:37:21Z",
+    "fetched_at_utc": "2026-10-29T03:27:32.061698Z",
+    "update_to_fetch_lag_seconds": 12885.061698
+  },
+  "daily_forecast": [
+    {
+      "local_date": "2026-10-28",
+      "high_f": null,
+      "low_f": 46.0
+    },
+    {
+      "local_date": "2026-10-29",
+      "high_f": 71.0,
+      "low_f": 53.0
+    },
+    {
+      "local_date": "2026-10-30",
+      "high_f": 71.0,
+      "low_f": 43.0
+    },
+    {
+      "local_date": "2026-10-31",
+      "high_f": 62.0,
+      "low_f": 45.0
+    },
+    {
+      "local_date": "2026-11-01",
+      "high_f": 65.0,
+      "low_f": 47.0
+    },
+    {
+      "local_date": "2026-11-02",
+      "high_f": 67.0,
+      "low_f": 50.0
+    },
+    {
+      "local_date": "2026-11-03",
+      "high_f": 67.0,
+      "low_f": 51.0
+    },
+    {
+      "local_date": "2026-11-04",
+      "high_f": 67.0,
+      "low_f": null
+    }
+  ],
+  "live_alert_event_names": [],
+  "dbt_build": {
+    "selection": "nws_*",
+    "models_passed": 4,
+    "tests_passed": 20,
+    "failures": 0
+  },
+  "fetch_time_definition": "raw.batches.loaded_at: first successful index timestamp immediately following receipt, not upstream issuance; byte-identical replay does not refresh it.",
+  "scratch_root": "data/nws-live",
+  "limitations": [
+    "No active alerts at the point, so no heat/cold event names verified live.",
+    "Raw scratch files are gitignored; SHA256 digests retained here."
+  ],
+  "offline_byte_identical_replay_insertions": {
+    "alerts": 0,
+    "forecast": 0
+  }
+}

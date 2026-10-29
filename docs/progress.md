@@ -156,3 +156,58 @@ Verification: full suite **43 passed in 42.04s**; `git diff --check` passed; the
 installed `grid-freshness` exits 1 with a clear message when nothing is published.
 Still missing: PJM key and DNS fix, live price ingestion, verified BGE node, Power BI
 report, web MVP, alerts and real users.
+
+## S1 and S2 — October 29, 2026
+
+Plan v2 adopted: grid-stress brief, EIA-930 only for grid data, direct PJM retired.
+Luna (S1) and Astra (S2) Codex workers in T3 all failed on the ChatGPT usage limit.
+S1 was finished in this thread from the workers' partial worktrees: their tests
+were applied first and failed (31 RED) against the old code, then the code made
+them pass. S2 was completed by Codex Astra through the Codex CLI (commit 2601085 on
+branch t3/nws-weather-ingestion) and reviewed here before being applied.
+
+S1 delivered: EIA dataset registry (`fuel-mix`, `pjm-demand`, `bge-demand`), direct
+PJM fetch removed, resumable `grid-backfill`, cleaned `eia_pjm_hourly_demand` and
+`eia_bge_hourly_demand` (BGE labeled trailing, never joined to PJM-wide data).
+
+Live S1 run: PJM demand backfill on DEMO_KEY loaded 3 of 16 windows, 12,960 rows
+(2019-01-01 to 2020-06-24), zero missing hour rows, all raw hashes verified, then hit
+the DEMO_KEY quota (limit 10, Retry-After 73,591 s). Real history exposed 23 null
+hours around DST changes and two impossible spikes (417,669 and 215,682 MWh). The
+build initially failed; cleaned models now flag `quality` instead of failing or
+hiding (test-first). Live dbt: PASS=23 WARN=1 ERROR=0. Evidence:
+`evidence/eia-demand-live-2026-10-29.json`.
+
+S2 delivered (Codex): `grid-weather`, NWS raw landing, forecast periods/daily/latest
+models keeping every issuance, heat/cold alerts. Live: gridpoint LWX/100,98, 7 days
+of highs and lows, update-to-fetch lag 12,885 s, no active alerts (alert names not
+verified live). Codex reported that a few supplementary checks lacked separate RED runs.
+
+Verification: full suite **82 passed in 135.88s**, one retried dbt `send_bytes()`
+flake reported as a warning; `git diff --check` clean. Nothing committed by Claude.
+
+S1 finished on the personal EIA key (entered through T3's private secret card; found
+in 0 files afterwards). The backfill resumed from its checkpoint and completed all
+16 windows: 68,594 PJM demand hours, 2019-01-01 to 2026-10-29 02:00 UTC, equal to
+EIA's own row total; all 16 raw hashes verified. First live `bge-demand` fetch:
+168 hours, all ok. One hour is absent upstream (2023-11-06 05:00 UTC).
+
+Full history exposed more errors: 116 null hours, values up to 2,147,480,000 MWh
+(2021-10-19) and one-hour spikes under the 200,000 cap (192,229 MWh between 127,489
+and 136,631). Measured: 99.99% of hours sit within 3.3% of the higher neighbour; the
+errors sit 15.6-42.7% above, or 41% below. Added test-first: more than 10% above
+both neighbours or 15% below both is implausible (needs both neighbours; a test
+caught DuckDB `greatest()` ignoring NULLs). Live result: 68,463 ok, 116 missing,
+15 implausible; highest ok hour 162,648 MWh (2026-07-02). dbt PASS=23 WARN=1 ERROR=0.
+
+Independent review by a GPT-6 Luna subagent on high effort (read-only, against HEAD
+1169c62): one medium finding, proven in a scratch run. A non-null non-numeric value
+was cast to NULL and labeled `missing`, hiding a provider format change. Fixed
+test-first (RED: build exited 0 for both series): such values are now `invalid` and
+`demand_unparseable_value` fails the build. Everything else it checked was clean:
+routes, stream names, backfill windows and resume, checkpoints, revision selection,
+thresholds, BGE separation, and the live counts in the evidence file.
+
+Final verification: **85 passed in 162.07s** (one retried dbt `send_bytes()` flake
+reported as a warning); live demand build PASS=24 WARN=1 ERROR=0, 0 invalid rows;
+`git diff --check` clean.

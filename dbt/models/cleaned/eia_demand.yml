@@ -1,0 +1,50 @@
+version: 2
+models:
+  - name: eia_pjm_hourly_demand
+    description: Hourly EIA RTO-level PJM demand.
+    columns:
+      - name: hour_utc
+        data_tests: [not_null, unique]
+      - name: respondent
+        data_tests: [not_null]
+      - name: demand_mwh
+        description: As reported by EIA; null when the provider has no value for the hour.
+      - name: quality
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['ok', 'missing', 'implausible', 'invalid']
+      - name: units
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['megawatthours']
+      - name: geography
+        data_tests: [not_null]
+  - name: eia_bge_hourly_demand
+    description: Hourly EIA BGE sub-balancing-area demand for trailing local context.
+    columns:
+      - name: hour_utc
+        data_tests: [not_null, unique]
+      - name: subba
+        data_tests: [not_null]
+      - name: parent
+        data_tests: [not_null]
+      - name: demand_mwh
+        description: As reported by EIA; null when the provider has no value for the hour.
+      - name: quality
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['ok', 'missing', 'implausible', 'invalid']
+      - name: units
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['megawatthours']
+      - name: geography
+        data_tests: [not_null]

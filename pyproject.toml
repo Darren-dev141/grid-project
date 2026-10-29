@@ -15,8 +15,10 @@ dev = ["pytest>=8,<10", "dbt-duckdb>=1.9,<2"]
 [project.scripts]
 grid = "grid_pipeline.cli:main"
 grid-fetch = "grid_pipeline.fetch_cli:main"
+grid-backfill = "grid_pipeline.fetch_cli:backfill_main"
 grid-publish = "grid_pipeline.publish:main"
 grid-freshness = "grid_pipeline.freshness:main"
+grid-weather = "grid_pipeline.nws:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]

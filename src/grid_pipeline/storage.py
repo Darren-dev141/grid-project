@@ -8,8 +8,8 @@ import duckdb
 
 
 def land(root: Path, source: str, body: bytes) -> Path:
-    if source not in {"eia", "pjm"}:
-        raise ValueError("source must be eia or pjm")
+    if source not in {"eia", "pjm", "nws"}:
+        raise ValueError("source must be eia, pjm or nws")
     digest = hashlib.sha256(body).hexdigest()
     path = root / "raw" / source / f"{digest}.json"
     path.parent.mkdir(parents=True, exist_ok=True)
@@ -27,7 +27,11 @@ def ingest(database: Path, root: Path, source: str, dataset: str, body: bytes,
     # Land before parsing: even malformed upstream bodies remain available for diagnosis.
     path = land(root, source, body)
     payload = json.loads(body)
-    records = payload["response"]["data"] if source == "eia" else payload["items"]
+    if source == "nws":
+        from grid_pipeline.nws import records_from_payload
+        records = records_from_payload(dataset, payload)
+    else:
+        records = payload["response"]["data"] if source == "eia" else payload["items"]
     if not isinstance(records, list) or any(not isinstance(row, dict) for row in records):
         raise ValueError("expected a list of record objects")
     digest = path.stem
