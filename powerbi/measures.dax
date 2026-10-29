@@ -1,0 +1,16 @@
+// Add each measure separately to GridHourly in Power BI Desktop.
+Average BGE LMP (USD per MWh) = AVERAGE(GridHourly[price_usd_per_mwh])
+
+Peak observed BGE LMP (USD per MWh) = MAX(GridHourly[price_usd_per_mwh])
+
+Average PJM renewable share = AVERAGE(GridHourly[renewable_share])
+
+Price hours = COUNT(GridHourly[price_usd_per_mwh])
+
+Share hours = COUNT(GridHourly[renewable_share])
+
+Observed hours = COUNTROWS(GridHourly)
+
+Share coverage = DIVIDE([Share hours], [Observed hours])
+
+Data label = SELECTEDVALUE(GridHourly[data_kind], "Mixed or unavailable data")

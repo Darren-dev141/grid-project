@@ -1,0 +1,19 @@
+name: grid_project
+version: '0.1.0'
+config-version: 2
+profile: grid_project
+flags:
+  send_anonymous_usage_stats: false
+model-paths: [models]
+test-paths: [tests]
+macro-paths: [macros]
+models:
+  grid_project:
+    cleaned:
+      +schema: cleaned
+      +materialized: view
+    serving:
+      +schema: serving
+      +materialized: view
+vars:
+  expected_fuels: ['COL', 'NG', 'NUC', 'OIL', 'OTH', 'SUN', 'WAT', 'WND']

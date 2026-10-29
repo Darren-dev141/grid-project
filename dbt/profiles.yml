@@ -1,0 +1,10 @@
+grid_project:
+  target: local
+  outputs:
+    local:
+      type: duckdb
+      path: "{{ env_var('GRID_DATABASE') }}"
+      schema: main
+      threads: 1
+      settings:
+        TimeZone: UTC

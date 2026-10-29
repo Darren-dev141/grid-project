@@ -22,7 +22,8 @@ def land(root: Path, source: str, body: bytes) -> Path:
     return path
 
 
-def ingest(database: Path, root: Path, source: str, dataset: str, body: bytes) -> int:
+def ingest(database: Path, root: Path, source: str, dataset: str, body: bytes,
+           *, committed: bool = True) -> int:
     # Land before parsing: even malformed upstream bodies remain available for diagnosis.
     path = land(root, source, body)
     payload = json.loads(body)
@@ -41,6 +42,9 @@ def ingest(database: Path, root: Path, source: str, dataset: str, body: bytes) -
             source VARCHAR, dataset VARCHAR, digest VARCHAR,
             row_number INTEGER, payload JSON,
             PRIMARY KEY (source, dataset, digest, row_number))""")
+        # Backward-compatible metadata migration; original response bytes never change.
+        conn.execute('ALTER TABLE raw.batches ADD COLUMN IF NOT EXISTS committed BOOLEAN DEFAULT TRUE')
+        conn.execute('ALTER TABLE raw.batches ADD COLUMN IF NOT EXISTS observed_at TIMESTAMPTZ')
         conn.execute("BEGIN TRANSACTION")
         try:
             exists = conn.execute(
@@ -51,8 +55,8 @@ def ingest(database: Path, root: Path, source: str, dataset: str, body: bytes) -
                 conn.execute("COMMIT")
                 return 0
             conn.execute(
-                "INSERT INTO raw.batches(source,dataset,digest,path) VALUES (?,?,?,?)",
-                [source, dataset, digest, str(path.resolve())],
+                "INSERT INTO raw.batches(source,dataset,digest,path,committed) VALUES (?,?,?,?,?)",
+                [source, dataset, digest, str(path.resolve()), committed],
             )
             if records:
                 conn.executemany("INSERT INTO raw.records VALUES (?,?,?,?,?)", [

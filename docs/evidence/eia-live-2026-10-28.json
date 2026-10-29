@@ -1,0 +1,41 @@
+{
+  "verified_at_utc": "2026-10-29T00:21:57.383698+00:00",
+  "source": "https://api.eia.gov/v2/electricity/rto/fuel-type-data/",
+  "credential_type": "public EIA DEMO_KEY; no registered personal key",
+  "interval_start_utc": "2026-10-26T00:00:00+00:00",
+  "interval_end_exclusive_utc": "2026-10-28T00:00:00+00:00",
+  "raw_batches": 5,
+  "raw_indexed_records": 576,
+  "cleaned_records": 384,
+  "distinct_hours": 48,
+  "fuel_counts": {
+    "COL": 48,
+    "NG": 48,
+    "NUC": 48,
+    "OIL": 48,
+    "OTH": 48,
+    "SUN": 48,
+    "WAT": 48,
+    "WND": 48
+  },
+  "raw_sha256": [
+    "8e4eafdf9e7c6aa396d21ad92e6a0d2d1b7f77c93656509b99b4e4d7353a2380",
+    "ed7322fcd4771d238e7daeae9701fd0b3760722ff22783b9238153539bc0fc3c",
+    "68c2ef06f34195646b16feaf08331fb15a4c682c11d5372096ba435b9846c97b",
+    "78a0d842719c9ba05703fbdf01cc7a5ea26b0306f2584dcc93a07e19f2058441",
+    "0a9cecbd398a0d771a3eda723bf495b697925fad51d7e19b02b4e7d7d1cc8c71"
+  ],
+  "raw_integrity": "all batch digests verified",
+  "replay_inserted": 0,
+  "pagination": "initial 192-row request, then four-page 384-row overlapping extension with page_size=100",
+  "dbt_status_counts": {
+    "success": 1,
+    "pass": 9
+  },
+  "dbt_invocation_id": "d4ceeda4-722e-4b9a-9116-dd88e822f861",
+  "limitations": [
+    "PJM price API and BGE node not verified",
+    "No complete dashboard or charging recommendation",
+    "Two-day EIA sample does not prove long-term freshness or upstream revision handling"
+  ]
+}

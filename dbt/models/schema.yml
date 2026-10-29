@@ -1,0 +1,34 @@
+version: 2
+models:
+  - name: pjm_bge_hourly_price
+    description: BGE node hourly real-time LMP; synthetic contract until live verification.
+    columns:
+      - name: hour_utc
+        data_tests: [not_null, unique]
+      - name: pnode_id
+        data_tests: [not_null]
+      - name: price_usd_per_mwh
+        data_tests: [not_null]
+  - name: eia_pjm_hourly_generation
+    description: PJM regional generation by fuel; not BGE marginal emissions.
+    columns:
+      - name: hour_utc
+        data_tests: [not_null]
+      - name: respondent
+        data_tests: [not_null]
+      - name: fuel_type
+        data_tests: [not_null]
+      - name: generation_mwh
+        data_tests: [not_null]
+      - name: units
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['megawatthours']
+  - name: grid_hourly
+    columns:
+      - name: hour_utc
+        data_tests: [not_null, unique]
+      - name: mix_complete
+        data_tests: [not_null]
