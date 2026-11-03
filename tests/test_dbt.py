@@ -56,12 +56,11 @@ def run_dbt(root, command='build', *, generation_only=False, demand_only=False):
     env = os.environ.copy()
     env['GRID_DATABASE'] = str(root / 'grid.duckdb')
     env['DBT_SEND_ANONYMOUS_USAGE_STATS'] = 'false'
-    executable = Path(sys.executable).parent / ('dbt.exe' if os.name == 'nt' else 'dbt')
     selection = (['--select', 'eia_pjm_hourly_generation'] if generation_only
                  else ['--select', 'eia_pjm_hourly_demand', 'eia_bge_hourly_demand']
                  if demand_only else ['--vars', '{bge_pnode_id: 999}'])
     result = subprocess.run([
-        str(executable), command, '--project-dir', str(PROJECT),
+        sys.executable, '-m', 'grid_pipeline.dbt_runner', command, '--project-dir', str(PROJECT),
         '--profiles-dir', str(PROJECT), '--target-path', str(root / 'target'),
         '--log-path', str(root / 'logs'), *selection,
     ], env=env, capture_output=True, text=True, timeout=120)

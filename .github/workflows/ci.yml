@@ -1,0 +1,33 @@
+name: CI
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  tests-and-ledger:
+    name: tests-and-ledger
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          fetch-tags: true
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install -e '.[dev]'
+      - name: Secret pattern scan
+        run: python scripts/s4_secret_scan.py
+      - name: Full tests
+        env:
+          DBT_SEND_ANONYMOUS_USAGE_STATS: 'false'
+        run: python -m pytest -ra
+      - name: Ledger integrity verification
+        run: python -m grid_pipeline.ledger verify --integrity-only
+      - name: Prospective ledger witness verification
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: python -m grid_pipeline.ledger verify --witness

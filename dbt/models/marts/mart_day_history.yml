@@ -1,0 +1,45 @@
+version: 2
+models:
+  - name: mart_day_history
+    description: >-
+      PJM-wide daily observed history in America/New_York. Hour-ending intervals
+      ending at midnight belong to the preceding date, with hour label 24.
+      Peaks use only finite nonnegative demand with quality ok. Equal peaks use
+      the earliest UTC interval. Incomplete days retain provisional peaks.
+      BWI temperatures retain NCEI's reported observation date and require quality
+      ok. This is not an NWS night alignment decision; the S3c gate remains open.
+    columns:
+      - name: local_date
+        data_tests: [unique, not_null]
+      - name: day_type
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['weekday', 'weekend']
+      - name: peak_mw
+        description: Hourly integrated MWh divided by one hour, numerically MW.
+      - name: peak_hour_ending
+        description: Local clock hour 1 to 24; peak_hour_utc distinguishes DST folds.
+      - name: peak_hour_utc
+        description: Original UTC hour-ending timestamp without a timezone suffix.
+      - name: expected_hours
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: [23, 24, 25]
+                quote: false
+      - name: observed_hours
+        data_tests: [not_null]
+      - name: ok_hours
+        data_tests: [not_null]
+      - name: complete
+        description: Demand only; ok_hours equals this local date's expected_hours.
+        data_tests: [not_null]
+      - name: tmax_f
+        description: BWI observed high on NCEI's reported date, Fahrenheit.
+      - name: tmin_f
+        description: BWI observed low on NCEI's reported date, Fahrenheit.
+      - name: temperature_quality
+        description: Cleaned NCEI quality, or null when there is no observation.

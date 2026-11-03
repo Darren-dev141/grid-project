@@ -1,0 +1,25 @@
+{
+  "host_previous_suite": {
+    "source": "coordinator supplied; raw log requested",
+    "python": "3.14.7",
+    "pytest": "9.2.0",
+    "failed": 1,
+    "passed": 180,
+    "warnings": 1,
+    "seconds": 215.48,
+    "verdict": "NOT READY"
+  },
+  "local_recheck": {
+    "targeted_passed": 39,
+    "seconds": 12.8,
+    "unexecuted_static_mutation_exit": 1,
+    "production_child_guard_exit": 1,
+    "mutations_removed": true,
+    "python_files_ast_parsed": 44,
+    "full_suite": "pending host rerun",
+    "independent_verdict": "pending recheck",
+    "timing_source": "see targeted-tests.txt",
+    "powershell_static_mutation_exit": 1
+  },
+  "original_preflight_report_sha256": "cc084d447037704bdcd7e69cdfe1719cde82e4e323074240f49818fab0a2ec25"
+}

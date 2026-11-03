@@ -1,0 +1,21 @@
+version: 2
+models:
+  - name: ncei_bwi_daily_temps
+    description: Latest committed BWI daily TMAX/TMIN in Fahrenheit, requested with units=standard. NOAA observation dates are retained; these are not NWS night-start lows. Non-ok rows must be excluded from model fitting.
+    columns:
+      - name: local_date
+        data_tests: [not_null, unique]
+      - name: station
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['USW00093721']
+      - name: quality
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['ok', 'missing', 'invalid', 'implausible', 'flagged']
+      - name: digest
+        data_tests: [not_null]

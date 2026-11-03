@@ -1,0 +1,12 @@
+{
+  "--integrity-only": {
+    "exit_code": 0,
+    "stdout": "{\"acceptance\": \"bootstrap_no_receipts\", \"first_seen_commits\": {}, \"historical_origins\": 0, \"historical_receipt_additions\": 0, \"historical_receipts\": 0, \"history_commits\": 0, \"pending_receipts\": 0, \"prospective_origins\": 0, \"prospective_receipts\": 0, \"public_visibility\": \"not_inferred\", \"receipt_status\": {}, \"receipts\": 0, \"timing\": \"unverified_integrity_only\", \"witnessed_origins\": 0, \"witnessed_receipts\": 0}\n",
+    "stderr": ""
+  },
+  "--witness": {
+    "exit_code": 1,
+    "stdout": "",
+    "stderr": "ledger verify failed: GitHub acceptance evidence unavailable\n"
+  }
+}

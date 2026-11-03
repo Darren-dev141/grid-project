@@ -1,0 +1,45 @@
+{
+  "seed": 20261102,
+  "generator": "generator.py",
+  "history_start": "2025-01-01",
+  "history_end": "2026-10-31",
+  "evaluation_window": {
+    "start": "2026-09-01",
+    "end": "2026-10-30",
+    "days": 60
+  },
+  "stale_gap": {
+    "start": "2026-10-20",
+    "end": "2026-10-22"
+  },
+  "heatwaves": [
+    {
+      "onset_local": "2026-09-15T12:00:00-04:00",
+      "duration_hours": 48,
+      "peak_load_uplift_pct": 18.0
+    },
+    {
+      "onset_local": "2026-10-05T10:00:00-04:00",
+      "duration_hours": 72,
+      "peak_load_uplift_pct": 15.0
+    }
+  ],
+  "plant_outage": {
+    "onset_local": "2026-09-28T06:00:00-04:00",
+    "duration_hours": 12,
+    "capacity_drop_mw": 1800.0
+  },
+  "params": {
+    "base_load_mw": 95000,
+    "weather_sensitivity": 0.004,
+    "noise_std_mw": 1200,
+    "temp_noise_std_f": 3.0
+  },
+  "files": {
+    "load_db": "C:\\Users\\ajbig\\Documents\\grid-project\\synthetic-twin\\data\\load.duckdb",
+    "temperature_db": "C:\\Users\\ajbig\\Documents\\grid-project\\synthetic-twin\\data\\temperature.duckdb",
+    "feed_load": "C:\\Users\\ajbig\\Documents\\grid-project\\synthetic-twin\\feed_load.json",
+    "feed_temperature": "C:\\Users\\ajbig\\Documents\\grid-project\\synthetic-twin\\feed_temperature.json",
+    "interchange": "C:\\Users\\ajbig\\Documents\\grid-project\\synthetic-twin\\interchange_series.csv"
+  }
+}

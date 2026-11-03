@@ -8,8 +8,8 @@ import duckdb
 
 
 def land(root: Path, source: str, body: bytes) -> Path:
-    if source not in {"eia", "pjm", "nws"}:
-        raise ValueError("source must be eia, pjm or nws")
+    if source not in {"eia", "pjm", "nws", "ncei"}:
+        raise ValueError("source must be eia, pjm, nws or ncei")
     digest = hashlib.sha256(body).hexdigest()
     path = root / "raw" / source / f"{digest}.json"
     path.parent.mkdir(parents=True, exist_ok=True)
@@ -29,6 +29,9 @@ def ingest(database: Path, root: Path, source: str, dataset: str, body: bytes,
     payload = json.loads(body)
     if source == "nws":
         from grid_pipeline.nws import records_from_payload
+        records = records_from_payload(dataset, payload)
+    elif source == "ncei":
+        from grid_pipeline.ncei import records_from_payload
         records = records_from_payload(dataset, payload)
     else:
         records = payload["response"]["data"] if source == "eia" else payload["items"]

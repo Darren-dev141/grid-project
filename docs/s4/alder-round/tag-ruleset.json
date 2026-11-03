@@ -1,0 +1,16 @@
+{
+  "name": "s4-acceptance-immutable",
+  "target": "tag",
+  "enforcement": "active",
+  "bypass_actors": [],
+  "conditions": {
+    "ref_name": {
+      "include": ["refs/tags/s4-acceptance"],
+      "exclude": []
+    }
+  },
+  "rules": [
+    {"type": "update"},
+    {"type": "deletion"}
+  ]
+}

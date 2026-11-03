@@ -1,0 +1,107 @@
+{
+  "verified_at_utc": "2026-10-29T13:09:36.112390+00:00",
+  "source": "https://www.ncei.noaa.gov/access/services/data/v1",
+  "station": "USW00093721",
+  "requested_units": "standard (Fahrenheit)",
+  "requested_start": "2019-01-01",
+  "requested_end_exclusive": "2026-10-29",
+  "batches": [
+    {
+      "indexed": 365,
+      "days": 365,
+      "station": "USW00093721",
+      "start": "2019-01-01",
+      "end": "2020-01-01",
+      "digest": "6be6f3a6f6233456a772fefec61920430c56ff4be2c24c5d32581e42f25d89e6"
+    },
+    {
+      "indexed": 366,
+      "days": 366,
+      "station": "USW00093721",
+      "start": "2020-01-01",
+      "end": "2021-01-01",
+      "digest": "f3d50d6e885857f5ae0047bf1cad02e47de48bfb6276437eba970168d1932953"
+    },
+    {
+      "indexed": 365,
+      "days": 365,
+      "station": "USW00093721",
+      "start": "2021-01-01",
+      "end": "2022-01-01",
+      "digest": "da45d85aabc57126f4f23a7eb6c71a9e04695a7b035e16fff17e0abed8cd8eec"
+    },
+    {
+      "indexed": 365,
+      "days": 365,
+      "station": "USW00093721",
+      "start": "2022-01-01",
+      "end": "2023-01-01",
+      "digest": "e3ed1a59508e8dd86916d9bac2fae0960d7f44f5eac442fdddcec5ee02f44a9a"
+    },
+    {
+      "indexed": 365,
+      "days": 365,
+      "station": "USW00093721",
+      "start": "2023-01-01",
+      "end": "2024-01-01",
+      "digest": "211dd4787a573ab7c3c14418d5bef047055aef72b24977dd76a869352785e924"
+    },
+    {
+      "indexed": 366,
+      "days": 366,
+      "station": "USW00093721",
+      "start": "2024-01-01",
+      "end": "2025-01-01",
+      "digest": "e523042b7dd2715840cd0e1c56b00aee094543e8fcb09c90f86efcda48bd03e5"
+    },
+    {
+      "indexed": 365,
+      "days": 365,
+      "station": "USW00093721",
+      "start": "2025-01-01",
+      "end": "2026-01-01",
+      "digest": "0f02229c7d7de631322f7eb816f528510e598af3c5f836240216be5fc9bf10c8"
+    },
+    {
+      "indexed": 297,
+      "days": 297,
+      "station": "USW00093721",
+      "start": "2026-01-01",
+      "end": "2026-10-29",
+      "digest": "051ecae8c631c65af593dc4f92c8ada9347e916c543dfe0fad569d5980f59f91"
+    }
+  ],
+  "cleaned": {
+    "first_date": "2019-01-01",
+    "last_date": "2026-10-24",
+    "days": 2854,
+    "quality_counts": {
+      "ok": 2854
+    },
+    "latest_rows": [
+      [
+        "2026-10-24",
+        63.0,
+        37.0,
+        "ok"
+      ],
+      [
+        "2026-10-23",
+        63.0,
+        41.0,
+        "ok"
+      ],
+      [
+        "2026-10-22",
+        69.0,
+        42.0,
+        "ok"
+      ]
+    ]
+  },
+  "dbt": {
+    "passed": 8,
+    "errors": 0,
+    "models_success": 1
+  }
+}

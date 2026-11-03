@@ -15,5 +15,8 @@ models:
     serving:
       +schema: serving
       +materialized: view
+    marts:
+      +schema: marts
+      +materialized: view
 vars:
   expected_fuels: ['COL', 'NG', 'NUC', 'OIL', 'OTH', 'SUN', 'WAT', 'WND']

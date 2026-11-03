@@ -1,0 +1,14 @@
+{
+  "coordinator_ruling": true,
+  "original_candidates": 31,
+  "all_excluded_by": ".venv/",
+  "independently_corroborated": 10,
+  "binary_not_independently_corroborated": 21,
+  "individual_corroboration_of_excluded_21_not_required": true,
+  "no_per_id_corroboration_mapping_claimed": true,
+  "unreadable_files": 2610,
+  "file_error_cause": "PermissionError errno 13 under .venv",
+  "excluded_directory_errors": 6,
+  "prior_per_match_metadata": "../preflight-classification.json",
+  "prior_report_sha256": "cc084d447037704bdcd7e69cdfe1719cde82e4e323074240f49818fab0a2ec25"
+}

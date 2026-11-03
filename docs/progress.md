@@ -225,3 +225,78 @@ Wind Chill names are no longer listed and are kept only for older alerts. Freeze
 and Frost are excluded as crop warnings. Evidence:
 `evidence/nws-alert-types-2026-10-29.json`. Deferred to S3: confirm that "the low
 for a date is the night starting that date" is the convention the stress index wants.
+
+## October 29, 2026: S3a NOAA BWI history
+
+Resumed from the S3-S7 proposal using its default keyless NOAA NCEI source.
+Added bounded daily TMAX/TMIN fetching, raw response retention, replay support,
+revision selection and cleaned.ncei_bwi_daily_temps with explicit quality flags.
+An A -> B -> A response sequence restores the latest observation without adding
+duplicate raw rows; pending batches stay out of the cleaned view.
+
+Live isolated verification: eight annual requests, 2,854 dates from 2019-01-01
+through 2026-10-24, all quality ok; one dbt view built and eight dbt tests passed.
+Evidence: docs/evidence/ncei-live-2026-10-29.json. No key or paid service used.
+Full regression suite: **105 passed, 1 warning in 184.58s**. The warning is the
+existing Windows/dbt send_bytes failure retried by the NWS test helper.
+
+See docs/s3a-ncei.md for request semantics and tradeoffs. S3b is next. S3c must
+resolve observed-day vs NWS night-start temperature alignment before publishing
+a forecast. The runner choice and v1 price retirement remain open; no scheduler,
+remote secrets, deletion, public notification or push was performed.
+
+## October 30, 2026: S3b implementation, runtime verification blocked
+
+Added the local DuckDB view `marts.mart_day_history`, a bounded-retry warehouse
+build helper, synthetic integration tests, dbt constraints, and a scratch-only
+coverage script. PJM demand alone supplies peaks and DST-aware completeness;
+BWI observed temperatures join on NCEI's reported date. BGE is not blended.
+The S3c temperature-alignment gate is unchanged. Design and rerun instructions
+are in `docs/s3b-day-history.md`.
+
+Five mocked helper tests passed on accessible Python 3.12.8. The full suite
+stopped at ten collection errors because the existing DuckDB extension requires
+Python 3.14. The project trampoline returned permission denied; native Hermes
+runtime discovery did not find an invokable Python. Direct dbt import with venv
+packages failed at `rpds.rpds`. No dbt models or tests executed, and real coverage
+and midnight-peak review remain pending. This is implementation evidence only,
+not a verified S3b completion. No Git operations, dependency installation,
+network ingestion, permission changes, or S3c work were performed.
+
+## October 30, 2026: S3b acceptance reconciliation
+
+S3b verified by Darren, Oct 30, 2026. Darren stated, “I'm saying it's verified. You can go ahead.” This dated owner verification supersedes the earlier runtime-blocked entry's “not a verified S3b completion” status. No S3b code or data changed.
+
+
+## October 30, 2026: S3c draft implementation, publication gate unmet
+
+Recorded the temperature convention in docs/s3b-day-history.md and docs/index/v1.md: observed TMIN belongs to its calendar date; an NWS night low maps to the morning end date. Applied Darren's alert ruling to the architecture's fetch, settings, and forecast-signature entries. The starting revision had only alert hits at lines 78 and 198; it had no separate sections table or alert-bump fallback. Added a dated supersession note rather than inventing a missing passage.
+
+Created src/grid_pipeline/model.py, src/grid_pipeline/stress.py, ledger/definitions/stress-index-v1.toml, docs/index/v1.md, tests/test_stress.py, and scripts/backtest_stress.py. The pure draft implements definition parsing and exact-byte SHA-256, immutable values, unambiguous seasonal and day-type filtering, hinge retention, normal-equation fitting, inclusive level comparison, and the earlier-hour mode tie. Date-keyed alert annotations are filtered for the target day and stored on stale no-calls; they never feed the level. NWS interval-to-date mapping remains an explicit gap.
+
+Fresh forecast calls raise DefinitionGap. Percentile interpolation, analog distance and selection ties, sample and singular-fit policies, calendar boundaries, missing temperatures, and historical issue-time availability remain unpinned. No defaults were invented. The coverage script reads a supplied mart read-only; it is not a completed metric backtest. The 2019–2026 table records eight years not run, not measured scores. S3c is not accepted as complete and v1 remains unpublished.
+
+Verification in the workspace-write sandbox: the project Python 3.14 launcher could not spawn its interpreter (permission denied). Available Miniconda Python 3.12.8, with project src and existing venv packages on PYTHONPATH, ran the final full-suite attempt with --continue-on-collection-errors: 22 passed, 0 test-body failures, 10 module collection errors in 0.47s. These are 17 S3c tests and 5 existing warehouse helper tests. All ten errors are missing _duckdb because the installed native extension targets Python 3.14. Test bodies in those ten modules did not run; their parametrized case count is unavailable. No dbt build or 2019–2026 historical backtest ran. Log: data/scratch/s3c-final-suite.log. All suites used cache disabled and scratch paths in the project. No danger-full-access or elevated execution was available or used; sandbox enforcement was preserved.
+
+No S3b code or data, PLAN.md, git state, forecasts, external services, Databricks, or S4 implementation were changed. The S3b owner verification above remains accepted; this session's runtime limit does not revoke it.
+
+
+### S3c authorized completion rerun, October 30, 2026
+
+The earlier workspace-write result above is historical. Under the authorized danger-full-access session, the project venv ran Python 3.14.7 and the full suite collected 132 tests: **132 passed, 0 failed, 0 errors, 1 warning in 217.78s**, exit 0. All 17 S3c tests passed. No failing test names or failure errors exist. The warning was `RuntimeWarning: dbt concurrent send_bytes() failure: retrying`, from `tests/test_nws_dbt.py::test_nws_dbt_retains_issuances_revisions_local_dates_and_pending`. The earlier native-extension runtime blocker is resolved.
+
+Read the PC architecture gate at docs/architecture-s3-s7.md lines 203-204. The definition remains unpublished until S3c tests pass on 2019-2026 history, including a backtest table. Built an external scratch mart from read-only source warehouses using a scratch copy of the existing verifier. The scratch dbt build completed with 3 successful models and 29 passed tests, 0 errors. Measured 2859 dates from 2018-12-31 to 2026-10-28, 2836 complete-demand dates, 2854 temperature dates, and 2833 complete joined dates. The coverage-only reporter ran. Fresh-input probes on all 2833 complete joined dates returned DefinitionGap, with 0 returned forecasts. Yearly counts are recorded in docs/index/v1.md and raw output. This is coverage and refusal evidence, not a completed performance backtest or successful historical S3c validation.
+
+Performance backtest remains blocked. MAE, hour-hit rate, precision, recall, and scored samples are unavailable. No metrics were fabricated and no unpinned methods were selected.
+
+The remaining rules block these steps:
+
+- Percentile interpolation blocks p75, p90, p97 thresholds, stress levels, and stress-day precision and recall.
+- Analog distance, scaling, and selection ties block the ten-day analog set, peak-hour forecasts, and hour-hit rate.
+- Sample requirements block eligibility for fitting, thresholds, and analogs, especially early-history dates.
+- Singular or ill-conditioned fitting policy blocks regression handling and peak-MW error metrics.
+- Calendar-boundary and missing-temperature handling block seasonal selection, leap-day handling, and defensible exclusions. Calendar-day temperature alignment is settled.
+- Historical availability and revision cutoffs block issue-time input reconstruction and proof of no lookahead. Observed temperatures are not archived NWS forecasts.
+- NWS alert-interval-to-date mapping blocks annotation validation only. It does not block numerical stress levels because alerts are annotation-only.
+
+Only docs/progress.md and docs/index/v1.md were edited. Source S3b stores and code, pinned components, and PLAN.md were not edited. No git operations, forecast publication, Databricks work, or S4 work were performed. No agents were launched. Skills used were poteto-mode, codebase-memory (read its exploration guidance; no graph operations), technical-writing, and unslop. Raw evidence and scratch scripts are in `C:\Users\ajbig\AppData\Local\Temp\grid-s3c-20261030`. S3c remains incomplete because the historical performance gate is blocked.

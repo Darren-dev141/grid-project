@@ -1,0 +1,21 @@
+{
+  "artifact": "docs/s3c/S3C-FIRST-ISSUANCE-2026-11-01.json",
+  "sha256": "01075035842a7ed11c2c5ee0108f064d35fa69197a816e719e609f06a67c57ec",
+  "issued_at": "2026-11-01T11:15:49.359408-05:00",
+  "target_date": "2026-11-01",
+  "scheduled_cutoff": "2026-11-01T07:00:00-05:00",
+  "issued_late": true,
+  "input_availability_verified": false,
+  "forecast_status": "UNSCORED",
+  "no_call_reason": "stale_load",
+  "git_tracked": false,
+  "local_history_commits": [],
+  "head": "e01a80d1f74f4cf4ec2b45045bc82f95ff6a2087",
+  "local_acceptance_tag_objects": [],
+  "ledger_files": [
+    "ledger/definitions/stress-index-v1.toml"
+  ],
+  "qualified_real_receipt": false,
+  "reason": "late same-day uncommitted diagnostic with unverified availability; no ledger receipt or acceptance boundary",
+  "modified_by_lead": false
+}

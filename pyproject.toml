@@ -7,7 +7,7 @@ name = "grid-project"
 version = "0.1.0"
 description = "Local PJM and EIA energy data pipeline"
 requires-python = ">=3.11"
-dependencies = ["duckdb>=1.2,<2", "httpx>=0.28,<1", "tzdata>=2025.1"]
+dependencies = ["duckdb>=1.2,<2", "httpx>=0.28,<1", "tzdata>=2025.1", "numpy>=2,<3"]
 
 [project.optional-dependencies]
 dev = ["pytest>=8,<10", "dbt-duckdb>=1.9,<2"]
@@ -19,6 +19,7 @@ grid-backfill = "grid_pipeline.fetch_cli:backfill_main"
 grid-publish = "grid_pipeline.publish:main"
 grid-freshness = "grid_pipeline.freshness:main"
 grid-weather = "grid_pipeline.nws:main"
+grid-temps = "grid_pipeline.ncei:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]

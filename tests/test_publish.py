@@ -2,6 +2,8 @@ import csv
 import hashlib
 import json
 from pathlib import Path
+import subprocess
+import sys
 
 import duckdb
 import pytest
@@ -28,7 +30,15 @@ def load(root, bad=False):
         ingest(root / 'grid.duckdb', root, source, dataset, json.dumps(payload).encode())
 
 
-def test_publish_validates_snapshot_and_preserves_previous_on_failure(tmp_path):
+def test_publish_validates_snapshot_and_preserves_previous_on_failure(tmp_path, monkeypatch):
+    from grid_pipeline import publish as publication
+    original_run = subprocess.run
+
+    def checked_run(command, **kwargs):
+        assert command[:3] == [sys.executable, '-m', 'grid_pipeline.dbt_runner']
+        return original_run(command, **kwargs)
+
+    monkeypatch.setattr(publication.subprocess, 'run', checked_run)
     root, output = tmp_path / 'data', tmp_path / 'export'
     load(root)
     snapshot = publish(root / 'grid.duckdb', output, PROJECT, 999, data_kind='synthetic')
@@ -65,3 +75,31 @@ def test_empty_serving_data_cannot_publish():
         conn.execute('CREATE TABLE serving.grid_hourly(hour_utc TIMESTAMP, price_usd_per_mwh DOUBLE)')
         with pytest.raises(PublishError, match='no price'):
             report_rows(conn)
+
+
+@pytest.mark.parametrize('failure', [
+    subprocess.TimeoutExpired('dbt', 300),
+    OSError('dbt startup failed'),
+    subprocess.CompletedProcess([], 1, '', 'dbt failure during shutdown'),
+])
+def test_publish_process_failure_preserves_pointer(tmp_path, monkeypatch, failure):
+    from grid_pipeline import publish as publication
+    root, output = tmp_path / 'data', tmp_path / 'export'
+    load(root)
+    output.mkdir()
+    pointer = b'{"snapshot_id":"previous-verified-publication"}'
+    (output / 'current.json').write_bytes(pointer)
+    calls = []
+
+    def failed_run(command, **kwargs):
+        calls.append(command)
+        assert command[:3] == [sys.executable, '-m', 'grid_pipeline.dbt_runner']
+        if isinstance(failure, Exception):
+            raise failure
+        return failure
+
+    monkeypatch.setattr(publication.subprocess, 'run', failed_run)
+    with pytest.raises(PublishError):
+        publish(root / 'grid.duckdb', output, PROJECT, 999, data_kind='synthetic')
+    assert len(calls) == 1
+    assert (output / 'current.json').read_bytes() == pointer

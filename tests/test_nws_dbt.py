@@ -4,7 +4,6 @@ import os
 from pathlib import Path
 import subprocess
 import sys
-import warnings
 
 import duckdb
 import pytest
@@ -18,16 +17,10 @@ def run_dbt(root):
     env = os.environ.copy()
     env['GRID_DATABASE'] = str(root / 'grid.duckdb')
     env['DBT_SEND_ANONYMOUS_USAGE_STATS'] = 'false'
-    executable = Path(sys.executable).parent / ('dbt.exe' if os.name == 'nt' else 'dbt')
-    args = [str(executable), 'build', '--project-dir', str(PROJECT),
+    args = [sys.executable, '-m', 'grid_pipeline.dbt_runner', 'build', '--project-dir', str(PROJECT),
             '--profiles-dir', str(PROJECT), '--target-path', str(root / 'target'),
             '--log-path', str(root / 'logs'), '--select', 'nws_*']
-    for _ in range(3):
-        result = subprocess.run(args, env=env, capture_output=True, text=True, timeout=120)
-        if 'concurrent send_bytes() calls are not supported' not in result.stdout + result.stderr:
-            return result
-        warnings.warn('dbt concurrent send_bytes() failure: retrying', RuntimeWarning)
-    return result
+    return subprocess.run(args, env=env, capture_output=True, text=True, timeout=120)
 
 
 def seed(root, dataset, payloads, digest, fetched='2026-11-01T12:00:00Z', committed=True):

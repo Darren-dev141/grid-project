@@ -1,0 +1,46 @@
+{
+  "head": "e01a80d1f74f4cf4ec2b45045bc82f95ff6a2087",
+  "branch": "feat/energy-ingestion",
+  "local_focused": {
+    "passed": 57,
+    "seconds": 126.58,
+    "log": "focused-tests.txt"
+  },
+  "local_ledger_checks": {
+    "--integrity-only": {
+      "acceptance": "bootstrap_no_receipts",
+      "historical_receipt_additions": 0,
+      "historical_receipts": 0,
+      "history_commits": 0,
+      "pending_receipts": 0,
+      "prospective_receipts": 0,
+      "public_visibility": "not_inferred",
+      "receipt_status": {},
+      "receipts": 0,
+      "timing": "unverified_integrity_only",
+      "witnessed_receipts": 0
+    },
+    "--witness": {
+      "acceptance": "bootstrap_no_receipts",
+      "historical_receipt_additions": 0,
+      "historical_receipts": 0,
+      "history_commits": 0,
+      "pending_receipts": 0,
+      "prospective_receipts": 0,
+      "public_visibility": "not_inferred",
+      "receipt_status": {},
+      "receipts": 0,
+      "timing": "witness_checked",
+      "witnessed_receipts": 0
+    }
+  },
+  "fresh_host_full_suite": "pending",
+  "fresh_terra_xhigh_session": "pending supervisor launch/turn_context evidence",
+  "independent_verdict": "pending; not READY",
+  "actual_actions_run_ids": [],
+  "actual_boundary_tag": null,
+  "actual_boundary_record": null,
+  "main_protection_readback": "pending host",
+  "genuine_receipt_witness": "waiting; no real receipt created",
+  "no_s5_started": true
+}

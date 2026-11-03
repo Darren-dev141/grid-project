@@ -1,0 +1,520 @@
+{
+  "eval_days": 60,
+  "hits": 6,
+  "misses": 1,
+  "false_alarms": 19,
+  "true_negatives": 34,
+  "in_window_dist": {
+    "n": 7,
+    "levels": {
+      "calm": 1,
+      "watch": 4,
+      "strained": 2
+    },
+    "peak_mw_mean": 97404.95524517889,
+    "actual_peak_mw_mean": 110685.52857142857
+  },
+  "out_window_dist": {
+    "n": 53,
+    "levels": {
+      "calm": 18,
+      "strained": 1,
+      "UNSCORED:insufficient_fit_history": 16,
+      "watch": 18
+    },
+    "peak_mw_mean": 97272.56557930153,
+    "actual_peak_mw_mean": 93946.80943396228
+  },
+  "issuance_stale_day": {
+    "date": "2026-10-21",
+    "reason": "stale_load",
+    "stale_data_reason": true
+  },
+  "issuance_clean_day": {
+    "date": "2026-10-25",
+    "reason": "unverified_issue_time_availability",
+    "normal_path": true
+  },
+  "rows": [
+    {
+      "date": "2026-09-01",
+      "level": "calm",
+      "reason": null,
+      "peak_mw": 98290.53214137704,
+      "actual_peak_mw": 98228.7,
+      "in_hw": false
+    },
+    {
+      "date": "2026-09-02",
+      "level": "strained",
+      "reason": null,
+      "peak_mw": 99935.68126839,
+      "actual_peak_mw": 100480.2,
+      "in_hw": false
+    },
+    {
+      "date": "2026-09-03",
+      "level": "calm",
+      "reason": null,
+      "peak_mw": 97329.77436557146,
+      "actual_peak_mw": 97521.8,
+      "in_hw": false
+    },
+    {
+      "date": "2026-09-04",
+      "level": "calm",
+      "reason": null,
+      "peak_mw": 96776.42937348962,
+      "actual_peak_mw": 97644.8,
+      "in_hw": false
+    },
+    {
+      "date": "2026-09-05",
+      "level": null,
+      "reason": "insufficient_fit_history",
+      "peak_mw": null,
+      "actual_peak_mw": 89078.8,
+      "in_hw": false
+    },
+    {
+      "date": "2026-09-06",
+      "level": null,
+      "reason": "insufficient_fit_history",
+      "peak_mw": null,
+      "actual_peak_mw": 88125.2,
+      "in_hw": false
+    },
+    {
+      "date": "2026-09-07",
+      "level": "calm",
+      "reason": null,
+      "peak_mw": 95479.06781810435,
+      "actual_peak_mw": 95550.1,
+      "in_hw": false
+    },
+    {
+      "date": "2026-09-08",
+      "level": "calm",
+      "reason": null,
+      "peak_mw": 96366.35093685362,
+      "actual_peak_mw": 95753.3,
+      "in_hw": false
+    },
+    {
+      "date": "2026-09-09",
+      "level": "calm",
+      "reason": null,
+      "peak_mw": 96990.75648215039,
+      "actual_peak_mw": 96109.6,
+      "in_hw": false
+    },
+    {
+      "date": "2026-09-10",
+      "level": "calm",
+      "reason": null,
+      "peak_mw": 95433.89254179258,
+      "actual_peak_mw": 95725.4,
+      "in_hw": false
+    },
+    {
+      "date": "2026-09-11",
+      "level": "watch",
+      "reason": null,
+      "peak_mw": 97759.79971979199,
+      "actual_peak_mw": 97840.0,
+      "in_hw": false
+    },
+    {
+      "date": "2026-09-12",
+      "level": null,
+      "reason": "insufficient_fit_history",
+      "peak_mw": null,
+      "actual_peak_mw": 87872.0,
+      "in_hw": false
+    },
+    {
+      "date": "2026-09-13",
+      "level": null,
+      "reason": "insufficient_fit_history",
+      "peak_mw": null,
+      "actual_peak_mw": 87123.7,
+      "in_hw": false
+    },
+    {
+      "date": "2026-09-14",
+      "level": "calm",
+      "reason": null,
+      "peak_mw": 95734.18564235089,
+      "actual_peak_mw": 94823.2,
+      "in_hw": false
+    },
+    {
+      "date": "2026-09-15",
+      "level": "calm",
+      "reason": null,
+      "peak_mw": 96472.49621332444,
+      "actual_peak_mw": 112665.6,
+      "in_hw": true
+    },
+    {
+      "date": "2026-09-16",
+      "level": "watch",
+      "reason": null,
+      "peak_mw": 97768.56414593215,
+      "actual_peak_mw": 113664.6,
+      "in_hw": true
+    },
+    {
+      "date": "2026-09-17",
+      "level": "watch",
+      "reason": null,
+      "peak_mw": 97402.89513340298,
+      "actual_peak_mw": 111496.8,
+      "in_hw": true
+    },
+    {
+      "date": "2026-09-18",
+      "level": "calm",
+      "reason": null,
+      "peak_mw": 96118.34473252983,
+      "actual_peak_mw": 96728.3,
+      "in_hw": false
+    },
+    {
+      "date": "2026-09-19",
+      "level": null,
+      "reason": "insufficient_fit_history",
+      "peak_mw": null,
+      "actual_peak_mw": 85301.7,
+      "in_hw": false
+    },
+    {
+      "date": "2026-09-20",
+      "level": null,
+      "reason": "insufficient_fit_history",
+      "peak_mw": null,
+      "actual_peak_mw": 85828.4,
+      "in_hw": false
+    },
+    {
+      "date": "2026-09-21",
+      "level": "calm",
+      "reason": null,
+      "peak_mw": 96021.87874213497,
+      "actual_peak_mw": 95870.5,
+      "in_hw": false
+    },
+    {
+      "date": "2026-09-22",
+      "level": "calm",
+      "reason": null,
+      "peak_mw": 96333.9598475394,
+      "actual_peak_mw": 96727.3,
+      "in_hw": false
+    },
+    {
+      "date": "2026-09-23",
+      "level": "calm",
+      "reason": null,
+      "peak_mw": 96382.03026979869,
+      "actual_peak_mw": 95034.9,
+      "in_hw": false
+    },
+    {
+      "date": "2026-09-24",
+      "level": "calm",
+      "reason": null,
+      "peak_mw": 95329.54049144819,
+      "actual_peak_mw": 96076.6,
+      "in_hw": false
+    },
+    {
+      "date": "2026-09-25",
+      "level": "calm",
+      "reason": null,
+      "peak_mw": 96379.84286920032,
+      "actual_peak_mw": 96554.4,
+      "in_hw": false
+    },
+    {
+      "date": "2026-09-26",
+      "level": null,
+      "reason": "insufficient_fit_history",
+      "peak_mw": null,
+      "actual_peak_mw": 87784.1,
+      "in_hw": false
+    },
+    {
+      "date": "2026-09-27",
+      "level": null,
+      "reason": "insufficient_fit_history",
+      "peak_mw": null,
+      "actual_peak_mw": 87106.6,
+      "in_hw": false
+    },
+    {
+      "date": "2026-09-28",
+      "level": "calm",
+      "reason": null,
+      "peak_mw": 96120.70444436806,
+      "actual_peak_mw": 96989.3,
+      "in_hw": false
+    },
+    {
+      "date": "2026-09-29",
+      "level": "calm",
+      "reason": null,
+      "peak_mw": 96414.0770232251,
+      "actual_peak_mw": 95879.0,
+      "in_hw": false
+    },
+    {
+      "date": "2026-09-30",
+      "level": "calm",
+      "reason": null,
+      "peak_mw": 95963.0987779126,
+      "actual_peak_mw": 95014.9,
+      "in_hw": false
+    },
+    {
+      "date": "2026-10-01",
+      "level": "watch",
+      "reason": null,
+      "peak_mw": 97132.52185581581,
+      "actual_peak_mw": 96107.0,
+      "in_hw": false
+    },
+    {
+      "date": "2026-10-02",
+      "level": "watch",
+      "reason": null,
+      "peak_mw": 96802.38851613693,
+      "actual_peak_mw": 98272.2,
+      "in_hw": false
+    },
+    {
+      "date": "2026-10-03",
+      "level": null,
+      "reason": "insufficient_fit_history",
+      "peak_mw": null,
+      "actual_peak_mw": 84679.4,
+      "in_hw": false
+    },
+    {
+      "date": "2026-10-04",
+      "level": null,
+      "reason": "insufficient_fit_history",
+      "peak_mw": null,
+      "actual_peak_mw": 86624.1,
+      "in_hw": false
+    },
+    {
+      "date": "2026-10-05",
+      "level": "watch",
+      "reason": null,
+      "peak_mw": 96973.40501476736,
+      "actual_peak_mw": 111508.0,
+      "in_hw": true
+    },
+    {
+      "date": "2026-10-06",
+      "level": "strained",
+      "reason": null,
+      "peak_mw": 97751.6728795858,
+      "actual_peak_mw": 109711.7,
+      "in_hw": true
+    },
+    {
+      "date": "2026-10-07",
+      "level": "strained",
+      "reason": null,
+      "peak_mw": 97682.02862624514,
+      "actual_peak_mw": 111475.2,
+      "in_hw": true
+    },
+    {
+      "date": "2026-10-08",
+      "level": "watch",
+      "reason": null,
+      "peak_mw": 97783.62470299432,
+      "actual_peak_mw": 104276.8,
+      "in_hw": true
+    },
+    {
+      "date": "2026-10-09",
+      "level": "watch",
+      "reason": null,
+      "peak_mw": 97701.93943006053,
+      "actual_peak_mw": 96912.4,
+      "in_hw": false
+    },
+    {
+      "date": "2026-10-10",
+      "level": null,
+      "reason": "insufficient_fit_history",
+      "peak_mw": null,
+      "actual_peak_mw": 86958.2,
+      "in_hw": false
+    },
+    {
+      "date": "2026-10-11",
+      "level": null,
+      "reason": "insufficient_fit_history",
+      "peak_mw": null,
+      "actual_peak_mw": 86152.9,
+      "in_hw": false
+    },
+    {
+      "date": "2026-10-12",
+      "level": "watch",
+      "reason": null,
+      "peak_mw": 97795.31290700368,
+      "actual_peak_mw": 97045.7,
+      "in_hw": false
+    },
+    {
+      "date": "2026-10-13",
+      "level": "watch",
+      "reason": null,
+      "peak_mw": 97844.71667199762,
+      "actual_peak_mw": 96153.0,
+      "in_hw": false
+    },
+    {
+      "date": "2026-10-14",
+      "level": "watch",
+      "reason": null,
+      "peak_mw": 97782.5730019987,
+      "actual_peak_mw": 96700.3,
+      "in_hw": false
+    },
+    {
+      "date": "2026-10-15",
+      "level": "watch",
+      "reason": null,
+      "peak_mw": 97871.22966160582,
+      "actual_peak_mw": 96835.9,
+      "in_hw": false
+    },
+    {
+      "date": "2026-10-16",
+      "level": "watch",
+      "reason": null,
+      "peak_mw": 97961.27967875477,
+      "actual_peak_mw": 97894.1,
+      "in_hw": false
+    },
+    {
+      "date": "2026-10-17",
+      "level": null,
+      "reason": "insufficient_fit_history",
+      "peak_mw": null,
+      "actual_peak_mw": 85712.0,
+      "in_hw": false
+    },
+    {
+      "date": "2026-10-18",
+      "level": null,
+      "reason": "insufficient_fit_history",
+      "peak_mw": null,
+      "actual_peak_mw": 87633.2,
+      "in_hw": false
+    },
+    {
+      "date": "2026-10-19",
+      "level": "watch",
+      "reason": null,
+      "peak_mw": 98061.84514194765,
+      "actual_peak_mw": 96225.5,
+      "in_hw": false
+    },
+    {
+      "date": "2026-10-20",
+      "level": "watch",
+      "reason": null,
+      "peak_mw": 98049.1841095362,
+      "actual_peak_mw": 97395.5,
+      "in_hw": false
+    },
+    {
+      "date": "2026-10-21",
+      "level": "watch",
+      "reason": null,
+      "peak_mw": 98079.2860484501,
+      "actual_peak_mw": 97455.0,
+      "in_hw": false
+    },
+    {
+      "date": "2026-10-22",
+      "level": "watch",
+      "reason": null,
+      "peak_mw": 98435.95136056186,
+      "actual_peak_mw": 96672.4,
+      "in_hw": false
+    },
+    {
+      "date": "2026-10-23",
+      "level": "watch",
+      "reason": null,
+      "peak_mw": 98600.25720556745,
+      "actual_peak_mw": 96859.0,
+      "in_hw": false
+    },
+    {
+      "date": "2026-10-24",
+      "level": null,
+      "reason": "insufficient_fit_history",
+      "peak_mw": null,
+      "actual_peak_mw": 87942.6,
+      "in_hw": false
+    },
+    {
+      "date": "2026-10-25",
+      "level": null,
+      "reason": "insufficient_fit_history",
+      "peak_mw": null,
+      "actual_peak_mw": 87960.9,
+      "in_hw": false
+    },
+    {
+      "date": "2026-10-26",
+      "level": "watch",
+      "reason": null,
+      "peak_mw": 98804.50393077164,
+      "actual_peak_mw": 96820.5,
+      "in_hw": false
+    },
+    {
+      "date": "2026-10-27",
+      "level": "watch",
+      "reason": null,
+      "peak_mw": 98277.0583157584,
+      "actual_peak_mw": 97941.0,
+      "in_hw": false
+    },
+    {
+      "date": "2026-10-28",
+      "level": "watch",
+      "reason": null,
+      "peak_mw": 97986.22173612099,
+      "actual_peak_mw": 99002.6,
+      "in_hw": false
+    },
+    {
+      "date": "2026-10-29",
+      "level": "calm",
+      "reason": null,
+      "peak_mw": 97657.0077175654,
+      "actual_peak_mw": 98826.5,
+      "in_hw": false
+    },
+    {
+      "date": "2026-10-30",
+      "level": "watch",
+      "reason": null,
+      "peak_mw": 99081.70165647421,
+      "actual_peak_mw": 99626.2,
+      "in_hw": false
+    }
+  ]
+}

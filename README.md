@@ -25,6 +25,8 @@ in `data/grid.duckdb`. Identical replay adds no rows. This command does not fetc
 remote data. Do not supply files containing credentials.
 
 See [architecture](docs/layer-1.md) and [API registration](docs/api-setup.md).
+For keyless BWI observed temperatures and the next architecture step, see
+[S3a NCEI ingestion](docs/s3a-ncei.md) and [the S3-S7 proposal](docs/architecture-s3-s7.md).
 The test suite also runs the real dbt DAG against isolated synthetic warehouses,
 including revision selection, missing mix, negative prices, and failing quality
 checks. Test data is not a current grid observation.

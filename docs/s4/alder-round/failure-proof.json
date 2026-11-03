@@ -1,0 +1,32 @@
+{
+  "source": "Actual sandbox tool runs before fixes; original red source snapshots were not retained",
+  "dynamic_subprocess": {
+    "command": "pytest -q tests/test_ledger_access.py -p no:cacheprovider",
+    "failed": 3,
+    "passed": 13,
+    "seconds": 0.65,
+    "failures": [
+      "argument",
+      "environment",
+      "config"
+    ],
+    "observed_error": "DID NOT RAISE PermissionError",
+    "child_imported_grid_package": false
+  },
+  "boundary_protocol": {
+    "command": "pytest -q tests/test_s4_boundary.py",
+    "failed": 6,
+    "seconds": 8.01
+  },
+  "duplicate_historical_origin": {
+    "failed": 1,
+    "seconds": 8.13,
+    "observed_error": "prospective_receipts was 1, expected 0"
+  },
+  "passing_proof": "focused-tests.txt",
+  "prospective_scanner_ownership": {
+    "failed": 1,
+    "seconds": 0.12,
+    "observed_error": "ledger definition reported unreadable because non-owner read was blocked"
+  }
+}

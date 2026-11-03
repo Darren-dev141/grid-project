@@ -1,0 +1,33 @@
+{
+  "source": "coordinator-supplied host observations; not rerun by sandbox lead",
+  "before_latest_publish_change": {
+    "exact_prior_failure": {
+      "passed": 1,
+      "seconds": 10.09
+    },
+    "full_suite": {
+      "collected": 207,
+      "passed": 207,
+      "seconds": 239.25
+    }
+  },
+  "confirmed_failure_stack": [
+    "dbt runnable.execute_nodes",
+    "pool.close",
+    "dbt graph.thread_pool.close",
+    "multiprocessing.pool.close",
+    "_change_notifier.put(None)",
+    "queues.put",
+    "connection.send_bytes",
+    "connection._send_bytes",
+    "ValueError concurrent send_bytes calls not supported"
+  ],
+  "live_host_gh": {
+    "admin": true,
+    "push": true,
+    "main_protected": false,
+    "actions_total_count": 0
+  },
+  "independent_verdict": "NOT READY",
+  "current_snapshot_full_suite": "unverified after latest changes"
+}

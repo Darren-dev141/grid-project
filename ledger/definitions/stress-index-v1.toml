@@ -1,0 +1,16 @@
+version = "stress-index-v1"
+weather_point = "NWS LWX/107,85"
+history_station = "USW00093721"
+history_years = 3
+window_days = 21
+heat_base_f = 65
+cold_base_f = 50
+hinge_min_nonzero_days = 10
+watch_percentile = 75
+strained_percentile = 90
+severe_percentile = 97
+analog_count = 10
+settle_days = 2
+
+[alerts]
+annotation_only = true

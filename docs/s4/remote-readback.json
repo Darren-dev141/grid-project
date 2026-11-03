@@ -1,0 +1,16 @@
+{
+  "repository": "Darren-dev141/grid-project",
+  "visibility": "public",
+  "main_sha": "863d4fca31a0139e0384ef672232fd8b705d869e",
+  "feature_sha": "60194df7f30cdbf5a6772774fa4e0bdb11b25403",
+  "main_protected": false,
+  "required_contexts": [],
+  "connector_permissions": {
+    "pull": true,
+    "push": false,
+    "admin": false
+  },
+  "protection_details_http_status": 403,
+  "protection_details_error": "Resource not accessible by integration",
+  "observed_actions_runs": 0
+}

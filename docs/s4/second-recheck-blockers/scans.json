@@ -1,0 +1,16 @@
+{
+  "index": {
+    "bytes": 168101,
+    "candidates": [],
+    "files": 65,
+    "scope": "exact index blobs",
+    "unreadable": []
+  },
+  "prospective": {
+    "bytes": 31018813,
+    "candidates": [],
+    "files": 253,
+    "scope": "prospective working files",
+    "unreadable": []
+  }
+}

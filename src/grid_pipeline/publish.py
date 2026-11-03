@@ -74,10 +74,9 @@ def publish(database: Path, output: Path, project: Path, node: int, *, data_kind
         env = os.environ.copy()
         env['GRID_DATABASE'] = str(copy)
         env['DBT_SEND_ANONYMOUS_USAGE_STATS'] = 'false'
-        executable = Path(sys.executable).parent / ('dbt.exe' if os.name == 'nt' else 'dbt')
         try:
             result = subprocess.run([
-                str(executable), 'build', '--project-dir', str(project.resolve()),
+                sys.executable, '-m', 'grid_pipeline.dbt_runner', 'build', '--project-dir', str(project.resolve()),
                 '--profiles-dir', str(project.resolve()),
                 '--target-path', str((snapshot / 'dbt').resolve()),
                 '--log-path', str((snapshot / 'logs').resolve()),

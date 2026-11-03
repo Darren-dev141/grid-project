@@ -1,0 +1,33 @@
+{
+  "issued_at": "2026-10-31T14:21:23.475877-04:00",
+  "target_date": "2026-10-31",
+  "latest_completed_peak_date": "2026-10-29",
+  "forecast": {
+    "target_date": "2026-10-31",
+    "definition_version": "stress-index-v1",
+    "definition_sha256": "63cb57268398ee62525499c64ecbf4c7694f2d5960eccf2a0eb2f3f3059fbfca",
+    "peak_mw": null,
+    "peak_hour_ending": null,
+    "level": null,
+    "thresholds_mw": null,
+    "no_call_reason": "stale_load",
+    "alerts": [],
+    "status": "UNSCORED",
+    "receipt": {
+      "mode": "prospective",
+      "publication_availability": "unverified",
+      "issued_at": "2026-10-31 14:21:23.475877-04:00",
+      "history_evaluated": false,
+      "history_gates": {},
+      "analog_gates": {},
+      "sample_sizes": {},
+      "fallbacks": [],
+      "analog_dates": [],
+      "regression_coefficients": null,
+      "active_hinges": [],
+      "initial_condition_number": null,
+      "final_condition_number": null,
+      "condition_number_matrix": "X"
+    }
+  }
+}

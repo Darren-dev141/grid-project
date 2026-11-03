@@ -1,0 +1,7 @@
+{
+  "sha256": "b48baaa51dc680cdcc7704f96aee954afbcd6d5433cb85a19d6fda51265679b5",
+  "created_utc": "2026-10-31T11:21:37.478231+00:00",
+  "artifact": "holdout-source.json",
+  "procedure": "Read-only SELECT * from each listed source, dates >=2025-01-01 and <2027-01-01, ordered by source date. All columns including quality and provenance retained; ISO-8601 date/timestamps; JSON sorted keys, compact separators, ensure_ascii=True, allow_nan=False; UTF-8 with one final LF. SHA-256 of exact bytes.",
+  "policy": "No fitting, tuning, feature selection or validation on holdout. Fixed features and hyperparameters chosen before scoring. Lagged observations from prior holdout days may be used only in sequential next-day final scoring. Training targets <=2024-12-31. Rolling-origin windows inside training years only."
+}
