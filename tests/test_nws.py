@@ -109,3 +109,49 @@ def test_retry_after_does_not_retry_early(tmp_path,monkeypatch):
         with pytest.raises(RuntimeError,match='later retry'):
             fetch(tmp_path,client=client,sleep=lambda _:None)
     assert len(calls)==1
+
+
+def _bwi_forecast_body():
+    return {'properties': {'updateTime': '2026-11-05T10:00:00Z',
+                            'generatedAt': '2026-11-05T10:01:00Z',
+                            'periods': [
+                                {'number': 1, 'startTime': '2026-11-05T01:00:00-05:00',
+                                 'endTime': '2026-11-05T06:00:00-05:00', 'isDaytime': False,
+                                 'temperature': 40, 'temperatureUnit': 'F'},
+                                {'number': 2, 'startTime': '2026-11-05T06:00:00-05:00',
+                                 'endTime': '2026-11-05T18:00:00-05:00', 'isDaytime': True,
+                                 'temperature': 65, 'temperatureUnit': 'F'}]}}
+
+
+def test_fetch_bwi_gridpoint_pin_and_provenance(tmp_path, monkeypatch):
+    from grid_pipeline.nws import fetch_bwi, GRID_BWI
+    assert GRID_BWI == ('LWX', 108, 86)
+    monkeypatch.setenv('NWS_USER_AGENT', 'synthetic-agent')
+    body = json.dumps(_bwi_forecast_body()).encode()
+    calls = []
+
+    def handler(request):
+        calls.append(request)
+        if '/points/' in request.url.path:
+            return httpx.Response(200, json={'properties': {'gridId': 'LWX', 'gridX': 108, 'gridY': 86}})
+        return httpx.Response(200, content=body)
+
+    with httpx.Client(transport=httpx.MockTransport(handler)) as client:
+        result = fetch_bwi(tmp_path, client=client, sleep=lambda _: None)
+    assert result['gridpoint'] == ('LWX', 108, 86)
+    assert result['forecast_bwi'] == 1
+    import duckdb
+    with duckdb.connect(str(tmp_path / 'grid.duckdb')) as conn:
+        row = conn.execute(
+            "select committed, observed_at from raw.batches where source='nws' and dataset='forecast_bwi'"
+        ).fetchone()
+    assert row is not None
+    assert row[0] is True
+    assert row[1] is not None
+
+
+def test_fetch_bwi_missing_ua(tmp_path, monkeypatch):
+    from grid_pipeline.nws import fetch_bwi
+    monkeypatch.delenv('NWS_USER_AGENT', raising=False)
+    with pytest.raises(RuntimeError, match='NWS_USER_AGENT'):
+        fetch_bwi(tmp_path)

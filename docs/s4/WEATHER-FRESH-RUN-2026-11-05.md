@@ -55,3 +55,47 @@ Printed by `fetch_bwi` to stdout (surfaced by the refresh job). Example from a l
 - The scheduled 05:00 job has not yet run; first run pending.
 - `ledger.append_forecast` still uses the target day's local midnight as the deadline (unchanged, not in scope).
 - Checker pass not run (per brief, deferred).
+
+## CONSOLIDATION addendum — 2026-11-05
+
+### Duplicates collapsed
+
+- Canonical model kept: `dbt/models/cleaned/nws_forecast_daily_end_date.sql`
+  (`nws_forecast_daily_end_date` in `nws.yml`).
+- Deleted files: `nws_forecast_daily_by_end.sql`, `nws_forecast_daily_by_end_date.sql`,
+  `nws_forecast_daily_end.sql`, `nws_forecast_daily_enddate.sql`,
+  `nws_forecast_daily_night_end.sql` (all 33 lines, byte-identical in logic).
+- `nws.yml` entry renamed from `nws_forecast_daily_enddate` to
+  `nws_forecast_daily_end_date`. `nws_forecast_daily.sql` and its pinned behaviour
+  (tests/test_nws_dbt.py) left intact.
+- Logic audit: all six duplicates implemented the settled rule (night lows aligned by
+  end date; daytime highs by start date; null high/low for incomplete pairs; period
+  counts; issuance identity). No deviation found; canonical model unchanged.
+
+### Tests added
+
+- tests/test_nws.py: +2 (fetch/provenance: BWI gridpoint pin 108,86, observed_at
+  commit record; missing UA).
+- tests/test_nws_dbt.py: +3 (end-date collision shape, missing-low flagging, DST
+  transition night).
+- tests/test_stress_inputs.py: +4 (lookahead exclusion, complete-pair preference,
+  uncommitted batch invisible, NULL usable_at without commit record).
+- tests/test_weather_fresh_gate.py: +4 (weather_fresh true/stale/incomplete/absent).
+- Total new: 13.
+
+### Implementation fixes from test findings
+
+- None required; all new tests pass against the committed implementation.
+
+### Full-suite result
+
+- Run in a detached worktree literally named `grid-project` at the final tip.
+- Result recorded below in Job 3.
+
+### Still unverified
+
+- >=06:00 low-drop question until probe runs accumulate.
+- 05:00 scheduler job inert until merge.
+- Architecture amendment in 954f3ba records gridpoint 108,86 superseding 107,85
+  (docs/architecture-s3-s7.md:91); older W4 references (lines 182, 206, 379) remain
+  historical and are not amended.

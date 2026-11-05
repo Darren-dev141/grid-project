@@ -36,7 +36,7 @@ models:
         data_tests: [not_null]
       - name: local_date
         data_tests: [not_null]
-  - name: nws_forecast_daily_enddate
+  - name: nws_forecast_daily_end_date
     description: High from daytime periods (by start date) and low from nights ending on each local date, retained per issuance. End-date night alignment.
     columns:
       - name: issuance_id

@@ -187,7 +187,7 @@ def load_nws_bwi_forecast(database, target_date, *, indexed_by=None):
         raise ValueError('indexed_by must be timezone-aware')
     db_path = Path(database).resolve(strict=True)
     # Self-contained alignment over raw nws forecast_bwi records (end-date night
-    # alignment). Mirrors dbt/models/cleaned/nws_forecast_daily_enddate.sql but
+    # alignment). Mirrors dbt/models/cleaned/nws_forecast_daily_end_date.sql but
     # reads raw directly so observed_at (commit record) is available for usable_at.
     sql = """
     with documents as (
