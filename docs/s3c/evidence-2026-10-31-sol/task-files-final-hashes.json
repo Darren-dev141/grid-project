@@ -1,0 +1,32 @@
+﻿[
+    {
+        "Algorithm":  "SHA256",
+        "Hash":  "CC750AC1FDC191D7CF7B86F7E7B22E37D2B4B076ABA763BAA2D72C8B9FC998D9",
+        "Path":  "C:\\Users\\ajbig\\Documents\\grid-project\\scripts\\diagnose_s3c.py"
+    },
+    {
+        "Algorithm":  "SHA256",
+        "Hash":  "397C93C9B2115D97445213280A66035E5F5C4A87EC27FC17FD389608BC4EA437",
+        "Path":  "C:\\Users\\ajbig\\Documents\\grid-project\\scripts\\verify_s3c_sol.ps1"
+    },
+    {
+        "Algorithm":  "SHA256",
+        "Hash":  "0A05801FB5139C95CBB023612B99A60804173BD8E29785916632FECAABCE24AD",
+        "Path":  "C:\\Users\\ajbig\\Documents\\grid-project\\src\\grid_pipeline\\stress_inputs.py"
+    },
+    {
+        "Algorithm":  "SHA256",
+        "Hash":  "BDC4BFBFD1172C6BEE737BF3599FA9F12684849A9CEF566DC88797A9D910512B",
+        "Path":  "C:\\Users\\ajbig\\Documents\\grid-project\\tests\\test_stress_inputs.py"
+    },
+    {
+        "Algorithm":  "SHA256",
+        "Hash":  "524DEBDDF2AFA6AFFE5918382730B26C557A08E31930B4B439614D4C382DC792",
+        "Path":  "C:\\Users\\ajbig\\Documents\\grid-project\\tests\\test_s3c_diagnosis.py"
+    },
+    {
+        "Algorithm":  "SHA256",
+        "Hash":  "641BB1D2EF38A5193746EE3E97590C5653201FB084B945C8531F73BD5D4A50FA",
+        "Path":  "C:\\Users\\ajbig\\Documents\\grid-project\\docs\\s3c\\S3C-DIAGNOSIS-2026-10-31.md"
+    }
+]

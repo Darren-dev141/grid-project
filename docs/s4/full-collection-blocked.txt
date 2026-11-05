@@ -1,0 +1,291 @@
+tests/test_ledger.py::test_hash_multiple_receipts_and_exclusive_create
+tests/test_ledger.py::test_hash_mismatch_and_readdressed_back_edit_fail
+tests/test_ledger.py::test_committed_definition_back_edit_fails_full_history
+tests/test_ledger.py::test_reject_retrospective_late_future_and_naive_issue
+tests/test_ledger.py::test_frozen_thresholds_and_late_commit_are_verified
+tests/test_ledger.py::test_renamed_retrospective_and_definitionless_receipts_fail
+tests/test_ledger.py::test_guard_blocks_non_owner_and_allows_owner
+tests/test_warehouse.py::test_build_uses_current_python_and_isolates_artifacts
+tests/test_warehouse.py::test_build_retries_only_known_flake
+tests/test_warehouse.py::test_build_fails_loudly_and_bounds_attempts[SQL compilation failed-1]
+tests/test_warehouse.py::test_build_fails_loudly_and_bounds_attempts[concurrent send_bytes() calls are not supported-3]
+tests/test_warehouse.py::test_build_propagates_timeout
+
+=================================== ERRORS ====================================
+_________________ ERROR collecting tests/test_day_history.py __________________
+ImportError while importing test module 'C:\Users\ajbig\Documents\grid-project\tests\test_day_history.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+..\..\miniconda3\Lib\importlib\__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\test_day_history.py:6: in <module>
+    import duckdb
+.venv\Lib\site-packages\duckdb\__init__.py:12: in <module>
+    from _duckdb import (
+E   ModuleNotFoundError: No module named '_duckdb'
+_____________________ ERROR collecting tests/test_dbt.py ______________________
+ImportError while importing test module 'C:\Users\ajbig\Documents\grid-project\tests\test_dbt.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+..\..\miniconda3\Lib\importlib\__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\test_dbt.py:10: in <module>
+    import duckdb
+.venv\Lib\site-packages\duckdb\__init__.py:12: in <module>
+    from _duckdb import (
+E   ModuleNotFoundError: No module named '_duckdb'
+____________________ ERROR collecting tests/test_fetch.py _____________________
+ImportError while importing test module 'C:\Users\ajbig\Documents\grid-project\tests\test_fetch.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+..\..\miniconda3\Lib\importlib\__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\test_fetch.py:3: in <module>
+    import duckdb
+.venv\Lib\site-packages\duckdb\__init__.py:12: in <module>
+    from _duckdb import (
+E   ModuleNotFoundError: No module named '_duckdb'
+__________________ ERROR collecting tests/test_freshness.py ___________________
+ImportError while importing test module 'C:\Users\ajbig\Documents\grid-project\tests\test_freshness.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+..\..\miniconda3\Lib\importlib\__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\test_freshness.py:8: in <module>
+    from grid_pipeline.publish import publish
+src\grid_pipeline\publish.py:16: in <module>
+    import duckdb
+.venv\Lib\site-packages\duckdb\__init__.py:12: in <module>
+    from _duckdb import (
+E   ModuleNotFoundError: No module named '_duckdb'
+_____________________ ERROR collecting tests/test_ncei.py _____________________
+ImportError while importing test module 'C:\Users\ajbig\Documents\grid-project\tests\test_ncei.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+..\..\miniconda3\Lib\importlib\__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\test_ncei.py:5: in <module>
+    import duckdb
+.venv\Lib\site-packages\duckdb\__init__.py:12: in <module>
+    from _duckdb import (
+E   ModuleNotFoundError: No module named '_duckdb'
+___________________ ERROR collecting tests/test_ncei_dbt.py ___________________
+ImportError while importing test module 'C:\Users\ajbig\Documents\grid-project\tests\test_ncei_dbt.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+..\..\miniconda3\Lib\importlib\__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\test_ncei_dbt.py:9: in <module>
+    import duckdb
+.venv\Lib\site-packages\duckdb\__init__.py:12: in <module>
+    from _duckdb import (
+E   ModuleNotFoundError: No module named '_duckdb'
+_____________________ ERROR collecting tests/test_nws.py ______________________
+ImportError while importing test module 'C:\Users\ajbig\Documents\grid-project\tests\test_nws.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+..\..\miniconda3\Lib\importlib\__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\test_nws.py:4: in <module>
+    from grid_pipeline.storage import ingest
+src\grid_pipeline\storage.py:7: in <module>
+    import duckdb
+.venv\Lib\site-packages\duckdb\__init__.py:12: in <module>
+    from _duckdb import (
+E   ModuleNotFoundError: No module named '_duckdb'
+___________________ ERROR collecting tests/test_nws_dbt.py ____________________
+ImportError while importing test module 'C:\Users\ajbig\Documents\grid-project\tests\test_nws_dbt.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+..\..\miniconda3\Lib\importlib\__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\test_nws_dbt.py:9: in <module>
+    import duckdb
+.venv\Lib\site-packages\duckdb\__init__.py:12: in <module>
+    from _duckdb import (
+E   ModuleNotFoundError: No module named '_duckdb'
+___________________ ERROR collecting tests/test_publish.py ____________________
+ImportError while importing test module 'C:\Users\ajbig\Documents\grid-project\tests\test_publish.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+..\..\miniconda3\Lib\importlib\__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\test_publish.py:6: in <module>
+    import duckdb
+.venv\Lib\site-packages\duckdb\__init__.py:12: in <module>
+    from _duckdb import (
+E   ModuleNotFoundError: No module named '_duckdb'
+________________ ERROR collecting tests/test_s3c_diagnosis.py _________________
+ImportError while importing test module 'C:\Users\ajbig\Documents\grid-project\tests\test_s3c_diagnosis.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+..\..\miniconda3\Lib\importlib\__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\test_s3c_diagnosis.py:6: in <module>
+    from scripts.diagnose_s3c import availability_bound, json_value
+scripts\diagnose_s3c.py:16: in <module>
+    import duckdb
+.venv\Lib\site-packages\duckdb\__init__.py:12: in <module>
+    from _duckdb import (
+E   ModuleNotFoundError: No module named '_duckdb'
+___________________ ERROR collecting tests/test_storage.py ____________________
+ImportError while importing test module 'C:\Users\ajbig\Documents\grid-project\tests\test_storage.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+..\..\miniconda3\Lib\importlib\__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\test_storage.py:3: in <module>
+    import duckdb
+.venv\Lib\site-packages\duckdb\__init__.py:12: in <module>
+    from _duckdb import (
+E   ModuleNotFoundError: No module named '_duckdb'
+____________________ ERROR collecting tests/test_stress.py ____________________
+ImportError while importing test module 'C:\Users\ajbig\Documents\grid-project\tests\test_stress.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+.venv\Lib\site-packages\numpy\_core\__init__.py:24: in <module>
+    from . import multiarray
+.venv\Lib\site-packages\numpy\_core\multiarray.py:11: in <module>
+    from . import _multiarray_umath, overrides
+.venv\Lib\site-packages\numpy\_core\overrides.py:6: in <module>
+    from numpy._core._multiarray_umath import (
+E   ModuleNotFoundError: No module named 'numpy._core._multiarray_umath'
+
+The above exception was the direct cause of the following exception:
+..\..\miniconda3\Lib\importlib\__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\test_stress.py:10: in <module>
+    from grid_pipeline.stress import DefinitionGap, annotate_alerts, _active_hinges, _day_type_history, _history, _level, _mode_hour, forecast, parse_definition
+src\grid_pipeline\stress.py:10: in <module>
+    import numpy as np
+.venv\Lib\site-packages\numpy\__init__.py:122: in <module>
+    from numpy.__config__ import show_config
+.venv\Lib\site-packages\numpy\__config__.py:4: in <module>
+    from numpy._core._multiarray_umath import (
+.venv\Lib\site-packages\numpy\_core\__init__.py:85: in <module>
+    raise ImportError(msg) from exc
+E   ImportError: 
+E   
+E   IMPORTANT: PLEASE READ THIS FOR ADVICE ON HOW TO SOLVE THIS ISSUE!
+E   
+E   Importing the numpy C-extensions failed. This error can happen for
+E   many reasons, often due to issues with your setup or how NumPy was
+E   installed.
+E   The following compiled module files exist, but seem incompatible
+E   with with either python 'cpython-312' or the platform 'win32':
+E   
+E     * _multiarray_umath.cp314-win_amd64.lib
+E     * _multiarray_umath.cp314-win_amd64.pyd
+E   
+E   We have compiled some common reasons and troubleshooting tips at:
+E   
+E       https://numpy.org/devdocs/user/troubleshooting-importerror.html
+E   
+E   Please note and check the following:
+E   
+E     * The Python version is: Python 3.12 from "C:\Users\ajbig\miniconda3\python.exe"
+E     * The NumPy version is: "2.5.4"
+E   
+E   and make sure that they are the versions you expect.
+E   
+E   Please carefully study the information and documentation linked above.
+E   This is unlikely to be a NumPy issue but will be caused by a bad install
+E   or environment on your machine.
+E   
+E   Original error was: No module named 'numpy._core._multiarray_umath'
+________________ ERROR collecting tests/test_stress_inputs.py _________________
+ImportError while importing test module 'C:\Users\ajbig\Documents\grid-project\tests\test_stress_inputs.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+..\..\miniconda3\Lib\importlib\__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\test_stress_inputs.py:6: in <module>
+    import duckdb
+.venv\Lib\site-packages\duckdb\__init__.py:12: in <module>
+    from _duckdb import (
+E   ModuleNotFoundError: No module named '_duckdb'
+________________ ERROR collecting tests/test_stress_rulings.py ________________
+ImportError while importing test module 'C:\Users\ajbig\Documents\grid-project\tests\test_stress_rulings.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+.venv\Lib\site-packages\numpy\_core\__init__.py:24: in <module>
+    from . import multiarray
+.venv\Lib\site-packages\numpy\_core\multiarray.py:11: in <module>
+    from . import _multiarray_umath, overrides
+.venv\Lib\site-packages\numpy\_core\overrides.py:6: in <module>
+    from numpy._core._multiarray_umath import (
+E   ModuleNotFoundError: No module named 'numpy._core._multiarray_umath'
+
+The above exception was the direct cause of the following exception:
+..\..\miniconda3\Lib\importlib\__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\test_stress_rulings.py:8: in <module>
+    from grid_pipeline.stress import forecast, parse_definition
+src\grid_pipeline\stress.py:10: in <module>
+    import numpy as np
+.venv\Lib\site-packages\numpy\__init__.py:122: in <module>
+    from numpy.__config__ import show_config
+.venv\Lib\site-packages\numpy\__config__.py:4: in <module>
+    from numpy._core._multiarray_umath import (
+.venv\Lib\site-packages\numpy\_core\__init__.py:85: in <module>
+    raise ImportError(msg) from exc
+E   ImportError: 
+E   
+E   IMPORTANT: PLEASE READ THIS FOR ADVICE ON HOW TO SOLVE THIS ISSUE!
+E   
+E   Importing the numpy C-extensions failed. This error can happen for
+E   many reasons, often due to issues with your setup or how NumPy was
+E   installed.
+E   The following compiled module files exist, but seem incompatible
+E   with with either python 'cpython-312' or the platform 'win32':
+E   
+E     * _multiarray_umath.cp314-win_amd64.lib
+E     * _multiarray_umath.cp314-win_amd64.pyd
+E   
+E   We have compiled some common reasons and troubleshooting tips at:
+E   
+E       https://numpy.org/devdocs/user/troubleshooting-importerror.html
+E   
+E   Please note and check the following:
+E   
+E     * The Python version is: Python 3.12 from "C:\Users\ajbig\miniconda3\python.exe"
+E     * The NumPy version is: "2.5.4"
+E   
+E   and make sure that they are the versions you expect.
+E   
+E   Please carefully study the information and documentation linked above.
+E   This is unlikely to be a NumPy issue but will be caused by a bad install
+E   or environment on your machine.
+E   
+E   Original error was: No module named 'numpy._core._multiarray_umath'
+=========================== short test summary info ===========================
+ERROR tests/test_day_history.py
+ERROR tests/test_dbt.py
+ERROR tests/test_fetch.py
+ERROR tests/test_freshness.py
+ERROR tests/test_ncei.py
+ERROR tests/test_ncei_dbt.py
+ERROR tests/test_nws.py
+ERROR tests/test_nws_dbt.py
+ERROR tests/test_publish.py
+ERROR tests/test_s3c_diagnosis.py
+ERROR tests/test_storage.py
+ERROR tests/test_stress.py
+ERROR tests/test_stress_inputs.py
+ERROR tests/test_stress_rulings.py
+!!!!!!!!!!!!!!!!!! Interrupted: 14 errors during collection !!!!!!!!!!!!!!!!!!!
+12 tests collected, 14 errors in 0.77s

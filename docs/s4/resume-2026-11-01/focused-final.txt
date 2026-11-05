@@ -1,0 +1,17 @@
+...........F............................................................ [ 93%]
+.....                                                                    [100%]
+================================== FAILURES ===================================
+____________________ test_repository_ledger_access_policy _____________________
+
+    def test_repository_ledger_access_policy():
+        from grid_pipeline.ledger_access import check_repository
+>       assert check_repository(Path(__file__).resolve().parents[1]) == []
+E       AssertionError: assert ['tests/test_...de ledger.py'] == []
+E         
+E         Left contains one more item: 'tests/test_ledger_access.py:65: direct ledger IO outside ledger.py'
+E         Use -v to get more diff
+
+tests\test_ledger_access.py:37: AssertionError
+=========================== short test summary info ===========================
+FAILED tests/test_ledger_access.py::test_repository_ledger_access_policy - As...
+1 failed, 76 passed in 389.62s (0:06:29)

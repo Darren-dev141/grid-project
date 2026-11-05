@@ -1,0 +1,11 @@
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+  File "C:\Users\ajbig\miniconda3\Lib\pathlib.py", line 1019, in read_bytes
+    with self.open(mode='rb') as f:
+         ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ajbig\miniconda3\Lib\pathlib.py", line 1013, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ajbig\Documents\grid-project\src\grid_pipeline\ledger_access.py", line 43, in audit
+    raise PermissionError('ledger access must go through grid_pipeline.ledger')
+PermissionError: ledger access must go through grid_pipeline.ledger

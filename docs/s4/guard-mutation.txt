@@ -1,0 +1,42 @@
+F                                                                        [100%]
+================================== FAILURES ===================================
+__________________________ test_deliberate_violation __________________________
+
+    def test_deliberate_violation():
+>       (Path(__file__).resolve().parents[1] / 'ledger/definitions/stress-index-v1.toml').read_bytes()
+
+tests\test_s4_deliberate_violation.py:3: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+..\..\miniconda3\Lib\pathlib.py:1019: in read_bytes
+    with self.open(mode='rb') as f:
+         ^^^^^^^^^^^^^^^^^^^^
+..\..\miniconda3\Lib\pathlib.py:1013: in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+event = 'open'
+args = ('C:\\Users\\ajbig\\Documents\\grid-project\\ledger\\definitions\\stress-index-v1.toml', 'r', 32896)
+
+    def _ledger_access(event, args):
+        if event not in {'open', 'os.listdir', 'os.scandir', 'os.remove', 'os.rename',
+                         'os.mkdir', 'os.rmdir'}:
+            return
+        for argument in args[:2] if event == 'os.rename' else args[:1]:
+            if not isinstance(argument, (str, bytes, os.PathLike)):
+                continue
+            path = os.path.normcase(os.path.realpath(os.fsdecode(argument)))
+            if path != _LEDGER and not path.startswith(_LEDGER + os.sep):
+                continue
+            frame = sys._getframe(1)
+            while frame:
+                filename = os.path.normcase(os.path.abspath(frame.f_code.co_filename))
+                if filename.startswith(os.path.normcase(str(_ROOT)) + os.sep) and filename != os.path.normcase(__file__):
+                    if filename != _OWNER:
+>                       raise PermissionError('ledger access must go through grid_pipeline.ledger')
+E                       PermissionError: ledger access must go through grid_pipeline.ledger
+
+tests\conftest.py:26: PermissionError
+=========================== short test summary info ===========================
+FAILED tests/test_s4_deliberate_violation.py::test_deliberate_violation - Per...
+1 failed in 0.13s

@@ -1,0 +1,17 @@
+﻿[
+    {
+        "Path":  "C:\\Users\\ajbig\\Documents\\grid-project\\data\\s1-live\\grid.duckdb",
+        "SHA256":  "0AE80A9A1939B78FFCF471F9998FBFC9A51749B039713DBC2ABFF7022D8337C3",
+        "Unchanged":  true
+    },
+    {
+        "Path":  "C:\\Users\\ajbig\\Documents\\grid-project\\data\\s3a-verification\\grid.duckdb",
+        "SHA256":  "FFFC2AEEF64CE06DD09F5EA2E4739A1BB7FDEFD6B28DFF1E66779EC8F4F091B1",
+        "Unchanged":  true
+    },
+    {
+        "Path":  "C:\\Users\\ajbig\\AppData\\Local\\Temp\\grid-s3c-20261030\\history-complete\\grid.duckdb",
+        "SHA256":  "CCAE32773857298E6CD0E61312C467C9F32748FEA62CE89B46CB125003CE367C",
+        "Unchanged":  true
+    }
+]

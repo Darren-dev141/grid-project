@@ -1,0 +1,38 @@
+﻿[
+    {
+        "Path":  "C:\\Users\\ajbig\\Documents\\grid-project\\src\\grid_pipeline\\stress.py",
+        "UnchangedDuringRunAndCurrent":  true
+    },
+    {
+        "Path":  "C:\\Users\\ajbig\\Documents\\grid-project\\src\\grid_pipeline\\model.py",
+        "UnchangedDuringRunAndCurrent":  true
+    },
+    {
+        "Path":  "C:\\Users\\ajbig\\Documents\\grid-project\\src\\grid_pipeline\\stress_inputs.py",
+        "UnchangedDuringRunAndCurrent":  true
+    },
+    {
+        "Path":  "C:\\Users\\ajbig\\Documents\\grid-project\\scripts\\diagnose_s3c.py",
+        "UnchangedDuringRunAndCurrent":  true
+    },
+    {
+        "Path":  "C:\\Users\\ajbig\\Documents\\grid-project\\tests\\test_stress.py",
+        "UnchangedDuringRunAndCurrent":  true
+    },
+    {
+        "Path":  "C:\\Users\\ajbig\\Documents\\grid-project\\tests\\test_stress_inputs.py",
+        "UnchangedDuringRunAndCurrent":  true
+    },
+    {
+        "Path":  "C:\\Users\\ajbig\\Documents\\grid-project\\tests\\test_stress_rulings.py",
+        "UnchangedDuringRunAndCurrent":  true
+    },
+    {
+        "Path":  "C:\\Users\\ajbig\\Documents\\grid-project\\tests\\test_s3c_diagnosis.py",
+        "UnchangedDuringRunAndCurrent":  true
+    },
+    {
+        "Path":  "C:\\Users\\ajbig\\Documents\\grid-project\\ledger\\definitions\\stress-index-v1.toml",
+        "UnchangedDuringRunAndCurrent":  true
+    }
+]

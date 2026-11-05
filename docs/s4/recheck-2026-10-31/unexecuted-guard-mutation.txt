@@ -1,0 +1,16 @@
+F                                                                        [100%]
+================================== FAILURES ===================================
+____________________ test_repository_ledger_access_policy _____________________
+
+    def test_repository_ledger_access_policy():
+        from grid_pipeline.ledger_access import check_repository
+>       assert check_repository(Path(__file__).resolve().parents[1]) == []
+E       AssertionError: assert ['scripts/_s4...de ledger.py'] == []
+E         
+E         Left contains one more item: 'scripts/_s4_unexecuted_violation.py:3: direct ledger IO outside ledger.py'
+E         Use -v to get more diff
+
+tests\test_ledger_access.py:29: AssertionError
+=========================== short test summary info ===========================
+FAILED tests/test_ledger_access.py::test_repository_ledger_access_policy - As...
+1 failed in 0.43s

@@ -1,0 +1,15 @@
+HISTORICAL CHECK: coverage and fail-closed probes, NOT a performance backtest
+COVERAGE_TOTALS [{"rows": 2859, "unique_dates": 2859, "first_date": "2018-12-31", "last_date": "2026-10-28", "demand_complete_days": 2836, "temperature_days": 2854, "complete_joined_days": 2833}]
+SCRATCH_DBT_RESULTS {'success': 3, 'pass': 29}
+Year | mart dates | complete demand | complete with temperatures | fresh forecast probes | DefinitionGap | returned forecasts
+2019 | 365 | 361 | 361 | 361 | 361 | 0
+2020 | 366 | 356 | 356 | 356 | 356 | 0
+2021 | 365 | 363 | 363 | 363 | 363 | 0
+2022 | 365 | 363 | 363 | 363 | 363 | 0
+2023 | 365 | 364 | 364 | 364 | 364 | 0
+2024 | 366 | 364 | 364 | 364 | 364 | 0
+2025 | 365 | 365 | 365 | 365 | 365 | 0
+2026 | 301 | 300 | 297 | 297 | 297 | 0
+DefinitionGap (2833 probes): v1 does not specify percentile interpolation, analog distance and ties, sample requirements, or regression fallback
+Performance backtest: NOT RUN. MAE, hour-hit rate, stress precision/recall, and scored samples: unavailable.
+Blockers: percentile interpolation blocks thresholds/levels; analog distance/scaling/selection ties block peak hour; sample requirements block fitting/threshold/analog eligibility; singular/ill-conditioned fitting policy blocks peak MW; calendar-boundary/missing-temperature rules block history selection and exclusions; historical availability/revision cutoffs block no-lookahead validation. NWS interval-to-date mapping blocks annotation validation only, never numerical stress levels.

@@ -1,0 +1,17 @@
+﻿Get-Content : Access is denied
+At line:2 char:1
++ Get-Content -LiteralPath 'C:\Users\ajbig\AppData\Local\hermes\cache\s ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : PermissionDenied: (C:\Users\ajbig\...rulings-out.txt:String) [Get-Content], Unauthorized 
+   AccessException
+    + FullyQualifiedErrorId : ItemExistsUnauthorizedAccessError,Microsoft.PowerShell.Commands.GetContentCommand
+ 
+Get-Content : Cannot find path 'C:\Users\ajbig\AppData\Local\hermes\cache\scratch\grid-s3c-worker-rulings-out.txt' 
+because it does not exist.
+At line:2 char:1
++ Get-Content -LiteralPath 'C:\Users\ajbig\AppData\Local\hermes\cache\s ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (C:\Users\ajbig\...rulings-out.txt:String) [Get-Content], ItemNotFoundEx 
+   ception
+    + FullyQualifiedErrorId : PathNotFound,Microsoft.PowerShell.Commands.GetContentCommand
+ 

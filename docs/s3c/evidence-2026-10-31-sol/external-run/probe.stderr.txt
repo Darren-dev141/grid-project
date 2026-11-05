@@ -1,0 +1,27 @@
+Traceback (most recent call last):
+  File "C:\Users\ajbig\Documents\grid-project\scripts\diagnose_s3c.py", line 272, in <module>
+    main()
+    ~~~~^^
+  File "C:\Users\ajbig\Documents\grid-project\scripts\diagnose_s3c.py", line 257, in main
+    result = probe(args.mart, repo / 'data/s1-live/grid.duckdb',
+                   repo / 'data/s3a-verification/grid.duckdb',
+                   repo / 'ledger/definitions/stress-index-v1.toml')
+  File "C:\Users\ajbig\Documents\grid-project\scripts\diagnose_s3c.py", line 131, in probe
+    history = load_first_recorded_history(load_db, temperature_db)
+  File "C:\Users\ajbig\Documents\grid-project\src\grid_pipeline\stress_inputs.py", line 47, in load_first_recorded_history
+    with duckdb.connect(':memory:') as connection:
+         ~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "C:\Users\ajbig\Documents\grid-project\src\grid_pipeline\stress_inputs.py", line 113, in load_first_recorded_history
+    rows = connection.execute('''
+           ~~~~~~~~~~~~~~~~~~^^^^
+        WITH availability AS (
+        ^^^^^^^^^^^^^^^^^^^^^^
+    ...<18 lines>...
+        ORDER BY history.local_date
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ''').fetchall()
+    ^^^^
+_duckdb.ConversionException: Conversion Error: Failed to cast value to numerical: {"period":"2019-03-27T07","respondent":"PJM","resp... when casting from source column payload
+
+LINE 6:                         AS loaded_at
+                               ^

@@ -1,0 +1,12 @@
+﻿[
+    {
+        "Algorithm":  "SHA256",
+        "Hash":  "2E1508C6966DDDD09C52CECED1AC00C21AE96118DE18793F399ED6A530E1C974",
+        "Path":  "C:\\Users\\ajbig\\Documents\\grid-project\\docs\\s3c\\evidence-2026-10-31-sol\\worker-rulings-report.txt"
+    },
+    {
+        "Algorithm":  "SHA256",
+        "Hash":  "6F1B8CDF087EE5A279BCC5FE0E6C017AFA0388964CAD4A97CF685E5F83C0CF50",
+        "Path":  "C:\\Users\\ajbig\\Documents\\grid-project\\docs\\s3c\\evidence-2026-10-31-sol\\worker-data-report.txt"
+    }
+]

@@ -1,0 +1,430 @@
+FFFFFFFFFFFFFF                                                           [100%]
+================================== FAILURES ===================================
+_ test_relative_dynamic_child_path_is_denied[environment-./ledger/definitions/stress-index-v1.toml-] _
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001F0490035F0>
+value = './ledger/definitions/stress-index-v1.toml', cwd_suffix = ''
+source = 'environment'
+
+    @pytest.mark.parametrize('value,cwd_suffix', [
+        ('./ledger/definitions/stress-index-v1.toml', ''),
+        ('.\\ledger\\definitions\\stress-index-v1.toml', ''),
+        ('scripts/../ledger/definitions/stress-index-v1.toml', ''),
+        ('./ledger/./definitions/../definitions//stress-index-v1.toml', ''),
+        ('../ledger/definitions/stress-index-v1.toml', 'scripts'),
+        ('../grid-project/ledger/definitions/stress-index-v1.toml', '..'),
+    ])
+    @pytest.mark.parametrize('source', ['environment', 'config'])
+    def test_relative_dynamic_child_path_is_denied(monkeypatch, value, cwd_suffix, source):
+        repo = Path(__file__).resolve().parents[1]
+        # The final alias is relative to the repository's parent.
+        if cwd_suffix == '..':
+            value = './grid-project/ledger/definitions/stress-index-v1.toml'
+        monkeypatch.setenv('INPUT', value)
+        config = {'path': os.environ['INPUT']}
+        if source == 'environment':
+            command = [sys.executable, '-c', 'import os; open(os.environ["INPUT"], "rb").read()']
+        else:
+            command = [sys.executable, '-c', 'import sys; open(sys.argv[1], "rb").read()', config['path']]
+>       with pytest.raises(PermissionError, match='external.*content'):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE PermissionError
+
+tests\test_ledger_access.py:100: Failed
+_ test_relative_dynamic_child_path_is_denied[environment-.\\ledger\\definitions\\stress-index-v1.toml-] _
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001F049003620>
+value = '.\\ledger\\definitions\\stress-index-v1.toml', cwd_suffix = ''
+source = 'environment'
+
+    @pytest.mark.parametrize('value,cwd_suffix', [
+        ('./ledger/definitions/stress-index-v1.toml', ''),
+        ('.\\ledger\\definitions\\stress-index-v1.toml', ''),
+        ('scripts/../ledger/definitions/stress-index-v1.toml', ''),
+        ('./ledger/./definitions/../definitions//stress-index-v1.toml', ''),
+        ('../ledger/definitions/stress-index-v1.toml', 'scripts'),
+        ('../grid-project/ledger/definitions/stress-index-v1.toml', '..'),
+    ])
+    @pytest.mark.parametrize('source', ['environment', 'config'])
+    def test_relative_dynamic_child_path_is_denied(monkeypatch, value, cwd_suffix, source):
+        repo = Path(__file__).resolve().parents[1]
+        # The final alias is relative to the repository's parent.
+        if cwd_suffix == '..':
+            value = './grid-project/ledger/definitions/stress-index-v1.toml'
+        monkeypatch.setenv('INPUT', value)
+        config = {'path': os.environ['INPUT']}
+        if source == 'environment':
+            command = [sys.executable, '-c', 'import os; open(os.environ["INPUT"], "rb").read()']
+        else:
+            command = [sys.executable, '-c', 'import sys; open(sys.argv[1], "rb").read()', config['path']]
+>       with pytest.raises(PermissionError, match='external.*content'):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE PermissionError
+
+tests\test_ledger_access.py:100: Failed
+_ test_relative_dynamic_child_path_is_denied[environment-scripts/../ledger/definitions/stress-index-v1.toml-] _
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001F04917B9E0>
+value = 'scripts/../ledger/definitions/stress-index-v1.toml', cwd_suffix = ''
+source = 'environment'
+
+    @pytest.mark.parametrize('value,cwd_suffix', [
+        ('./ledger/definitions/stress-index-v1.toml', ''),
+        ('.\\ledger\\definitions\\stress-index-v1.toml', ''),
+        ('scripts/../ledger/definitions/stress-index-v1.toml', ''),
+        ('./ledger/./definitions/../definitions//stress-index-v1.toml', ''),
+        ('../ledger/definitions/stress-index-v1.toml', 'scripts'),
+        ('../grid-project/ledger/definitions/stress-index-v1.toml', '..'),
+    ])
+    @pytest.mark.parametrize('source', ['environment', 'config'])
+    def test_relative_dynamic_child_path_is_denied(monkeypatch, value, cwd_suffix, source):
+        repo = Path(__file__).resolve().parents[1]
+        # The final alias is relative to the repository's parent.
+        if cwd_suffix == '..':
+            value = './grid-project/ledger/definitions/stress-index-v1.toml'
+        monkeypatch.setenv('INPUT', value)
+        config = {'path': os.environ['INPUT']}
+        if source == 'environment':
+            command = [sys.executable, '-c', 'import os; open(os.environ["INPUT"], "rb").read()']
+        else:
+            command = [sys.executable, '-c', 'import sys; open(sys.argv[1], "rb").read()', config['path']]
+>       with pytest.raises(PermissionError, match='external.*content'):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE PermissionError
+
+tests\test_ledger_access.py:100: Failed
+_ test_relative_dynamic_child_path_is_denied[environment-./ledger/./definitions/../definitions//stress-index-v1.toml-] _
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001F0499B6510>
+value = './ledger/./definitions/../definitions//stress-index-v1.toml'
+cwd_suffix = '', source = 'environment'
+
+    @pytest.mark.parametrize('value,cwd_suffix', [
+        ('./ledger/definitions/stress-index-v1.toml', ''),
+        ('.\\ledger\\definitions\\stress-index-v1.toml', ''),
+        ('scripts/../ledger/definitions/stress-index-v1.toml', ''),
+        ('./ledger/./definitions/../definitions//stress-index-v1.toml', ''),
+        ('../ledger/definitions/stress-index-v1.toml', 'scripts'),
+        ('../grid-project/ledger/definitions/stress-index-v1.toml', '..'),
+    ])
+    @pytest.mark.parametrize('source', ['environment', 'config'])
+    def test_relative_dynamic_child_path_is_denied(monkeypatch, value, cwd_suffix, source):
+        repo = Path(__file__).resolve().parents[1]
+        # The final alias is relative to the repository's parent.
+        if cwd_suffix == '..':
+            value = './grid-project/ledger/definitions/stress-index-v1.toml'
+        monkeypatch.setenv('INPUT', value)
+        config = {'path': os.environ['INPUT']}
+        if source == 'environment':
+            command = [sys.executable, '-c', 'import os; open(os.environ["INPUT"], "rb").read()']
+        else:
+            command = [sys.executable, '-c', 'import sys; open(sys.argv[1], "rb").read()', config['path']]
+>       with pytest.raises(PermissionError, match='external.*content'):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE PermissionError
+
+tests\test_ledger_access.py:100: Failed
+_ test_relative_dynamic_child_path_is_denied[environment-../ledger/definitions/stress-index-v1.toml-scripts] _
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001F0499B6900>
+value = '../ledger/definitions/stress-index-v1.toml', cwd_suffix = 'scripts'
+source = 'environment'
+
+    @pytest.mark.parametrize('value,cwd_suffix', [
+        ('./ledger/definitions/stress-index-v1.toml', ''),
+        ('.\\ledger\\definitions\\stress-index-v1.toml', ''),
+        ('scripts/../ledger/definitions/stress-index-v1.toml', ''),
+        ('./ledger/./definitions/../definitions//stress-index-v1.toml', ''),
+        ('../ledger/definitions/stress-index-v1.toml', 'scripts'),
+        ('../grid-project/ledger/definitions/stress-index-v1.toml', '..'),
+    ])
+    @pytest.mark.parametrize('source', ['environment', 'config'])
+    def test_relative_dynamic_child_path_is_denied(monkeypatch, value, cwd_suffix, source):
+        repo = Path(__file__).resolve().parents[1]
+        # The final alias is relative to the repository's parent.
+        if cwd_suffix == '..':
+            value = './grid-project/ledger/definitions/stress-index-v1.toml'
+        monkeypatch.setenv('INPUT', value)
+        config = {'path': os.environ['INPUT']}
+        if source == 'environment':
+            command = [sys.executable, '-c', 'import os; open(os.environ["INPUT"], "rb").read()']
+        else:
+            command = [sys.executable, '-c', 'import sys; open(sys.argv[1], "rb").read()', config['path']]
+>       with pytest.raises(PermissionError, match='external.*content'):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE PermissionError
+
+tests\test_ledger_access.py:100: Failed
+_ test_relative_dynamic_child_path_is_denied[environment-../grid-project/ledger/definitions/stress-index-v1.toml-..] _
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001F0499B4B30>
+value = './grid-project/ledger/definitions/stress-index-v1.toml'
+cwd_suffix = '..', source = 'environment'
+
+    @pytest.mark.parametrize('value,cwd_suffix', [
+        ('./ledger/definitions/stress-index-v1.toml', ''),
+        ('.\\ledger\\definitions\\stress-index-v1.toml', ''),
+        ('scripts/../ledger/definitions/stress-index-v1.toml', ''),
+        ('./ledger/./definitions/../definitions//stress-index-v1.toml', ''),
+        ('../ledger/definitions/stress-index-v1.toml', 'scripts'),
+        ('../grid-project/ledger/definitions/stress-index-v1.toml', '..'),
+    ])
+    @pytest.mark.parametrize('source', ['environment', 'config'])
+    def test_relative_dynamic_child_path_is_denied(monkeypatch, value, cwd_suffix, source):
+        repo = Path(__file__).resolve().parents[1]
+        # The final alias is relative to the repository's parent.
+        if cwd_suffix == '..':
+            value = './grid-project/ledger/definitions/stress-index-v1.toml'
+        monkeypatch.setenv('INPUT', value)
+        config = {'path': os.environ['INPUT']}
+        if source == 'environment':
+            command = [sys.executable, '-c', 'import os; open(os.environ["INPUT"], "rb").read()']
+        else:
+            command = [sys.executable, '-c', 'import sys; open(sys.argv[1], "rb").read()', config['path']]
+>       with pytest.raises(PermissionError, match='external.*content'):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE PermissionError
+
+tests\test_ledger_access.py:100: Failed
+_ test_relative_dynamic_child_path_is_denied[config-./ledger/definitions/stress-index-v1.toml-] _
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001F0499C09E0>
+value = './ledger/definitions/stress-index-v1.toml', cwd_suffix = ''
+source = 'config'
+
+    @pytest.mark.parametrize('value,cwd_suffix', [
+        ('./ledger/definitions/stress-index-v1.toml', ''),
+        ('.\\ledger\\definitions\\stress-index-v1.toml', ''),
+        ('scripts/../ledger/definitions/stress-index-v1.toml', ''),
+        ('./ledger/./definitions/../definitions//stress-index-v1.toml', ''),
+        ('../ledger/definitions/stress-index-v1.toml', 'scripts'),
+        ('../grid-project/ledger/definitions/stress-index-v1.toml', '..'),
+    ])
+    @pytest.mark.parametrize('source', ['environment', 'config'])
+    def test_relative_dynamic_child_path_is_denied(monkeypatch, value, cwd_suffix, source):
+        repo = Path(__file__).resolve().parents[1]
+        # The final alias is relative to the repository's parent.
+        if cwd_suffix == '..':
+            value = './grid-project/ledger/definitions/stress-index-v1.toml'
+        monkeypatch.setenv('INPUT', value)
+        config = {'path': os.environ['INPUT']}
+        if source == 'environment':
+            command = [sys.executable, '-c', 'import os; open(os.environ["INPUT"], "rb").read()']
+        else:
+            command = [sys.executable, '-c', 'import sys; open(sys.argv[1], "rb").read()', config['path']]
+>       with pytest.raises(PermissionError, match='external.*content'):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE PermissionError
+
+tests\test_ledger_access.py:100: Failed
+_ test_relative_dynamic_child_path_is_denied[config-.\\ledger\\definitions\\stress-index-v1.toml-] _
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001F0499C1E50>
+value = '.\\ledger\\definitions\\stress-index-v1.toml', cwd_suffix = ''
+source = 'config'
+
+    @pytest.mark.parametrize('value,cwd_suffix', [
+        ('./ledger/definitions/stress-index-v1.toml', ''),
+        ('.\\ledger\\definitions\\stress-index-v1.toml', ''),
+        ('scripts/../ledger/definitions/stress-index-v1.toml', ''),
+        ('./ledger/./definitions/../definitions//stress-index-v1.toml', ''),
+        ('../ledger/definitions/stress-index-v1.toml', 'scripts'),
+        ('../grid-project/ledger/definitions/stress-index-v1.toml', '..'),
+    ])
+    @pytest.mark.parametrize('source', ['environment', 'config'])
+    def test_relative_dynamic_child_path_is_denied(monkeypatch, value, cwd_suffix, source):
+        repo = Path(__file__).resolve().parents[1]
+        # The final alias is relative to the repository's parent.
+        if cwd_suffix == '..':
+            value = './grid-project/ledger/definitions/stress-index-v1.toml'
+        monkeypatch.setenv('INPUT', value)
+        config = {'path': os.environ['INPUT']}
+        if source == 'environment':
+            command = [sys.executable, '-c', 'import os; open(os.environ["INPUT"], "rb").read()']
+        else:
+            command = [sys.executable, '-c', 'import sys; open(sys.argv[1], "rb").read()', config['path']]
+>       with pytest.raises(PermissionError, match='external.*content'):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE PermissionError
+
+tests\test_ledger_access.py:100: Failed
+_ test_relative_dynamic_child_path_is_denied[config-scripts/../ledger/definitions/stress-index-v1.toml-] _
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001F0499C01D0>
+value = 'scripts/../ledger/definitions/stress-index-v1.toml', cwd_suffix = ''
+source = 'config'
+
+    @pytest.mark.parametrize('value,cwd_suffix', [
+        ('./ledger/definitions/stress-index-v1.toml', ''),
+        ('.\\ledger\\definitions\\stress-index-v1.toml', ''),
+        ('scripts/../ledger/definitions/stress-index-v1.toml', ''),
+        ('./ledger/./definitions/../definitions//stress-index-v1.toml', ''),
+        ('../ledger/definitions/stress-index-v1.toml', 'scripts'),
+        ('../grid-project/ledger/definitions/stress-index-v1.toml', '..'),
+    ])
+    @pytest.mark.parametrize('source', ['environment', 'config'])
+    def test_relative_dynamic_child_path_is_denied(monkeypatch, value, cwd_suffix, source):
+        repo = Path(__file__).resolve().parents[1]
+        # The final alias is relative to the repository's parent.
+        if cwd_suffix == '..':
+            value = './grid-project/ledger/definitions/stress-index-v1.toml'
+        monkeypatch.setenv('INPUT', value)
+        config = {'path': os.environ['INPUT']}
+        if source == 'environment':
+            command = [sys.executable, '-c', 'import os; open(os.environ["INPUT"], "rb").read()']
+        else:
+            command = [sys.executable, '-c', 'import sys; open(sys.argv[1], "rb").read()', config['path']]
+>       with pytest.raises(PermissionError, match='external.*content'):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE PermissionError
+
+tests\test_ledger_access.py:100: Failed
+_ test_relative_dynamic_child_path_is_denied[config-./ledger/./definitions/../definitions//stress-index-v1.toml-] _
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001F0499C0890>
+value = './ledger/./definitions/../definitions//stress-index-v1.toml'
+cwd_suffix = '', source = 'config'
+
+    @pytest.mark.parametrize('value,cwd_suffix', [
+        ('./ledger/definitions/stress-index-v1.toml', ''),
+        ('.\\ledger\\definitions\\stress-index-v1.toml', ''),
+        ('scripts/../ledger/definitions/stress-index-v1.toml', ''),
+        ('./ledger/./definitions/../definitions//stress-index-v1.toml', ''),
+        ('../ledger/definitions/stress-index-v1.toml', 'scripts'),
+        ('../grid-project/ledger/definitions/stress-index-v1.toml', '..'),
+    ])
+    @pytest.mark.parametrize('source', ['environment', 'config'])
+    def test_relative_dynamic_child_path_is_denied(monkeypatch, value, cwd_suffix, source):
+        repo = Path(__file__).resolve().parents[1]
+        # The final alias is relative to the repository's parent.
+        if cwd_suffix == '..':
+            value = './grid-project/ledger/definitions/stress-index-v1.toml'
+        monkeypatch.setenv('INPUT', value)
+        config = {'path': os.environ['INPUT']}
+        if source == 'environment':
+            command = [sys.executable, '-c', 'import os; open(os.environ["INPUT"], "rb").read()']
+        else:
+            command = [sys.executable, '-c', 'import sys; open(sys.argv[1], "rb").read()', config['path']]
+>       with pytest.raises(PermissionError, match='external.*content'):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE PermissionError
+
+tests\test_ledger_access.py:100: Failed
+_ test_relative_dynamic_child_path_is_denied[config-../ledger/definitions/stress-index-v1.toml-scripts] _
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001F0499C0BC0>
+value = '../ledger/definitions/stress-index-v1.toml', cwd_suffix = 'scripts'
+source = 'config'
+
+    @pytest.mark.parametrize('value,cwd_suffix', [
+        ('./ledger/definitions/stress-index-v1.toml', ''),
+        ('.\\ledger\\definitions\\stress-index-v1.toml', ''),
+        ('scripts/../ledger/definitions/stress-index-v1.toml', ''),
+        ('./ledger/./definitions/../definitions//stress-index-v1.toml', ''),
+        ('../ledger/definitions/stress-index-v1.toml', 'scripts'),
+        ('../grid-project/ledger/definitions/stress-index-v1.toml', '..'),
+    ])
+    @pytest.mark.parametrize('source', ['environment', 'config'])
+    def test_relative_dynamic_child_path_is_denied(monkeypatch, value, cwd_suffix, source):
+        repo = Path(__file__).resolve().parents[1]
+        # The final alias is relative to the repository's parent.
+        if cwd_suffix == '..':
+            value = './grid-project/ledger/definitions/stress-index-v1.toml'
+        monkeypatch.setenv('INPUT', value)
+        config = {'path': os.environ['INPUT']}
+        if source == 'environment':
+            command = [sys.executable, '-c', 'import os; open(os.environ["INPUT"], "rb").read()']
+        else:
+            command = [sys.executable, '-c', 'import sys; open(sys.argv[1], "rb").read()', config['path']]
+>       with pytest.raises(PermissionError, match='external.*content'):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE PermissionError
+
+tests\test_ledger_access.py:100: Failed
+_ test_relative_dynamic_child_path_is_denied[config-../grid-project/ledger/definitions/stress-index-v1.toml-..] _
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001F0499C2210>
+value = './grid-project/ledger/definitions/stress-index-v1.toml'
+cwd_suffix = '..', source = 'config'
+
+    @pytest.mark.parametrize('value,cwd_suffix', [
+        ('./ledger/definitions/stress-index-v1.toml', ''),
+        ('.\\ledger\\definitions\\stress-index-v1.toml', ''),
+        ('scripts/../ledger/definitions/stress-index-v1.toml', ''),
+        ('./ledger/./definitions/../definitions//stress-index-v1.toml', ''),
+        ('../ledger/definitions/stress-index-v1.toml', 'scripts'),
+        ('../grid-project/ledger/definitions/stress-index-v1.toml', '..'),
+    ])
+    @pytest.mark.parametrize('source', ['environment', 'config'])
+    def test_relative_dynamic_child_path_is_denied(monkeypatch, value, cwd_suffix, source):
+        repo = Path(__file__).resolve().parents[1]
+        # The final alias is relative to the repository's parent.
+        if cwd_suffix == '..':
+            value = './grid-project/ledger/definitions/stress-index-v1.toml'
+        monkeypatch.setenv('INPUT', value)
+        config = {'path': os.environ['INPUT']}
+        if source == 'environment':
+            command = [sys.executable, '-c', 'import os; open(os.environ["INPUT"], "rb").read()']
+        else:
+            command = [sys.executable, '-c', 'import sys; open(sys.argv[1], "rb").read()', config['path']]
+>       with pytest.raises(PermissionError, match='external.*content'):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE PermissionError
+
+tests\test_ledger_access.py:100: Failed
+____________ test_remote_anchor_prevents_missing_policy_bootstrap _____________
+
+repository = WindowsPath('C:/Users/ajbig/AppData/Local/Temp/grid-s4-relative-red/test_remote_anchor_prevents_mi0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001F0490C9640>
+
+    def test_remote_anchor_prevents_missing_policy_bootstrap(repository, monkeypatch):
+        monkeypatch.setattr(ledger, '_remote_acceptance_tag',
+                            lambda repo: {'object': {'type': 'tag', 'sha': '1' * 40}}, raising=False)
+>       with pytest.raises(ledger.LedgerError, match='boundary|anchor'):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE LedgerError
+
+tests\test_s4_boundary.py:34: Failed
+_______________ test_future_issue_on_other_reachable_ref_fails ________________
+
+repository = WindowsPath('C:/Users/ajbig/AppData/Local/Temp/grid-s4-relative-red/test_future_issue_on_other_rea0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001F0499C31D0>
+
+    def test_future_issue_on_other_reachable_ref_fails(repository, monkeypatch):
+        git(repository, 'add', '.')
+        git(repository, 'commit', '-m', 'definition baseline')
+        base = git(repository, 'rev-parse', 'HEAD').stdout.strip()
+        git(repository, 'checkout', '-b', 'other-receipt-ref')
+        forecast, issued = call()
+        ledger.append_forecast(repository / 'ledger', 'stress', forecast, issued)
+        git(repository, 'add', '.')
+        git(repository, 'commit', '-m', 'receipt on other ref')
+        git(repository, 'checkout', '--detach', base)
+    
+        class Earlier(datetime):
+            @classmethod
+            def now(cls, tz=None):
+                return (issued - __import__('datetime').timedelta(days=1)).astimezone(tz)
+    
+        monkeypatch.setattr(ledger, 'datetime', Earlier)
+>       with pytest.raises(ledger.LedgerError, match='future'):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE LedgerError
+
+tests\test_s4_boundary.py:55: Failed
+=========================== short test summary info ===========================
+FAILED tests/test_ledger_access.py::test_relative_dynamic_child_path_is_denied[environment-./ledger/definitions/stress-index-v1.toml-]
+FAILED tests/test_ledger_access.py::test_relative_dynamic_child_path_is_denied[environment-.\\ledger\\definitions\\stress-index-v1.toml-]
+FAILED tests/test_ledger_access.py::test_relative_dynamic_child_path_is_denied[environment-scripts/../ledger/definitions/stress-index-v1.toml-]
+FAILED tests/test_ledger_access.py::test_relative_dynamic_child_path_is_denied[environment-./ledger/./definitions/../definitions//stress-index-v1.toml-]
+FAILED tests/test_ledger_access.py::test_relative_dynamic_child_path_is_denied[environment-../ledger/definitions/stress-index-v1.toml-scripts]
+FAILED tests/test_ledger_access.py::test_relative_dynamic_child_path_is_denied[environment-../grid-project/ledger/definitions/stress-index-v1.toml-..]
+FAILED tests/test_ledger_access.py::test_relative_dynamic_child_path_is_denied[config-./ledger/definitions/stress-index-v1.toml-]
+FAILED tests/test_ledger_access.py::test_relative_dynamic_child_path_is_denied[config-.\\ledger\\definitions\\stress-index-v1.toml-]
+FAILED tests/test_ledger_access.py::test_relative_dynamic_child_path_is_denied[config-scripts/../ledger/definitions/stress-index-v1.toml-]
+FAILED tests/test_ledger_access.py::test_relative_dynamic_child_path_is_denied[config-./ledger/./definitions/../definitions//stress-index-v1.toml-]
+FAILED tests/test_ledger_access.py::test_relative_dynamic_child_path_is_denied[config-../ledger/definitions/stress-index-v1.toml-scripts]
+FAILED tests/test_ledger_access.py::test_relative_dynamic_child_path_is_denied[config-../grid-project/ledger/definitions/stress-index-v1.toml-..]
+FAILED tests/test_s4_boundary.py::test_remote_anchor_prevents_missing_policy_bootstrap
+FAILED tests/test_s4_boundary.py::test_future_issue_on_other_reachable_ref_fails
+14 failed in 6.03s

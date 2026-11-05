@@ -1,0 +1,383 @@
+{
+  "sources": {
+    "cohort_mart": "C:\\Users\\ajbig\\AppData\\Local\\Temp\\grid-s3c-20261030\\history-complete\\grid.duckdb",
+    "load": "C:\\Users\\ajbig\\Documents\\grid-project\\data\\s1-live\\grid.duckdb",
+    "temperature": "C:\\Users\\ajbig\\Documents\\grid-project\\data\\s3a-verification\\grid.duckdb"
+  },
+  "source_sha256_before": {
+    "cohort_mart": "ccae32773857298e6cd0e61312c467c9f32748fea62ce89b46cb125003ce367c",
+    "load": "0ae80a9a1939b78ffcf471f9998fbfc9a51749b039713dbc2abff7022d8337c3",
+    "temperature": "fffc2aeef64ce06dd09f5ea2e4739a1bb7fdefd6b28dff1e66779ec8f4f091b1"
+  },
+  "source_sha256_after": {
+    "cohort_mart": "ccae32773857298e6cd0e61312c467c9f32748fea62ce89b46cb125003ce367c",
+    "load": "0ae80a9a1939b78ffcf471f9998fbfc9a51749b039713dbc2abff7022d8337c3",
+    "temperature": "fffc2aeef64ce06dd09f5ea2e4739a1bb7fdefd6b28dff1e66779ec8f4f091b1"
+  },
+  "definition_sha256": "63cb57268398ee62525499c64ecbf4c7694f2d5960eccf2a0eb2f3f3059fbfca",
+  "cohort": {
+    "dates": 2833,
+    "first": "2019-01-01",
+    "last": "2026-10-24",
+    "years": {
+      "2019": 361,
+      "2020": 356,
+      "2021": 363,
+      "2022": 363,
+      "2023": 364,
+      "2024": 364,
+      "2025": 365,
+      "2026": 297
+    },
+    "mart_dates": 2859,
+    "complete_demand": 2836,
+    "date_sha256": "755b973f0451066dc8552ee6879b65f10ac806bf85582adf3fece54c2397e09a"
+  }
+}
+{
+  "label": "OBSERVED-WEATHER RETROSPECTIVE ELIGIBILITY RECONSTRUCTION",
+  "publication_availability": "unverified",
+  "issued_forecasts": false,
+  "outcomes": {
+    "DefinitionGap:calendar boundary and leap-day selection is unspecified": 656,
+    "UNSCORED:insufficient_fit_history": 357,
+    "strained": 71,
+    "watch": 328,
+    "calm": 1407,
+    "severe": 14
+  },
+  "years": {
+    "2019": {
+      "DefinitionGap:calendar boundary and leap-day selection is unspecified": 83,
+      "UNSCORED:insufficient_fit_history": 278
+    },
+    "2020": {
+      "DefinitionGap:calendar boundary and leap-day selection is unspecified": 85,
+      "strained": 10,
+      "watch": 30,
+      "calm": 151,
+      "UNSCORED:insufficient_fit_history": 79,
+      "severe": 1
+    },
+    "2021": {
+      "DefinitionGap:calendar boundary and leap-day selection is unspecified": 85,
+      "calm": 200,
+      "watch": 65,
+      "strained": 10,
+      "severe": 3
+    },
+    "2022": {
+      "DefinitionGap:calendar boundary and leap-day selection is unspecified": 84,
+      "calm": 233,
+      "strained": 15,
+      "watch": 31
+    },
+    "2023": {
+      "DefinitionGap:calendar boundary and leap-day selection is unspecified": 85,
+      "calm": 230,
+      "strained": 3,
+      "watch": 42,
+      "severe": 4
+    },
+    "2024": {
+      "DefinitionGap:calendar boundary and leap-day selection is unspecified": 85,
+      "strained": 12,
+      "watch": 54,
+      "calm": 210,
+      "severe": 3
+    },
+    "2025": {
+      "DefinitionGap:calendar boundary and leap-day selection is unspecified": 85,
+      "severe": 3,
+      "strained": 6,
+      "watch": 60,
+      "calm": 211
+    },
+    "2026": {
+      "DefinitionGap:calendar boundary and leap-day selection is unspecified": 64,
+      "calm": 172,
+      "watch": 46,
+      "strained": 15
+    }
+  },
+  "target_gates": {
+    "freshness": {
+      "entered": 2833,
+      "passed": 2833,
+      "rejected": 0
+    },
+    "target_temperature": {
+      "entered": 2833,
+      "passed": 2833,
+      "rejected": 0
+    },
+    "calendar_window": {
+      "entered": 2833,
+      "passed": 2177,
+      "rejected": 656,
+      "reason:calendar_definition_gap": 656
+    },
+    "threshold_stratum": {
+      "entered": 2177,
+      "passed": 2177,
+      "rejected": 0
+    },
+    "fit_stratum": {
+      "entered": 2177,
+      "passed": 1820,
+      "rejected": 357,
+      "reason:insufficient_fit_history": 357
+    },
+    "analog_floor": {
+      "entered": 1820,
+      "passed": 1820,
+      "rejected": 0
+    },
+    "classified": {
+      "entered": 1820,
+      "passed": 1820,
+      "rejected": 0
+    }
+  },
+  "history_row_gates": {
+    "prior_date": {
+      "entered": 6224043,
+      "passed": 3168558,
+      "rejected": 3055485,
+      "target_dates_evaluated": 2177
+    },
+    "history_year": {
+      "entered": 3168558,
+      "passed": 2214131,
+      "rejected": 954427,
+      "target_dates_evaluated": 2177
+    },
+    "complete": {
+      "entered": 2214131,
+      "passed": 2194197,
+      "rejected": 19934,
+      "target_dates_evaluated": 2177
+    },
+    "load_value": {
+      "entered": 2194197,
+      "passed": 2194197,
+      "rejected": 0,
+      "target_dates_evaluated": 2177
+    },
+    "first_recorded": {
+      "entered": 2194197,
+      "passed": 2194197,
+      "rejected": 0,
+      "target_dates_evaluated": 2177
+    },
+    "temperature": {
+      "entered": 2194197,
+      "passed": 2194197,
+      "rejected": 0,
+      "target_dates_evaluated": 2177
+    },
+    "availability": {
+      "entered": 2194197,
+      "passed": 2194197,
+      "rejected": 0,
+      "target_dates_evaluated": 2177
+    },
+    "unique_date": {
+      "entered": 2194197,
+      "passed": 2194197,
+      "rejected": 0,
+      "target_dates_evaluated": 2177
+    },
+    "season": {
+      "entered": 2194197,
+      "passed": 253003,
+      "rejected": 1941194,
+      "target_dates_evaluated": 2177
+    },
+    "day_type": {
+      "entered": 253003,
+      "passed": 149271,
+      "rejected": 103732,
+      "target_dates_evaluated": 2177
+    }
+  },
+  "analog_row_gates": {
+    "season": {
+      "entered": 2194197,
+      "passed": 253003,
+      "rejected": 1941194
+    },
+    "day_type": {
+      "entered": 253003,
+      "passed": 149271,
+      "rejected": 103732
+    },
+    "peak_hour": {
+      "entered": 149271,
+      "passed": 149271,
+      "rejected": 0
+    },
+    "selected": {
+      "entered": 144410,
+      "passed": 18200,
+      "rejected": 126210
+    }
+  },
+  "sample_ranges": {
+    "threshold": {
+      "min": 20,
+      "max": 150
+    },
+    "fit": {
+      "min": 5,
+      "max": 108
+    },
+    "analog_candidates": {
+      "min": 5,
+      "max": 108
+    },
+    "analogs_selected": {
+      "min": 0,
+      "max": 10
+    }
+  },
+  "fallbacks": {
+    "heat_hinge_fewer_than_10_nonzero_days": 185,
+    "cold_hinge_fewer_than_10_nonzero_days": 759
+  },
+  "integration": {
+    "input": "REAL original mart target, REAL first-recorded history",
+    "annotation_source": "SYNTHETIC annotation for invariance check only",
+    "complete": true,
+    "target_high_f": 91.0,
+    "target_low_f": 74.0,
+    "forecast": {
+      "target_date": "2025-07-01",
+      "definition_version": "stress-index-v1",
+      "definition_sha256": "63cb57268398ee62525499c64ecbf4c7694f2d5960eccf2a0eb2f3f3059fbfca",
+      "peak_mw": 130741.70325439323,
+      "peak_hour_ending": 18,
+      "level": "calm",
+      "thresholds_mw": [
+        133441.0,
+        143203.9,
+        150440.77000000002
+      ],
+      "no_call_reason": null,
+      "alerts": [],
+      "status": "SCORED",
+      "receipt": {
+        "mode": "retrospective",
+        "publication_availability": "unverified",
+        "issued_at": null,
+        "history_evaluated": true,
+        "history_gates": {
+          "prior_date": {
+            "entered": 2859,
+            "passed": 2374,
+            "rejected": 485
+          },
+          "history_year": {
+            "entered": 2374,
+            "passed": 1277,
+            "rejected": 1097
+          },
+          "complete": {
+            "entered": 1277,
+            "passed": 1272,
+            "rejected": 5
+          },
+          "load_value": {
+            "entered": 1272,
+            "passed": 1272,
+            "rejected": 0
+          },
+          "first_recorded": {
+            "entered": 1272,
+            "passed": 1272,
+            "rejected": 0
+          },
+          "temperature": {
+            "entered": 1272,
+            "passed": 1272,
+            "rejected": 0
+          },
+          "availability": {
+            "entered": 1272,
+            "passed": 1272,
+            "rejected": 0
+          },
+          "unique_date": {
+            "entered": 1272,
+            "passed": 1272,
+            "rejected": 0
+          },
+          "season": {
+            "entered": 1272,
+            "passed": 150,
+            "rejected": 1122
+          },
+          "day_type": {
+            "entered": 150,
+            "passed": 107,
+            "rejected": 43
+          }
+        },
+        "analog_gates": {
+          "season": {
+            "entered": 1272,
+            "passed": 150,
+            "rejected": 1122
+          },
+          "day_type": {
+            "entered": 150,
+            "passed": 107,
+            "rejected": 43
+          },
+          "peak_hour": {
+            "entered": 107,
+            "passed": 107,
+            "rejected": 0
+          },
+          "selected": {
+            "entered": 107,
+            "passed": 10,
+            "rejected": 97
+          }
+        },
+        "sample_sizes": {
+          "threshold": 150,
+          "fit": 107,
+          "analog_candidates": 107,
+          "analogs_selected": 10
+        },
+        "fallbacks": [
+          "cold_hinge_fewer_than_10_nonzero_days"
+        ],
+        "analog_dates": [
+          "2023-07-06",
+          "2023-07-07",
+          "2023-06-26",
+          "2022-07-19",
+          "2024-07-11",
+          "2023-07-03",
+          "2023-07-05",
+          "2022-07-06",
+          "2023-07-18",
+          "2023-07-04"
+        ],
+        "regression_coefficients": [
+          87838.92500450257,
+          1650.1068557650253
+        ],
+        "active_hinges": [
+          "heat"
+        ],
+        "initial_condition_number": 87.93289768175437,
+        "final_condition_number": 87.93289768175437
+      }
+    },
+    "claims_identical_with_alert": true,
+    "passed": true
+  }
+}

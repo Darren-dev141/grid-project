@@ -31,3 +31,7 @@ pytest-temp/
 targeted-temp/
 .venv-*/
 *.parquet
+suite_out.txt
+synthetic-twin/feed_load.json
+synthetic-twin/feed_temperature.json
+synthetic-twin/interchange_series.csv

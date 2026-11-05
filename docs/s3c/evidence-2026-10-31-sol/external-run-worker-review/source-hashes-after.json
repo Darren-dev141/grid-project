@@ -1,0 +1,47 @@
+[
+  {
+    "Algorithm": "SHA256",
+    "Hash": "054D3C240DAA897C8C004B303BAB1A91D35799F94A2C33CB3EABFC3163FBC915",
+    "Path": "C:\\Users\\ajbig\\Documents\\grid-project\\src\\grid_pipeline\\stress.py"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "56A337A31357300A2239F104625169613D2034CC659270FE7D25800658E0080B",
+    "Path": "C:\\Users\\ajbig\\Documents\\grid-project\\src\\grid_pipeline\\model.py"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "D0E92A16ED97587740E55F4F43D0906B4C26C8FC1EA3FEE232FF8CCF0C5EDB4F",
+    "Path": "C:\\Users\\ajbig\\Documents\\grid-project\\src\\grid_pipeline\\stress_inputs.py"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "CC750AC1FDC191D7CF7B86F7E7B22E37D2B4B076ABA763BAA2D72C8B9FC998D9",
+    "Path": "C:\\Users\\ajbig\\Documents\\grid-project\\scripts\\diagnose_s3c.py"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "BEF6AE2D6D56689B06D0ED72A615EE8C5214AAC58BE849E24C44E8C892039C03",
+    "Path": "C:\\Users\\ajbig\\Documents\\grid-project\\tests\\test_stress.py"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "B2600222BC37D2B55826DCF1ED5F43C457098577AEA507AF0BE921EE15D8CC50",
+    "Path": "C:\\Users\\ajbig\\Documents\\grid-project\\tests\\test_stress_inputs.py"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "9E96F32A1664F7778B2A96153F0A29DDDD35FD0F2CA21F90D98926A40CE62345",
+    "Path": "C:\\Users\\ajbig\\Documents\\grid-project\\tests\\test_stress_rulings.py"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "524DEBDDF2AFA6AFFE5918382730B26C557A08E31930B4B439614D4C382DC792",
+    "Path": "C:\\Users\\ajbig\\Documents\\grid-project\\tests\\test_s3c_diagnosis.py"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "63CB57268398EE62525499C64ECBF4C7694F2D5960ECCF2A0EB2F3F3059FBFCA",
+    "Path": "C:\\Users\\ajbig\\Documents\\grid-project\\ledger\\definitions\\stress-index-v1.toml"
+  }
+]

@@ -1,0 +1,338 @@
+﻿[
+    {
+        "Path":  "dbt/models/cleaned/ncei.yml",
+        "Present":  true,
+        "MatchesInitial":  true,
+        "OwnedChange":  false
+    },
+    {
+        "Path":  "dbt/models/cleaned/ncei_bwi_daily_temps.sql",
+        "Present":  true,
+        "MatchesInitial":  true,
+        "OwnedChange":  false
+    },
+    {
+        "Path":  "dbt/models/marts/mart_day_history.sql",
+        "Present":  true,
+        "MatchesInitial":  true,
+        "OwnedChange":  false
+    },
+    {
+        "Path":  "dbt/models/marts/mart_day_history.yml",
+        "Present":  true,
+        "MatchesInitial":  true,
+        "OwnedChange":  false
+    },
+    {
+        "Path":  "dbt/tests/mart_day_history_consistency.sql",
+        "Present":  true,
+        "MatchesInitial":  true,
+        "OwnedChange":  false
+    },
+    {
+        "Path":  "dbt/tests/mart_pjm_unparseable_input.sql",
+        "Present":  true,
+        "MatchesInitial":  true,
+        "OwnedChange":  false
+    },
+    {
+        "Path":  "dbt/tests/ncei_unparseable_value.sql",
+        "Present":  true,
+        "MatchesInitial":  true,
+        "OwnedChange":  false
+    },
+    {
+        "Path":  "docs/evidence/ncei-live-2026-10-29.json",
+        "Present":  true,
+        "MatchesInitial":  true,
+        "OwnedChange":  false
+    },
+    {
+        "Path":  "docs/index/v1.md",
+        "Present":  true,
+        "MatchesInitial":  true,
+        "OwnedChange":  false
+    },
+    {
+        "Path":  "docs/reviews/egm-architecture-s3-s7/comprehension_report.md",
+        "Present":  true,
+        "MatchesInitial":  true,
+        "OwnedChange":  false
+    },
+    {
+        "Path":  "docs/reviews/egm-architecture-s3-s7/consolidated_review_report.md",
+        "Present":  true,
+        "MatchesInitial":  true,
+        "OwnedChange":  false
+    },
+    {
+        "Path":  "docs/reviews/egm-architecture-s3-s7/critic_report.md",
+        "Present":  true,
+        "MatchesInitial":  true,
+        "OwnedChange":  false
+    },
+    {
+        "Path":  "docs/reviews/egm-architecture-s3-s7/implementation_readiness_report.md",
+        "Present":  true,
+        "MatchesInitial":  true,
+        "OwnedChange":  false
+    },
+    {
+        "Path":  "docs/reviews/egm-architecture-s3-s7/intermediate_zoom_out_report.md",
+        "Present":  true,
+        "MatchesInitial":  true,
+        "OwnedChange":  false
+    },
+    {
+        "Path":  "docs/reviews/egm-architecture-s3-s7/zoom_out_report.md",
+        "Present":  true,
+        "MatchesInitial":  true,
+        "OwnedChange":  false
+    },
+    {
+        "Path":  "docs/s3a-ncei.md",
+        "Present":  true,
+        "MatchesInitial":  true,
+        "OwnedChange":  false
+    },
+    {
+        "Path":  "docs/s3b-day-history.md",
+        "Present":  true,
+        "MatchesInitial":  true,
+        "OwnedChange":  false
+    },
+    {
+        "Path":  "docs/workstream-a/FREEZE.json",
+        "Present":  true,
+        "MatchesInitial":  true,
+        "OwnedChange":  false
+    },
+    {
+        "Path":  "docs/workstream-a/REPORT.md",
+        "Present":  true,
+        "MatchesInitial":  true,
+        "OwnedChange":  false
+    },
+    {
+        "Path":  "docs/workstream-a/assets.json",
+        "Present":  true,
+        "MatchesInitial":  true,
+        "OwnedChange":  false
+    },
+    {
+        "Path":  "docs/workstream-a/baselines.json",
+        "Present":  true,
+        "MatchesInitial":  true,
+        "OwnedChange":  false
+    },
+    {
+        "Path":  "docs/workstream-a/holdout-source.json",
+        "Present":  true,
+        "MatchesInitial":  true,
+        "OwnedChange":  false
+    },
+    {
+        "Path":  "docs/workstream-a/installed-packages.json",
+        "Present":  true,
+        "MatchesInitial":  true,
+        "OwnedChange":  false
+    },
+    {
+        "Path":  "docs/workstream-a/metadata.json",
+        "Present":  true,
+        "MatchesInitial":  true,
+        "OwnedChange":  false
+    },
+    {
+        "Path":  "docs/workstream-a/predictions.csv",
+        "Present":  true,
+        "MatchesInitial":  true,
+        "OwnedChange":  false
+    },
+    {
+        "Path":  "docs/workstream-a/results.csv",
+        "Present":  true,
+        "MatchesInitial":  true,
+        "OwnedChange":  false
+    },
+    {
+        "Path":  "docs/workstream-a/results.md",
+        "Present":  true,
+        "MatchesInitial":  true,
+        "OwnedChange":  false
+    },
+    {
+        "Path":  "docs/workstream-a/rolling.csv",
+        "Present":  true,
+        "MatchesInitial":  true,
+        "OwnedChange":  false
+    },
+    {
+        "Path":  "docs/workstream-a/rolling.md",
+        "Present":  true,
+        "MatchesInitial":  true,
+        "OwnedChange":  false
+    },
+    {
+        "Path":  "docs/workstream-a/verification.json",
+        "Present":  true,
+        "MatchesInitial":  true,
+        "OwnedChange":  false
+    },
+    {
+        "Path":  "ledger/definitions/stress-index-v1.toml",
+        "Present":  true,
+        "MatchesInitial":  true,
+        "OwnedChange":  false
+    },
+    {
+        "Path":  "scripts/backtest_stress.py",
+        "Present":  true,
+        "MatchesInitial":  true,
+        "OwnedChange":  false
+    },
+    {
+        "Path":  "scripts/diagnose_s3c.py",
+        "Present":  true,
+        "MatchesInitial":  false,
+        "OwnedChange":  true
+    },
+    {
+        "Path":  "scripts/freeze_workstream_a.py",
+        "Present":  true,
+        "MatchesInitial":  true,
+        "OwnedChange":  false
+    },
+    {
+        "Path":  "scripts/verify-s3b.py",
+        "Present":  true,
+        "MatchesInitial":  true,
+        "OwnedChange":  false
+    },
+    {
+        "Path":  "scripts/workstream_a.py",
+        "Present":  true,
+        "MatchesInitial":  true,
+        "OwnedChange":  false
+    },
+    {
+        "Path":  "src/grid_pipeline/model.py",
+        "Present":  true,
+        "MatchesInitial":  true,
+        "OwnedChange":  false
+    },
+    {
+        "Path":  "src/grid_pipeline/ncei.py",
+        "Present":  true,
+        "MatchesInitial":  true,
+        "OwnedChange":  false
+    },
+    {
+        "Path":  "src/grid_pipeline/stress.py",
+        "Present":  true,
+        "MatchesInitial":  false,
+        "OwnedChange":  true
+    },
+    {
+        "Path":  "src/grid_pipeline/stress_inputs.py",
+        "Present":  true,
+        "MatchesInitial":  false,
+        "OwnedChange":  true
+    },
+    {
+        "Path":  "src/grid_pipeline/warehouse.py",
+        "Present":  true,
+        "MatchesInitial":  true,
+        "OwnedChange":  false
+    },
+    {
+        "Path":  "tests/test_day_history.py",
+        "Present":  true,
+        "MatchesInitial":  true,
+        "OwnedChange":  false
+    },
+    {
+        "Path":  "tests/test_ncei.py",
+        "Present":  true,
+        "MatchesInitial":  true,
+        "OwnedChange":  false
+    },
+    {
+        "Path":  "tests/test_ncei_dbt.py",
+        "Present":  true,
+        "MatchesInitial":  true,
+        "OwnedChange":  false
+    },
+    {
+        "Path":  "tests/test_stress.py",
+        "Present":  true,
+        "MatchesInitial":  false,
+        "OwnedChange":  true
+    },
+    {
+        "Path":  "tests/test_stress_inputs.py",
+        "Present":  true,
+        "MatchesInitial":  false,
+        "OwnedChange":  true
+    },
+    {
+        "Path":  "tests/test_stress_rulings.py",
+        "Present":  true,
+        "MatchesInitial":  false,
+        "OwnedChange":  true
+    },
+    {
+        "Path":  "tests/test_warehouse.py",
+        "Present":  true,
+        "MatchesInitial":  true,
+        "OwnedChange":  false
+    },
+    {
+        "Path":  "PLAN.md",
+        "Present":  true,
+        "MatchesInitial":  true,
+        "OwnedChange":  false
+    },
+    {
+        "Path":  "README.md",
+        "Present":  true,
+        "MatchesInitial":  true,
+        "OwnedChange":  false
+    },
+    {
+        "Path":  "dbt/dbt_project.yml",
+        "Present":  true,
+        "MatchesInitial":  true,
+        "OwnedChange":  false
+    },
+    {
+        "Path":  "docs/architecture-s3-s7.md",
+        "Present":  true,
+        "MatchesInitial":  true,
+        "OwnedChange":  false
+    },
+    {
+        "Path":  "docs/progress.md",
+        "Present":  true,
+        "MatchesInitial":  true,
+        "OwnedChange":  false
+    },
+    {
+        "Path":  "pyproject.toml",
+        "Present":  true,
+        "MatchesInitial":  true,
+        "OwnedChange":  false
+    },
+    {
+        "Path":  "src/grid_pipeline/cli.py",
+        "Present":  true,
+        "MatchesInitial":  true,
+        "OwnedChange":  false
+    },
+    {
+        "Path":  "src/grid_pipeline/storage.py",
+        "Present":  true,
+        "MatchesInitial":  true,
+        "OwnedChange":  false
+    }
+]

@@ -1,0 +1,39 @@
+﻿ M PLAN.md
+ M README.md
+ M dbt/dbt_project.yml
+ M docs/architecture-s3-s7.md
+ M docs/progress.md
+ M pyproject.toml
+ M src/grid_pipeline/cli.py
+ M src/grid_pipeline/storage.py
+?? dbt/models/cleaned/ncei.yml
+?? dbt/models/cleaned/ncei_bwi_daily_temps.sql
+?? dbt/models/marts/
+?? dbt/tests/mart_day_history_consistency.sql
+?? dbt/tests/mart_pjm_unparseable_input.sql
+?? dbt/tests/ncei_unparseable_value.sql
+?? docs/evidence/ncei-live-2026-10-29.json
+?? docs/index/
+?? docs/reviews/
+?? docs/s3a-ncei.md
+?? docs/s3b-day-history.md
+?? docs/s3c/
+?? docs/workstream-a/
+?? ledger/
+?? scripts/backtest_stress.py
+?? scripts/diagnose_s3c.py
+?? scripts/freeze_workstream_a.py
+?? scripts/verify-s3b.py
+?? scripts/workstream_a.py
+?? src/grid_pipeline/model.py
+?? src/grid_pipeline/ncei.py
+?? src/grid_pipeline/stress.py
+?? src/grid_pipeline/stress_inputs.py
+?? src/grid_pipeline/warehouse.py
+?? tests/test_day_history.py
+?? tests/test_ncei.py
+?? tests/test_ncei_dbt.py
+?? tests/test_stress.py
+?? tests/test_stress_inputs.py
+?? tests/test_stress_rulings.py
+?? tests/test_warehouse.py

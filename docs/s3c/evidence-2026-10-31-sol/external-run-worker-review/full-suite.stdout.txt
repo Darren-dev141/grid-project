@@ -1,0 +1,31 @@
+============================= test session starts =============================
+platform win32 -- Python 3.14.7, pytest-9.2.0, pluggy-1.7.0
+rootdir: C:\Users\ajbig\Documents\grid-project
+configfile: pyproject.toml
+testpaths: tests
+plugins: anyio-4.15.1
+collected 174 items
+
+tests\test_day_history.py .....                                          [  2%]
+tests\test_dbt.py ...............                                        [ 11%]
+tests\test_fetch.py ...........................                          [ 27%]
+tests\test_freshness.py ......                                           [ 30%]
+tests\test_ncei.py ..................                                    [ 40%]
+tests\test_ncei_dbt.py ..                                                [ 41%]
+tests\test_nws.py .................                                      [ 51%]
+tests\test_nws_dbt.py .........                                          [ 56%]
+tests\test_publish.py ..                                                 [ 58%]
+tests\test_s3c_diagnosis.py ..                                           [ 59%]
+tests\test_storage.py .........                                          [ 64%]
+tests\test_stress.py ....................                                [ 75%]
+tests\test_stress_inputs.py ..........                                   [ 81%]
+tests\test_stress_rulings.py ...........................                 [ 97%]
+tests\test_warehouse.py .....                                            [100%]
+
+============================== warnings summary ===============================
+tests/test_nws_dbt.py::test_nws_dbt_rejects_invalid_forecast_fields[temperature-NaN]
+  C:\Users\ajbig\Documents\grid-project\tests\test_nws_dbt.py:29: RuntimeWarning: dbt concurrent send_bytes() failure: retrying
+    warnings.warn('dbt concurrent send_bytes() failure: retrying', RuntimeWarning)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+================= 174 passed, 1 warning in 222.42s (0:03:42) ==================

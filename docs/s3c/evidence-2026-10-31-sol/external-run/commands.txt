@@ -1,0 +1,2 @@
+& 'C:\Users\ajbig\Documents\grid-project\.venv\Scripts\python.exe' -m pytest -ra --basetemp 'C:\Users\ajbig\Documents\grid-project\docs\s3c\evidence-2026-10-31-sol\external-run/pytest-temp'
+& 'C:\Users\ajbig\Documents\grid-project\.venv\Scripts\python.exe' scripts/diagnose_s3c.py 'C:/Users/ajbig/AppData/Local/Temp/grid-s3c-20261030/history-complete/grid.duckdb' --output 'C:\Users\ajbig\Documents\grid-project\docs\s3c\evidence-2026-10-31-sol\external-run/probe.json'

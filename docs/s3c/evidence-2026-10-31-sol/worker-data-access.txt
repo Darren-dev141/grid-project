@@ -1,0 +1,17 @@
+﻿Get-Content : Access is denied
+At line:2 char:236
++ ... oding utf8; Get-Content -LiteralPath 'C:\Users\ajbig\AppData\Local\he ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : PermissionDenied: (C:\Users\ajbig\...er-data-out.txt:String) [Get-Content], Unauthorized 
+   AccessException
+    + FullyQualifiedErrorId : ItemExistsUnauthorizedAccessError,Microsoft.PowerShell.Commands.GetContentCommand
+ 
+Get-Content : Cannot find path 'C:\Users\ajbig\AppData\Local\hermes\cache\scratch\grid-s3c-worker-data-out.txt' 
+because it does not exist.
+At line:2 char:236
++ ... oding utf8; Get-Content -LiteralPath 'C:\Users\ajbig\AppData\Local\he ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (C:\Users\ajbig\...er-data-out.txt:String) [Get-Content], ItemNotFoundEx 
+   ception
+    + FullyQualifiedErrorId : PathNotFound,Microsoft.PowerShell.Commands.GetContentCommand
+ 

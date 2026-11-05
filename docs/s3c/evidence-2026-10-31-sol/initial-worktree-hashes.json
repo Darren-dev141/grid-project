@@ -1,0 +1,226 @@
+﻿[
+    {
+        "Path":  "dbt/models/cleaned/ncei.yml",
+        "SHA256":  "4250EDCD3F56FFAC9CA73583025C62EEF6E241B3A17D84C353C2DCE0AC40C33A"
+    },
+    {
+        "Path":  "dbt/models/cleaned/ncei_bwi_daily_temps.sql",
+        "SHA256":  "FE0DAB6636C072DB2C7985FA1E7C5EACD419AE6AF0F01166CC026295D6AA6A84"
+    },
+    {
+        "Path":  "dbt/models/marts/mart_day_history.sql",
+        "SHA256":  "CB4A0ACB4BA12A02732DDAA4C3F646825EBC91E9C27EC141254105933D376F8C"
+    },
+    {
+        "Path":  "dbt/models/marts/mart_day_history.yml",
+        "SHA256":  "A7D847403C4930C40E3241E7F9F5C55336BEC95612EBC420281EDB703F1FAC54"
+    },
+    {
+        "Path":  "dbt/tests/mart_day_history_consistency.sql",
+        "SHA256":  "2D08F0CEB8464A5D4A0B98D80D8FBF6C03FC08D94586D4C2248D81BA342EA0B5"
+    },
+    {
+        "Path":  "dbt/tests/mart_pjm_unparseable_input.sql",
+        "SHA256":  "A74B51036469ACB2B2812A329E910319D8A2E2EB0153708301FB7913B76F77BC"
+    },
+    {
+        "Path":  "dbt/tests/ncei_unparseable_value.sql",
+        "SHA256":  "9B8D07A1066D28DF817DEC71368EEB1673B4DF1E4A13C990BE1C9A1E86C24714"
+    },
+    {
+        "Path":  "docs/evidence/ncei-live-2026-10-29.json",
+        "SHA256":  "5AE3EA9BF2F61E920D5BFD1A8356007CFD14D3BA8A82FCDEC2D2771316E820CB"
+    },
+    {
+        "Path":  "docs/index/v1.md",
+        "SHA256":  "8442AB6F0643086F1F056C71B2D10496296E4BB9562A4181573A69CBF4DE4ADF"
+    },
+    {
+        "Path":  "docs/reviews/egm-architecture-s3-s7/comprehension_report.md",
+        "SHA256":  "4FEA68B7740B9CE73CF608361CAD9DF6AB8A65139880B23756445034499610BA"
+    },
+    {
+        "Path":  "docs/reviews/egm-architecture-s3-s7/consolidated_review_report.md",
+        "SHA256":  "A05C3C1A005589E5A44003F64B40D3A2EAD47B2D85A652F14C0443E27EDD8862"
+    },
+    {
+        "Path":  "docs/reviews/egm-architecture-s3-s7/critic_report.md",
+        "SHA256":  "95AA129B47590F0336714BA2A04323E18ED0655D195468F70558364AE43AED93"
+    },
+    {
+        "Path":  "docs/reviews/egm-architecture-s3-s7/implementation_readiness_report.md",
+        "SHA256":  "43972016F393963D10DF716EA4730B26AB827BED441F2E7C446EFF1F1E72D1C0"
+    },
+    {
+        "Path":  "docs/reviews/egm-architecture-s3-s7/intermediate_zoom_out_report.md",
+        "SHA256":  "020C54CE5B0DDDFDCE7C81770912A859F7D53D2BE5D3DE35D43EF017110601A3"
+    },
+    {
+        "Path":  "docs/reviews/egm-architecture-s3-s7/zoom_out_report.md",
+        "SHA256":  "D8DEBCF71E0D44FBB04695702E386C5D5DB0F37A740DEDD5611766D7EC3E7976"
+    },
+    {
+        "Path":  "docs/s3a-ncei.md",
+        "SHA256":  "774B83DC651D0EE8A11016C1DEF625C043FE17C5BD124CE536A0D93BC0DD8C63"
+    },
+    {
+        "Path":  "docs/s3b-day-history.md",
+        "SHA256":  "C4D1756C4D767433A084271E31DBF717CF103B6ECC29D2F6E80C8872DABA3402"
+    },
+    {
+        "Path":  "docs/workstream-a/FREEZE.json",
+        "SHA256":  "E18C6CB85D60CB320F3323649EB61FA98B05E445F87F9544EB6E15E64AA0D406"
+    },
+    {
+        "Path":  "docs/workstream-a/REPORT.md",
+        "SHA256":  "2B3937FC5306E5ED761F3E4875CD89D597DD31A7306367058A06893D22F3228E"
+    },
+    {
+        "Path":  "docs/workstream-a/assets.json",
+        "SHA256":  "EC7567AFBE8268520B56DF194D09EF3E7DCC65B8F55931E910326BBEFFA6EE65"
+    },
+    {
+        "Path":  "docs/workstream-a/baselines.json",
+        "SHA256":  "9D305F0E4067B0DE1D0A2CFDA0359A5E598389C3554F50B17F08B7420F045406"
+    },
+    {
+        "Path":  "docs/workstream-a/holdout-source.json",
+        "SHA256":  "B48BAAA51DC680CDCC7704F96AEE954AFBCD6D5433CB85A19D6FDA51265679B5"
+    },
+    {
+        "Path":  "docs/workstream-a/installed-packages.json",
+        "SHA256":  "455EBEF07C2B9CCF529BE5F8778219DC6E2FD365B4C68525A8BC338B403E3DDF"
+    },
+    {
+        "Path":  "docs/workstream-a/metadata.json",
+        "SHA256":  "13D33169C0CCF31D9B49673E7D1C50669691BB9DEB68258B6930A87B0FF19F8B"
+    },
+    {
+        "Path":  "docs/workstream-a/predictions.csv",
+        "SHA256":  "836EB1701A5D828E35B18A5E95A1F02F4E2F3ABD455D4B465B8F56A9F645D6AE"
+    },
+    {
+        "Path":  "docs/workstream-a/results.csv",
+        "SHA256":  "3E74BFF37DA40F670692BA7F3116071EA2B42F41A06BDBA5B49DD8B77BCBA3FA"
+    },
+    {
+        "Path":  "docs/workstream-a/results.md",
+        "SHA256":  "4F2E3161948F186FAD0C0AB07817C898C0959175BE984A85E66122F2DD635D6D"
+    },
+    {
+        "Path":  "docs/workstream-a/rolling.csv",
+        "SHA256":  "E24AF3746B36862B381A9D92DC02173930D68D51850D615EFD467F56F25257A0"
+    },
+    {
+        "Path":  "docs/workstream-a/rolling.md",
+        "SHA256":  "09F5D2585B5B5B07022E1D3AB8A8A4516490338740CCBECF594718F554412CD3"
+    },
+    {
+        "Path":  "docs/workstream-a/verification.json",
+        "SHA256":  "CBF83B0266C459124735E444023DF06F4BA50C0A8E404FE0CFE2322631B705FB"
+    },
+    {
+        "Path":  "ledger/definitions/stress-index-v1.toml",
+        "SHA256":  "63CB57268398EE62525499C64ECBF4C7694F2D5960ECCF2A0EB2F3F3059FBFCA"
+    },
+    {
+        "Path":  "scripts/backtest_stress.py",
+        "SHA256":  "5905E47A46F2D98297B2084AAB5488D3C9F6683E25045A635B44F4057F076625"
+    },
+    {
+        "Path":  "scripts/diagnose_s3c.py",
+        "SHA256":  "ACADD476BF72674DD20AA43CD6E03E12A89D6D75B9BA0A9F52B41BBC4E6D8E28"
+    },
+    {
+        "Path":  "scripts/freeze_workstream_a.py",
+        "SHA256":  "B1AEE312FEC8792ECDB225C3501C1A80EAF2BA9BC0288EAC49B245511B11CA2B"
+    },
+    {
+        "Path":  "scripts/verify-s3b.py",
+        "SHA256":  "2ED0837CE86EC83E8D554E8341A410EC5FEA96F0530925DCFA3AEBA42189937D"
+    },
+    {
+        "Path":  "scripts/workstream_a.py",
+        "SHA256":  "59A3ED53F9D17F77A308130A9892B095DE3453C66D513A64E5040B9DBA3D9BFC"
+    },
+    {
+        "Path":  "src/grid_pipeline/model.py",
+        "SHA256":  "56A337A31357300A2239F104625169613D2034CC659270FE7D25800658E0080B"
+    },
+    {
+        "Path":  "src/grid_pipeline/ncei.py",
+        "SHA256":  "6695456EA2728F185F7FCE67E4D817AA116E7299E0B9005381F0C8D30EF5B3DE"
+    },
+    {
+        "Path":  "src/grid_pipeline/stress.py",
+        "SHA256":  "4B5AE705217DE498CA836588268831B8E912F99153B80537AC889B0913C47C57"
+    },
+    {
+        "Path":  "src/grid_pipeline/stress_inputs.py",
+        "SHA256":  "DB6623A18974492E6E9F531F143DF4E48008715276FBFCB5643267FBD4CADEEC"
+    },
+    {
+        "Path":  "src/grid_pipeline/warehouse.py",
+        "SHA256":  "F98FA975D1FB4E57661063BE96524B675CCCE495E2BC2E31F0EEE13FBB4D14C4"
+    },
+    {
+        "Path":  "tests/test_day_history.py",
+        "SHA256":  "C886155495E95C3A1C390DCFFB4D04271E46CFC11D3265A92546A921C0CE3974"
+    },
+    {
+        "Path":  "tests/test_ncei.py",
+        "SHA256":  "E08D9EDA4B332438707C25E4D0B4CAB6F6BF2B212076958D174BBFFCEB48A9A5"
+    },
+    {
+        "Path":  "tests/test_ncei_dbt.py",
+        "SHA256":  "2A2ED445259C107652084A709729614D3A6F6637616457B81C0B63A25C3E41C6"
+    },
+    {
+        "Path":  "tests/test_stress.py",
+        "SHA256":  "CD423E5D53FA983B800E016C155401DEF89790222B5B1684BA03754F7CD51AC2"
+    },
+    {
+        "Path":  "tests/test_stress_inputs.py",
+        "SHA256":  "9E35EC3178D003BC7E0F8A3FCAC4F948D11AEF313DFB998312EF919C60F76DBC"
+    },
+    {
+        "Path":  "tests/test_stress_rulings.py",
+        "SHA256":  "CE7EA2A18A6324BB9CB1B41115C907F91D6C8C7FA8F01200464DD408EFE7AE37"
+    },
+    {
+        "Path":  "tests/test_warehouse.py",
+        "SHA256":  "0E55DED3CCBD865573E7DA76363790102D92672B93E502792C5ADC463B4495DC"
+    },
+    {
+        "Path":  "PLAN.md",
+        "SHA256":  "93C8BE8466D7460FCE382471D1F1E207961FF2C9F3044544C1CBFCD32C7503D1"
+    },
+    {
+        "Path":  "README.md",
+        "SHA256":  "073F76E2052ABDCFBB438EA467136B332C0BC44696AD9DAFD6D2C3A4B62A721D"
+    },
+    {
+        "Path":  "dbt/dbt_project.yml",
+        "SHA256":  "19B4B8651EA739234A21E9A6F145BE3C8F47C7C6D39FFD893328DCBE06521EC4"
+    },
+    {
+        "Path":  "docs/architecture-s3-s7.md",
+        "SHA256":  "682E21C1058A536C9441A5507580F83CEBF00F44353137EE9C348802175F7666"
+    },
+    {
+        "Path":  "docs/progress.md",
+        "SHA256":  "57F2894041925E2F08EF519A8B95F62DC97E76ED4E9770BB60319423EA536BF8"
+    },
+    {
+        "Path":  "pyproject.toml",
+        "SHA256":  "B2049BAB5B1C679A9AF9AC41671C608A11740628E312CEAF970EF2940844A14E"
+    },
+    {
+        "Path":  "src/grid_pipeline/cli.py",
+        "SHA256":  "2E0F859EB36BE1630F1B174810702BB6428F84AA059C6E859282F59E8FA84CF9"
+    },
+    {
+        "Path":  "src/grid_pipeline/storage.py",
+        "SHA256":  "6B16C512A3299ABC39016E9405A7D9C9CB47CC04557D872B1B28EB2F769F4079"
+    }
+]

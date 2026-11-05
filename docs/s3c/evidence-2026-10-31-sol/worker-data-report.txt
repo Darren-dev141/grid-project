@@ -1,0 +1,133 @@
+The original S3c probe’s 2,833 `DefinitionGap` results came from an earlier implementation that unconditionally refused fresh forecasts. They do not show an analog failure. In a separate retrospective replay against the **current** model, the first-recorded gate was decisive: treating the retained archive rows as first recorded produced 1,820 scored cases; leaving the attestations unset produced no scored cases. That replay is conditional and does not establish historical issue-time availability.
+
+The original probe and its output are retained in [probe_history.py](C:/Users/ajbig/AppData/Local/Temp/grid-s3c-20261030/probe_history.py:14) and [history-probes.txt](C:/Users/ajbig/AppData/Local/Temp/grid-s3c-20261030/history-probes.txt:1). The earlier unconditional refusal is visible in the saved [source snapshot](C:/Users/ajbig/AppData/Local/Temp/grid-s3c-20261030/sources.txt:547).
+
+1. **First-recorded / known-at filter.** The current loader selects the earliest `loaded_at` row per PJM hour and NCEI date *within the supplied committed raw databases*. It cannot establish an earlier observation that was never retained. The model then requires both first-recorded flags; prospective mode also requires timezone-aware load and temperature timestamps no later than issuance. Retrospective mode bypasses that availability test. See [stress_inputs.py](C:/Users/ajbig/Documents/grid-project/src/grid_pipeline/stress_inputs.py:37) and [stress.py](C:/Users/ajbig/Documents/grid-project/src/grid_pipeline/stress.py:144).
+
+   I found **68,594 distinct PJM hourly keys** and **2,854 distinct BWI temperature dates** in the retained JSON files, with no duplicate keys in either set. All 17 EIA and eight NCEI filenames matched their content hashes. That supports the replay’s uniqueness assumption; it does not prove database membership or when the provider first published a value. The NCEI evidence identifies the 2019–2026 fetch and its October 29, 2026 verification time, but that verification time is not a historical publication timestamp. [NCEI evidence](C:/Users/ajbig/Documents/grid-project/docs/evidence/ncei-live-2026-10-29.json:2).
+
+   In my conditional replay, with no availability timestamps assigned, **1,820 / 2,833** cases scored, **357** failed the fit-history minimum, and **656** raised a calendar `DefinitionGap`. With first-recorded flags unset, **2,177** failed the threshold-history minimum and the same **656** raised the calendar gap. For July 1, 2025, the first-recorded gate passed **1,272 of 1,272** rows in the conditional case and rejected **1,272 of 1,272** with flags unset. The original probe constructed `HistoryDay` without those flags, which now default to `None`. [Original probe](C:/Users/ajbig/AppData/Local/Temp/grid-s3c-20261030/probe_history.py:23), [model defaults](C:/Users/ajbig/Documents/grid-project/src/grid_pipeline/model.py:6).
+
+2. **BGE versus PJM geography.** The demand path is **PJM balancing-authority demand**, not BGE demand. It is paired with BWI station temperatures. The mart explicitly references the PJM and BWI models, and the loader filters EIA rows to respondent `PJM`, type `D`. [Mart SQL](C:/Users/ajbig/Documents/grid-project/dbt/models/marts/mart_day_history.sql:1), [loader](C:/Users/ajbig/Documents/grid-project/src/grid_pipeline/stress_inputs.py:56).
+
+   BWI is a single-location weather proxy for a regional load target. That is a modeling limitation, but I found no evidence that BGE load was accidentally substituted for PJM in this probe. Its effect on forecast error remains unmeasured. The architecture specifies PJM-wide forecasts and describes BGE as trailing background data. [Architecture](C:/Users/ajbig/Documents/grid-project/docs/architecture-s3-s7.md:13).
+
+3. **Alerts / receipts dependency.** Alerts are optional date-keyed annotations. They do not change peak MW, peak hour, or level, and neither the historical probe nor the numerical model requires an external receipt store to score. The `ForecastReceipt` returned by `forecast` is an in-memory record of gates and fallbacks. [stress.py](C:/Users/ajbig/Documents/grid-project/src/grid_pipeline/stress.py:189), [model.py](C:/Users/ajbig/Documents/grid-project/src/grid_pipeline/model.py:61), [alert test](C:/Users/ajbig/Documents/grid-project/tests/test_stress_rulings.py:247).
+
+   The receipt’s `verified_at_issuance` label deserves care: the model sets it after checking the supplied target-weather timestamp. The diagnostic supplies **settled mart temperatures** but pairs them with the first-recorded observation’s timestamp. If those values differ, that timestamp does not prove availability of the supplied settled values. Freshness is also forced to `True` in the probe. [Diagnostic](C:/Users/ajbig/Documents/grid-project/scripts/diagnose_s3c.py:62), [forecast gate](C:/Users/ajbig/Documents/grid-project/src/grid_pipeline/stress.py:221).
+
+4. **Analog collapse.** I found no analog collapse in the conditional retrospective replay. All **1,820 scored cases** had **28–108 analog candidates**, and each selected ten. There were no `insufficient_analogs` outcomes. The current model first requires at least 20 fit days, then requires at least five candidates with valid peak hours; an emptied first-recorded history fails earlier. [stress.py](C:/Users/ajbig/Documents/grid-project/src/grid_pipeline/stress.py:232).
+
+   These are eligibility and classification counts, not accuracy results. The conditional scored labels were 1,407 calm, 328 watch, 71 strained, and 14 severe. Observed temperatures were used for targets, so this is an observed-weather reconstruction, not validation of issued forecasts.
+
+5. **Date, completeness and DST.** I independently reconstructed the raw archive’s daily coverage and matched the saved artifact’s gap and DST rows. The retained mart spans **2,859 dates**, December 31, 2018 through October 28, 2026: **2,836** complete-demand dates, **2,854** dates with temperatures, and **2,833** complete joined target dates in 2019–2026. There are **26** gap rows overall: 23 incomplete-demand dates and three complete-demand dates missing temperatures. [Coverage artifact](C:/Users/ajbig/AppData/Local/Temp/grid-s3c-20261030/history-complete/coverage.json:7).
+
+   The mart calculates 23-, 24-, or 25-hour expectations from New York local midnights and assigns an interval ending at midnight to the preceding date. Of the **15 DST dates** in the saved span, **nine** are complete and **six** incomplete. For example, March 8, 2020 has 23 observed hours but only one usable hour. [Mart SQL](C:/Users/ajbig/Documents/grid-project/dbt/models/marts/mart_day_history.sql:1), [DST evidence](C:/Users/ajbig/AppData/Local/Temp/grid-s3c-20261030/history-complete/coverage.json:385).
+
+   Separately, the current seasonal-window implementation rejects windows crossing a year boundary or containing February 28/leap day. That accounts for the **656** conditional replay gaps; they are not DST-completeness failures. [stress.py](C:/Users/ajbig/Documents/grid-project/src/grid_pipeline/stress.py:131).
+
+The current [diagnostic](C:/Users/ajbig/Documents/grid-project/scripts/diagnose_s3c.py:30) is useful for inspecting gates, but its CLI requires `--output` and writes a file. Its `complete_temperatures` label is the filtered cohort size, not all temperature-bearing mart dates. Its independent availability totals sum history-target pairs across targets, rather than counting unique history rows. Its first-versus-settled comparison checks only peak MW and the two temperatures. [Diagnostic summary](C:/Users/ajbig/Documents/grid-project/scripts/diagnose_s3c.py:38), [availability audit](C:/Users/ajbig/Documents/grid-project/scripts/diagnose_s3c.py:125).
+
+The source databases are `data/s1-live/grid.duckdb` and `data/s3a-verification/grid.duckdb`; the historical scratch mart is `C:\Users\ajbig\AppData\Local\Temp\grid-s3c-20261030\history-complete\grid.duckdb`. The project venv targets Python 3.14 and contains a `cp314` DuckDB extension. Its launcher failed with permission denied in this sandbox; accessible Miniconda Python 3.12 could run the pure model but could not load that extension. Consequently, **I did not run the current diagnostic against the databases or measure prospective outcomes**.
+
+To reproduce the conditional replay from the repository root with the accessible Miniconda Python, using the saved coverage artifact and retained JSON files:
+
+```powershell
+$env:PYTHONDONTWRITEBYTECODE = '1'
+$env:PYTHONPATH = 'src'
+@'
+from collections import Counter, defaultdict
+from dataclasses import replace
+from datetime import date, datetime, timedelta, timezone
+from pathlib import Path
+from zoneinfo import ZoneInfo
+import json
+from grid_pipeline.model import HistoryDay, Features
+from grid_pipeline.stress import forecast, parse_definition, DefinitionGap
+
+p = Path('data')
+ny = ZoneInfo('America/New_York')
+coverage = json.loads(Path(
+    r'C:\Users\ajbig\AppData\Local\Temp\grid-s3c-20261030\history-complete\coverage.json'
+).read_text())
+gaps = {date.fromisoformat(x['local_date']): x for x in coverage['gaps']}
+loads, temperatures = defaultdict(list), {}
+
+for f in (p / 's1-live/raw/eia').glob('*.json'):
+    for x in json.loads(f.read_text(encoding='utf8'))['response']['data']:
+        if x.get('respondent') == 'PJM' and x.get('type') == 'D':
+            t = datetime.strptime(x['period'], '%Y-%m-%dT%H').replace(tzinfo=timezone.utc)
+            d = (t - timedelta(microseconds=1)).astimezone(ny).date()
+            loads[d].append((t, x['value']))
+
+for f in (p / 's3a-verification/raw/ncei').glob('*.json'):
+    for x in json.loads(f.read_text(encoding='utf8')):
+        if x.get('STATION') == 'USW00093721':
+            temperatures[date.fromisoformat(x['DATE'])] = x
+
+d = date.fromisoformat(coverage['coverage'][0]['first_date'])
+end = date.fromisoformat(coverage['coverage'][0]['last_date'])
+history = []
+while d <= end:
+    if d in gaps:
+        g = gaps[d]
+        peak, hour, high, low, complete = (
+            g['peak_mw'], g['peak_hour_ending'], g['tmax_f'],
+            g['tmin_f'], g['complete']
+        )
+    else:
+        t, v = min(loads[d], key=lambda x: (-float(x[1]), x[0]))
+        peak, hour = float(v), t.astimezone(ny).hour or 24
+        high, low, complete = (
+            float(temperatures[d]['TMAX']), float(temperatures[d]['TMIN']), True
+        )
+    history.append(HistoryDay(d, peak, hour, high, low, complete,
+                              d in loads, d in temperatures))
+    d += timedelta(days=1)
+
+cohort = [h for h in history if 2019 <= h.date.year <= 2026
+          and h.complete and h.high_f is not None and h.morning_low_f is not None]
+definition = parse_definition(Path('ledger/definitions/stress-index-v1.toml').read_bytes())
+unattested = [replace(h, load_first_recorded=None, temperature_first_recorded=None)
+              for h in history]
+
+for name, pool in [('conditional', history), ('unattested', unattested)]:
+    counts, candidates = Counter(), []
+    for h in cohort:
+        try:
+            f = forecast(Features(h.date, h.high_f, h.morning_low_f,
+                                  tuple(pool), True, True), definition)
+            counts[f.level if f.status == 'SCORED' else f.no_call_reason] += 1
+            if f.status == 'SCORED':
+                candidates.append(f.receipt.sample_sizes['analog_candidates'])
+        except DefinitionGap:
+            counts['calendar_definition_gap'] += 1
+    print(name, dict(counts), 'scored candidate range',
+          (min(candidates), max(candidates)) if candidates else None)
+'@ | & 'C:\Users\ajbig\miniconda3\python.exe' -
+```
+
+With a working project Python, the following invokes the actual diagnostic function without its file-writing CLI. It may return different results from the conditional replay because it reads committed batch metadata:
+
+```powershell
+$env:PYTHONDONTWRITEBYTECODE = '1'
+$env:PYTHONPATH = 'src'
+@'
+from pathlib import Path
+import sys
+sys.path.insert(0, 'scripts')
+from diagnose_s3c import probe
+
+repo = Path.cwd()
+mart = Path(r'C:\Users\ajbig\AppData\Local\Temp\grid-s3c-20261030\history-complete\grid.duckdb')
+r = probe(mart, repo / 'data/s1-live/grid.duckdb',
+          repo / 'data/s3a-verification/grid.duckdb',
+          repo / 'ledger/definitions/stress-index-v1.toml')
+print('cohort', r['cohort'])
+print('availability', r['availability'])
+for mode, result in r['modes'].items():
+    print(mode, result['outcomes'], result['sample_ranges'], result['analog_row_gates'])
+'@ | .\.venv\Scripts\python.exe -
+```
+
+I made no repository or data edits. The working tree was already dirty; an untracked `docs/s3c/` directory appeared between my initial and final status checks.

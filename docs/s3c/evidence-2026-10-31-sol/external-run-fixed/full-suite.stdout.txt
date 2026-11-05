@@ -1,0 +1,32 @@
+============================= test session starts =============================
+platform win32 -- Python 3.14.7, pytest-9.2.0, pluggy-1.7.0
+rootdir: C:\Users\ajbig\Documents\grid-project
+configfile: pyproject.toml
+testpaths: tests
+plugins: anyio-4.15.1
+collected 160 items
+
+tests\test_day_history.py .....                                          [  3%]
+tests\test_dbt.py ...............                                        [ 12%]
+tests\test_fetch.py ...........................                          [ 29%]
+tests\test_freshness.py ......                                           [ 33%]
+tests\test_ncei.py ..................                                    [ 44%]
+tests\test_ncei_dbt.py ..                                                [ 45%]
+tests\test_nws.py .................                                      [ 56%]
+tests\test_nws_dbt.py .........                                          [ 61%]
+tests\test_publish.py ..                                                 [ 63%]
+tests\test_s3c_diagnosis.py ..                                           [ 64%]
+tests\test_storage.py .........                                          [ 70%]
+tests\test_stress.py ................                                    [ 80%]
+tests\test_stress_inputs.py ....                                         [ 82%]
+tests\test_stress_rulings.py .......................                     [ 96%]
+tests\test_warehouse.py .....                                            [100%]
+
+============================== warnings summary ===============================
+tests/test_nws_dbt.py::test_nws_dbt_rejects_invalid_forecast_fields[temperature-NaN]
+tests/test_nws_dbt.py::test_nws_dbt_rejects_invalid_forecast_fields[isDaytime-None]
+  C:\Users\ajbig\Documents\grid-project\tests\test_nws_dbt.py:29: RuntimeWarning: dbt concurrent send_bytes() failure: retrying
+    warnings.warn('dbt concurrent send_bytes() failure: retrying', RuntimeWarning)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+================= 160 passed, 2 warnings in 232.36s (0:03:52) =================

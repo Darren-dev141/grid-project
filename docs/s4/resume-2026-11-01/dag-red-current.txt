@@ -1,0 +1,55 @@
+FF                                                                       [100%]
+================================== FAILURES ===================================
+___ test_incomparable_origin_of_historical_content_requires_its_own_witness ___
+
+repository = WindowsPath('C:/Users/ajbig/AppData/Local/Temp/grid-s4-resume-dag-red/test_incomparable_origin_of_hi0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000024F26720AD0>
+
+    def test_incomparable_origin_of_historical_content_requires_its_own_witness(repository, monkeypatch):
+        base = git(repository, 'rev-parse', 'HEAD').stdout.strip()
+        forecast, issued = call()
+        ledger.append_forecast(repository / 'ledger', 'stress', forecast, issued)
+        git(repository, 'add', '.')
+        git(repository, 'commit', '-m', 'original historical content')
+        historical_commit = git(repository, 'rev-parse', 'HEAD').stdout.strip()
+        historical_tree = git(repository, 'rev-parse', 'HEAD^{tree}').stdout.strip()
+        establish(repository)
+        boundary_head = git(repository, 'rev-parse', 'HEAD').stdout.strip()
+        side = git(repository, 'commit-tree', historical_tree, '-p', base, '-m', 'same content on side').stdout.strip()
+        merged = git(repository, 'commit-tree', 'HEAD^{tree}', '-p', boundary_head,
+                     '-p', side, '-m', 'merge identical historical receipt').stdout.strip()
+        git(repository, 'checkout', '--detach', merged)
+        monkeypatch.setattr(ledger, '_verify_boundary_remote', lambda *args: None)
+        monkeypatch.setattr(ledger, '_push_witnesses', lambda repo: [(historical_commit, datetime.now(timezone.utc))])
+>       with pytest.raises(ledger.LedgerError, match='witness'):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE LedgerError
+
+tests\test_s4_boundary.py:170: Failed
+______ test_every_incomparable_prospective_origin_needs_witness_coverage ______
+
+repository = WindowsPath('C:/Users/ajbig/AppData/Local/Temp/grid-s4-resume-dag-red/test_every_incomparable_prospe0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000024F26806F90>
+
+    def test_every_incomparable_prospective_origin_needs_witness_coverage(repository, monkeypatch):
+        establish(repository)
+        base = git(repository, 'rev-parse', 'HEAD').stdout.strip()
+        forecast, issued = call()
+        ledger.append_forecast(repository / 'ledger', 'stress', forecast, issued)
+        git(repository, 'add', '.')
+        git(repository, 'commit', '-m', 'first prospective origin')
+        first = git(repository, 'rev-parse', 'HEAD').stdout.strip()
+        second = git(repository, 'commit-tree', 'HEAD^{tree}', '-p', base, '-m', 'incomparable second origin').stdout.strip()
+        merged = git(repository, 'commit-tree', 'HEAD^{tree}', '-p', first, '-p', second, '-m', 'merge origins').stdout.strip()
+        git(repository, 'checkout', '--detach', merged)
+        monkeypatch.setattr(ledger, '_verify_boundary_remote', lambda *args: None)
+        monkeypatch.setattr(ledger, '_push_witnesses', lambda repo: [(first, datetime.now(timezone.utc))])
+>       with pytest.raises(ledger.LedgerError, match='witness'):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE LedgerError
+
+tests\test_s4_boundary.py:192: Failed
+=========================== short test summary info ===========================
+FAILED tests/test_s4_boundary.py::test_incomparable_origin_of_historical_content_requires_its_own_witness
+FAILED tests/test_s4_boundary.py::test_every_incomparable_prospective_origin_needs_witness_coverage
+2 failed in 46.07s
