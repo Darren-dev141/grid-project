@@ -88,8 +88,7 @@ pipeline.
    - BGE demand for the last 7 days;
    - NCEI BWI daily temperatures for the same span as PJM demand, as 366-day
      requests (about 4);
-   - the NWS forecast for **two points**: BWI (gridpoint LWX/107,85, used by the
-     model) and Reisterstown (LWX/100,98, the household line);
+   - the NWS forecast for **two points**: BWI (gridpoint LWX/108,86 verified via /points for KBWI 39.1754,-76.6684; docs previously claimed LWX/107,85 — amended 2026-11-05) and Reisterstown (LWX/100,98, the household line);
    - NWS alerts for Reisterstown, recorded per target local date as validation/display annotations only; they never affect the stress level.
 2. **Build:** `warehouse.build(database)` runs `dbt build`, with up to 3 attempts
    on the known dbt `send_bytes()` failure.
