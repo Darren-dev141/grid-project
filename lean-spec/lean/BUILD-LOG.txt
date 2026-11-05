@@ -1,0 +1,28 @@
+BUILD LOG — GridLedger.lean (final clean build)
+Invocation: ELAN_HOME=~/workspace/lean-toolchain/elan ~/workspace/lean-toolchain/elan/bin/lean GridLedger.lean
+Working directory: ~/workspace/grid-project/lean-spec/lean/
+Lean version: 4.35.0 (toolchain leanprover--lean4---v4.35.0)
+Exit status: 0 — no errors, no warnings, no sorry (grep for sorry/admit: none).
+
+=== compiler output: #print axioms audit (the only output) ===
+'record_props' depends on axioms: [propext]
+'receipt_hash_env' depends on axioms: [propext]
+'scored_fresh' depends on axioms: [propext]
+'never_early' depends on axioms: [propext]
+'day_bounds' depends on axioms: [propext, Classical.choice, Quot.sound]
+'pairwise_days' depends on axioms: [propext, Classical.choice, Quot.sound]
+'day_unique' depends on axioms: [propext]
+'day_surjective' depends on axioms: [propext, Quot.sound]
+'lookupDay_append' does not depend on any axioms
+'lookupDay_spec' depends on axioms: [propext]
+'lookup_of_mem_unique' depends on axioms: [propext]
+'extends_prefix' depends on axioms: [propext]
+'lookupDay_persistent' does not depend on any axioms
+'lookupDay_complete' depends on axioms: [propext, Classical.choice, Quot.sound]
+'no_backfill' depends on axioms: [propext, Classical.choice, Quot.sound]
+'countWith_step' depends on axioms: [propext]
+'scoredCadence_le_receiptStreak' depends on axioms: [propext, Quot.sound]
+'noCall_keeps_cadence' depends on axioms: [propext]
+'missed_keeps_both' depends on axioms: [propext]
+'scored_advances_both' depends on axioms: [propext]
+'scoredRun_step' depends on axioms: [propext]
