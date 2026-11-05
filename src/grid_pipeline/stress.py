@@ -1,7 +1,7 @@
 """Stress-index v1 calculation and its input-provenance receipt."""
 from collections import Counter
 from dataclasses import replace
-from datetime import date, datetime, timedelta
+from datetime import date, datetime, time, timedelta, timezone
 from hashlib import sha256
 from math import isfinite
 import tomllib
@@ -133,6 +133,28 @@ def _available_at_issue(value, issued_at) -> bool:
     return _aware(value) and _aware(issued_at) and value <= issued_at
 
 
+# Same-day issuance (Darren's ruling, Nov 5, 2026): the 07:00 America/New_York job on day D
+# forecasts day D's peak. Issuance must be at or before this local cutoff on the target day,
+# and before the start of the forecast's peak hour.
+ISSUANCE_CUTOFF = time(7, 0)
+
+
+def issuance_cutoff(target_date: date) -> datetime:
+    """The local issuance cutoff on the target day (07:00 America/New_York)."""
+    return datetime.combine(target_date, ISSUANCE_CUTOFF, tzinfo=ZoneInfo('America/New_York'))
+
+
+def peak_hour_start(target_date: date, peak_hour_ending: int) -> datetime:
+    """Local start of the target day's hour ending `peak_hour_ending` (1..24)."""
+    return datetime(target_date.year, target_date.month, target_date.day, peak_hour_ending - 1,
+                    tzinfo=ZoneInfo('America/New_York'))
+
+
+def _issued_after(issued_at: datetime, boundary: datetime) -> bool:
+    # Compare instants: aware datetimes sharing one tzinfo object would compare wall clocks.
+    return issued_at.astimezone(timezone.utc) > boundary.astimezone(timezone.utc)
+
+
 def verify_input_availability(features: Features,
                               used_days: tuple[HistoryDay, ...]) -> AvailabilityCheck:
     """Check that every input a prospective forecast would use was first usable by issuance.
@@ -262,8 +284,8 @@ def forecast(features: Features, definition: Definition) -> Forecast:
     if features.mode == 'prospective':
         if not _aware(features.issued_at):
             return no_call('missing_or_invalid_issue_time', receipt)
-        if features.issued_at.astimezone(ZoneInfo('America/New_York')).date() >= features.target_date:
-            return no_call('issue_time_not_before_target_date', receipt)
+        if _issued_after(features.issued_at, issuance_cutoff(features.target_date)):
+            return no_call('issue_time_after_target_day_cutoff', receipt)
         if not _available_at_issue(features.weather_available_at, features.issued_at):
             return no_call('target_weather_unavailable_at_issuance', receipt)
         # Indexing timestamps and caller flags cannot establish first usable commits.
@@ -297,6 +319,12 @@ def forecast(features: Features, definition: Definition) -> Forecast:
         return no_call('insufficient_analogs', receipt)
 
     selected, analog_fallbacks = _analogs(features, candidates, definition.analog_count)
+    peak_hour = _mode_hour([day.peak_hour_ending for day in selected])
+    # The target day's actual peak time is unknowable at issuance; the forecast's own peak hour
+    # is the only peak-time source a prospective run has, so it is checked once it exists.
+    if features.mode == 'prospective' and _issued_after(
+            features.issued_at, peak_hour_start(features.target_date, peak_hour)):
+        return no_call('issue_time_after_peak', receipt)
     coefficients, active, fit_fallbacks, initial_condition, final_condition = _fit_model(fit_days)
     terms = {'heat': max(0.0, features.high_f - definition.heat_base_f),
              'cold': max(0.0, definition.cold_base_f - features.morning_low_f)}
@@ -316,5 +344,4 @@ def forecast(features: Features, definition: Definition) -> Forecast:
                       regression_coefficients=coefficients, active_hinges=active,
                       initial_condition_number=initial_condition, final_condition_number=final_condition)
     return Forecast(features.target_date, definition.version, definition.sha256, float(peak),
-                    _mode_hour([day.peak_hour_ending for day in selected]),
-                    _level(peak, *thresholds), thresholds, None, alerts, 'SCORED', receipt)
+                    peak_hour, _level(peak, *thresholds), thresholds, None, alerts, 'SCORED', receipt)

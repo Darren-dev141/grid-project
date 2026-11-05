@@ -1,11 +1,14 @@
-from datetime import date, timedelta
+from dataclasses import replace
+from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
+from zoneinfo import ZoneInfo
 
 import pytest
 
 from grid_pipeline.ledger import read_definition
 from grid_pipeline.model import Features, HistoryDay
 from grid_pipeline.stress import forecast, parse_definition
+from scripts.issue_stress import build_features, load_is_fresh
 
 RAW = read_definition(Path(__file__).parents[1] / 'ledger/definitions/stress-index-v1.toml')
 
@@ -236,22 +239,41 @@ def test_prospective_timestamps_alone_do_not_prove_issue_time_availability():
     assert at_issue.no_call_reason == 'unverified_issue_time_availability'
 
 
+# Same-day issuance (W2, Darren's ruling of Nov 5, 2026): the 07:00 job on day D forecasts D's
+# peak. These two tests replace
+# test_prospective_issue_at_or_after_target_local_midnight_has_no_claim, whose
+# before-the-target-date rule no longer holds; its four instants are all kept below.
 @pytest.mark.parametrize(('target', 'issued'), [
-    (date(2026, 7, 1), '2026-07-01T04:00:00+00:00'),
-    (date(2026, 7, 1), '2026-07-03T12:00:00+00:00'),
-    (date(2026, 3, 8), '2026-03-08T05:00:00+00:00'),
-    (date(2026, 11, 1), '2026-11-01T04:00:00+00:00'),
+    (date(2026, 7, 1), '2026-07-03T12:00:00+00:00'),     # two days after the target day
+    (date(2026, 7, 1), '2026-07-01T11:00:01+00:00'),     # one second after 07:00 EDT
+    (date(2026, 3, 8), '2026-03-08T11:00:01+00:00'),     # one second after 07:00 EDT (spring forward)
+    (date(2026, 11, 1), '2026-11-01T12:00:01+00:00'),    # one second after 07:00 EST (fall back)
 ])
-def test_prospective_issue_at_or_after_target_local_midnight_has_no_claim(target, issued):
-    from datetime import datetime
-
+def test_prospective_issue_after_the_target_day_cutoff_has_no_claim(target, issued):
     issue = datetime.fromisoformat(issued)
     result = _call(_inputs(target_date=target, mode='prospective', issued_at=issue,
                            weather_available_at=issue - timedelta(hours=1)))
-    assert result.no_call_reason == 'issue_time_not_before_target_date'
+    assert result.no_call_reason == 'issue_time_after_target_day_cutoff'
     assert result.status == 'UNSCORED'
     assert result.receipt.publication_availability == 'unverified'
     assert result.peak_mw is None
+
+
+@pytest.mark.parametrize(('target', 'issued'), [
+    (date(2026, 7, 1), '2026-07-01T04:00:00+00:00'),     # target local midnight: old gate rejected
+    (date(2026, 3, 8), '2026-03-08T05:00:00+00:00'),     # target local midnight (spring forward)
+    (date(2026, 11, 1), '2026-11-01T04:00:00+00:00'),    # target local midnight (fall back)
+    (date(2026, 7, 1), '2026-07-01T11:00:00+00:00'),     # exactly 07:00 EDT
+    (date(2026, 3, 8), '2026-03-08T11:00:00+00:00'),     # exactly 07:00 EDT (spring forward)
+    (date(2026, 11, 1), '2026-11-01T12:00:00+00:00'),    # exactly 07:00 EST (fall back)
+    (date(2026, 11, 1), '2026-11-01T11:59:59+00:00'),    # 06:59:59 EST
+])
+def test_prospective_issue_at_or_before_the_target_day_cutoff_passes_the_timing_gate(target, issued):
+    issue = datetime.fromisoformat(issued)
+    result = _call(_inputs(target_date=target, mode='prospective', issued_at=issue,
+                           weather_available_at=issue - timedelta(hours=1)))
+    # The next gate in line: these inputs carry no commit-derived usable times.
+    assert result.no_call_reason == 'unverified_issue_time_availability'
 
 
 def test_unattested_first_recorded_history_never_becomes_a_forecast():
@@ -304,3 +326,146 @@ def test_identical_repeated_history_record_counts_as_one_day():
     assert result.status == 'SCORED'
     assert result.receipt.sample_sizes['threshold'] == 80
     assert result.receipt.history_gates['unique_date'] == {'entered': 81, 'passed': 80, 'rejected': 1}
+
+
+# --- same-day issuance: scored, late, post-peak, stale (W2) ---------------------------
+
+NEW_YORK = ZoneInfo('America/New_York')
+TARGET = date(2026, 7, 1)
+PEAK_HOUR = 19
+
+
+def _stamped_pool(usable, peak_hour=PEAK_HOUR):
+    return tuple(replace(day, peak_hour_ending=peak_hour, load_available_at=usable,
+                         temperature_available_at=usable, load_usable_at=usable,
+                         temperature_usable_at=usable) for day in _pool())
+
+
+def _same_day(issued_at, peak_hour=PEAK_HOUR, **kwargs):
+    """Prospective inputs for TARGET with history and weather verified usable an hour earlier."""
+    usable = issued_at - timedelta(hours=1)
+    return _inputs(_stamped_pool(usable, peak_hour), mode='prospective', issued_at=issued_at,
+                   weather_available_at=usable, weather_usable_at=usable, **kwargs)
+
+
+def test_same_day_issue_at_0700_with_fresh_verified_history_is_scored():
+    issued = datetime(2026, 7, 1, 7, 0, tzinfo=NEW_YORK)
+    assert issued.date() == TARGET                       # target_date stays the issue day
+    result = _call(_same_day(issued))
+    assert result.status == 'SCORED', result.no_call_reason
+    assert result.target_date == TARGET
+    assert result.peak_hour_ending == PEAK_HOUR
+    assert result.receipt.publication_availability == 'verified'
+    assert result.receipt.input_availability.verified is True
+
+
+@pytest.mark.parametrize('issued', [
+    datetime(2026, 7, 1, 0, 0, tzinfo=NEW_YORK),         # target local midnight
+    datetime(2026, 7, 1, 6, 59, 59, tzinfo=NEW_YORK),
+    datetime(2026, 6, 30, 17, 17, tzinfo=NEW_YORK),      # the day before still precedes the cutoff
+    datetime(2026, 7, 1, 11, 0, tzinfo=timezone.utc),    # 07:00 EDT given in UTC
+])
+def test_same_day_issue_at_or_before_the_cutoff_is_scored(issued):
+    assert _call(_same_day(issued)).status == 'SCORED'
+
+
+@pytest.mark.parametrize('issued', [
+    datetime(2026, 7, 1, 7, 0, 0, 1, tzinfo=NEW_YORK),   # one microsecond late
+    datetime(2026, 7, 1, 7, 0, 8, tzinfo=NEW_YORK),      # when the Nov 4 scheduled run fired
+    datetime(2026, 7, 1, 11, 0, 1, tzinfo=timezone.utc), # one second after 07:00 EDT, in UTC
+])
+def test_same_day_issue_after_the_cutoff_has_no_claim(issued):
+    result = _call(_same_day(issued))
+    assert result.status == 'UNSCORED'
+    assert result.no_call_reason == 'issue_time_after_target_day_cutoff'
+    assert (result.peak_mw, result.peak_hour_ending, result.level) == (None, None, None)
+    assert result.receipt.publication_availability == 'unverified'
+
+
+@pytest.mark.parametrize('issued', [
+    datetime(2026, 7, 1, 18, 0, tzinfo=NEW_YORK),        # the start of the peak hour (HE 19)
+    datetime(2026, 7, 1, 19, 0, tzinfo=NEW_YORK),        # the end of the peak hour
+    datetime(2026, 7, 1, 23, 59, tzinfo=NEW_YORK),
+])
+def test_same_day_issue_after_the_days_peak_has_no_claim(issued):
+    result = _call(_same_day(issued))
+    assert result.status == 'UNSCORED'
+    assert result.no_call_reason == 'issue_time_after_target_day_cutoff'
+    assert result.peak_mw is None
+
+
+@pytest.mark.parametrize(('peak_hour', 'issued', 'expected'), [
+    (7, datetime(2026, 7, 1, 5, 59, 59, tzinfo=NEW_YORK), None),   # before HE 7 (06:00-07:00)
+    (7, datetime(2026, 7, 1, 6, 0, tzinfo=NEW_YORK), None),        # exactly at its start
+    (7, datetime(2026, 7, 1, 6, 0, 1, tzinfo=NEW_YORK), 'issue_time_after_peak'),
+    (7, datetime(2026, 7, 1, 7, 0, tzinfo=NEW_YORK), 'issue_time_after_peak'),
+    (8, datetime(2026, 7, 1, 7, 0, tzinfo=NEW_YORK), None),        # HE 8 starts at 07:00
+])
+def test_issue_after_the_start_of_the_forecast_peak_hour_has_no_claim(peak_hour, issued, expected):
+    result = _call(_same_day(issued, peak_hour))
+    assert result.no_call_reason == expected
+    assert result.status == ('SCORED' if expected is None else 'UNSCORED')
+    if expected:
+        assert (result.peak_mw, result.peak_hour_ending, result.level) == (None, None, None)
+        assert result.receipt.history_evaluated is True
+
+
+def _fresh_day(day, usable):
+    return HistoryDay(day, 1040, PEAK_HOUR, 80, 60, True, load_first_recorded=True,
+                      temperature_first_recorded=True, load_available_at=usable,
+                      temperature_available_at=usable, load_usable_at=usable,
+                      temperature_usable_at=usable)
+
+
+def _history_through(last_day, usable):
+    return _stamped_pool(usable) + (_fresh_day(last_day, usable),)
+
+
+def _target_row(issued, *, load_first_recorded=None):
+    """The target day's weather row; it has no load, as at 07:00 on the day itself."""
+    usable = issued - timedelta(hours=1)
+    return HistoryDay(TARGET, None, None, 95, 50, False, load_first_recorded=load_first_recorded,
+                      temperature_first_recorded=True, temperature_available_at=usable,
+                      temperature_usable_at=usable)
+
+
+def test_same_day_features_with_history_through_d_minus_2_are_scored_without_a_target_load_row():
+    issued = datetime(2026, 7, 1, 7, 0, tzinfo=NEW_YORK)
+    usable = issued - timedelta(hours=1)
+    history = _history_through(TARGET - timedelta(days=2), usable) + (_target_row(issued),)
+    features = build_features(history, issued)
+    assert features.target_date == TARGET and features.load_fresh is True
+    result = _call(features)
+    assert result.status == 'SCORED', result.no_call_reason
+    assert result.receipt.publication_availability == 'verified'
+
+
+@pytest.mark.parametrize('last_day', [TARGET - timedelta(days=5), TARGET - timedelta(days=3)])
+def test_same_day_stale_history_still_no_calls_stale_load(last_day):
+    issued = datetime(2026, 7, 1, 7, 0, tzinfo=NEW_YORK)
+    usable = issued - timedelta(hours=1)
+    # Even a target-day row claiming first-recorded load must not rescue stale history.
+    history = (_history_through(last_day, usable)
+               + (_target_row(issued, load_first_recorded=True),))
+    features = build_features(history, issued)
+    assert features.load_fresh is False
+    result = _call(features)
+    assert result.status == 'UNSCORED'
+    assert result.no_call_reason == 'stale_load'
+
+
+def test_load_freshness_is_judged_on_the_completed_peak_two_days_before_the_target():
+    usable = datetime(2026, 7, 1, 6, tzinfo=NEW_YORK)
+    d2 = TARGET - timedelta(days=2)
+    fresh = _fresh_day(d2, usable)
+    assert load_is_fresh((fresh,), d2) is True
+    assert load_is_fresh((), d2) is False
+    assert load_is_fresh((_fresh_day(TARGET - timedelta(days=3), usable),), d2) is False
+    assert load_is_fresh((replace(fresh, complete=False),), d2) is False
+    assert load_is_fresh((replace(fresh, load_first_recorded=None),), d2) is False
+    assert load_is_fresh((replace(fresh, peak_mw=None),), d2) is False
+    assert load_is_fresh((replace(fresh, peak_mw=float('nan')),), d2) is False
+    # D-1 is not a completed peak at a 07:00 issuance and is dropped before the check.
+    issued = datetime(2026, 7, 1, 7, 0, tzinfo=NEW_YORK)
+    only_d1 = (_fresh_day(TARGET - timedelta(days=1), usable),)
+    assert build_features(only_d1, issued).load_fresh is False
