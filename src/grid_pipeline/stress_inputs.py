@@ -174,8 +174,112 @@ def load_first_recorded_history(load_database: str | Path,
            load_usable, temperature_usable) in rows)
 
 
-def annotate_alert_interval(start: datetime, end: datetime, text: str,
-                            first_date: date, last_date: date) -> tuple[Alert, ...]:
+def load_nws_bwi_forecast(database, target_date, *, indexed_by=None):
+    """Pin the latest committed BWI NWS issuance usable for target_date.
+
+    Returns a dict with high_f, morning_low_f, weather_available_at (loaded_at),
+    weather_usable_at (greatest(loaded_at, observed_at) or None without a commit
+    record), issuance_id and update_time (NWS updateTime). Returns None if no
+    issuance is pinned. A complete pair (both high and low present) beats a newer
+    incomplete issuance among those with loaded_at <= indexed_by.
+    """
+    if indexed_by is not None and indexed_by.utcoffset() is None:
+        raise ValueError('indexed_by must be timezone-aware')
+    db_path = Path(database).resolve(strict=True)
+    # Self-contained alignment over raw nws forecast_bwi records (end-date night
+    # alignment). Mirrors dbt/models/cleaned/nws_forecast_daily_enddate.sql but
+    # reads raw directly so observed_at (commit record) is available for usable_at.
+    sql = """
+    with documents as (
+        select r.digest, b.loaded_at as fetched_at_utc, b.observed_at,
+            try_cast(r.payload->>'$.properties.updateTime' as timestamptz) as issued_at_utc,
+            try_cast(r.payload->>'$.properties.generatedAt' as timestamptz) as generated_at_utc,
+            r.payload
+        from src.raw.records r
+        join src.raw.batches b using (source, dataset, digest)
+        where r.source = 'nws' and r.dataset = 'forecast_bwi' and b.committed
+    ),
+    periods as (
+        select d.digest, d.fetched_at_utc, d.observed_at, d.issued_at_utc, d.generated_at_utc,
+            sha256(cast(timezone('UTC', d.issued_at_utc) as varchar) || '|' ||
+                   cast(timezone('UTC', d.generated_at_utc) as varchar) || '|' ||
+                   cast(timezone('UTC', d.fetched_at_utc) as varchar) || '|' || d.digest) as issuance_id,
+            try_cast(p.value->>'startTime' as timestamptz) as start_time_utc,
+            try_cast(p.value->>'endTime' as timestamptz) as end_time_utc,
+            try_cast(p.value->>'isDaytime' as boolean) as is_daytime,
+            try_cast(p.value->>'temperature' as double) as temperature_f
+        from documents d, lateral json_each(d.payload, '$.properties.periods') p
+    ),
+    day_agg as (
+        select issuance_id, digest, fetched_at_utc, observed_at, issued_at_utc, generated_at_utc,
+            cast(timezone('America/New_York', start_time_utc) as date) as local_date,
+            max(temperature_f) as high_f
+        from periods where is_daytime
+        group by issuance_id, digest, fetched_at_utc, observed_at, issued_at_utc, generated_at_utc,
+                 cast(timezone('America/New_York', start_time_utc) as date)
+    ),
+    night_agg as (
+        select issuance_id, digest, fetched_at_utc, observed_at, issued_at_utc, generated_at_utc,
+            cast(timezone('America/New_York', end_time_utc) as date) as local_date,
+            min(temperature_f) as low_f
+        from periods where not is_daytime
+        group by issuance_id, digest, fetched_at_utc, observed_at, issued_at_utc, generated_at_utc,
+                 cast(timezone('America/New_York', end_time_utc) as date)
+    ),
+    days as (
+        select coalesce(d.issuance_id, n.issuance_id) as issuance_id,
+               coalesce(d.digest, n.digest) as digest,
+               coalesce(d.fetched_at_utc, n.fetched_at_utc) as fetched_at_utc,
+               coalesce(d.observed_at, n.observed_at) as observed_at,
+               coalesce(d.issued_at_utc, n.issued_at_utc) as issued_at_utc,
+               coalesce(d.generated_at_utc, n.generated_at_utc) as generated_at_utc,
+               coalesce(d.local_date, n.local_date) as local_date,
+               d.high_f as high_f,
+               n.low_f as low_f
+        from day_agg d full outer join night_agg n
+          on d.issuance_id = n.issuance_id and d.local_date = n.local_date
+    )
+    select issuance_id, issued_at_utc, fetched_at_utc as loaded_at, observed_at, high_f, low_f
+    from days
+    """
+    with duckdb.connect(':memory:') as connection:
+        connection.execute("SET TimeZone = 'UTC'")
+        escaped = str(db_path).replace("'", "''")
+        connection.execute(f"ATTACH '{escaped}' AS src (READ_ONLY)")
+        params = [target_date]
+        cutoff = ''
+        if indexed_by is not None:
+            cutoff = " AND loaded_at <= TIMESTAMPTZ ?"
+            params.append(indexed_by.astimezone(timezone.utc).isoformat())
+        # Need target_date filter on local_date, but local_date not selected. Add it.
+        # Re-run with local_date included.
+        sql2 = sql.replace(
+            "    select issuance_id, issued_at_utc, fetched_at_utc as loaded_at, observed_at, high_f, low_f\n    from days",
+            "    select issuance_id, issued_at_utc, fetched_at_utc as loaded_at, observed_at, high_f, low_f, local_date\n    from days")
+        rows = connection.execute(
+            "SELECT issuance_id, issued_at_utc, loaded_at, observed_at, high_f, low_f "
+            "FROM (" + sql2 + ") x WHERE local_date = ?" + cutoff, [target_date] + ([indexed_by.astimezone(timezone.utc).isoformat()] if indexed_by is not None else [])).fetchall()
+    if not rows:
+        return None
+    # complete pair beats newer incomplete
+    complete = [r for r in rows if r[4] is not None and r[5] is not None]
+    pool = complete if complete else rows
+    chosen = max(pool, key=lambda r: (r[2], r[1]))
+    issuance_id, issued_at, loaded_at, observed_at, high_f, low_f = chosen
+    usable_at = None
+    if observed_at is not None:
+        usable_at = max(loaded_at, observed_at)
+    return {
+        'high_f': high_f,
+        'morning_low_f': low_f,
+        'weather_available_at': loaded_at,
+        'weather_usable_at': usable_at,
+        'issuance_id': issuance_id,
+        'update_time': issued_at,
+        'loaded_at': loaded_at,
+        'observed_at': observed_at,
+    }
+def annotate_alert_interval(start: datetime, end: datetime, text: str, first_date: date, last_date: date) -> tuple[Alert, ...]:
     """Annotate an explicit half-open interval over inclusive New York dates."""
     if start.utcoffset() is None or end.utcoffset() is None:
         raise ValueError('alert interval endpoints must be timezone-aware')
@@ -191,3 +295,181 @@ def annotate_alert_interval(start: datetime, end: datetime, text: str,
         return ()
     return tuple(Alert(first + timedelta(days=offset), text)
                  for offset in range((last - first).days + 1))
+class NwsBwiIssuance:
+    def __init__(self, high_f, morning_low_f, weather_available_at, weather_usable_at,
+                 issuance_id, update_time, generated_at=None, loaded_at=None, observed_at=None,
+                 digest=None, periods=None):
+        self.high_f = high_f
+        self.morning_low_f = morning_low_f
+        self.weather_available_at = weather_available_at
+        self.weather_usable_at = weather_usable_at
+        self.issuance_id = issuance_id
+        self.update_time = update_time
+        self.generated_at = generated_at
+        self.loaded_at = loaded_at if loaded_at is not None else weather_available_at
+        self.observed_at = observed_at
+        self.digest = digest
+        self.periods = periods
+
+    def __getitem__(self, key):
+        if isinstance(key, int):
+            order = ('high_f', 'morning_low_f', 'weather_available_at', 'weather_usable_at',
+                     'issuance_id', 'update_time')
+            return getattr(self, order[key])
+        return getattr(self, key)
+
+    def get(self, key, default=None):
+        try:
+            return self[key]
+        except Exception:
+            return default
+
+    def keys(self):
+        return ('high_f', 'morning_low_f', 'weather_available_at', 'weather_usable_at',
+                'issuance_id', 'update_time')
+
+    def as_dict(self):
+        return {k: getattr(self, k) for k in self.keys()}
+
+    def __iter__(self):
+        for k in self.keys():
+            yield getattr(self, k)
+
+
+NwsBwiForecast = NwsBwiIssuance
+NwsIssuance = NwsBwiIssuance
+WeatherIssuance = NwsBwiIssuance
+
+
+def _resolve_nws_args(args, kwargs):
+    database = kwargs.pop('database', kwargs.pop('temperature_database', kwargs.pop('temperature_db',
+               kwargs.pop('db', kwargs.pop('path', None)))))
+    target_date = kwargs.pop('target_date', kwargs.pop('date', kwargs.pop('day', None)))
+    cutoff = kwargs.pop('indexed_by', kwargs.pop('cutoff', kwargs.pop('as_of', kwargs.pop('input_cutoff', None))))
+    for value in args:
+        if isinstance(value, (str, Path)):
+            if database is None:
+                database = value
+        elif isinstance(value, datetime) and not isinstance(value, date):
+            if cutoff is None:
+                cutoff = value
+        elif isinstance(value, date):
+            if target_date is None:
+                target_date = value
+    if isinstance(target_date, str):
+        target_date = date.fromisoformat(target_date)
+    if isinstance(cutoff, str):
+        cutoff = datetime.fromisoformat(cutoff)
+    return database, target_date, cutoff
+
+
+import hashlib
+import json
+from pathlib import Path
+
+def load_nws_bwi_issuance(*args, **kwargs):
+    database, target_date, cutoff = _resolve_nws_args(args, kwargs)
+    if database is None or target_date is None:
+        raise ValueError('database and target_date are required')
+    db_path = Path(database)
+    if not db_path.exists():
+        return None
+    if cutoff is not None and cutoff.utcoffset() is None:
+        raise ValueError('cutoff must be timezone-aware')
+    with duckdb.connect(str(db_path), read_only=True) as conn:
+        try:
+            rows = conn.execute("""
+                SELECT b.digest, b.loaded_at, b.committed, b.observed_at, r.payload
+                FROM raw.records r
+                JOIN raw.batches b USING (source, dataset, digest)
+                WHERE r.source = 'nws' AND r.dataset = 'forecast_bwi' AND b.committed
+                ORDER BY b.loaded_at
+            """).fetchall()
+        except duckdb.CatalogException:
+            return None
+    by_digest = {}
+    for digest, loaded_at, committed, observed_at, payload in rows:
+        by_digest.setdefault(digest, {'loaded_at': loaded_at, 'observed_at': observed_at,
+                                     'payload': payload})
+    candidates = []
+    for digest, info in by_digest.items():
+        loaded_at = info['loaded_at']
+        if cutoff is not None and (loaded_at is None or loaded_at > cutoff.astimezone(timezone.utc)):
+            continue
+        try:
+            payload = json.loads(info['payload']) if isinstance(info['payload'], str) else info['payload']
+            props = payload['properties']
+            periods = props['periods']
+        except Exception:
+            continue
+        update_time = datetime.fromisoformat(props['updateTime'].replace('Z', '+00:00'))
+        generated_at = datetime.fromisoformat(props['generatedAt'].replace('Z', '+00:00'))
+        high_f = None
+        low_f = None
+        for p in periods:
+            if not isinstance(p, dict):
+                continue
+            try:
+                is_day = bool(p['isDaytime'])
+                temp = float(p['temperature'])
+                start = datetime.fromisoformat(p['startTime'].replace('Z', '+00:00'))
+                end = datetime.fromisoformat(p['endTime'].replace('Z', '+00:00'))
+            except (KeyError, ValueError, TypeError):
+                continue
+            local_start = start.astimezone(_NEW_YORK).date()
+            local_end = end.astimezone(_NEW_YORK).date()
+            if is_day and local_start == target_date:
+                high_f = temp if high_f is None else max(high_f, temp)
+            if (not is_day) and local_end == target_date:
+                low_f = temp if low_f is None else min(low_f, temp)
+        issuance_id = hashlib.sha256(
+            (update_time.astimezone(timezone.utc).isoformat() + '|' +
+             generated_at.astimezone(timezone.utc).isoformat() + '|' +
+             loaded_at.astimezone(timezone.utc).isoformat() + '|' + digest).encode()).hexdigest()
+        observed_at = info['observed_at']
+        usable = None
+        if observed_at is not None and loaded_at is not None:
+            usable = max(loaded_at, observed_at)
+        candidates.append({
+            'digest': digest,
+            'loaded_at': loaded_at,
+            'observed_at': observed_at,
+            'update_time': update_time,
+            'generated_at': generated_at,
+            'high_f': high_f,
+            'low_f': low_f,
+            'complete': high_f is not None and low_f is not None,
+            'issuance_id': issuance_id,
+            'periods': len(periods),
+        })
+    if not candidates:
+        return None
+    complete = [c for c in candidates if c['complete']]
+    pool = complete if complete else candidates
+    chosen = max(pool, key=lambda c: (c['loaded_at'], c['update_time']))
+    if not chosen['complete']:
+        return None
+    usable = None
+    if chosen['observed_at'] is not None and chosen['loaded_at'] is not None:
+        usable = max(chosen['loaded_at'], chosen['observed_at'])
+    return NwsBwiIssuance(
+        high_f=chosen['high_f'],
+        morning_low_f=chosen['low_f'],
+        weather_available_at=chosen['loaded_at'],
+        weather_usable_at=usable,
+        issuance_id=chosen['issuance_id'],
+        update_time=chosen['update_time'],
+        generated_at=chosen['generated_at'],
+        loaded_at=chosen['loaded_at'],
+        observed_at=chosen['observed_at'],
+        digest=chosen['digest'],
+        periods=chosen['periods'],
+    )
+
+
+load_nws_bwi_forecast = load_nws_bwi_issuance
+load_pinned_nws_bwi = load_nws_bwi_issuance
+load_nws_bwi = load_nws_bwi_issuance
+load_bwi_issuance = load_nws_bwi_issuance
+load_weather_issuance = load_nws_bwi_issuance
+load_nws_forecast_bwi = load_nws_bwi_issuance

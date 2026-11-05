@@ -19,7 +19,7 @@ from zoneinfo import ZoneInfo
 from grid_pipeline.ledger import read_definition
 from grid_pipeline.model import Alert, Features
 from grid_pipeline.stress import forecast, parse_definition
-from grid_pipeline.stress_inputs import load_first_recorded_history
+from grid_pipeline.stress_inputs import load_first_recorded_history, load_nws_bwi_forecast
 
 ROOT = Path(r"C:\Users\ajbig\Documents\grid-project")
 DEFINITION = ROOT / "ledger" / "definitions" / "stress-index-v1.toml"
@@ -67,25 +67,45 @@ def load_is_fresh(history, latest_completed_peak) -> bool:
                for day in history)
 
 
-def build_features(all_history, issued_at) -> Features:
+def build_features(all_history, issued_at, weather=None) -> Features:
     """Prospective features for the same-day run: target day == issue day (S3c, Nov 5 ruling)."""
     target_date = issued_at.astimezone(ET).date()
     latest_completed_peak = target_date - timedelta(days=2)
     by_date = {day.date: day for day in all_history}
     target = by_date.get(target_date)
     history = tuple(day for day in all_history if day.date <= latest_completed_peak)
+    if weather is not None:
+        high_f = weather['high_f']
+        morning_low_f = weather['morning_low_f']
+        weather_available_at = weather['weather_available_at']
+        weather_usable_at = weather['weather_usable_at']
+        update_time = weather['update_time']
+    else:
+        high_f = None
+        morning_low_f = None
+        weather_available_at = None
+        weather_usable_at = None
+        update_time = None
+    complete_pair = high_f is not None and morning_low_f is not None
+    weather_fresh = False
+    if complete_pair and update_time is not None:
+        scheduled_cutoff = issued_at.replace(hour=7, minute=0, second=0, microsecond=0)
+        input_cutoff = min(issued_at, scheduled_cutoff)
+        age_hours = (input_cutoff - update_time).total_seconds() / 3600.0
+        if 0 <= age_hours <= 12:
+            weather_fresh = True
     return Features(
         target_date=target_date,
-        high_f=target.high_f if target is not None else None,
-        morning_low_f=target.morning_low_f if target is not None else None,
+        high_f=high_f,
+        morning_low_f=morning_low_f,
         history=history,
         load_fresh=load_is_fresh(history, latest_completed_peak),
-        weather_fresh=target is not None and target.temperature_first_recorded is True,
+        weather_fresh=weather_fresh,
         alerts=(),
         mode="prospective",
         issued_at=issued_at,
-        weather_available_at=target.temperature_available_at if target is not None else None,
-        weather_usable_at=target.temperature_usable_at if target is not None else None,
+        weather_available_at=weather_available_at,
+        weather_usable_at=weather_usable_at,
     )
 
 
@@ -96,7 +116,8 @@ def main() -> None:
     input_cutoff = min(issued_at, scheduled_cutoff)
     latest_completed_peak = target_date - timedelta(days=2)
     all_history = load_first_recorded_history(LOAD_DB, TEMP_DB, indexed_by=input_cutoff)
-    features = build_features(all_history, issued_at)
+    weather = load_nws_bwi_forecast(TEMP_DB, target_date, indexed_by=input_cutoff)
+    features = build_features(all_history, issued_at, weather)
     result = forecast(features, parse_definition(read_definition(DEFINITION)))
     output = ROOT / "docs" / "s3c" / f"S3C-FIRST-ISSUANCE-{target_date.isoformat()}.json"
     output.parent.mkdir(parents=True, exist_ok=True)

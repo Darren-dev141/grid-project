@@ -36,6 +36,17 @@ models:
         data_tests: [not_null]
       - name: local_date
         data_tests: [not_null]
+  - name: nws_forecast_daily_enddate
+    description: High from daytime periods (by start date) and low from nights ending on each local date, retained per issuance. End-date night alignment.
+    columns:
+      - name: issuance_id
+        data_tests: [not_null]
+      - name: local_date
+        data_tests: [not_null]
+      - name: loaded_at
+        data_tests: [not_null]
+      - name: issued_at_utc
+        data_tests: [not_null]
   - name: nws_forecast_latest
     description: Daily rows of the latest updateTime, then generatedAt, fetch time and digest; historical issuances remain in the other views.
   - name: nws_alerts
