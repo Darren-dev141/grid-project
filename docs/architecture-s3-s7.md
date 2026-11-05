@@ -8,12 +8,27 @@ Status: **design accepted for build, pending one more review round.**
 - Purpose, audience and owner decisions live in `PLAN.md`; this file says how the
   build works.
 
+> **Darren's ruling, Nov 5, 2026: SAME-DAY — the 07:00 job forecasts today's peak;
+> freshness judged on completed history through target − 2.** `target_date` is the
+> issue day D. Issuance must be at or before the 07:00 America/New_York cutoff on
+> the target day and before that day's peak; the D−2 latest-completed-peak rule is
+> unchanged. This supersedes the next-day issuance wording below ("a call for
+> tomorrow", "Forecast tomorrow", the append refusal "at or after the start of the
+> target day", and the 17:17 EDT afternoon cron under Schedule). Those passages are
+> amended inline where they state the semantics; the Schedule and the `ledger`
+> No-backdating rule (target day not started by the verifier's clock) are design
+> text for the not-yet-built S4/S5 runner and are **not** re-planned here. In code,
+> `stress.forecast` and `scripts/issue_stress.py` follow the ruling (W2);
+> `ledger.append_forecast` and `ledger verify` still use the target day's local
+> midnight as the deadline and are not yet aligned.
+
 ## Objective
 
 S3 to S7 turn the ingested data into a daily public forecast with receipts:
 
-1. Each afternoon, publish a call for tomorrow's PJM-wide peak demand, peak hour
-   and stress level.
+1. Each morning, by the 07:00 America/New_York cutoff, publish a call for that
+   day's PJM-wide peak demand, peak hour and stress level. *(Amended Nov 5, 2026,
+   same-day ruling; was "each afternoon ... tomorrow's".)*
 2. Write that call to a file that can never be quietly changed.
 3. Score it against EIA actuals once the day has passed.
 
@@ -83,13 +98,16 @@ pipeline.
    - the BWI forecast is stale if it was issued more than 12 hours ago or is
      missing the target date's high or the night before it;
    - the NCEI history lag is reported, but it does not block the forecast.
-4. **Forecast tomorrow:**
+4. **Forecast the target day (same-day):** *(Amended Nov 5, 2026; was "Forecast
+   tomorrow".)*
    - `features.load(conn, target, as_of=now)`, then
      `stress.forecast(features, definition)`;
    - stale load or stale weather produces a no-call with that reason.
 5. **Append:** `ledger.append(fc)`. It refuses if this forecaster already has a
-   receipt for that target date, and refuses an issue time at or after the start
-   of the target day.
+   receipt for that target date, and refuses an issue time after the 07:00
+   America/New_York cutoff on the target day. *(Amended Nov 5, 2026; was "at or
+   after the start of the target day". `ledger.append_forecast` has not been
+   changed and still refuses after the target day began.)*
 6. **Verify:** run `ledger.verify(new_since=<origin/main at job start>)`, then
    commit `ledger/` only.
 7. **Score yesterday, provisionally:** `scoring.score` using provisional

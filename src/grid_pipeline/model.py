@@ -16,6 +16,12 @@ class HistoryDay:
     temperature_first_recorded: bool | None = None
     load_available_at: datetime | None = None
     temperature_available_at: datetime | None = None
+    # First-usable times derived from batch commit records: the later of a batch's
+    # loaded_at (indexing) and observed_at (commit), for committed batches only.
+    # None when any contributing batch has no commit record. Unlike
+    # *_available_at, these are what prospective verification checks.
+    load_usable_at: datetime | None = None
+    temperature_usable_at: datetime | None = None
 
 
 @dataclass(frozen=True)
@@ -37,6 +43,8 @@ class Features:
     mode: str = 'retrospective'
     issued_at: datetime | None = None
     weather_available_at: datetime | None = None
+    # Commit-record-derived first-usable time of the target weather (see HistoryDay).
+    weather_usable_at: datetime | None = None
 
 
 @dataclass(frozen=True)
@@ -59,11 +67,22 @@ class Definition:
 
 
 @dataclass(frozen=True)
+class AvailabilityCheck:
+    """Outcome of the prospective first-usable check; `verified` is earned, never asserted."""
+    verified: bool
+    reason: str | None
+    days_checked: int = 0
+    days_unproven: int = 0
+    latest_usable_at: datetime | None = None
+
+
+@dataclass(frozen=True)
 class ForecastReceipt:
     """Sequential gate counts and calculation fallbacks for a forecast."""
     mode: str
     publication_availability: str
     issued_at: datetime | None = None
+    input_availability: AvailabilityCheck | None = None
     history_evaluated: bool = False
     history_gates: dict[str, dict[str, int]] = field(default_factory=dict)
     analog_gates: dict[str, dict[str, int]] = field(default_factory=dict)

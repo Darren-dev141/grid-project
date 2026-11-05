@@ -1,0 +1,3 @@
+FAILED tests/test_availability.py::test_committed_batch_without_a_commit_record_has_no_usable_time
+FAILED tests/test_availability.py::test_adjacent_hour_without_a_commit_record_blocks_the_day
+2 failed, 19 passed in 31.16s

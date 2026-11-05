@@ -1,0 +1,1 @@
+{"end": "2026-11-05", "equivalent_command": "grid-temps --root C:\\Users\\ajbig\\AppData\\Local\\hermes\\cache\\scratch\\s3a-copy --start 2026-10-21 --end 2026-11-05", "latest_recorded": "2026-10-24", "start": "2026-10-21", "status": "dry_run"}

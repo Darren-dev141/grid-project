@@ -1,0 +1,10 @@
+{
+ "ncei_batches": 9,
+ "committed": 9,
+ "latest_loaded_at": "2026-11-05 01:57:31.327085-05:00",
+ "latest_observed_at": "2026-11-05 01:57:31.415042-05:00",
+ "records_in_committed_batches": 2866,
+ "distinct_dates": 2862,
+ "first_date": "2019-01-01",
+ "latest_date": "2026-11-01"
+}

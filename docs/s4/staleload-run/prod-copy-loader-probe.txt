@@ -1,0 +1,5 @@
+history days 2859 span 2018-12-31 2026-10-28
+load days with available_at 2859 with usable_at 2859 usable>available 2859
+temp days with available_at 2854 with usable_at 2854 usable>available 2854
+latest load usable 2026-10-29 10:56:12.904205+00:00 latest temp usable 2026-10-29 13:09:30.829589+00:00
+latest day with load 2026-10-28 latest day with temp 2026-10-24
