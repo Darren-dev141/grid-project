@@ -1,0 +1,34 @@
+--- hermes/scripts/grid_s3c_repo_launcher.py.bak-pre-ncei-refresh	2026-11-01 11:25:22.572456900 -0500
++++ hermes/scripts/grid_s3c_repo_launcher.py	2026-11-05 01:35:04.853717700 -0500
+@@ -10,7 +10,31 @@
+ PYTHON = REPO / '.venv' / 'Scripts' / 'python.exe'
+ 
+ 
++def refresh(repo: Path, python: Path) -> None:
++    """Catch the keyless NCEI temperature archive up before issuing; never blocks issuance.
++
++    Runs scripts/refresh_ncei.py from the repo when it exists. A failed refresh is
++    reported and issuance continues on existing data (stale inputs then no-call).
++    Note the issuance input cutoff is 07:00 ET, so batches this step commits after
++    07:00:00 are first usable for the next day's issuance, not today's.
++    """
++    script = repo / 'scripts' / 'refresh_ncei.py'
++    if not script.exists():
++        print(f'NCEI refresh: skipped ({script} not present in repo)')
++        return
++    result = subprocess.run([str(python), str(script)], cwd=str(repo), text=True,
++                            encoding='utf-8', errors='replace', capture_output=True)
++    if result.stdout:
++        print('NCEI refresh: ' + result.stdout.strip())
++    if result.stderr:
++        print('NCEI refresh stderr: ' + result.stderr.strip(), file=sys.stderr)
++    if result.returncode:
++        print(f'NCEI refresh failed (exit {result.returncode}); issuing with existing data',
++              file=sys.stderr)
++
++
+ def execute(repo: Path, python: Path, target_date: str) -> int:
++    refresh(repo, python)
+     script = repo / 'scripts' / 'issue_stress.py'
+     result = subprocess.run([str(python), str(script)], cwd=str(repo), text=True,
+                             encoding='utf-8', errors='replace', capture_output=True)

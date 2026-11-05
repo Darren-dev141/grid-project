@@ -1,0 +1,18 @@
+Issuance no-call: status=UNSCORED, reason=stub, receipt=C:\Users\ajbig\AppData\Local\hermes\cache\scratch\tmpsgrhs_s7\docs\s3c\S3C-FIRST-ISSUANCE-2026-11-05.json
+Issuance no-call: status=UNSCORED, reason=stub, receipt=C:\Users\ajbig\AppData\Local\hermes\cache\scratch\tmp86edm3is\docs\s3c\S3C-FIRST-ISSUANCE-2026-11-05.json
+NCEI refresh stderr: NCEI HTTP 503
+NCEI refresh failed (exit 1); issuing with existing data
+Issuance no-call: status=UNSCORED, reason=stub, receipt=C:\Users\ajbig\AppData\Local\hermes\cache\scratch\tmpgeipz3ca\docs\s3c\S3C-FIRST-ISSUANCE-2026-11-05.json
+== A refresh script absent (state of main today)
+NCEI refresh: skipped (C:\Users\ajbig\AppData\Local\hermes\cache\scratch\tmpsgrhs_s7\scripts\refresh_ncei.py not present in repo)
+execute() exit code: 2 (2 = stub no-call, i.e. issuance was reached)
+order.log: ['issue']
+== B refresh present and succeeds
+NCEI refresh: {"status": "fetched"}
+execute() exit code: 2 (2 = stub no-call, i.e. issuance was reached)
+order.log: ['refresh', 'issue']
+== C refresh present and fails
+execute() exit code: 2 (2 = stub no-call, i.e. issuance was reached)
+order.log: ['refresh', 'issue']
+== D real main checkout: refresh() only (issuance NOT run)
+NCEI refresh: skipped (C:\Users\ajbig\Documents\grid-project\scripts\refresh_ncei.py not present in repo)
