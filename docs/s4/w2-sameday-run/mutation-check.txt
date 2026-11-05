@@ -1,0 +1,7 @@
+M0 unmutated:                         53 passed in 0.43s
+M1 old before-target-date gate:       17 failed, 36 passed in 0.80s
+M2 peak-hour gate disabled:           2 failed, 51 passed in 1.33s
+M3 boundary made exclusive (>=):      9 failed, 44 passed in 0.62s
+M4 target-row freshness restored:     3 failed, 50 passed in 0.56s
+M5 restored:                          53 passed in 0.35s
+originals restored byte-for-byte

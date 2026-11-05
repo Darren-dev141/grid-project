@@ -1,0 +1,11 @@
+# issue date vs target date, and lateness vs the 07:00 ET cutoff, from docs/s3c/S3C-FIRST-ISSUANCE-*.json
+2026-10-31  issued_at=2026-10-31T14:21:23.475877-04:00  issue_date=2026-10-31  target_date=2026-10-31  same_day=True  seconds_after_0700=26483.5  issued_late=None  status=UNSCORED  reason=stale_load
+2026-11-01  issued_at=2026-11-01T11:15:49.359408-05:00  issue_date=2026-11-01  target_date=2026-11-01  same_day=True  seconds_after_0700=15349.4  issued_late=True  status=UNSCORED  reason=stale_load
+2026-11-02  issued_at=2026-11-02T07:00:23.639468-05:00  issue_date=2026-11-02  target_date=2026-11-02  same_day=True  seconds_after_0700=23.6  issued_late=True  status=UNSCORED  reason=stale_load
+2026-11-03  issued_at=2026-11-03T07:00:07.514343-05:00  issue_date=2026-11-03  target_date=2026-11-03  same_day=True  seconds_after_0700=7.5  issued_late=True  status=UNSCORED  reason=stale_load
+2026-11-04  issued_at=2026-11-04T07:00:08.815307-05:00  issue_date=2026-11-04  target_date=2026-11-04  same_day=True  seconds_after_0700=8.8  issued_late=True  status=UNSCORED  reason=stale_load
+
+# launcher refusal rule (grid_s3c_repo_launcher.py, outside the repo):
+    now = datetime.now(ZoneInfo('America/New_York'))
+    if (now.hour, now.minute) < (7, 0):
+        print(f'Refusing issuance before 07:00 America/New_York: {now.isoformat()}', file=sys.stderr)
