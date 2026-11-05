@@ -90,7 +90,7 @@ Limits, stated plainly:
 - `Features.weather_usable_at` is supplied by the caller. No loader derives it for NWS target weather yet, so a real prospective SCORED call still needs the NWS adapter (separate branch) to supply it from commit records. Under today's `issue_stress.py` the target-day row never exists at 07:00, so the run still no-calls `stale_load` (W2).
 - The strict reading was chosen: one unproven used day makes the whole run unverified (no silent shrinking of the sample).
 
-## W1 (NCEI half): wiring landed (commit `4b5c316`), catch-up HELD
+## W1 (NCEI half): wiring landed (commit `4b5c316`); catch-up held, then RUN after release (see "NCEI catch-up run" below)
 
 The scheduled job `d977b52c965c` has `script = grid_s3c_repo_launcher.py`, `no_agent: true`, `workdir = C:\Users\ajbig\Documents\grid-project`, schedule `0 7 * * *`. The script it runs lives outside the repo at `C:\Users\ajbig\AppData\Local\hermes\scripts\grid_s3c_repo_launcher.py`. `jobs.json` was NOT edited.
 
@@ -121,6 +121,37 @@ Timing finding (needs a decision): the issuance input cutoff is `min(issued_at, 
 
 Nothing EIA was touched: no `grid-fetch`/`grid-backfill`, no key, no request for one. EIA load data remains at 2026-10-29, so `stale_load` from the EIA half persists until that is handled separately.
 
+## NCEI catch-up run (released 2026-11-05 ~01:57 ET)
+
+Release: the coordinator reported the HOST-STEPS v2 seat finished with its final verification trio passing and lifted the hold. Wall clock was 01:57 ET, before the 07:00 job. No live issuance was run; W4 stays pending the EIA piece.
+
+Command run (from the worktree, against the main checkout's data directory, using the main `.venv` interpreter; same window as `grid-temps --root ... --start 2026-10-21 --end 2026-11-05`):
+
+```
+C:\Users\ajbig\Documents\grid-project\.venv\Scripts\python.exe scripts\refresh_ncei.py --root C:\Users\ajbig\Documents\grid-project\data\s3a-verification
+```
+
+- Dry run first (`staleload-run/ncei-catchup-dry-run.txt`): latest recorded 2026-10-24, window 2026-10-21 to 2026-11-05 exclusive.
+- Exit code 0 (`ncei-catchup-run.exit`), stderr empty, wall time about 1 second. Output (`ncei-catchup-run.out`): `{"days": 12, "digest": "b30a4ce8...504f0", "end": "2026-11-05", "indexed": 12, "start": "2026-10-21", "station": "USW00093721", "status": "fetched"}`.
+- Landed: one new committed batch, 12 BWI daily rows covering 2026-10-21 through 2026-11-01 (`ncei-catchup-landed-rows.txt`). 8 are new dates (2026-10-25 to 2026-11-01). The 4 overlap dates (2026-10-21 to 10-24) were already recorded; the earlier batches keep first-recorded precedence, so first-recorded history is unchanged.
+- NCEI returned nothing for 2026-11-02 to 2026-11-04, so the archive is not yet through yesterday. That is NCEI publication lag, not a failed fetch; the next run picks those days up.
+
+Archive state (`ncei-catchup-pre-state.txt` / `ncei-catchup-post-state.txt`):
+
+| | Before | After |
+|---|---|---|
+| NCEI batches (all committed) | 8 | 9 |
+| Records in committed batches | 2854 | 2866 |
+| Distinct dates | 2854 | 2862 |
+| Latest DATE | 2026-10-24 | 2026-11-01 |
+| Latest loaded_at / observed_at | 2026-10-29 09:09 ET | 2026-11-05 01:57:31 ET |
+
+Loader view as of now (`ncei-catchup-latest-state.txt`, read-only): latest day with temperature 2026-11-01 (every temperature day has a commit-derived usable time); latest day with load still 2026-10-28, because EIA was not touched. The D-2 bound for a Nov 5 issuance is 2026-11-03, so load is still about 6 days short and `stale_load` will persist until the EIA piece lands.
+
+Side effects: `data\s3a-verification\grid.duckdb` gained the batch and `data\s3a-verification\raw\ncei\b30a4ce8...504f0.json` was landed. `data/` is gitignored, so main shows no tracked changes from this run. Main's `git status` shows only the other seat's untracked `docs/s4/HOST-STEPS-V2-RUN-2026-11-05.md`.
+
+Because the main checkout now has the refreshed archive but not `scripts\refresh_ncei.py`, tomorrow's 07:00 job still does not refresh until this branch is merged (launcher is inert until then).
+
 ## Hard limits check
 
 - Main checkout: no edits, no commits, no pushes. Reads only: the two `grid.duckdb` files were copied to scratch for probes; `data/`, `docs/`, and git state there were not modified. `git worktree add` wrote worktree metadata under the main repo's `.git`, which is how a worktree is created.
@@ -129,7 +160,7 @@ Nothing EIA was touched: no `grid-fetch`/`grid-backfill`, no key, no request for
 ## Open items for the coordinator
 
 1. W2 decision (same-day vs next-day target); see the conflict above. Until then `issue_stress.py` keeps `target_date = issued_at.date()`.
-2. Release the NCEI catch-up after the HOST-STEPS verification trio, using the command above.
+2. NCEI catch-up: DONE after release (see "NCEI catch-up run"); NCEI is through 2026-11-01 and will need the next refresh for 11-02 onward.
 3. Decide whether the refresh should run before 07:00 (timing finding).
 4. EIA refresh remains an open dependency (key required; out of scope).
 5. The NWS target-weather adapter must supply `weather_usable_at` before any real SCORED prospective call.
