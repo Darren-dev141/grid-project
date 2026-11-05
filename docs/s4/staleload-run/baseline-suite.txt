@@ -1,0 +1,76 @@
+........................................................................ [ 28%]
+..................F.....F............................................... [ 57%]
+........................................................................ [ 86%]
+.................................                                        [100%]
+================================== FAILURES ===================================
+_ test_relative_dynamic_child_path_is_denied[environment-./grid-project/ledger/definitions/stress-index-v1.toml-..] _
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000020381248440>
+value = './grid-project/ledger/definitions/stress-index-v1.toml'
+cwd_suffix = '..', source = 'environment'
+
+    @pytest.mark.parametrize('value,cwd_suffix', [
+        ('./ledger/definitions/stress-index-v1.toml', ''),
+        ('.\\ledger\\definitions\\stress-index-v1.toml', ''),
+        ('scripts/../ledger/definitions/stress-index-v1.toml', ''),
+        ('./ledger/./definitions/../definitions//stress-index-v1.toml', ''),
+        ('../ledger/definitions/stress-index-v1.toml', 'scripts'),
+        ('./grid-project/ledger/definitions/stress-index-v1.toml', '..'),
+    ])
+    @pytest.mark.parametrize('source', ['environment', 'config'])
+    def test_relative_dynamic_child_path_is_denied(monkeypatch, value, cwd_suffix, source):
+        repo = Path(__file__).resolve().parents[1]
+        monkeypatch.setenv('INPUT', value)
+        config = {'path': os.environ['INPUT']}
+        if source == 'environment':
+            command = [sys.executable, '-c', 'import os; open(os.environ["INPUT"], "rb").read()']
+        else:
+            command = [sys.executable, '-c', 'import sys; open(sys.argv[1], "rb").read()', config['path']]
+            monkeypatch.delenv('INPUT')
+>       with pytest.raises(PermissionError, match='external.*content'):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE PermissionError
+
+tests\test_ledger_access.py:100: Failed
+_ test_relative_dynamic_child_path_is_denied[config-./grid-project/ledger/definitions/stress-index-v1.toml-..] _
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x00000203812498D0>
+value = './grid-project/ledger/definitions/stress-index-v1.toml'
+cwd_suffix = '..', source = 'config'
+
+    @pytest.mark.parametrize('value,cwd_suffix', [
+        ('./ledger/definitions/stress-index-v1.toml', ''),
+        ('.\\ledger\\definitions\\stress-index-v1.toml', ''),
+        ('scripts/../ledger/definitions/stress-index-v1.toml', ''),
+        ('./ledger/./definitions/../definitions//stress-index-v1.toml', ''),
+        ('../ledger/definitions/stress-index-v1.toml', 'scripts'),
+        ('./grid-project/ledger/definitions/stress-index-v1.toml', '..'),
+    ])
+    @pytest.mark.parametrize('source', ['environment', 'config'])
+    def test_relative_dynamic_child_path_is_denied(monkeypatch, value, cwd_suffix, source):
+        repo = Path(__file__).resolve().parents[1]
+        monkeypatch.setenv('INPUT', value)
+        config = {'path': os.environ['INPUT']}
+        if source == 'environment':
+            command = [sys.executable, '-c', 'import os; open(os.environ["INPUT"], "rb").read()']
+        else:
+            command = [sys.executable, '-c', 'import sys; open(sys.argv[1], "rb").read()', config['path']]
+            monkeypatch.delenv('INPUT')
+>       with pytest.raises(PermissionError, match='external.*content'):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE PermissionError
+
+tests\test_ledger_access.py:100: Failed
+============================= slowest 8 durations =============================
+19.86s call     tests/test_s4_boundary.py::test_every_incomparable_prospective_origin_needs_witness_coverage
+19.78s call     tests/test_s4_boundary.py::test_incomparable_origin_of_historical_content_requires_its_own_witness
+19.57s call     tests/test_s4_boundary.py::test_post_boundary_requires_real_provider_in_ci
+13.86s call     tests/test_s4_regressions.py::test_push_witness_cutoff_is_not_committer_date[6-False]
+13.66s call     tests/test_s4_regressions.py::test_push_witness_cutoff_is_not_committer_date[0-True]
+13.57s call     tests/test_s4_boundary.py::test_historical_selection_is_offline_and_labeled
+13.39s call     tests/test_publish.py::test_publish_validates_snapshot_and_preserves_previous_on_failure
+13.26s call     tests/test_dbt.py::test_dbt_revisions_missing_mix_and_geography
+=========================== short test summary info ===========================
+FAILED tests/test_ledger_access.py::test_relative_dynamic_child_path_is_denied[environment-./grid-project/ledger/definitions/stress-index-v1.toml-..]
+FAILED tests/test_ledger_access.py::test_relative_dynamic_child_path_is_denied[config-./grid-project/ledger/definitions/stress-index-v1.toml-..]
+2 failed, 247 passed in 428.41s (0:07:08)

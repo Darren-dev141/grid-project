@@ -1,0 +1,5 @@
+FAILED tests/test_availability.py::test_committed_batch_usable_time_is_the_later_of_indexing_and_commit
+FAILED tests/test_availability.py::test_backdated_indexing_time_does_not_move_usable_time_earlier
+FAILED tests/test_availability.py::test_uncommitted_batch_rows_never_verify_or_pull_usable_time_earlier
+FAILED tests/test_availability.py::test_end_to_end_backdated_indexing_time_does_not_earn_the_flag
+4 failed, 17 passed in 33.37s

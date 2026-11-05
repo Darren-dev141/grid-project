@@ -1,0 +1,5 @@
+Same commit f0adcba exported via git archive into a directory literally named grid-project (scratch copy):
+  pytest tests/test_ledger_access.py -k relative_dynamic_child -> 12 passed, 18 deselected
+In the worktree named grid-project-staleload the two params using ./grid-project/ledger/... (cwd = repo/..) fail,
+because that relative path only resolves when the repo directory is named grid-project.
+The scratch copy is left under the Hermes scratch dir (pruned after 24h).

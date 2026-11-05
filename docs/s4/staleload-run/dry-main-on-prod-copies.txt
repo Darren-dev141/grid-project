@@ -1,0 +1,9 @@
+wrote C:\Users\ajbig\AppData\Local\hermes\cache\scratch\dryroot\docs\s3c\S3C-FIRST-ISSUANCE-2026-11-05.json
+{
+ "issued_at": "2026-11-05T01:32:25.340832-05:00",
+ "target_date": "2026-11-05",
+ "latest_completed_peak_date": "2026-11-03",
+ "input_availability_verified": false,
+ "input_availability_note": "Availability check not reached; forecast no-called first: stale_load."
+}
+UNSCORED stale_load None
