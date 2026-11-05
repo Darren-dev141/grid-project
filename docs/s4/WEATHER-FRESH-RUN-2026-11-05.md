@@ -90,7 +90,7 @@ Printed by `fetch_bwi` to stdout (surfaced by the refresh job). Example from a l
 ### Full-suite result
 
 - Run in a detached worktree literally named `grid-project` at the final tip.
-- Result recorded below in Job 3.
+- Full suite in a checkout literally named `grid-project` at final tip db07934: **321 passed**, 0 failures, 613.25s (~10.2 min). Baseline 308 + 13 new tests.
 
 ### Still unverified
 
