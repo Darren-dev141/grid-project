@@ -19,6 +19,7 @@ grid-backfill = "grid_pipeline.fetch_cli:backfill_main"
 grid-publish = "grid_pipeline.publish:main"
 grid-freshness = "grid_pipeline.freshness:main"
 grid-weather = "grid_pipeline.nws:main"
+grid-weather-bwi = "grid_pipeline.nws:main_bwi"
 grid-temps = "grid_pipeline.ncei:main"
 
 [tool.setuptools.packages.find]

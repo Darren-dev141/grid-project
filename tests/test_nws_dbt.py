@@ -136,3 +136,77 @@ def test_nws_dbt_issuance_identity_is_session_timezone_independent(tmp_path):
         utc_id = conn.execute('select issuance_id from cleaned.nws_forecast_periods limit 1').fetchone()
         conn.execute("SET TimeZone='America/New_York'")
         assert conn.execute('select issuance_id from cleaned.nws_forecast_periods limit 1').fetchone() == utc_id
+
+
+def _collision_forecast():
+    return {'properties': {'updateTime': '2026-11-05T10:00:00Z',
+                            'generatedAt': '2026-11-05T10:05:00Z',
+                            'periods': [
+                                {'number': 1, 'name': 'Overnight',
+                                 'startTime': '2026-11-06T02:00:00-05:00',
+                                 'endTime': '2026-11-06T06:00:00-05:00',
+                                 'isDaytime': False, 'temperature': 38, 'temperatureUnit': 'F'},
+                                {'number': 2, 'name': 'Thursday',
+                                 'startTime': '2026-11-06T06:00:00-05:00',
+                                 'endTime': '2026-11-06T18:00:00-05:00',
+                                 'isDaytime': True, 'temperature': 60, 'temperatureUnit': 'F'},
+                                {'number': 3, 'name': 'Thursday Night',
+                                 'startTime': '2026-11-06T18:00:00-05:00',
+                                 'endTime': '2026-11-07T06:00:00-05:00',
+                                 'isDaytime': False, 'temperature': 30, 'temperatureUnit': 'F'}]}}
+
+
+def test_nws_dbt_end_date_collision_shape(tmp_path):
+    seed(tmp_path, 'forecast', [_collision_forecast()], 'collision')
+    result = run_dbt(tmp_path)
+    assert result.returncode == 0, result.stdout + result.stderr
+    with duckdb.connect(str(tmp_path / 'grid.duckdb')) as conn:
+        rows = conn.execute(
+            "select cast(local_date as varchar), high_f, low_f, "
+            "daytime_period_count, nighttime_period_count, period_count "
+            "from cleaned.nws_forecast_daily_end_date order by local_date").fetchall()
+    by_date = {r[0]: r for r in rows}
+    assert ('2026-11-06' in by_date)
+    thu = by_date['2026-11-06']
+    assert thu[1] == 60          # Thursday daytime high
+    assert thu[2] == 38          # Overnight low lands on Thursday
+    assert thu[3] == 1 and thu[4] == 1
+    # Thursday Night's low lands on Friday, not Thursday
+    if '2026-11-07' in by_date:
+        fri = by_date['2026-11-07']
+        assert fri[2] == 30
+        assert fri[1] is None
+
+
+def test_nws_dbt_end_date_missing_low_flagged(tmp_path):
+    body = forecast()
+    body['properties']['periods'] = [period(1, '2026-11-01T06:00:00-05:00', True, 65)]
+    seed(tmp_path, 'forecast', [body], 'dayonly')
+    result = run_dbt(tmp_path)
+    assert result.returncode == 0, result.stdout + result.stderr
+    with duckdb.connect(str(tmp_path / 'grid.duckdb')) as conn:
+        rows = conn.execute(
+            "select high_f, low_f, daytime_period_count, nighttime_period_count "
+            "from cleaned.nws_forecast_daily_end_date").fetchall()
+    assert rows == [(65, None, 1, 0)]
+
+
+def test_nws_dbt_end_date_dst_transition_night(tmp_path):
+    # Night spanning the Nov 1 2026 DST fall-back; ensure build succeeds and low lands.
+    body = forecast()
+    body['properties']['periods'] = [
+        {'number': 1, 'name': 'Night', 'startTime': '2026-11-01T00:00:00-04:00',
+         'endTime': '2026-11-01T06:00:00-05:00', 'isDaytime': False,
+         'temperature': 36, 'temperatureUnit': 'F'},
+        {'number': 2, 'name': 'Day', 'startTime': '2026-11-01T06:00:00-05:00',
+         'endTime': '2026-11-01T18:00:00-05:00', 'isDaytime': True,
+         'temperature': 55, 'temperatureUnit': 'F'},
+    ]
+    seed(tmp_path, 'forecast', [body], 'dst')
+    result = run_dbt(tmp_path)
+    assert result.returncode == 0, result.stdout + result.stderr
+    with duckdb.connect(str(tmp_path / 'grid.duckdb')) as conn:
+        rows = conn.execute(
+            "select cast(local_date as varchar), high_f, low_f "
+            "from cleaned.nws_forecast_daily_end_date order by local_date").fetchall()
+    assert ('2026-11-01', 55, 36) in rows

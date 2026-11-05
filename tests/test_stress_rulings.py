@@ -432,8 +432,12 @@ def _target_row(issued, *, load_first_recorded=None):
 def test_same_day_features_with_history_through_d_minus_2_are_scored_without_a_target_load_row():
     issued = datetime(2026, 7, 1, 7, 0, tzinfo=NEW_YORK)
     usable = issued - timedelta(hours=1)
+    weather = {'high_f': 95, 'morning_low_f': 50,
+               'weather_available_at': usable, 'weather_usable_at': usable,
+               'update_time': usable, 'issuance_id': 'x', 'loaded_at': usable,
+               'observed_at': usable}
     history = _history_through(TARGET - timedelta(days=2), usable) + (_target_row(issued),)
-    features = build_features(history, issued)
+    features = build_features(history, issued, weather)
     assert features.target_date == TARGET and features.load_fresh is True
     result = _call(features)
     assert result.status == 'SCORED', result.no_call_reason
@@ -444,10 +448,14 @@ def test_same_day_features_with_history_through_d_minus_2_are_scored_without_a_t
 def test_same_day_stale_history_still_no_calls_stale_load(last_day):
     issued = datetime(2026, 7, 1, 7, 0, tzinfo=NEW_YORK)
     usable = issued - timedelta(hours=1)
+    weather = {'high_f': 95, 'morning_low_f': 50,
+               'weather_available_at': usable, 'weather_usable_at': usable,
+               'update_time': usable, 'issuance_id': 'x', 'loaded_at': usable,
+               'observed_at': usable}
     # Even a target-day row claiming first-recorded load must not rescue stale history.
     history = (_history_through(last_day, usable)
                + (_target_row(issued, load_first_recorded=True),))
-    features = build_features(history, issued)
+    features = build_features(history, issued, weather)
     assert features.load_fresh is False
     result = _call(features)
     assert result.status == 'UNSCORED'

@@ -169,3 +169,86 @@ def test_alert_interval_validation(start, end, first, last, message):
     with pytest.raises(ValueError, match=message):
         annotate_alert_interval(datetime.fromisoformat(start), datetime.fromisoformat(end),
                                 'synthetic', date(2026, 7, first), date(2026, 7, last))
+
+
+from grid_pipeline.stress_inputs import load_nws_bwi_forecast
+
+NWS_DATASET = 'forecast_bwi'
+
+
+def nws_forecast_payload(update_time, high=65, low=40):
+    return {'properties': {'updateTime': update_time, 'generatedAt': update_time,
+                           'periods': [
+                               {'number': 1, 'startTime': '2026-11-05T01:00:00-05:00',
+                                'endTime': '2026-11-05T06:00:00-05:00', 'isDaytime': False,
+                                'temperature': low, 'temperatureUnit': 'F'},
+                               {'number': 2, 'startTime': '2026-11-05T06:00:00-05:00',
+                                'endTime': '2026-11-05T18:00:00-05:00', 'isDaytime': True,
+                                'temperature': high, 'temperatureUnit': 'F'}]}}
+
+
+def add_nws_batch(path, digest, loaded_at, payload, *, observed_at=None, committed=True):
+    add_batch(path, 'nws', NWS_DATASET, digest, loaded_at, [payload],
+              observed_at=observed_at, committed=committed)
+
+
+def test_nws_loader_lookahead_exclusion(tmp_path):
+    db = tmp_path / 'w.duckdb'
+    make_database(db)
+    cutoff = datetime(2026, 11, 5, 12, tzinfo=UTC)
+    early_update = '2026-11-05T06:00:00Z'
+    late_update = '2026-11-05T13:00:00Z'
+    add_nws_batch(db, 'early', cutoff - timedelta(hours=2),
+                  nws_forecast_payload(early_update), observed_at=cutoff - timedelta(hours=2))
+    add_nws_batch(db, 'late', cutoff + timedelta(hours=1),
+                  nws_forecast_payload(late_update), observed_at=cutoff + timedelta(hours=1))
+    target = date(2026, 11, 5)
+    pinned = load_nws_bwi_forecast(db, target, indexed_by=cutoff)
+    assert pinned is not None
+    assert pinned['update_time'].astimezone(UTC).isoformat().startswith('2026-11-05T06')
+    # unrestricted sees the later one
+    unrestricted = load_nws_bwi_forecast(db, target)
+    assert unrestricted['update_time'].astimezone(UTC).isoformat().startswith('2026-11-05T13')
+
+
+def test_nws_loader_complete_pair_preferred_over_newer_incomplete(tmp_path):
+    db = tmp_path / 'w.duckdb'
+    make_database(db)
+    cutoff = datetime(2026, 11, 5, 12, tzinfo=UTC)
+    complete_update = '2026-11-05T06:00:00Z'
+    incomplete_payload = nws_forecast_payload('2026-11-05T11:00:00Z', high=70, low=None)
+    # remove the night period to make incomplete
+    incomplete_payload['properties']['periods'] = [incomplete_payload['properties']['periods'][1]]
+    add_nws_batch(db, 'complete', cutoff - timedelta(hours=3),
+                  nws_forecast_payload(complete_update), observed_at=cutoff - timedelta(hours=3))
+    add_nws_batch(db, 'incomplete', cutoff - timedelta(hours=1),
+                  incomplete_payload, observed_at=cutoff - timedelta(hours=1))
+    target = date(2026, 11, 5)
+    pinned = load_nws_bwi_forecast(db, target, indexed_by=cutoff)
+    assert pinned is not None
+    assert pinned['morning_low_f'] is not None
+    assert pinned['high_f'] is not None
+
+
+def test_nws_loader_uncommitted_batch_invisible(tmp_path):
+    db = tmp_path / 'w.duckdb'
+    make_database(db)
+    cutoff = datetime(2026, 11, 5, 12, tzinfo=UTC)
+    add_nws_batch(db, 'uncommitted', cutoff - timedelta(hours=1),
+                  nws_forecast_payload('2026-11-05T06:00:00Z'),
+                  observed_at=None, committed=False)
+    target = date(2026, 11, 5)
+    assert load_nws_bwi_forecast(db, target, indexed_by=cutoff) is None
+
+
+def test_nws_loader_null_usable_at_without_commit_record(tmp_path):
+    db = tmp_path / 'w.duckdb'
+    make_database(db)
+    cutoff = datetime(2026, 11, 5, 12, tzinfo=UTC)
+    add_nws_batch(db, 'nocommitrecord', cutoff - timedelta(hours=1),
+                  nws_forecast_payload('2026-11-05T06:00:00Z'),
+                  observed_at=None, committed=True)
+    target = date(2026, 11, 5)
+    pinned = load_nws_bwi_forecast(db, target, indexed_by=cutoff)
+    assert pinned is not None
+    assert pinned['weather_usable_at'] is None
