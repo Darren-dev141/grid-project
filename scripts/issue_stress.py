@@ -24,6 +24,31 @@ ET = ZoneInfo("America/New_York")
 UTC = ZoneInfo("UTC")
 
 
+def availability_fields(result) -> dict:
+    """Receipt fields for input availability, taken only from the check's own outcome.
+
+    `input_availability_verified` is True only when the forecast's receipt carries a
+    passed `verify_input_availability` result. A run that no-called before the check
+    (stale input, bad issue time, ...) reports False and says why it was not evaluated.
+    """
+    check = result.receipt.input_availability if result.receipt is not None else None
+    if check is None:
+        return {
+            "input_availability_verified": False,
+            "input_availability_note": "Availability check not reached; forecast no-called first: "
+                                       f"{result.no_call_reason}.",
+        }
+    if check.verified:
+        note = ("Every history day used and the target weather have a first-usable time, "
+                "derived from committed batch records (later of loaded_at and observed_at), "
+                "at or before issued_at. The commit record is local DuckDB state, not "
+                "tamper-evident.")
+    else:
+        note = (f"Availability not verified: {check.reason} ({check.days_unproven} of "
+                f"{check.days_checked} used days unproven).")
+    return {"input_availability_verified": check.verified, "input_availability_note": note}
+
+
 def main() -> None:
     issued_at = datetime.now(ET)
     target_date = issued_at.date()
@@ -45,6 +70,7 @@ def main() -> None:
         mode="prospective",
         issued_at=issued_at,
         weather_available_at=target.temperature_available_at if target is not None else None,
+        weather_usable_at=target.temperature_usable_at if target is not None else None,
     )
     result = forecast(features, parse_definition(read_definition(DEFINITION)))
     output = ROOT / "docs" / "s3c" / f"S3C-FIRST-ISSUANCE-{target_date.isoformat()}.json"
@@ -58,8 +84,7 @@ def main() -> None:
         "input_index_cutoff": input_cutoff.isoformat(),
         "issued_late": issued_at > scheduled_cutoff,
         "latest_completed_peak_date": latest_completed_peak.isoformat(),
-        "input_availability_verified": False,
-        "input_availability_note": "Indexing time is not proof of commit or first usable availability; prospective forecast fails closed.",
+        **availability_fields(result),
         "forecast": asdict(result),
     }
     with output.open('x', encoding='utf-8') as file:

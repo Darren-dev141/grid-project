@@ -9,7 +9,8 @@ from zoneinfo import ZoneInfo
 
 import numpy as np
 
-from grid_pipeline.model import Alert, Definition, Features, Forecast, ForecastReceipt, HistoryDay
+from grid_pipeline.model import (Alert, AvailabilityCheck, Definition, Features, Forecast,
+                                 ForecastReceipt, HistoryDay)
 
 
 _V1 = {
@@ -132,6 +133,37 @@ def _available_at_issue(value, issued_at) -> bool:
     return _aware(value) and _aware(issued_at) and value <= issued_at
 
 
+def verify_input_availability(features: Features,
+                              used_days: tuple[HistoryDay, ...]) -> AvailabilityCheck:
+    """Check that every input a prospective forecast would use was first usable by issuance.
+
+    Evidence is the loader's commit-record-derived `*_usable_at` (the later of a
+    batch's loaded_at and observed_at, committed batches only), never the legacy
+    `*_available_at` indexing times and never a caller flag. Fails closed: a
+    missing, naive, or post-issuance usable time on any used history day or on the
+    target weather leaves the result unverified. `verified` is only ever True here.
+    """
+    if not _aware(features.issued_at):
+        return AvailabilityCheck(False, 'missing_or_invalid_issue_time')
+    if not used_days:
+        return AvailabilityCheck(False, 'no_history_to_verify')
+    unproven = [day for day in used_days
+                if not (_available_at_issue(day.load_usable_at, features.issued_at)
+                        and _available_at_issue(day.temperature_usable_at, features.issued_at))]
+    stamps = [stamp for day in used_days
+              for stamp in (day.load_usable_at, day.temperature_usable_at)
+              if stamp is not None and _aware(stamp)]
+    latest = max(stamps, default=None)
+    if unproven:
+        return AvailabilityCheck(False, 'history_first_usable_not_proven_by_issuance',
+                                 len(used_days), len(unproven), latest)
+    weather = features.weather_usable_at
+    if weather is None or not _available_at_issue(weather, features.issued_at):
+        return AvailabilityCheck(False, 'target_weather_first_usable_not_proven_by_issuance',
+                                 len(used_days), 0, latest)
+    return AvailabilityCheck(True, None, len(used_days), 0, max([*stamps, weather]))
+
+
 def _season_window(target_date: date, definition: Definition) -> set[str]:
     leap_year = date(2024, 1, 1).year
     def slot(day: date) -> int:
@@ -226,6 +258,7 @@ def forecast(features: Features, definition: Definition) -> Forecast:
         return no_call('stale_load' if not features.load_fresh else 'stale_weather', receipt)
     if not _finite(features.high_f) or not _finite(features.morning_low_f):
         return no_call('missing_target_temperature', receipt)
+    gated = None
     if features.mode == 'prospective':
         if not _aware(features.issued_at):
             return no_call('missing_or_invalid_issue_time', receipt)
@@ -234,9 +267,16 @@ def forecast(features: Features, definition: Definition) -> Forecast:
         if not _available_at_issue(features.weather_available_at, features.issued_at):
             return no_call('target_weather_unavailable_at_issuance', receipt)
         # Indexing timestamps and caller flags cannot establish first usable commits.
-        return no_call('unverified_issue_time_availability', receipt)
+        # Only the commit-record-derived usable times on the rows actually used can.
+        gated = _history_with_gates(features, definition)
+        availability = verify_input_availability(features, gated[0])
+        receipt = replace(receipt, input_availability=availability)
+        if not availability.verified:
+            return no_call('unverified_issue_time_availability', receipt)
+        receipt = replace(receipt, publication_availability='verified')
 
-    threshold_days, fit_days, history_gates = _history_with_gates(features, definition)
+    threshold_days, fit_days, history_gates = (
+        gated if gated is not None else _history_with_gates(features, definition))
     candidates = tuple(day for day in fit_days
                        if type(day.peak_hour_ending) is int and 1 <= day.peak_hour_ending <= 24)
     analog_gates = {

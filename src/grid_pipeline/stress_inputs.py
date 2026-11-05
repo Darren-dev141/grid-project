@@ -42,8 +42,16 @@ def load_first_recorded_history(load_database: str | Path,
     Ties in recorded load time are ordered by digest and row number. Missing
     recorded timestamps fail closed. The legacy *_available_at fields contain
     indexing times, which may precede commit, not proven first usable times.
+    The *_usable_at fields are the derived first-usable times: for each selected
+    row, the later of its batch's loaded_at and observed_at (the commit record),
+    committed batches only; the day value is the latest across contributing rows
+    (load: the hour plus the adjacent hours the quality model reads), and NULL if
+    any contributing batch has no commit record. A backdated loaded_at therefore
+    cannot move a usable time earlier than the recorded commit. The commit record
+    is local DuckDB state and is not tamper-evident; it proves what the archive
+    recorded, not independent publication.
     Load indexing bounds include adjacent hours used by the quality model.
-    Prospective forecasting remains disabled without verified input provenance.
+    Prospective verification is done by stress.verify_input_availability.
     """
     if indexed_by is not None and indexed_by.utcoffset() is None:
         raise ValueError('indexed_by must be timezone-aware')
@@ -58,9 +66,14 @@ def load_first_recorded_history(load_database: str | Path,
             _attach_read_only(connection, temperature_path, 'temperature_source')
             temperature_source = 'temperature_source'
 
+        # usable_at is the first time a batch's rows could be used: the later of the
+        # indexing time and the commit record (observed_at). A committed batch with no
+        # commit record has no provable first-usable time, so usable_at stays NULL.
+        usable = ('CASE WHEN b.committed AND b.observed_at IS NOT NULL '
+                  'THEN greatest(b.loaded_at, b.observed_at) END AS usable_at')
         source_queries = {
-            'load_rows': '''
-                SELECT r.*, b.loaded_at
+            'load_rows': f'''
+                SELECT r.*, b.loaded_at, {usable}
                 FROM load_source.raw.records r
                 JOIN load_source.raw.batches b USING (source, dataset, digest)
                 WHERE r.source = 'eia' AND r.dataset = 'electricity/rto/region-data'
@@ -68,7 +81,7 @@ def load_first_recorded_history(load_database: str | Path,
                     AND (r.payload ->> 'type') = 'D'
             ''',
             'temperature_rows': f'''
-                SELECT r.*, b.loaded_at
+                SELECT r.*, b.loaded_at, {usable}
                 FROM {temperature_source}.raw.records r
                 JOIN {temperature_source}.raw.batches b USING (source, dataset, digest)
                 WHERE r.source = 'ncei' AND r.dataset = 'daily-summaries'
@@ -124,7 +137,15 @@ def load_first_recorded_history(load_database: str | Path,
                 SELECT CAST(timezone('America/New_York', timezone('UTC', current.hour_utc)
                             - INTERVAL 1 MICROSECOND) AS DATE) AS local_date,
                     max(greatest(current.loaded_at, previous.loaded_at, following.loaded_at))
-                        AS loaded_at
+                        AS loaded_at,
+                    -- NULL if any contributing hour lacks a commit record: DuckDB's
+                    -- greatest() skips NULLs, so absence must be tested explicitly.
+                    CASE WHEN bool_or(current.usable_at IS NULL
+                                      OR (previous.hour_utc IS NOT NULL AND previous.usable_at IS NULL)
+                                      OR (following.hour_utc IS NOT NULL AND following.usable_at IS NULL))
+                        THEN NULL
+                        ELSE max(greatest(current.usable_at, previous.usable_at, following.usable_at))
+                    END AS usable_at
                 FROM first_load current
                 LEFT JOIN first_load previous
                     ON previous.hour_utc = current.hour_utc - INTERVAL 1 HOUR
@@ -135,7 +156,8 @@ def load_first_recorded_history(load_database: str | Path,
             )
             SELECT history.local_date, history.peak_mw, history.peak_hour_ending,
                 history.tmax_f, history.tmin_f, history.complete,
-                availability.loaded_at, first_temperature.loaded_at
+                availability.loaded_at, first_temperature.loaded_at,
+                availability.usable_at, first_temperature.usable_at
             FROM history
             LEFT JOIN availability USING (local_date)
             LEFT JOIN first_temperature USING (local_date)
@@ -147,7 +169,9 @@ def load_first_recorded_history(load_database: str | Path,
         load_first_recorded=True if load_at is not None else None,
         temperature_first_recorded=True if temperature_at is not None else None,
         load_available_at=load_at, temperature_available_at=temperature_at,
-    ) for day, peak, hour, high, low, complete, load_at, temperature_at in rows)
+        load_usable_at=load_usable, temperature_usable_at=temperature_usable,
+    ) for (day, peak, hour, high, low, complete, load_at, temperature_at,
+           load_usable, temperature_usable) in rows)
 
 
 def annotate_alert_interval(start: datetime, end: datetime, text: str,
