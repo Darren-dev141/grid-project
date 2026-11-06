@@ -1,0 +1,118 @@
+name: Daily grid run (S5 deployment)
+
+# S5 deployment layer (PLAN decision 4): the scheduled run builds the dbt
+# project against the Supabase (Postgres) target and keeps the deployment
+# honest — a paused Supabase project or a missing secret fails this run
+# loudly, never silently.
+#
+# ACTIVATION: merge only after these repo secrets exist (values are entered
+# by Darren in the GitHub UI; this file references names only):
+#   EIA_API_KEY          the personal EIA key (same key used on the PC)
+#   SUPABASE_DB_HOST     Supabase direct/session-pooler host
+#   SUPABASE_DB_USER     "postgres" (direct) or "postgres.<project-ref>" (pooler)
+#   SUPABASE_DB_PASSWORD the project's database password
+# Optional: SUPABASE_DB_PORT (default 5432 — session mode; do NOT use the
+# 6543 transaction pooler), SUPABASE_DB_NAME (default "postgres").
+#
+# Scope note: this workflow owns the deployment warehouse run (fetch ->
+# raw mirror -> dbt build+test on the Supabase target). Forecast issuance
+# still runs from the PC cron into the git ledger, and the public brief page
+# (site/) + pinned-issue comment land with the S5 `brief` module; Vercel
+# serves site/ per vercel.json once the first brief is committed.
+
+on:
+  schedule:
+    # 11:00 UTC = 07:00 EDT / 06:00 EST. GitHub cron is UTC-only and does not
+    # follow DST; 07:00 ET year-round is not expressible — this keeps the
+    # run at the EDT issuance hour and one hour early in EST. The PC cron
+    # remains the issuance of record until `grid daily` consolidates.
+    - cron: '0 11 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: daily-grid-run
+  cancel-in-progress: false
+
+jobs:
+  supabase-build:
+    name: supabase-build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install -e '.[dev]'
+
+      - name: Required secrets present (fail loudly, never skip silently)
+        env:
+          EIA_API_KEY: ${{ secrets.EIA_API_KEY }}
+          SUPABASE_DB_HOST: ${{ secrets.SUPABASE_DB_HOST }}
+          SUPABASE_DB_USER: ${{ secrets.SUPABASE_DB_USER }}
+          SUPABASE_DB_PASSWORD: ${{ secrets.SUPABASE_DB_PASSWORD }}
+        run: |
+          missing=0
+          for name in EIA_API_KEY SUPABASE_DB_HOST SUPABASE_DB_USER SUPABASE_DB_PASSWORD; do
+            if [ -z "${!name}" ]; then
+              echo "::error::Required repo secret $name is not set — the deployment run cannot proceed."
+              missing=1
+            fi
+          done
+          exit $missing
+
+      - name: Supabase reachable (a paused project fails here, by design)
+        env:
+          SUPABASE_DB_HOST: ${{ secrets.SUPABASE_DB_HOST }}
+          SUPABASE_DB_PORT: ${{ secrets.SUPABASE_DB_PORT }}
+          SUPABASE_DB_USER: ${{ secrets.SUPABASE_DB_USER }}
+          SUPABASE_DB_PASSWORD: ${{ secrets.SUPABASE_DB_PASSWORD }}
+          SUPABASE_DB_NAME: ${{ secrets.SUPABASE_DB_NAME }}
+        run: python scripts/load_raw_to_postgres.py --check
+
+      - name: Fetch latest windows into the runner-local raw zone
+        env:
+          EIA_API_KEY: ${{ secrets.EIA_API_KEY }}
+        run: |
+          end=$(date -u +%Y-%m-%dT%H)
+          start=$(date -u -d '4 days ago' +%Y-%m-%dT%H)
+          for dataset in fuel-mix pjm-demand bge-demand; do
+            python -m grid_pipeline.fetch_cli "$dataset" --start "$start" --end "$end" --root data
+          done
+          python scripts/refresh_nws_bwi.py --root data
+          python scripts/refresh_ncei.py --root data
+
+      - name: Mirror raw zone into Supabase Postgres
+        env:
+          SUPABASE_DB_HOST: ${{ secrets.SUPABASE_DB_HOST }}
+          SUPABASE_DB_PORT: ${{ secrets.SUPABASE_DB_PORT }}
+          SUPABASE_DB_USER: ${{ secrets.SUPABASE_DB_USER }}
+          SUPABASE_DB_PASSWORD: ${{ secrets.SUPABASE_DB_PASSWORD }}
+          SUPABASE_DB_NAME: ${{ secrets.SUPABASE_DB_NAME }}
+        run: python scripts/load_raw_to_postgres.py --database data/grid.duckdb
+
+      - name: dbt build + test against the Supabase target
+        env:
+          DBT_SEND_ANONYMOUS_USAGE_STATS: 'false'
+          SUPABASE_DB_HOST: ${{ secrets.SUPABASE_DB_HOST }}
+          SUPABASE_DB_PORT: ${{ secrets.SUPABASE_DB_PORT }}
+          SUPABASE_DB_USER: ${{ secrets.SUPABASE_DB_USER }}
+          SUPABASE_DB_PASSWORD: ${{ secrets.SUPABASE_DB_PASSWORD }}
+          SUPABASE_DB_NAME: ${{ secrets.SUPABASE_DB_NAME }}
+        run: |
+          python -m grid_pipeline.dbt_runner build \
+            --project-dir dbt --profiles-dir dbt \
+            --target supabase \
+            --target-path dbt/target --log-path dbt/logs
+
+      - name: Deployment status note
+        if: always()
+        run: |
+          echo "Supabase warehouse build finished with status ${{ job.status }}."
+          echo "Brief page (site/) and pinned-issue comment land with the S5 brief module;"
+          echo "Vercel serves site/ per vercel.json once the first brief is committed."

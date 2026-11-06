@@ -17,6 +17,40 @@ from grid_pipeline.model import Alert, HistoryDay
 _DBT_MODELS = Path(__file__).resolve().parents[2] / 'dbt' / 'models'
 _NEW_YORK = ZoneInfo('America/New_York')
 
+# S5 dialect pass: the dbt models call cross-dialect macros
+# (dbt/macros/cross_dialect.sql) that render to the DuckDB-native
+# constructs below on the local target. This raw-SQL consumer runs the
+# same model text in DuckDB, so _model_sql substitutes each macro
+# spelling back to exactly what dbt renders for DuckDB. The count == 1
+# assertion in _model_sql keeps any drift between the models and this
+# table a loud failure, never a silent change of meaning.
+_DUCKDB_MACRO_SUBSTITUTIONS = {
+    'cleaned/eia_pjm_hourly_demand.sql': {
+        "{{ try_strptime(\"r.payload ->> 'period'\", '%Y-%m-%dT%H') }}":
+            "try_strptime(r.payload ->> 'period', '%Y-%m-%dT%H')",
+        "{{ try_cast(\"r.payload ->> 'value'\", 'double') }}":
+            "try_cast(r.payload ->> 'value' as double)",
+    },
+    'cleaned/ncei_bwi_daily_temps.sql': {
+        "{{ try_cast(\"r.payload ->> 'DATE'\", 'date') }}":
+            "try_cast(r.payload ->> 'DATE' as date)",
+        "{{ try_cast(\"r.payload ->> 'TMAX'\", 'double') }}":
+            "try_cast(r.payload ->> 'TMAX' as double)",
+        "{{ try_cast(\"r.payload ->> 'TMIN'\", 'double') }}":
+            "try_cast(r.payload ->> 'TMIN' as double)",
+        "{{ is_finite('high_f') }}": "isfinite(high_f)",
+        "{{ is_finite('low_f') }}": "isfinite(low_f)",
+    },
+    'marts/mart_day_history.sql': {
+        "{{ is_finite('demand_mwh') }}": "isfinite(demand_mwh)",
+        ("{{ date_diff_hour(\"timezone('America/New_York', cast(local_date as timestamp))\",\n"
+         "            \"timezone('America/New_York', cast(local_date + 1 as timestamp))\") }}"):
+            ("date_diff('hour', timezone('America/New_York', cast(local_date as timestamp)),\n"
+             "            timezone('America/New_York', cast(local_date + 1 as timestamp)))"),
+        "{{ isodow_of('d.local_date') }}": "isodow(d.local_date)",
+    },
+}
+
 
 def _model_sql(relative_path: str, substitutions: dict[str, str]) -> str:
     sql = (_DBT_MODELS / relative_path).read_text(encoding='utf-8')
@@ -123,11 +157,16 @@ def load_first_recorded_history(load_database: str | Path,
 
         raw_refs = {"{{ source('raw', 'records') }}": 'first_records',
                     "{{ source('raw', 'batches') }}": 'source_batches'}
-        demand_sql = _model_sql('cleaned/eia_pjm_hourly_demand.sql', raw_refs)
-        temperature_sql = _model_sql('cleaned/ncei_bwi_daily_temps.sql', raw_refs)
+        demand_sql = _model_sql('cleaned/eia_pjm_hourly_demand.sql',
+                                {**raw_refs,
+                                 **_DUCKDB_MACRO_SUBSTITUTIONS['cleaned/eia_pjm_hourly_demand.sql']})
+        temperature_sql = _model_sql('cleaned/ncei_bwi_daily_temps.sql',
+                                     {**raw_refs,
+                                      **_DUCKDB_MACRO_SUBSTITUTIONS['cleaned/ncei_bwi_daily_temps.sql']})
         mart_sql = _model_sql('marts/mart_day_history.sql', {
             "{{ ref('eia_pjm_hourly_demand') }}": 'clean_demand',
             "{{ ref('ncei_bwi_daily_temps') }}": 'clean_temperature',
+            **_DUCKDB_MACRO_SUBSTITUTIONS['marts/mart_day_history.sql'],
         })
         connection.execute('CREATE TEMP VIEW clean_demand AS ' + demand_sql)
         connection.execute('CREATE TEMP VIEW clean_temperature AS ' + temperature_sql)
