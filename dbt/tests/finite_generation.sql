@@ -1,3 +1,1 @@
-select hour_utc, fuel_type
-from {{ ref('eia_pjm_hourly_generation') }}
-where not isfinite(generation_mwh)
+c2VsZWN0IGhvdXJfdXRjLCBmdWVsX3R5cGUKZnJvbSB7eyByZWYoJ2VpYV9wam1faG91cmx5X2dlbmVyYXRpb24nKSB9fQp3aGVyZSBub3Qge3sgaXNfZmluaXRlKCdnZW5lcmF0aW9uX213aCcpIH19Cg==
