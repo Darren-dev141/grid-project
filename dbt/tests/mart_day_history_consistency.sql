@@ -1,11 +1,1 @@
-select * from {{ ref('mart_day_history') }}
-where ok_hours < 0 or observed_hours < ok_hours or observed_hours > expected_hours
-    or complete != (ok_hours = expected_hours)
-    or (ok_hours = 0 and (peak_mw is not null or peak_hour_ending is not null
-        or peak_hour_utc is not null))
-    or (ok_hours > 0 and (peak_mw is null or peak_hour_ending is null
-        or peak_hour_utc is null))
-    or peak_hour_ending not between 1 and 24
-    or not isfinite(peak_mw) or peak_mw < 0
-    or (temperature_quality is distinct from 'ok' and (tmax_f is not null or tmin_f is not null))
-    or (temperature_quality = 'ok' and (tmax_f is null or tmin_f is null or tmin_f > tmax_f))
+c2VsZWN0ICogZnJvbSB7eyByZWYoJ21hcnRfZGF5X2hpc3RvcnknKSB9fQp3aGVyZSBva19ob3VycyA8IDAgb3Igb2JzZXJ2ZWRfaG91cnMgPCBva19ob3VycyBvciBvYnNlcnZlZF9ob3VycyA+IGV4cGVjdGVkX2hvdXJzCiAgICBvciBjb21wbGV0ZSAhPSAob2tfaG91cnMgPSBleHBlY3RlZF9ob3VycykKICAgIG9yIChva19ob3VycyA9IDAgYW5kIChwZWFrX213IGlzIG5vdCBudWxsIG9yIHBlYWtfaG91cl9lbmRpbmcgaXMgbm90IG51bGwKICAgICAgICBvciBwZWFrX2hvdXJfdXRjIGlzIG5vdCBudWxsKSkKICAgIG9yIChva19ob3VycyA+IDAgYW5kIChwZWFrX213IGlzIG51bGwgb3IgcGVha19ob3VyX2VuZGluZyBpcyBudWxsCiAgICAgICAgb3IgcGVha19ob3VyX3V0YyBpcyBudWxsKSkKICAgIG9yIHBlYWtfaG91cl9lbmRpbmcgbm90IGJldHdlZW4gMSBhbmQgMjQKICAgIG9yIG5vdCB7eyBpc19maW5pdGUoJ3BlYWtfbXcnKSB9fSBvciBwZWFrX213IDwgMAogICAgb3IgKHRlbXBlcmF0dXJlX3F1YWxpdHkgaXMgZGlzdGluY3QgZnJvbSAnb2snIGFuZCAodG1heF9mIGlzIG5vdCBudWxsIG9yIHRtaW5fZiBpcyBub3QgbnVsbCkpCiAgICBvciAodGVtcGVyYXR1cmVfcXVhbGl0eSA9ICdvaycgYW5kICh0bWF4X2YgaXMgbnVsbCBvciB0bWluX2YgaXMgbnVsbCBvciB0bWluX2YgPiB0bWF4X2YpKQo=
