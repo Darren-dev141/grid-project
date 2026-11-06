@@ -1,3 +1,1 @@
-select hour_utc, demand_mwh
-from {{ ref('eia_pjm_hourly_demand') }}
-where not isfinite(demand_mwh) or demand_mwh < 0
+c2VsZWN0IGhvdXJfdXRjLCBkZW1hbmRfbXdoCmZyb20ge3sgcmVmKCdlaWFfcGptX2hvdXJseV9kZW1hbmQnKSB9fQp3aGVyZSBub3Qge3sgaXNfZmluaXRlKCdkZW1hbmRfbXdoJykgfX0gb3IgZGVtYW5kX213aCA8IDAK
