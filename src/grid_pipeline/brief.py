@@ -1,1 +1,433 @@
-IiIiUmVuZGVyIHRoZSBkYWlseSBicmllZjogYGBzaXRlL2luZGV4Lmh0bWxgYCBwbHVzIHRoZSBpc3N1ZS1jb21tZW50IHRleHQuCgpUaGlzIGlzIHN0ZXAgOCBvZiBgYGdyaWQgZGFpbHlgYCBpbiBgYGRvY3MvYXJjaGl0ZWN0dXJlLXMzLXM3Lm1kYGAuIFRoZSBicmllZgpyZW5kZXJzIGV4YWN0bHkgd2hhdCB0aGUgZXhpc3RpbmcgcGlwZWxpbmUgYWxyZWFkeSBwcm9kdWNlcyDigJQgb25lIGZvcmVjYXN0Cihmcm9tIGBgc3RyZXNzLmZvcmVjYXN0YGAgb3ZlciBgYHN0cmVzc19pbnB1dHNgYCkgcGx1cyBmcmVzaG5lc3MgZmFjdHMg4oCUIGFuZApub3RoaW5nIGVsc2U6IG5vIG5ldyBjbGFpbXMsIG1ldHJpY3MsIG9yIGRhc2hib2FyZCBzY29wZS4KCkRldmlhdGlvbnMgZnJvbSB0aGUgYXJjaGl0ZWN0dXJlIGRvYydzIGlkZWFsaXNlZCBzaWduYXR1cmVzLCBmb3JjZWQgYnkgdGhlCmNvZGUgdGhhdCBhY3R1YWxseSBleGlzdHMgdG9kYXk6CgotIFRoZXJlIGlzIG5vIGBgc2NvcmluZ2BgIG1vZHVsZSBhbmQgbm8gYGBSZXBvcnRgYCB0eXBlOyBgYGZyZXNobmVzcy5weWBgIGlzCiAgdGhlIGxlZ2FjeSBwdWJsaXNoLXNuYXBzaG90IGNoZWNrZXIuIEZyZXNobmVzcyBoZXJlIGlzIHRoZXJlZm9yZSB0aGUgcGFpcgogIG9mIGJvb2xlYW5zIHRoZSBmb3JlY2FzdCBpdHNlbGYgY29uc3VtZXMgKGBgRmVhdHVyZXMubG9hZF9mcmVzaGBgIC8KICBgYEZlYXR1cmVzLndlYXRoZXJfZnJlc2hgYCksIGRlcml2ZWQgd2l0aCB0aGUgc2FtZSBydWxlcwogIGBgc2NyaXB0cy9pc3N1ZV9zdHJlc3MucHlgYCB1c2VzOiBsb2FkIGlzIGZyZXNoIHdoZW4gdGhlIGxhdGVzdCBjb21wbGV0ZWQKICBwZWFrICh0YXJnZXQgLSAyIGRheXMsIHBlciB0aGUgTm92IDUgc2FtZS1kYXkgcnVsaW5nKSBpcyBwcmVzZW50LCBjb21wbGV0ZSwKICBmaXJzdC1yZWNvcmRlZCBhbmQgZmluaXRlOyB3ZWF0aGVyIGlzIGZyZXNoIHdoZW4gYSBwaW5uZWQgTldTIEJXSSBpc3N1YW5jZQogIGZvciB0aGUgdGFyZ2V0IGRhdGUgY2FycmllcyBhIGNvbXBsZXRlIGhpZ2gvbG93IHBhaXIuCi0gVGhlcmUgaXMgbm8gYGBmZWF0dXJlcy5sb2FkYGA7IGhpc3RvcnkgYW5kIHRhcmdldCB3ZWF0aGVyIGNvbWUgZnJvbQogIGBgc3RyZXNzX2lucHV0cy5sb2FkX2ZpcnN0X3JlY29yZGVkX2hpc3RvcnlgYCBhbmQKICBgYHN0cmVzc19pbnB1dHMubG9hZF9ud3NfYndpX2ZvcmVjYXN0YGAuCi0gVGhlIGZvcmVjYXN0IGlzIGNvbXB1dGVkIGluIGBgcmV0cm9zcGVjdGl2ZWBgIG1vZGUgKHRoZSBtb2RlCiAgYGBzY3JpcHRzL2RpYWdub3NlX3MzYy5weWBgIHVzZXMgZm9yIHJlY29uc3RydWN0aW9uKS4gUHJvc3BlY3RpdmUgaXNzdWFuY2UKICBzdGF5cyB3aXRoIHRoZSBpc3N1YW5jZSBwYXRoIGFuZCB0aGUgbGVkZ2VyOyB0aGlzIHJlbmRlcmVyIG5ldmVyIGFwcGVuZHMKICByZWNlaXB0cyBhbmQgbmV2ZXIgaW52ZW50cyBpc3N1ZS10aW1lIHByb3ZlbmFuY2UuCgpBbGwgbGVkZ2VyIHJlYWRzIGdvIHRocm91Z2ggYGBncmlkX3BpcGVsaW5lLmxlZGdlcmBgICh0aGUgb25seSBtb2R1bGUgYWxsb3dlZAp0byBvcGVuIGxlZGdlciBwYXRocyk6IHRoZSBkZWZpbml0aW9uIHZpYSBgYGxlZGdlci5yZWFkX2RlZmluaXRpb25gYCBhbmQgdGhlCnJlY2VpcHQgbGlzdGluZyB2aWEgYGBsZWRnZXIucmVjZWlwdF9wYXRoc2BgICsgYGBsZWRnZXIucmVhZF9jb250ZW50YGAuClRoZSBpc3N1ZSBjb21tZW50IGxpc3RzLCBmb3IgdGhlIGJyaWVmJ3MgdGFyZ2V0IGRhdGUsIGVhY2ggcmVjZWlwdCdzIHBhdGgKYW5kIGZ1bGwgc2hhMjU2IChhcmNoaXRlY3R1cmUgc3RlcCA4KS4KIiIiCmZyb20gX19mdXR1cmVfXyBpbXBvcnQgYW5ub3RhdGlvbnMKCmltcG9ydCBhcmdwYXJzZQpmcm9tIGRhdGFjbGFzc2VzIGltcG9ydCBkYXRhY2xhc3MKZnJvbSBkYXRldGltZSBpbXBvcnQgZGF0ZSwgZGF0ZXRpbWUsIHRpbWVkZWx0YSwgdGltZXpvbmUKZnJvbSBoYXNobGliIGltcG9ydCBzaGEyNTYKaW1wb3J0IGh0bWwKaW1wb3J0IGpzb24KZnJvbSBtYXRoIGltcG9ydCBpc2Zpbml0ZQpmcm9tIHBhdGhsaWIgaW1wb3J0IFBhdGgKZnJvbSB6b25laW5mbyBpbXBvcnQgWm9uZUluZm8KCmltcG9ydCBkdWNrZGIKCmZyb20gZ3JpZF9waXBlbGluZSBpbXBvcnQgbGVkZ2VyLCBtZF9nZW8KZnJvbSBncmlkX3BpcGVsaW5lLm1vZGVsIGltcG9ydCBGZWF0dXJlcywgRm9yZWNhc3QKZnJvbSBncmlkX3BpcGVsaW5lLnN0cmVzcyBpbXBvcnQgZm9yZWNhc3QgYXMgc3RyZXNzX2ZvcmVjYXN0LCBwYXJzZV9kZWZpbml0aW9uCmZyb20gZ3JpZF9waXBlbGluZS5zdHJlc3NfaW5wdXRzIGltcG9ydCBsb2FkX2ZpcnN0X3JlY29yZGVkX2hpc3RvcnksIGxvYWRfbndzX2J3aV9mb3JlY2FzdAoKRVQgPSBab25lSW5mbygnQW1lcmljYS9OZXdfWW9yaycpCkdFT0dSQVBIWSA9ICdQSk0td2lkZSBjYWxsLCBNYXJ5bGFuZCB3ZWF0aGVyJwpERUZJTklUSU9OX1ZFUlNJT04gPSAnc3RyZXNzLWluZGV4LXYxJwoKCkBkYXRhY2xhc3MoZnJvemVuPVRydWUpCmNsYXNzIEJyaWVmOgogICAgIiIiUmVuZGVyZWQgYnJpZWY6IHRoZSBwYWdlIGFuZCB0aGUgaXNzdWUtY29tbWVudCB0ZXh0LiIiIgogICAgaHRtbDogc3RyCiAgICBjb21tZW50X21kOiBzdHIKCgpAZGF0YWNsYXNzKGZyb3plbj1UcnVlKQpjbGFzcyBCcmllZkZhY3RzOgogICAgIiIiRnJlc2huZXNzIGFuZCBkYXRhLWFzLW9mIGZhY3RzIHNob3duIGFsb25nc2lkZSB0aGUgZm9yZWNhc3QuIiIiCiAgICBsb2FkX2ZyZXNoOiBib29sCiAgICB3ZWF0aGVyX2ZyZXNoOiBib29sCiAgICBsYXRlc3RfY29tcGxldGVkX3BlYWs6IGRhdGUKICAgIGxhdGVzdF9jb21wbGV0ZWRfcHJlc2VudDogYm9vbAogICAgaGlzdG9yeV9kYXlzOiBpbnQKICAgIGhpc3RvcnlfbGFzdF9kYXRlOiBkYXRlIHwgTm9uZQogICAgZGF0YV9hc19vZjogZGF0ZSB8IE5vbmUKICAgIGxvYWRfbGFzdF9ob3VyX3V0YzogZGF0ZXRpbWUgfCBOb25lCiAgICB3ZWF0aGVyX3VwZGF0ZV90aW1lOiBkYXRldGltZSB8IE5vbmUKICAgIHRhcmdldF9oaWdoX2Y6IGZsb2F0IHwgTm9uZQogICAgdGFyZ2V0X21vcm5pbmdfbG93X2Y6IGZsb2F0IHwgTm9uZQoKCkBkYXRhY2xhc3MoZnJvemVuPVRydWUpCmNsYXNzIFJlbmRlcmVkQnJpZWY6CiAgICBmb3JlY2FzdDogRm9yZWNhc3QKICAgIGZhY3RzOiBCcmllZkZhY3RzCiAgICBicmllZjogQnJpZWYKICAgIGluZGV4X3BhdGg6IFBhdGgKICAgIGNvbW1lbnRfcGF0aDogUGF0aAoKCmRlZiBfZm10X213KHZhbHVlOiBmbG9hdCB8IE5vbmUpIC0+IHN0cjoKICAgIHJldHVybiAn4oCUJyBpZiB2YWx1ZSBpcyBOb25lIGVsc2UgZid7dmFsdWU6LC4xZn0gTVcnCgoKZGVmIF9mbXRfdGltZSh2YWx1ZTogZGF0ZXRpbWUgfCBOb25lKSAtPiBzdHI6CiAgICByZXR1cm4gJ+KAlCcgaWYgdmFsdWUgaXMgTm9uZSBlbHNlIHZhbHVlLmFzdGltZXpvbmUodGltZXpvbmUudXRjKS5zdHJmdGltZSgnJVktJW0tJWQgJUg6JU0gVVRDJykKCgpkZWYgX3JlY2VpcHRfbGlzdGluZyhyb290OiBQYXRoLCB0YXJnZXRfZGF0ZTogZGF0ZSkgLT4gbGlzdFt0dXBsZVtzdHIsIHN0cl1dOgogICAgIiIiUmVjZWlwdHMgZm9yIGBgdGFyZ2V0X2RhdGVgYCBhcyAoZGlzcGxheSBwYXRoLCBmdWxsIHNoYTI1NiksIHZpYSBsZWRnZXIgb25seS4iIiIKICAgIGxpc3RpbmcgPSBbXQogICAgZm9yZWNhc3RzX2RpciA9IHJvb3QgLyAnZm9yZWNhc3RzJwogICAgaWYgbm90IGZvcmVjYXN0c19kaXIuZXhpc3RzKCk6CiAgICAgICAgcmV0dXJuIGxpc3RpbmcKICAgIGZvciBwYXRoIGluIGxlZGdlci5yZWNlaXB0X3BhdGhzKHJvb3QpOgogICAgICAgIHJhdyA9IGxlZGdlci5yZWFkX2NvbnRlbnQocGF0aCkKICAgICAgICB0cnk6CiAgICAgICAgICAgIHBheWxvYWQgPSBqc29uLmxvYWRzKHJhdykKICAgICAgICBleGNlcHQgVmFsdWVFcnJvcjoKICAgICAgICAgICAgY29udGludWUKICAgICAgICBpZiBwYXlsb2FkLmdldCgndGFyZ2V0X2RhdGUnKSAhPSB0YXJnZXRfZGF0ZS5pc29mb3JtYXQoKToKICAgICAgICAgICAgY29udGludWUKICAgICAgICByZWxhdGl2ZSA9IHBhdGgucmVsYXRpdmVfdG8ocm9vdCkuYXNfcG9zaXgoKQogICAgICAgIGRpc3BsYXkgPSBmJ3tyb290Lm5hbWV9L3tyZWxhdGl2ZX0nIGlmIHJvb3QubmFtZSBlbHNlIHJlbGF0aXZlCiAgICAgICAgbGlzdGluZy5hcHBlbmQoKGRpc3BsYXksIHNoYTI1NihyYXcpLmhleGRpZ2VzdCgpKSkKICAgIHJldHVybiBsaXN0aW5nCgoKTEVWRUxfU1RZTEUgPSB7CiAgICAjIEJlYXQgdGhlIEdyaWQgbGV2ZWwgcGFsZXR0ZSwgaW4gR29kJ3MgRXllIFZpZXcncyBkZXNpZ24gbGFuZ3VhZ2UKICAgICMgKG5lYXItYmxhY2sgZ2xhc3MsIGVsZWN0cmljIGN5YW4gYWNjZW50LCBjb2NrcGl0IGFtYmVyKS4KICAgICdjYWxtJzogKCcjMDBkNGZmJywgMC4zMCksCiAgICAnd2F0Y2gnOiAoJyNmZmI4MDAnLCAwLjM4KSwKICAgICdzdHJhaW5lZCc6ICgnI2ZmN2ExYScsIDAuNDYpLAogICAgJ3NldmVyZSc6ICgnI2ZmNDU0NScsIDAuNTUpLAp9Ck5PX0NBTExfQ09MT1IgPSAnIzViNmI3MycKCgpkZWYgX21hcF9zY3JpcHQobGV2ZWw6IHN0ciB8IE5vbmUpIC0+IHN0cjoKICAgICIiIkxlYWZsZXQgbWFwOiBNYXJ5bGFuZCBjb3VudGllcywgQkdFIGZvb3RwcmludCBsaXQgYXQgdGhlIGNhbGwgbGV2ZWwuCgogICAgVGhlIGNhbGwgaXMgUEpNLXdpZGU7IHRoZSBsaXQgY291bnRpZXMgYXJlIHRoZSBCR0UgaG9tZSB0ZXJyaXRvcnkgYXQKICAgIGNvdW50eSByZXNvbHV0aW9uIChtZF9nZW8pLiBab29tIGdvZXMgdG8gc3RyZWV0IGxldmVsIHNvIGEgcmVhZGVyIGNhbgogICAgZmluZCB0aGVpciBvd24gbmVpZ2hib3Job29kIGluc2lkZSAob3Igb3V0c2lkZSkgdGhlIGxpdCBhcmVhLgogICAgIiIiCiAgICBjb2xvciwgZmlsbCA9IExFVkVMX1NUWUxFLmdldChsZXZlbCBvciAnJywgKE5PX0NBTExfQ09MT1IsIDAuMTIpKQogICAgY291bnRpZXMgPSBqc29uLmR1bXBzKG1kX2dlby5NRF9DT1VOVElFUywgc2VwYXJhdG9ycz0oJywnLCAnOicpKQogICAgcmV0dXJuIGYnJyc8c2NyaXB0Pgp2YXIgbWFwID0gTC5tYXAoJ21hcCcsIHt7IHNjcm9sbFdoZWVsWm9vbTogdHJ1ZSwgbWluWm9vbTogNywgbWF4Wm9vbTogMTYgfX0pOwpMLnRpbGVMYXllcignaHR0cHM6Ly97e3N9fS5iYXNlbWFwcy5jYXJ0b2Nkbi5jb20vZGFya19hbGwve3t6fX0ve3t4fX0ve3t5fX17e3J9fS5wbmcnLCB7ewogIGF0dHJpYnV0aW9uOiAnJmNvcHk7IDxhIGhyZWY9Imh0dHBzOi8vd3d3Lm9wZW5zdHJlZXRtYXAub3JnL2NvcHlyaWdodCI+T3BlblN0cmVldE1hcDwvYT4gJmNvcHk7IDxhIGhyZWY9Imh0dHBzOi8vY2FydG8uY29tL2F0dHJpYnV0aW9ucyI+Q0FSVE88L2E+JywKICBzdWJkb21haW5zOiAnYWJjZCcsIG1heFpvb206IDE5Cn19KS5hZGRUbyhtYXApOwp2YXIgY291bnRpZXMgPSB7Y291bnRpZXN9Owp2YXIgbGV2ZWxDb2xvciA9ICd7Y29sb3J9JywgbGV2ZWxGaWxsID0ge2ZpbGx9OwpmdW5jdGlvbiBjb3VudHlTdHlsZShmZWF0dXJlKSB7ewogIHZhciBiZ2UgPSBmZWF0dXJlLnByb3BlcnRpZXMuYmdlOwogIGlmIChiZ2UgPT09ICdjb3JlJykgcmV0dXJuIHt7IGNvbG9yOiBsZXZlbENvbG9yLCB3ZWlnaHQ6IDEuNCwgZmlsbENvbG9yOiBsZXZlbENvbG9yLCBmaWxsT3BhY2l0eTogbGV2ZWxGaWxsIH19OwogIGlmIChiZ2UgPT09ICdwYXJ0aWFsJykgcmV0dXJuIHt7IGNvbG9yOiBsZXZlbENvbG9yLCB3ZWlnaHQ6IDEsIGZpbGxDb2xvcjogbGV2ZWxDb2xvciwgZmlsbE9wYWNpdHk6IGxldmVsRmlsbCAqIDAuNDUgfX07CiAgcmV0dXJuIHt7IGNvbG9yOiAncmdiYSgyMzIsMjM0LDIzNywwLjI1KScsIHdlaWdodDogMC43LCBmaWxsQ29sb3I6ICcjZThlYWVkJywgZmlsbE9wYWNpdHk6IDAuMDQgfX07Cn19CnZhciBnbG93ID0gTC5nZW9KU09OKGNvdW50aWVzLCB7eyBzdHlsZTogZnVuY3Rpb24oZikge3sKICB2YXIgcyA9IGNvdW50eVN0eWxlKGYpOyBpZiAoZi5wcm9wZXJ0aWVzLmJnZSA9PT0gJ25vbmUnKSByZXR1cm4ge3sgb3BhY2l0eTogMCwgZmlsbE9wYWNpdHk6IDAgfX07CiAgcmV0dXJuIHt7IGNvbG9yOiBsZXZlbENvbG9yLCB3ZWlnaHQ6IDcsIG9wYWNpdHk6IDAuMjgsIGZpbGxPcGFjaXR5OiAwIH19Owp9fSB9fSkuYWRkVG8obWFwKTsKdmFyIGxheWVyID0gTC5nZW9KU09OKGNvdW50aWVzLCB7eyBzdHlsZTogY291bnR5U3R5bGUsCiAgb25FYWNoRmVhdHVyZTogZnVuY3Rpb24oZiwgbCkge3sgbC5iaW5kVG9vbHRpcChmLnByb3BlcnRpZXMubmFtZSArIChmLnByb3BlcnRpZXMuYmdlID09PSAnY29yZScgPyAnIOKAlCBCR0UnIDogZi5wcm9wZXJ0aWVzLmJnZSA9PT0gJ3BhcnRpYWwnID8gJyDigJQgQkdFIChwYXJ0KScgOiAnJykpOyB9fQp9fSkuYWRkVG8obWFwKTsKTC5jaXJjbGVNYXJrZXIoWzM5LjE3NzQsIC03Ni42Njg0XSwge3sgcmFkaXVzOiA1LCBjb2xvcjogJyNlOGVhZWQnLCB3ZWlnaHQ6IDEuNSwgZmlsbENvbG9yOiAnIzAwZDRmZicsIGZpbGxPcGFjaXR5OiAwLjkgfX0pCiAgLmFkZFRvKG1hcCkuYmluZFRvb2x0aXAoJ0JXSSDigJQgd2VhdGhlciBwb2ludCcpOwptYXAuZml0Qm91bmRzKGxheWVyLmdldEJvdW5kcygpLnBhZCgwLjA0KSk7Cjwvc2NyaXB0PicnJwoKCmRlZiByZW5kZXIoZm9yZWNhc3Q6IEZvcmVjYXN0LCBmYWN0czogQnJpZWZGYWN0cywKICAgICAgICAgICByZWNlaXB0czogbGlzdFt0dXBsZVtzdHIsIHN0cl1dLCAqLCBnZW5lcmF0ZWRfYXQ6IGRhdGV0aW1lKSAtPiBCcmllZjoKICAgICIiIlJlbmRlciBvbmUgZm9yZWNhc3QgcGx1cyBpdHMgZnJlc2huZXNzIGZhY3RzLiBQdXJlOiBubyBJTy4iIiIKICAgIGVzYyA9IGh0bWwuZXNjYXBlCiAgICB0YXJnZXQgPSBmb3JlY2FzdC50YXJnZXRfZGF0ZS5pc29mb3JtYXQoKQogICAgZ2VuZXJhdGVkID0gX2ZtdF90aW1lKGdlbmVyYXRlZF9hdCkKICAgIG5vX2NhbGwgPSBmb3JlY2FzdC5ub19jYWxsX3JlYXNvbiBpcyBub3QgTm9uZQogICAgaWYgbm9fY2FsbDoKICAgICAgICBoZWFkbGluZSA9ICdObyBjYWxsJwogICAgICAgIGhlcm9faHRtbCA9IChmJzxwIGNsYXNzPSJsZXZlbCI+Tm8gY2FsbCDigJQge2VzYyhmb3JlY2FzdC5ub19jYWxsX3JlYXNvbil9PC9wPlxuJwogICAgICAgICAgICAgICAgICAgICAnPHAgY2xhc3M9Im5vY2xhaW0iPk5vIHBlYWsgZGVtYW5kLCBwZWFrIGhvdXIsIG9yIHN0cmVzcyBsZXZlbCBpcyBjbGFpbWVkIGZvciAnCiAgICAgICAgICAgICAgICAgICAgICd0aGlzIGRhdGUuPC9wPicpCiAgICAgICAgY2FsbF9saW5lcyA9IFtmJ0NhbGw6ICoqTm8gY2FsbCoqIOKAlCBge2ZvcmVjYXN0Lm5vX2NhbGxfcmVhc29ufWAnLAogICAgICAgICAgICAgICAgICAgICAgJ1BlYWsgZGVtYW5kIC8gcGVhayBob3VyIC8gbGV2ZWw6IG5vdCBjbGFpbWVkLiddCiAgICAgICAgc3RhdHNfaHRtbCA9ICcnCiAgICAgICAgYmFyX2h0bWwgPSAnJwogICAgZWxzZToKICAgICAgICBoZWFkbGluZSA9IGYnU3RyZXNzIGxldmVsOiB7Zm9yZWNhc3QubGV2ZWx9JwogICAgICAgIHRocmVzaG9sZHMgPSBmb3JlY2FzdC50aHJlc2hvbGRzX213IG9yIChOb25lLCBOb25lLCBOb25lKQogICAgICAgIGhlcm9faHRtbCA9IGYnPHAgY2xhc3M9ImxldmVsIj5TdHJlc3MgbGV2ZWw6IHtlc2MoZm9yZWNhc3QubGV2ZWwgb3IgIiIpfTwvcD4nCiAgICAgICAgc3RhdHNfaHRtbCA9ICgKICAgICAgICAgICAgJzxkaXYgY2xhc3M9InN0YXRzIj5cbicKICAgICAgICAgICAgZic8ZGl2IGNsYXNzPSJzdGF0Ij48c3BhbiBjbGFzcz0ic3RhdC1sYWJlbCI+UGVhayBkZW1hbmQ8L3NwYW4+JwogICAgICAgICAgICBmJzxzcGFuIGNsYXNzPSJzdGF0LXZhbHVlIj5QZWFrIGRlbWFuZDoge2VzYyhfZm10X213KGZvcmVjYXN0LnBlYWtfbXcpKX08L3NwYW4+PC9kaXY+XG4nCiAgICAgICAgICAgIGYnPGRpdiBjbGFzcz0ic3RhdCI+PHNwYW4gY2xhc3M9InN0YXQtbGFiZWwiPlBlYWsgaG91cjwvc3Bhbj4nCiAgICAgICAgICAgIGYnPHNwYW4gY2xhc3M9InN0YXQtdmFsdWUiPlBlYWsgaG91ciBlbmRpbmc6IHtmb3JlY2FzdC5wZWFrX2hvdXJfZW5kaW5nfSAobG9jYWwpPC9zcGFuPjwvZGl2PlxuJwogICAgICAgICAgICAnPC9kaXY+JykKICAgICAgICBjYWxsX2xpbmVzID0gW2YnQ2FsbDogKip7Zm9yZWNhc3QubGV2ZWx9KionLAogICAgICAgICAgICAgICAgICAgICAgZidQZWFrIGRlbWFuZDoge19mbXRfbXcoZm9yZWNhc3QucGVha19tdyl9JywKICAgICAgICAgICAgICAgICAgICAgIGYnUGVhayBob3VyIGVuZGluZzoge2ZvcmVjYXN0LnBlYWtfaG91cl9lbmRpbmd9IChsb2NhbCknXQogICAgICAgIGJhcl9odG1sID0gJycKICAgICAgICBpZiBOb25lIG5vdCBpbiB0aHJlc2hvbGRzIGFuZCBmb3JlY2FzdC5wZWFrX213OgogICAgICAgICAgICB3YXRjaCwgc3RyYWluZWQsIHNldmVyZSA9IHRocmVzaG9sZHMKICAgICAgICAgICAgY2FwID0gc2V2ZXJlICogMS4xNQogICAgICAgICAgICBkZWYgcGN0KHYpOgogICAgICAgICAgICAgICAgcmV0dXJuIG1heCgwLjAsIG1pbigxMDAuMCwgdiAvIGNhcCAqIDEwMC4wKSkKICAgICAgICAgICAgYmFyX2h0bWwgPSAoCiAgICAgICAgICAgICAgICAnPGRpdiBjbGFzcz0iYmFyLXdyYXAiPjxkaXYgY2xhc3M9ImJhciI+JwogICAgICAgICAgICAgICAgZic8ZGl2IGNsYXNzPSJzZWcgc2VnLWNhbG0iIHN0eWxlPSJ3aWR0aDp7cGN0KHdhdGNoKTouMWZ9JSI+PC9kaXY+JwogICAgICAgICAgICAgICAgZic8ZGl2IGNsYXNzPSJzZWcgc2VnLXdhdGNoIiBzdHlsZT0id2lkdGg6e3BjdChzdHJhaW5lZCkgLSBwY3Qod2F0Y2gpOi4xZn0lIj48L2Rpdj4nCiAgICAgICAgICAgICAgICBmJzxkaXYgY2xhc3M9InNlZyBzZWctc3RyYWluZWQiIHN0eWxlPSJ3aWR0aDp7cGN0KHNldmVyZSkgLSBwY3Qoc3RyYWluZWQpOi4xZn0lIj48L2Rpdj4nCiAgICAgICAgICAgICAgICBmJzxkaXYgY2xhc3M9InNlZyBzZWctc2V2ZXJlIiBzdHlsZT0id2lkdGg6ezEwMC4wIC0gcGN0KHNldmVyZSk6LjFmfSUiPjwvZGl2PicKICAgICAgICAgICAgICAgIGYnPGRpdiBjbGFzcz0icGVhay1tYXJrZXIiIHN0eWxlPSJsZWZ0OntwY3QoZm9yZWNhc3QucGVha19tdyk6LjFmfSUiPjwvZGl2PicKICAgICAgICAgICAgICAgICc8L2Rpdj4nCiAgICAgICAgICAgICAgICBmJzxwIGNsYXNzPSJ0aHJlc2hvbGRzIj5UaHJlc2hvbGRzOiB3YXRjaCB7X2ZtdF9tdyh3YXRjaCl9LCAnCiAgICAgICAgICAgICAgICBmJ3N0cmFpbmVkIHtfZm10X213KHN0cmFpbmVkKX0sIHNldmVyZSB7X2ZtdF9tdyhzZXZlcmUpfTwvcD48L2Rpdj4nKQogICAgZHJpdmVycyA9ICcnCiAgICBpZiBmYWN0cy50YXJnZXRfaGlnaF9mIGlzIG5vdCBOb25lIG9yIGZhY3RzLnRhcmdldF9tb3JuaW5nX2xvd19mIGlzIG5vdCBOb25lOgogICAgICAgIGRyaXZlcnMgPSAoZic8bGk+Rm9yZWNhc3QgaGlnaDoge2ZhY3RzLnRhcmdldF9oaWdoX2Z9IEY7ICcKICAgICAgICAgICAgICAgICAgIGYnbW9ybmluZyBsb3c6IHtmYWN0cy50YXJnZXRfbW9ybmluZ19sb3dfZn0gRjwvbGk+XG4nKQogICAgYWxlcnRzX2h0bWwgPSAnJwogICAgaWYgZm9yZWNhc3QuYWxlcnRzOgogICAgICAgIGl0ZW1zID0gJ1xuJy5qb2luKGYnPGxpPntlc2ModGV4dCl9PC9saT4nIGZvciB0ZXh0IGluIGZvcmVjYXN0LmFsZXJ0cykKICAgICAgICBhbGVydHNfaHRtbCA9IGYnPHNlY3Rpb24gY2xhc3M9InBhbmVsIj48aDI+QWxlcnRzIChhbm5vdGF0aW9uIG9ubHkpPC9oMj5cbjx1bD5cbntpdGVtc31cbjwvdWw+PC9zZWN0aW9uPlxuJwogICAgbG9hZF9zdGF0ZSA9ICdmcmVzaCcgaWYgZmFjdHMubG9hZF9mcmVzaCBlbHNlICdzdGFsZScKICAgIHdlYXRoZXJfc3RhdGUgPSAnZnJlc2gnIGlmIGZhY3RzLndlYXRoZXJfZnJlc2ggZWxzZSAnc3RhbGUnCiAgICBjb21wbGV0ZWQgPSAoJ3ByZXNlbnQnIGlmIGZhY3RzLmxhdGVzdF9jb21wbGV0ZWRfcHJlc2VudCBlbHNlICdtaXNzaW5nJykKICAgIGxldmVsX2tleSA9IGZvcmVjYXN0LmxldmVsIGlmIG5vdCBub19jYWxsIGVsc2UgTm9uZQogICAgbGV2ZWxfY29sb3IgPSBMRVZFTF9TVFlMRS5nZXQobGV2ZWxfa2V5IG9yICcnLCAoTk9fQ0FMTF9DT0xPUiwgMC4xMikpWzBdCiAgICBtYXBfaHRtbCA9IF9tYXBfc2NyaXB0KGxldmVsX2tleSkKICAgIHBhZ2UgPSBmJycnPCFET0NUWVBFIGh0bWw+CjxodG1sIGxhbmc9ImVuIj4KPGhlYWQ+CjxtZXRhIGNoYXJzZXQ9InV0Zi04Ij4KPG1ldGEgbmFtZT0idmlld3BvcnQiIGNvbnRlbnQ9IndpZHRoPWRldmljZS13aWR0aCwgaW5pdGlhbC1zY2FsZT0xIj4KPHRpdGxlPkJlYXQgdGhlIEdyaWQg4oCUIHt0YXJnZXR9PC90aXRsZT4KPGxpbmsgcmVsPSJzdHlsZXNoZWV0IiBocmVmPSJodHRwczovL3VucGtnLmNvbS9sZWFmbGV0QDEuOS40L2Rpc3QvbGVhZmxldC5jc3MiPgo8c3R5bGU+Cjpyb290IHt7IC0tYmc6ICMwYTBhMGY7IC0tZ2xhc3M6IHJnYmEoMTIsMTIsMjAsMC43Mik7IC0tYm9yZGVyOiByZ2JhKDI1NSwyNTUsMjU1LDAuMDgpOwogIC0tYWNjZW50OiAjMDBkNGZmOyAtLXRleHQ6ICNlOGVhZWQ7IC0tc2Vjb25kYXJ5OiByZ2JhKDIzMiwyMzQsMjM3LDAuNSk7IC0tZGltOiByZ2JhKDIzMiwyMzQsMjM3LDAuMyk7CiAgLS1sZXZlbDoge2xldmVsX2NvbG9yfTsgLS1tb25vOiAnSmV0QnJhaW5zIE1vbm8nLCdTRiBNb25vJywnRmlyYSBDb2RlJyxtb25vc3BhY2U7CiAgLS1zYW5zOiAnSW50ZXInLC1hcHBsZS1zeXN0ZW0sQmxpbmtNYWNTeXN0ZW1Gb250LHN5c3RlbS11aSxzYW5zLXNlcmlmOyB9fQoqIHt7IGJveC1zaXppbmc6IGJvcmRlci1ib3g7IH19CmJvZHkge3sgbWFyZ2luOiAwOyBiYWNrZ3JvdW5kOiB2YXIoLS1iZyk7IGNvbG9yOiB2YXIoLS10ZXh0KTsgZm9udC1mYW1pbHk6IHZhcigtLXNhbnMpOyBsaW5lLWhlaWdodDogMS41OyB9fQoud3JhcCB7eyBtYXgtd2lkdGg6IDY4cmVtOyBtYXJnaW46IDAgYXV0bzsgcGFkZGluZzogMS4yNXJlbSAxcmVtIDNyZW07IH19CmhlYWRlci5odWQge3sgZGlzcGxheTogZmxleDsgZmxleC13cmFwOiB3cmFwOyBhbGlnbi1pdGVtczogYmFzZWxpbmU7IGdhcDogMC41cmVtIDEuMjVyZW07IHBhZGRpbmc6IDAuNzVyZW0gMCAxcmVtOyB9fQoud29yZG1hcmsge3sgZm9udC1mYW1pbHk6IHZhcigtLW1vbm8pOyBmb250LXdlaWdodDogNjAwOyBmb250LXNpemU6IDAuOHJlbTsgbGV0dGVyLXNwYWNpbmc6IDAuMjJlbTsKICB0ZXh0LXRyYW5zZm9ybTogdXBwZXJjYXNlOyBjb2xvcjogdmFyKC0tYWNjZW50KTsgdGV4dC1zaGFkb3c6IDAgMCAxMnB4IHJnYmEoMCwyMTIsMjU1LDAuNCk7IH19CmgxIHt7IGZvbnQtc2l6ZTogMS4zNXJlbTsgbWFyZ2luOiAwOyBmb250LXdlaWdodDogNjUwOyB9fQoubWV0YSB7eyBjb2xvcjogdmFyKC0tc2Vjb25kYXJ5KTsgZm9udC1zaXplOiAwLjlyZW07IH19Ci5tYXAtcGFuZWwge3sgcG9zaXRpb246IHJlbGF0aXZlOyBib3JkZXI6IDFweCBzb2xpZCB2YXIoLS1ib3JkZXIpOyBib3JkZXItcmFkaXVzOiAxNnB4OyBvdmVyZmxvdzogaGlkZGVuOwogIGJhY2tncm91bmQ6IHZhcigtLWdsYXNzKTsgYm94LXNoYWRvdzogMCAwIDQycHggY29sb3ItbWl4KGluIHNyZ2IsIHZhcigtLWxldmVsKSAyMiUsIHRyYW5zcGFyZW50KTsgfX0KI21hcCB7eyBoZWlnaHQ6IG1pbig2MnZoLCA1NjBweCk7IG1pbi1oZWlnaHQ6IDM0MHB4OyBiYWNrZ3JvdW5kOiAjMGEwYTBmOyB9fQouaGVybyB7eyBwb3NpdGlvbjogYWJzb2x1dGU7IHRvcDogMTRweDsgbGVmdDogMTRweDsgei1pbmRleDogNTAwOyBiYWNrZ3JvdW5kOiB2YXIoLS1nbGFzcyk7CiAgYm9yZGVyOiAxcHggc29saWQgdmFyKC0tYm9yZGVyKTsgYm9yZGVyLXJhZGl1czogMTJweDsgcGFkZGluZzogMC43cmVtIDFyZW07IGJhY2tkcm9wLWZpbHRlcjogYmx1cig4cHgpOyB9fQouaGVybyAubGV2ZWwge3sgZm9udC1mYW1pbHk6IHZhcigtLW1vbm8pOyBmb250LXNpemU6IDEuMjVyZW07IGZvbnQtd2VpZ2h0OiA3MDA7IG1hcmdpbjogMDsgY29sb3I6IHZhcigtLWxldmVsKTsKICB0ZXh0LXNoYWRvdzogMCAwIDE0cHggY29sb3ItbWl4KGluIHNyZ2IsIHZhcigtLWxldmVsKSA1NSUsIHRyYW5zcGFyZW50KTsgfX0KLmhlcm8gLm5vY2xhaW0ge3sgbWFyZ2luOiAwLjI1cmVtIDAgMDsgY29sb3I6IHZhcigtLXNlY29uZGFyeSk7IGZvbnQtc2l6ZTogMC44OHJlbTsgbWF4LXdpZHRoOiAyMnJlbTsgfX0KLm1hcC1jYXB0aW9uIHt7IHBvc2l0aW9uOiBhYnNvbHV0ZTsgcmlnaHQ6IDE0cHg7IGJvdHRvbTogMTRweDsgei1pbmRleDogNTAwOyBtYXgtd2lkdGg6IDE5cmVtOwogIGJhY2tncm91bmQ6IHZhcigtLWdsYXNzKTsgYm9yZGVyOiAxcHggc29saWQgdmFyKC0tYm9yZGVyKTsgYm9yZGVyLXJhZGl1czogMTJweDsgcGFkZGluZzogMC41NXJlbSAwLjhyZW07CiAgY29sb3I6IHZhcigtLXNlY29uZGFyeSk7IGZvbnQtc2l6ZTogMC44cmVtOyBiYWNrZHJvcC1maWx0ZXI6IGJsdXIoOHB4KTsgfX0KLmxlYWZsZXQtY29udGFpbmVyIHt7IGZvbnQtZmFtaWx5OiB2YXIoLS1zYW5zKTsgfX0KLnN0YXRzIHt7IGRpc3BsYXk6IGZsZXg7IGZsZXgtd3JhcDogd3JhcDsgZ2FwOiAwLjc1cmVtOyBtYXJnaW4tdG9wOiAwLjlyZW07IH19Ci5zdGF0IHt7IGZsZXg6IDEgMSAxMnJlbTsgYmFja2dyb3VuZDogdmFyKC0tZ2xhc3MpOyBib3JkZXI6IDFweCBzb2xpZCB2YXIoLS1ib3JkZXIpOyBib3JkZXItcmFkaXVzOiAxMnB4OyBwYWRkaW5nOiAwLjdyZW0gMXJlbTsgfX0KLnN0YXQtbGFiZWwge3sgZGlzcGxheTogYmxvY2s7IGZvbnQtZmFtaWx5OiB2YXIoLS1tb25vKTsgZm9udC1zaXplOiAwLjYycmVtOyBmb250LXdlaWdodDogNjAwOwogIGxldHRlci1zcGFjaW5nOiAwLjE0ZW07IHRleHQtdHJhbnNmb3JtOiB1cHBlcmNhc2U7IGNvbG9yOiB2YXIoLS1kaW0pOyB9fQouc3RhdC12YWx1ZSB7eyBmb250LWZhbWlseTogdmFyKC0tbW9ubyk7IGZvbnQtc2l6ZTogMS4wMnJlbTsgfX0KLmJhci13cmFwIHt7IG1hcmdpbi10b3A6IDAuOXJlbTsgYmFja2dyb3VuZDogdmFyKC0tZ2xhc3MpOyBib3JkZXI6IDFweCBzb2xpZCB2YXIoLS1ib3JkZXIpOyBib3JkZXItcmFkaXVzOiAxMnB4OyBwYWRkaW5nOiAwLjhyZW0gMXJlbTsgfX0KLmJhciB7eyBwb3NpdGlvbjogcmVsYXRpdmU7IGRpc3BsYXk6IGZsZXg7IGhlaWdodDogMTBweDsgYm9yZGVyLXJhZGl1czogNXB4OyBvdmVyZmxvdzogdmlzaWJsZTsgfX0KLnNlZy1jYWxtIHt7IGJhY2tncm91bmQ6ICMwMGQ0ZmY7IGJvcmRlci1yYWRpdXM6IDVweCAwIDAgNXB4OyB9fQouc2VnLXdhdGNoIHt7IGJhY2tncm91bmQ6ICNmZmI4MDA7IH19Ci5zZWctc3RyYWluZWQge3sgYmFja2dyb3VuZDogI2ZmN2ExYTsgfX0KLnNlZy1zZXZlcmUge3sgYmFja2dyb3VuZDogI2ZmNDU0NTsgYm9yZGVyLXJhZGl1czogMCA1cHggNXB4IDA7IH19Ci5wZWFrLW1hcmtlciB7eyBwb3NpdGlvbjogYWJzb2x1dGU7IHRvcDogLTVweDsgd2lkdGg6IDJweDsgaGVpZ2h0OiAyMHB4OyBiYWNrZ3JvdW5kOiAjZmZmOwogIGJveC1zaGFkb3c6IDAgMCA4cHggcmdiYSgyNTUsMjU1LDI1NSwwLjgpOyB9fQoudGhyZXNob2xkcyB7eyBtYXJnaW46IDAuNXJlbSAwIDA7IGNvbG9yOiB2YXIoLS1zZWNvbmRhcnkpOyBmb250LXNpemU6IDAuODVyZW07IGZvbnQtZmFtaWx5OiB2YXIoLS1tb25vKTsgfX0KLnBhbmVsIHt7IG1hcmdpbi10b3A6IDAuOXJlbTsgYmFja2dyb3VuZDogdmFyKC0tZ2xhc3MpOyBib3JkZXI6IDFweCBzb2xpZCB2YXIoLS1ib3JkZXIpOyBib3JkZXItcmFkaXVzOiAxNnB4OyBwYWRkaW5nOiAwLjlyZW0gMS4xcmVtOyB9fQoucGFuZWwgaDIge3sgZm9udC1mYW1pbHk6IHZhcigtLW1vbm8pOyBmb250LXNpemU6IDAuNjhyZW07IGZvbnQtd2VpZ2h0OiA2MDA7IGxldHRlci1zcGFjaW5nOiAwLjE0ZW07CiAgdGV4dC10cmFuc2Zvcm06IHVwcGVyY2FzZTsgY29sb3I6IHZhcigtLXNlY29uZGFyeSk7IG1hcmdpbjogMCAwIDAuNXJlbTsgfX0KLnBhbmVsIHVsIHt7IG1hcmdpbjogMDsgcGFkZGluZy1sZWZ0OiAxLjFyZW07IH19Ci5waWxsIHt7IGZvbnQtZmFtaWx5OiB2YXIoLS1tb25vKTsgZm9udC1zaXplOiAwLjgycmVtOyB9fQpmb290ZXIge3sgbWFyZ2luLXRvcDogMXJlbTsgY29sb3I6IHZhcigtLWRpbSk7IGZvbnQtc2l6ZTogMC44NXJlbTsgfX0KQG1lZGlhIChtYXgtd2lkdGg6IDY0MHB4KSB7eyAubWFwLWNhcHRpb24ge3sgZGlzcGxheTogbm9uZTsgfX0gI21hcCB7eyBtaW4taGVpZ2h0OiAzMDBweDsgfX0gfX0KPC9zdHlsZT4KPC9oZWFkPgo8Ym9keT4KPGRpdiBjbGFzcz0id3JhcCI+CjxoZWFkZXIgY2xhc3M9Imh1ZCI+CjxzcGFuIGNsYXNzPSJ3b3JkbWFyayI+QmVhdCB0aGUgR3JpZDwvc3Bhbj4KPGgxPkdyaWQgYnJpZWYg4oCUIHt0YXJnZXR9PC9oMT4KPHNwYW4gY2xhc3M9Im1ldGEiPntHRU9HUkFQSFl9LiBEZWZpbml0aW9uOiB7ZXNjKGZvcmVjYXN0LmRlZmluaXRpb25fdmVyc2lvbil9Ljwvc3Bhbj4KPC9oZWFkZXI+CjxkaXYgY2xhc3M9Im1hcC1wYW5lbCI+CjxkaXYgaWQ9Im1hcCI+PC9kaXY+CjxkaXYgY2xhc3M9Imhlcm8iPgp7aGVyb19odG1sfQo8L2Rpdj4KPGRpdiBjbGFzcz0ibWFwLWNhcHRpb24iPkxpdCBjb3VudGllcyBhcmUgdGhlIEJHRSBob21lIHRlcnJpdG9yeSwgZ2xvd2luZyBhdCB0b2RheSdzIGNhbGwgbGV2ZWwg4oCUIHRoZSBjYWxsIGl0c2VsZiBpcyBQSk0td2lkZS4gWm9vbSBpbiB0byB5b3VyIG5laWdoYm9yaG9vZDogaWYgeW91ciBjb3VudHkgaXMgbGl0LCB0aGUgY2FsbCBjb3ZlcnMgeW91LiBDb3VudHkgbGluZXMgYXJlIGFuIGFwcHJveGltYXRpb24uPC9kaXY+CjwvZGl2Pgp7c3RhdHNfaHRtbH0Ke2Jhcl9odG1sfQp7YWxlcnRzX2h0bWx9PHNlY3Rpb24gY2xhc3M9InBhbmVsIj48aDI+RnJlc2huZXNzPC9oMj4KPHVsPgo8bGkgY2xhc3M9InBpbGwiPkxvYWQ6IHtsb2FkX3N0YXRlfSAobGF0ZXN0IGNvbXBsZXRlZCBwZWFrIHtmYWN0cy5sYXRlc3RfY29tcGxldGVkX3BlYWsuaXNvZm9ybWF0KCl9OiB7Y29tcGxldGVkfSk8L2xpPgo8bGkgY2xhc3M9InBpbGwiPldlYXRoZXI6IHt3ZWF0aGVyX3N0YXRlfSAocGlubmVkIE5XUyBCV0kgaXNzdWFuY2U6IHtfZm10X3RpbWUoZmFjdHMud2VhdGhlcl91cGRhdGVfdGltZSl9KTwvbGk+Cntkcml2ZXJzfTxsaT5IaXN0b3J5IGRheXMgbG9hZGVkOiB7ZmFjdHMuaGlzdG9yeV9kYXlzfSAobGFzdDoge2ZhY3RzLmhpc3RvcnlfbGFzdF9kYXRlIG9yICLigJQifSk8L2xpPgo8L3VsPgo8L3NlY3Rpb24+Cjxmb290ZXI+RGF0YSBhcyBvZjoge2ZhY3RzLmRhdGFfYXNfb2Ygb3IgIuKAlCJ9IChsYXN0IGxvYWQgaG91cjoge19mbXRfdGltZShmYWN0cy5sb2FkX2xhc3RfaG91cl91dGMpfSkuIEdlbmVyYXRlZDoge2dlbmVyYXRlZH0uPC9mb290ZXI+CjwvZGl2Pgo8c2NyaXB0IHNyYz0iaHR0cHM6Ly91bnBrZy5jb20vbGVhZmxldEAxLjkuNC9kaXN0L2xlYWZsZXQuanMiPjwvc2NyaXB0Pgp7bWFwX2h0bWx9CjwvYm9keT4KPC9odG1sPgonJycKICAgIGNvbW1lbnRfbGluZXMgPSBbZicjIyBHcmlkIGJyaWVmIOKAlCB7dGFyZ2V0fScsICcnLAogICAgICAgICAgICAgICAgICAgICBmJ3tHRU9HUkFQSFl9LiBEZWZpbml0aW9uOiB7Zm9yZWNhc3QuZGVmaW5pdGlvbl92ZXJzaW9ufS4nLAogICAgICAgICAgICAgICAgICAgICAqY2FsbF9saW5lcywKICAgICAgICAgICAgICAgICAgICAgZidGcmVzaG5lc3M6IGxvYWQge2xvYWRfc3RhdGV9LCB3ZWF0aGVyIHt3ZWF0aGVyX3N0YXRlfS4nLAogICAgICAgICAgICAgICAgICAgICBmJ0RhdGEgYXMgb2Y6IHtmYWN0cy5kYXRhX2FzX29mIG9yICLigJQifS4nLAogICAgICAgICAgICAgICAgICAgICAnJywgZicjIyMgUmVjZWlwdHMgZm9yIHt0YXJnZXR9J10KICAgIGlmIHJlY2VpcHRzOgogICAgICAgIGNvbW1lbnRfbGluZXMgKz0gW2YnLSBge3BhdGh9YCDigJQgc2hhMjU2OiBge2RpZ2VzdH1gJyBmb3IgcGF0aCwgZGlnZXN0IGluIHJlY2VpcHRzXQogICAgZWxzZToKICAgICAgICBjb21tZW50X2xpbmVzLmFwcGVuZCgnTm8gcmVjZWlwdHMgaW4gdGhlIGxlZGdlciBmb3IgdGhpcyB0YXJnZXQgZGF0ZS4nKQogICAgY29tbWVudF9saW5lcy5hcHBlbmQoJycpCiAgICByZXR1cm4gQnJpZWYoaHRtbD1wYWdlLCBjb21tZW50X21kPSdcbicuam9pbihjb21tZW50X2xpbmVzKSkKCgpkZWYgX3dlYXRoZXJfZmllbGQod2VhdGhlciwgbmFtZSk6CiAgICBpZiB3ZWF0aGVyIGlzIE5vbmU6CiAgICAgICAgcmV0dXJuIE5vbmUKICAgIGlmIGlzaW5zdGFuY2Uod2VhdGhlciwgZGljdCk6CiAgICAgICAgcmV0dXJuIHdlYXRoZXIuZ2V0KG5hbWUpCiAgICByZXR1cm4gZ2V0YXR0cih3ZWF0aGVyLCBuYW1lLCBOb25lKQoKCmRlZiBfd2FyZWhvdXNlX2ZhY3RzKGRhdGFiYXNlOiBQYXRoKSAtPiB0dXBsZVtkYXRlIHwgTm9uZSwgZGF0ZXRpbWUgfCBOb25lXToKICAgICIiIkRhdGEtYXMtb2YgZnJvbSB0aGUgYnVpbHQgZGJ0IHRhYmxlczsgKE5vbmUsIE5vbmUpIHdoZW4gbm90IGJ1aWx0LiIiIgogICAgZGF0YV9hc19vZiA9IE5vbmUKICAgIGxvYWRfbGFzdF9ob3VyID0gTm9uZQogICAgd2l0aCBkdWNrZGIuY29ubmVjdChzdHIoZGF0YWJhc2UpLCByZWFkX29ubHk9VHJ1ZSkgYXMgY29ubmVjdGlvbjoKICAgICAgICB0cnk6CiAgICAgICAgICAgIHJvdyA9IGNvbm5lY3Rpb24uZXhlY3V0ZSgKICAgICAgICAgICAgICAgICdTRUxFQ1QgbWF4KGxvY2FsX2RhdGUpIEZST00gbWFydHMubWFydF9kYXlfaGlzdG9yeScpLmZldGNob25lKCkKICAgICAgICAgICAgZGF0YV9hc19vZiA9IHJvd1swXSBpZiByb3cgZWxzZSBOb25lCiAgICAgICAgZXhjZXB0IGR1Y2tkYi5FcnJvcjoKICAgICAgICAgICAgcGFzcwogICAgICAgIHRyeToKICAgICAgICAgICAgcm93ID0gY29ubmVjdGlvbi5leGVjdXRlKAogICAgICAgICAgICAgICAgJ1NFTEVDVCBtYXgoaG91cl91dGMpIEZST00gY2xlYW5lZC5laWFfcGptX2hvdXJseV9kZW1hbmQnKS5mZXRjaG9uZSgpCiAgICAgICAgICAgIGxvYWRfbGFzdF9ob3VyID0gcm93WzBdIGlmIHJvdyBlbHNlIE5vbmUKICAgICAgICBleGNlcHQgZHVja2RiLkVycm9yOgogICAgICAgICAgICBwYXNzCiAgICByZXR1cm4gZGF0YV9hc19vZiwgbG9hZF9sYXN0X2hvdXIKCgpkZWYgYnVpbGRfZmVhdHVyZXMoZGF0YWJhc2U6IFBhdGgsIHRhcmdldF9kYXRlOiBkYXRlKSAtPiB0dXBsZVtGZWF0dXJlcywgQnJpZWZGYWN0c106CiAgICAiIiJBc3NlbWJsZSBmb3JlY2FzdCBmZWF0dXJlcyBhbmQgZnJlc2huZXNzIGZhY3RzIGZyb20gdGhlIHdhcmVob3VzZS4iIiIKICAgIGhpc3RvcnkgPSBsb2FkX2ZpcnN0X3JlY29yZGVkX2hpc3RvcnkoZGF0YWJhc2UsIGRhdGFiYXNlKQogICAgd2VhdGhlciA9IGxvYWRfbndzX2J3aV9mb3JlY2FzdChkYXRhYmFzZSwgdGFyZ2V0X2RhdGUpCiAgICBoaWdoX2YgPSBfd2VhdGhlcl9maWVsZCh3ZWF0aGVyLCAnaGlnaF9mJykKICAgIG1vcm5pbmdfbG93X2YgPSBfd2VhdGhlcl9maWVsZCh3ZWF0aGVyLCAnbW9ybmluZ19sb3dfZicpCiAgICB1cGRhdGVfdGltZSA9IF93ZWF0aGVyX2ZpZWxkKHdlYXRoZXIsICd1cGRhdGVfdGltZScpCiAgICBsYXRlc3RfY29tcGxldGVkID0gdGFyZ2V0X2RhdGUgLSB0aW1lZGVsdGEoZGF5cz0yKQogICAgbGF0ZXN0X3ByZXNlbnQgPSBhbnkoCiAgICAgICAgZGF5LmRhdGUgPT0gbGF0ZXN0X2NvbXBsZXRlZCBhbmQgZGF5LmNvbXBsZXRlCiAgICAgICAgYW5kIGRheS5sb2FkX2ZpcnN0X3JlY29yZGVkIGlzIFRydWUKICAgICAgICBhbmQgZGF5LnBlYWtfbXcgaXMgbm90IE5vbmUgYW5kIGlzZmluaXRlKGRheS5wZWFrX213KQogICAgICAgIGZvciBkYXkgaW4gaGlzdG9yeSkKICAgIHdlYXRoZXJfZnJlc2ggPSAoaGlnaF9mIGlzIG5vdCBOb25lIGFuZCBtb3JuaW5nX2xvd19mIGlzIG5vdCBOb25lCiAgICAgICAgICAgICAgICAgICAgIGFuZCBpc2Zpbml0ZShoaWdoX2YpIGFuZCBpc2Zpbml0ZShtb3JuaW5nX2xvd19mKSkKICAgIGZlYXR1cmVzID0gRmVhdHVyZXModGFyZ2V0X2RhdGU9dGFyZ2V0X2RhdGUsIGhpZ2hfZj1oaWdoX2YsCiAgICAgICAgICAgICAgICAgICAgICAgIG1vcm5pbmdfbG93X2Y9bW9ybmluZ19sb3dfZiwgaGlzdG9yeT1oaXN0b3J5LAogICAgICAgICAgICAgICAgICAgICAgICBsb2FkX2ZyZXNoPWxhdGVzdF9wcmVzZW50LCB3ZWF0aGVyX2ZyZXNoPXdlYXRoZXJfZnJlc2gsCiAgICAgICAgICAgICAgICAgICAgICAgIGFsZXJ0cz0oKSwgbW9kZT0ncmV0cm9zcGVjdGl2ZScpCiAgICBtYXJ0X2FzX29mLCBsb2FkX2xhc3RfaG91ciA9IF93YXJlaG91c2VfZmFjdHMoZGF0YWJhc2UpCiAgICBoaXN0b3J5X2xhc3QgPSBtYXgoKGRheS5kYXRlIGZvciBkYXkgaW4gaGlzdG9yeSksIGRlZmF1bHQ9Tm9uZSkKICAgIGZhY3RzID0gQnJpZWZGYWN0cyhsb2FkX2ZyZXNoPWxhdGVzdF9wcmVzZW50LCB3ZWF0aGVyX2ZyZXNoPXdlYXRoZXJfZnJlc2gsCiAgICAgICAgICAgICAgICAgICAgICAgbGF0ZXN0X2NvbXBsZXRlZF9wZWFrPWxhdGVzdF9jb21wbGV0ZWQsCiAgICAgICAgICAgICAgICAgICAgICAgbGF0ZXN0X2NvbXBsZXRlZF9wcmVzZW50PWxhdGVzdF9wcmVzZW50LAogICAgICAgICAgICAgICAgICAgICAgIGhpc3RvcnlfZGF5cz1sZW4oaGlzdG9yeSksIGhpc3RvcnlfbGFzdF9kYXRlPWhpc3RvcnlfbGFzdCwKICAgICAgICAgICAgICAgICAgICAgICBkYXRhX2FzX29mPW1hcnRfYXNfb2Ygb3IgaGlzdG9yeV9sYXN0LAogICAgICAgICAgICAgICAgICAgICAgIGxvYWRfbGFzdF9ob3VyX3V0Yz1sb2FkX2xhc3RfaG91ciwKICAgICAgICAgICAgICAgICAgICAgICB3ZWF0aGVyX3VwZGF0ZV90aW1lPXVwZGF0ZV90aW1lLAogICAgICAgICAgICAgICAgICAgICAgIHRhcmdldF9oaWdoX2Y9aGlnaF9mLCB0YXJnZXRfbW9ybmluZ19sb3dfZj1tb3JuaW5nX2xvd19mKQogICAgcmV0dXJuIGZlYXR1cmVzLCBmYWN0cwoKCmRlZiByZW5kZXJfYnJpZWYoZGF0YWJhc2U6IFBhdGgsIHJvb3Q6IFBhdGgsIG91dF9kaXI6IFBhdGgsICosCiAgICAgICAgICAgICAgICAgdGFyZ2V0X2RhdGU6IGRhdGUgfCBOb25lID0gTm9uZSwKICAgICAgICAgICAgICAgICBnZW5lcmF0ZWRfYXQ6IGRhdGV0aW1lIHwgTm9uZSA9IE5vbmUpIC0+IFJlbmRlcmVkQnJpZWY6CiAgICAiIiJDb21wdXRlIHRoZSBmb3JlY2FzdCBmb3IgYGB0YXJnZXRfZGF0ZWBgIGFuZCB3cml0ZSB0aGUgYnJpZWYgZmlsZXMuCgogICAgYGByb290YGAgaXMgdGhlIGxlZGdlciByb290ICh0aGUgZGlyZWN0b3J5IGhvbGRpbmcgYGBkZWZpbml0aW9ucy9gYCBhbmQKICAgIGBgZm9yZWNhc3RzL2BgKS4gV3JpdGVzIGBgaW5kZXguaHRtbGBgIGFuZCBgYGNvbW1lbnQubWRgYCB1bmRlcgogICAgYGBvdXRfZGlyYGAuIERlZmF1bHRzIHRoZSB0YXJnZXQgdG8gdG9kYXkgaW4gQW1lcmljYS9OZXdfWW9yay4KICAgICIiIgogICAgZGF0YWJhc2UgPSBQYXRoKGRhdGFiYXNlKQogICAgcm9vdCA9IFBhdGgocm9vdCkKICAgIG91dF9kaXIgPSBQYXRoKG91dF9kaXIpCiAgICBnZW5lcmF0ZWQgPSBnZW5lcmF0ZWRfYXQgb3IgZGF0ZXRpbWUubm93KHRpbWV6b25lLnV0YykKICAgIHRhcmdldCA9IHRhcmdldF9kYXRlIG9yIGdlbmVyYXRlZC5hc3RpbWV6b25lKEVUKS5kYXRlKCkKICAgIGRlZmluaXRpb24gPSBwYXJzZV9kZWZpbml0aW9uKGxlZGdlci5yZWFkX2RlZmluaXRpb24oCiAgICAgICAgcm9vdCAvICdkZWZpbml0aW9ucycgLyAoREVGSU5JVElPTl9WRVJTSU9OICsgJy50b21sJykpKQogICAgZmVhdHVyZXMsIGZhY3RzID0gYnVpbGRfZmVhdHVyZXMoZGF0YWJhc2UsIHRhcmdldCkKICAgIHJlc3VsdCA9IHN0cmVzc19mb3JlY2FzdChmZWF0dXJlcywgZGVmaW5pdGlvbikKICAgIHJlY2VpcHRzID0gX3JlY2VpcHRfbGlzdGluZyhyb290LCB0YXJnZXQpCiAgICBicmllZiA9IHJlbmRlcihyZXN1bHQsIGZhY3RzLCByZWNlaXB0cywgZ2VuZXJhdGVkX2F0PWdlbmVyYXRlZCkKICAgIG91dF9kaXIubWtkaXIocGFyZW50cz1UcnVlLCBleGlzdF9vaz1UcnVlKQogICAgaW5kZXhfcGF0aCA9IG91dF9kaXIgLyAnaW5kZXguaHRtbCcKICAgIGNvbW1lbnRfcGF0aCA9IG91dF9kaXIgLyAnY29tbWVudC5tZCcKICAgIGluZGV4X3BhdGgud3JpdGVfdGV4dChicmllZi5odG1sLCBlbmNvZGluZz0ndXRmLTgnKQogICAgY29tbWVudF9wYXRoLndyaXRlX3RleHQoYnJpZWYuY29tbWVudF9tZCwgZW5jb2Rpbmc9J3V0Zi04JykKICAgIHJldHVybiBSZW5kZXJlZEJyaWVmKGZvcmVjYXN0PXJlc3VsdCwgZmFjdHM9ZmFjdHMsIGJyaWVmPWJyaWVmLAogICAgICAgICAgICAgICAgICAgICAgICAgaW5kZXhfcGF0aD1pbmRleF9wYXRoLCBjb21tZW50X3BhdGg9Y29tbWVudF9wYXRoKQoKCmRlZiBtYWluKGFyZ3Y9Tm9uZSkgLT4gTm9uZToKICAgIHBhcnNlciA9IGFyZ3BhcnNlLkFyZ3VtZW50UGFyc2VyKGRlc2NyaXB0aW9uPV9fZG9jX18pCiAgICBwYXJzZXIuYWRkX2FyZ3VtZW50KCctLWRhdGFiYXNlJywgdHlwZT1QYXRoLCByZXF1aXJlZD1UcnVlLAogICAgICAgICAgICAgICAgICAgICAgICBoZWxwPSdCdWlsdCBEdWNrREIgd2FyZWhvdXNlIChyYXcgKyBjbGVhbmVkL21hcnRzKS4nKQogICAgcGFyc2VyLmFkZF9hcmd1bWVudCgnLS1sZWRnZXInLCB0eXBlPVBhdGgsIHJlcXVpcmVkPVRydWUsCiAgICAgICAgICAgICAgICAgICAgICAgIGhlbHA9J0xlZGdlciByb290IChob2xkcyBkZWZpbml0aW9ucy8gYW5kIGZvcmVjYXN0cy8pLicpCiAgICBwYXJzZXIuYWRkX2FyZ3VtZW50KCctLW91dCcsIHR5cGU9UGF0aCwgZGVmYXVsdD1QYXRoKCdzaXRlJyksCiAgICAgICAgICAgICAgICAgICAgICAgIGhlbHA9J091dHB1dCBkaXJlY3RvcnkgZm9yIGluZGV4Lmh0bWwgYW5kIGNvbW1lbnQubWQuJykKICAgIHBhcnNlci5hZGRfYXJndW1lbnQoJy0tdGFyZ2V0LWRhdGUnLCB0eXBlPWRhdGUuZnJvbWlzb2Zvcm1hdCwgZGVmYXVsdD1Ob25lLAogICAgICAgICAgICAgICAgICAgICAgICBoZWxwPSdUYXJnZXQgZGF0ZSAoZGVmYXVsdDogdG9kYXksIEFtZXJpY2EvTmV3X1lvcmspLicpCiAgICBhcmdzID0gcGFyc2VyLnBhcnNlX2FyZ3MoYXJndikKICAgIHJlbmRlcmVkID0gcmVuZGVyX2JyaWVmKGFyZ3MuZGF0YWJhc2UsIGFyZ3MubGVkZ2VyLCBhcmdzLm91dCwKICAgICAgICAgICAgICAgICAgICAgICAgICAgIHRhcmdldF9kYXRlPWFyZ3MudGFyZ2V0X2RhdGUpCiAgICByZXN1bHQgPSByZW5kZXJlZC5mb3JlY2FzdAogICAgc3VtbWFyeSA9IChmJ25vIGNhbGwgKHtyZXN1bHQubm9fY2FsbF9yZWFzb259KScgaWYgcmVzdWx0Lm5vX2NhbGxfcmVhc29uCiAgICAgICAgICAgICAgIGVsc2UgZidsZXZlbCB7cmVzdWx0LmxldmVsfScpCiAgICBwcmludChmJ3dyb3RlIHtyZW5kZXJlZC5pbmRleF9wYXRofSBhbmQge3JlbmRlcmVkLmNvbW1lbnRfcGF0aH06ICcKICAgICAgICAgIGYndGFyZ2V0IHtyZXN1bHQudGFyZ2V0X2RhdGUuaXNvZm9ybWF0KCl9LCB7c3VtbWFyeX0nKQoKCmlmIF9fbmFtZV9fID09ICdfX21haW5fXyc6CiAgICBtYWluKCkK
+"""Render the daily brief: ``site/index.html`` plus the issue-comment text.
+
+This is step 8 of ``grid daily`` in ``docs/architecture-s3-s7.md``. The brief
+renders exactly what the existing pipeline already produces — one forecast
+(from ``stress.forecast`` over ``stress_inputs``) plus freshness facts — and
+nothing else: no new claims, metrics, or dashboard scope.
+
+Deviations from the architecture doc's idealised signatures, forced by the
+code that actually exists today:
+
+- There is no ``scoring`` module and no ``Report`` type; ``freshness.py`` is
+  the legacy publish-snapshot checker. Freshness here is therefore the pair
+  of booleans the forecast itself consumes (``Features.load_fresh`` /
+  ``Features.weather_fresh``), derived with the same rules
+  ``scripts/issue_stress.py`` uses: load is fresh when the latest completed
+  peak (target - 2 days, per the Nov 5 same-day ruling) is present, complete,
+  first-recorded and finite; weather is fresh when a pinned NWS BWI issuance
+  for the target date carries a complete high/low pair.
+- There is no ``features.load``; history and target weather come from
+  ``stress_inputs.load_first_recorded_history`` and
+  ``stress_inputs.load_nws_bwi_forecast``.
+- The forecast is computed in ``retrospective`` mode (the mode
+  ``scripts/diagnose_s3c.py`` uses for reconstruction). Prospective issuance
+  stays with the issuance path and the ledger; this renderer never appends
+  receipts and never invents issue-time provenance.
+
+All ledger reads go through ``grid_pipeline.ledger`` (the only module allowed
+to open ledger paths): the definition via ``ledger.read_definition`` and the
+receipt listing via ``ledger.receipt_paths`` + ``ledger.read_content``.
+The issue comment lists, for the brief's target date, each receipt's path
+and full sha256 (architecture step 8).
+"""
+from __future__ import annotations
+
+import argparse
+from dataclasses import dataclass
+from datetime import date, datetime, timedelta, timezone
+from hashlib import sha256
+import html
+import json
+from math import isfinite
+from pathlib import Path
+from zoneinfo import ZoneInfo
+
+import duckdb
+
+from grid_pipeline import ledger, md_geo
+from grid_pipeline.model import Features, Forecast
+from grid_pipeline.stress import forecast as stress_forecast, parse_definition
+from grid_pipeline.stress_inputs import load_first_recorded_history, load_nws_bwi_forecast
+
+ET = ZoneInfo('America/New_York')
+GEOGRAPHY = 'PJM-wide call, Maryland weather'
+DEFINITION_VERSION = 'stress-index-v1'
+
+
+@dataclass(frozen=True)
+class Brief:
+    """Rendered brief: the page and the issue-comment text."""
+    html: str
+    comment_md: str
+
+
+@dataclass(frozen=True)
+class BriefFacts:
+    """Freshness and data-as-of facts shown alongside the forecast."""
+    load_fresh: bool
+    weather_fresh: bool
+    latest_completed_peak: date
+    latest_completed_present: bool
+    history_days: int
+    history_last_date: date | None
+    data_as_of: date | None
+    load_last_hour_utc: datetime | None
+    weather_update_time: datetime | None
+    target_high_f: float | None
+    target_morning_low_f: float | None
+
+
+@dataclass(frozen=True)
+class RenderedBrief:
+    forecast: Forecast
+    facts: BriefFacts
+    brief: Brief
+    index_path: Path
+    comment_path: Path
+
+
+def _fmt_mw(value: float | None) -> str:
+    return '—' if value is None else f'{value:,.1f} MW'
+
+
+def _fmt_time(value: datetime | None) -> str:
+    return '—' if value is None else value.astimezone(timezone.utc).strftime('%Y-%m-%d %H:%M UTC')
+
+
+def _receipt_listing(root: Path, target_date: date) -> list[tuple[str, str]]:
+    """Receipts for ``target_date`` as (display path, full sha256), via ledger only."""
+    listing = []
+    forecasts_dir = root / 'forecasts'
+    if not forecasts_dir.exists():
+        return listing
+    for path in ledger.receipt_paths(root):
+        raw = ledger.read_content(path)
+        try:
+            payload = json.loads(raw)
+        except ValueError:
+            continue
+        if payload.get('target_date') != target_date.isoformat():
+            continue
+        relative = path.relative_to(root).as_posix()
+        display = f'{root.name}/{relative}' if root.name else relative
+        listing.append((display, sha256(raw).hexdigest()))
+    return listing
+
+
+LEVEL_STYLE = {
+    # Beat the Grid level palette, in God's Eye View's design language
+    # (near-black glass, electric cyan accent, cockpit amber).
+    'calm': ('#00d4ff', 0.30),
+    'watch': ('#ffb800', 0.38),
+    'strained': ('#ff7a1a', 0.46),
+    'severe': ('#ff4545', 0.55),
+}
+NO_CALL_COLOR = '#5b6b73'
+
+
+def _map_script(level: str | None) -> str:
+    """Leaflet map: Maryland counties, BGE footprint lit at the call level.
+
+    The call is PJM-wide; the lit counties are the BGE home territory at
+    county resolution (md_geo). Zoom goes to street level so a reader can
+    find their own neighborhood inside (or outside) the lit area.
+    """
+    color, fill = LEVEL_STYLE.get(level or '', (NO_CALL_COLOR, 0.12))
+    counties = json.dumps(md_geo.MD_COUNTIES, separators=(',', ':'))
+    return f'''<script>
+var map = L.map('map', {{ scrollWheelZoom: true, minZoom: 7, maxZoom: 16 }});
+L.tileLayer('https://{{s}}.basemaps.cartocdn.com/dark_all/{{z}}/{{x}}/{{y}}{{r}}.png', {{
+  attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>',
+  subdomains: 'abcd', maxZoom: 19
+}}).addTo(map);
+var counties = {counties};
+var levelColor = '{color}', levelFill = {fill};
+function countyStyle(feature) {{
+  var bge = feature.properties.bge;
+  if (bge === 'core') return {{ color: levelColor, weight: 1.4, fillColor: levelColor, fillOpacity: levelFill }};
+  if (bge === 'partial') return {{ color: levelColor, weight: 1, fillColor: levelColor, fillOpacity: levelFill * 0.45 }};
+  return {{ color: 'rgba(232,234,237,0.25)', weight: 0.7, fillColor: '#e8eaed', fillOpacity: 0.04 }};
+}}
+var glow = L.geoJSON(counties, {{ style: function(f) {{
+  var s = countyStyle(f); if (f.properties.bge === 'none') return {{ opacity: 0, fillOpacity: 0 }};
+  return {{ color: levelColor, weight: 7, opacity: 0.28, fillOpacity: 0 }};
+}} }}).addTo(map);
+var layer = L.geoJSON(counties, {{ style: countyStyle,
+  onEachFeature: function(f, l) {{ l.bindTooltip(f.properties.name + (f.properties.bge === 'core' ? ' — BGE' : f.properties.bge === 'partial' ? ' — BGE (part)' : '')); }}
+}}).addTo(map);
+L.circleMarker([39.1774, -76.6684], {{ radius: 5, color: '#e8eaed', weight: 1.5, fillColor: '#00d4ff', fillOpacity: 0.9 }})
+  .addTo(map).bindTooltip('BWI — weather point');
+map.fitBounds(layer.getBounds().pad(0.04));
+</script>'''
+
+
+def render(forecast: Forecast, facts: BriefFacts,
+           receipts: list[tuple[str, str]], *, generated_at: datetime) -> Brief:
+    """Render one forecast plus its freshness facts. Pure: no IO."""
+    esc = html.escape
+    target = forecast.target_date.isoformat()
+    generated = _fmt_time(generated_at)
+    no_call = forecast.no_call_reason is not None
+    if no_call:
+        headline = 'No call'
+        hero_html = (f'<p class="level">No call — {esc(forecast.no_call_reason)}</p>\n'
+                     '<p class="noclaim">No peak demand, peak hour, or stress level is claimed for '
+                     'this date.</p>')
+        call_lines = [f'Call: **No call** — `{forecast.no_call_reason}`',
+                      'Peak demand / peak hour / level: not claimed.']
+        stats_html = ''
+        bar_html = ''
+    else:
+        headline = f'Stress level: {forecast.level}'
+        thresholds = forecast.thresholds_mw or (None, None, None)
+        hero_html = f'<p class="level">Stress level: {esc(forecast.level or "")}</p>'
+        stats_html = (
+            '<div class="stats">\n'
+            f'<div class="stat"><span class="stat-label">Peak demand</span>'
+            f'<span class="stat-value">Peak demand: {esc(_fmt_mw(forecast.peak_mw))}</span></div>\n'
+            f'<div class="stat"><span class="stat-label">Peak hour</span>'
+            f'<span class="stat-value">Peak hour ending: {forecast.peak_hour_ending} (local)</span></div>\n'
+            '</div>')
+        call_lines = [f'Call: **{forecast.level}**',
+                      f'Peak demand: {_fmt_mw(forecast.peak_mw)}',
+                      f'Peak hour ending: {forecast.peak_hour_ending} (local)']
+        bar_html = ''
+        if None not in thresholds and forecast.peak_mw:
+            watch, strained, severe = thresholds
+            cap = severe * 1.15
+            def pct(v):
+                return max(0.0, min(100.0, v / cap * 100.0))
+            bar_html = (
+                '<div class="bar-wrap"><div class="bar">'
+                f'<div class="seg seg-calm" style="width:{pct(watch):.1f}%"></div>'
+                f'<div class="seg seg-watch" style="width:{pct(strained) - pct(watch):.1f}%"></div>'
+                f'<div class="seg seg-strained" style="width:{pct(severe) - pct(strained):.1f}%"></div>'
+                f'<div class="seg seg-severe" style="width:{100.0 - pct(severe):.1f}%"></div>'
+                f'<div class="peak-marker" style="left:{pct(forecast.peak_mw):.1f}%"></div>'
+                '</div>'
+                f'<p class="thresholds">Thresholds: watch {_fmt_mw(watch)}, '
+                f'strained {_fmt_mw(strained)}, severe {_fmt_mw(severe)}</p></div>')
+    drivers = ''
+    if facts.target_high_f is not None or facts.target_morning_low_f is not None:
+        drivers = (f'<li>Forecast high: {facts.target_high_f} F; '
+                   f'morning low: {facts.target_morning_low_f} F</li>\n')
+    alerts_html = ''
+    if forecast.alerts:
+        items = '\n'.join(f'<li>{esc(text)}</li>' for text in forecast.alerts)
+        alerts_html = f'<section class="panel"><h2>Alerts (annotation only)</h2>\n<ul>\n{items}\n</ul></section>\n'
+    load_state = 'fresh' if facts.load_fresh else 'stale'
+    weather_state = 'fresh' if facts.weather_fresh else 'stale'
+    completed = ('present' if facts.latest_completed_present else 'missing')
+    level_key = forecast.level if not no_call else None
+    level_color = LEVEL_STYLE.get(level_key or '', (NO_CALL_COLOR, 0.12))[0]
+    map_html = _map_script(level_key)
+    page = f'''<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Beat the Grid — {target}</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<style>
+:root {{ --bg: #0a0a0f; --glass: rgba(12,12,20,0.72); --border: rgba(255,255,255,0.08);
+  --accent: #00d4ff; --text: #e8eaed; --secondary: rgba(232,234,237,0.5); --dim: rgba(232,234,237,0.3);
+  --level: {level_color}; --mono: 'JetBrains Mono','SF Mono','Fira Code',monospace;
+  --sans: 'Inter',-apple-system,BlinkMacSystemFont,system-ui,sans-serif; }}
+* {{ box-sizing: border-box; }}
+body {{ margin: 0; background: var(--bg); color: var(--text); font-family: var(--sans); line-height: 1.5; }}
+.wrap {{ max-width: 68rem; margin: 0 auto; padding: 1.25rem 1rem 3rem; }}
+header.hud {{ display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.5rem 1.25rem; padding: 0.75rem 0 1rem; }}
+.wordmark {{ font-family: var(--mono); font-weight: 600; font-size: 0.8rem; letter-spacing: 0.22em;
+  text-transform: uppercase; color: var(--accent); text-shadow: 0 0 12px rgba(0,212,255,0.4); }}
+h1 {{ font-size: 1.35rem; margin: 0; font-weight: 650; }}
+.meta {{ color: var(--secondary); font-size: 0.9rem; }}
+.map-panel {{ position: relative; border: 1px solid var(--border); border-radius: 16px; overflow: hidden;
+  background: var(--glass); box-shadow: 0 0 42px color-mix(in srgb, var(--level) 22%, transparent); }}
+#map {{ height: min(62vh, 560px); min-height: 340px; background: #0a0a0f; }}
+.hero {{ position: absolute; top: 14px; left: 14px; z-index: 500; background: var(--glass);
+  border: 1px solid var(--border); border-radius: 12px; padding: 0.7rem 1rem; backdrop-filter: blur(8px); }}
+.hero .level {{ font-family: var(--mono); font-size: 1.25rem; font-weight: 700; margin: 0; color: var(--level);
+  text-shadow: 0 0 14px color-mix(in srgb, var(--level) 55%, transparent); }}
+.hero .noclaim {{ margin: 0.25rem 0 0; color: var(--secondary); font-size: 0.88rem; max-width: 22rem; }}
+.map-caption {{ position: absolute; right: 14px; bottom: 14px; z-index: 500; max-width: 19rem;
+  background: var(--glass); border: 1px solid var(--border); border-radius: 12px; padding: 0.55rem 0.8rem;
+  color: var(--secondary); font-size: 0.8rem; backdrop-filter: blur(8px); }}
+.leaflet-container {{ font-family: var(--sans); }}
+.stats {{ display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 0.9rem; }}
+.stat {{ flex: 1 1 12rem; background: var(--glass); border: 1px solid var(--border); border-radius: 12px; padding: 0.7rem 1rem; }}
+.stat-label {{ display: block; font-family: var(--mono); font-size: 0.62rem; font-weight: 600;
+  letter-spacing: 0.14em; text-transform: uppercase; color: var(--dim); }}
+.stat-value {{ font-family: var(--mono); font-size: 1.02rem; }}
+.bar-wrap {{ margin-top: 0.9rem; background: var(--glass); border: 1px solid var(--border); border-radius: 12px; padding: 0.8rem 1rem; }}
+.bar {{ position: relative; display: flex; height: 10px; border-radius: 5px; overflow: visible; }}
+.seg-calm {{ background: #00d4ff; border-radius: 5px 0 0 5px; }}
+.seg-watch {{ background: #ffb800; }}
+.seg-strained {{ background: #ff7a1a; }}
+.seg-severe {{ background: #ff4545; border-radius: 0 5px 5px 0; }}
+.peak-marker {{ position: absolute; top: -5px; width: 2px; height: 20px; background: #fff;
+  box-shadow: 0 0 8px rgba(255,255,255,0.8); }}
+.thresholds {{ margin: 0.5rem 0 0; color: var(--secondary); font-size: 0.85rem; font-family: var(--mono); }}
+.panel {{ margin-top: 0.9rem; background: var(--glass); border: 1px solid var(--border); border-radius: 16px; padding: 0.9rem 1.1rem; }}
+.panel h2 {{ font-family: var(--mono); font-size: 0.68rem; font-weight: 600; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--secondary); margin: 0 0 0.5rem; }}
+.panel ul {{ margin: 0; padding-left: 1.1rem; }}
+.pill {{ font-family: var(--mono); font-size: 0.82rem; }}
+footer {{ margin-top: 1rem; color: var(--dim); font-size: 0.85rem; }}
+@media (max-width: 640px) {{ .map-caption {{ display: none; }} #map {{ min-height: 300px; }} }}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="hud">
+<span class="wordmark">Beat the Grid</span>
+<h1>Grid brief — {target}</h1>
+<span class="meta">{GEOGRAPHY}. Definition: {esc(forecast.definition_version)}.</span>
+</header>
+<div class="map-panel">
+<div id="map"></div>
+<div class="hero">
+{hero_html}
+</div>
+<div class="map-caption">Lit counties are the BGE home territory, glowing at today's call level — the call itself is PJM-wide. Zoom in to your neighborhood: if your county is lit, the call covers you. County lines are an approximation.</div>
+</div>
+{stats_html}
+{bar_html}
+{alerts_html}<section class="panel"><h2>Freshness</h2>
+<ul>
+<li class="pill">Load: {load_state} (latest completed peak {facts.latest_completed_peak.isoformat()}: {completed})</li>
+<li class="pill">Weather: {weather_state} (pinned NWS BWI issuance: {_fmt_time(facts.weather_update_time)})</li>
+{drivers}<li>History days loaded: {facts.history_days} (last: {facts.history_last_date or "—"})</li>
+</ul>
+</section>
+<footer>Data as of: {facts.data_as_of or "—"} (last load hour: {_fmt_time(facts.load_last_hour_utc)}). Generated: {generated}.</footer>
+</div>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+{map_html}
+</body>
+</html>
+'''
+    comment_lines = [f'## Grid brief — {target}', '',
+                     f'{GEOGRAPHY}. Definition: {forecast.definition_version}.',
+                     *call_lines,
+                     f'Freshness: load {load_state}, weather {weather_state}.',
+                     f'Data as of: {facts.data_as_of or "—"}.',
+                     '', f'### Receipts for {target}']
+    if receipts:
+        comment_lines += [f'- `{path}` — sha256: `{digest}`' for path, digest in receipts]
+    else:
+        comment_lines.append('No receipts in the ledger for this target date.')
+    comment_lines.append('')
+    return Brief(html=page, comment_md='\n'.join(comment_lines))
+
+
+def _weather_field(weather, name):
+    if weather is None:
+        return None
+    if isinstance(weather, dict):
+        return weather.get(name)
+    return getattr(weather, name, None)
+
+
+def _warehouse_facts(database: Path) -> tuple[date | None, datetime | None]:
+    """Data-as-of from the built dbt tables; (None, None) when not built."""
+    data_as_of = None
+    load_last_hour = None
+    with duckdb.connect(str(database), read_only=True) as connection:
+        try:
+            row = connection.execute(
+                'SELECT max(local_date) FROM marts.mart_day_history').fetchone()
+            data_as_of = row[0] if row else None
+        except duckdb.Error:
+            pass
+        try:
+            row = connection.execute(
+                'SELECT max(hour_utc) FROM cleaned.eia_pjm_hourly_demand').fetchone()
+            load_last_hour = row[0] if row else None
+        except duckdb.Error:
+            pass
+    return data_as_of, load_last_hour
+
+
+def build_features(database: Path, target_date: date) -> tuple[Features, BriefFacts]:
+    """Assemble forecast features and freshness facts from the warehouse."""
+    history = load_first_recorded_history(database, database)
+    weather = load_nws_bwi_forecast(database, target_date)
+    high_f = _weather_field(weather, 'high_f')
+    morning_low_f = _weather_field(weather, 'morning_low_f')
+    update_time = _weather_field(weather, 'update_time')
+    latest_completed = target_date - timedelta(days=2)
+    latest_present = any(
+        day.date == latest_completed and day.complete
+        and day.load_first_recorded is True
+        and day.peak_mw is not None and isfinite(day.peak_mw)
+        for day in history)
+    weather_fresh = (high_f is not None and morning_low_f is not None
+                     and isfinite(high_f) and isfinite(morning_low_f))
+    features = Features(target_date=target_date, high_f=high_f,
+                        morning_low_f=morning_low_f, history=history,
+                        load_fresh=latest_present, weather_fresh=weather_fresh,
+                        alerts=(), mode='retrospective')
+    mart_as_of, load_last_hour = _warehouse_facts(database)
+    history_last = max((day.date for day in history), default=None)
+    facts = BriefFacts(load_fresh=latest_present, weather_fresh=weather_fresh,
+                       latest_completed_peak=latest_completed,
+                       latest_completed_present=latest_present,
+                       history_days=len(history), history_last_date=history_last,
+                       data_as_of=mart_as_of or history_last,
+                       load_last_hour_utc=load_last_hour,
+                       weather_update_time=update_time,
+                       target_high_f=high_f, target_morning_low_f=morning_low_f)
+    return features, facts
+
+
+def render_brief(database: Path, root: Path, out_dir: Path, *,
+                 target_date: date | None = None,
+                 generated_at: datetime | None = None) -> RenderedBrief:
+    """Compute the forecast for ``target_date`` and write the brief files.
+
+    ``root`` is the ledger root (the directory holding ``definitions/`` and
+    ``forecasts/``). Writes ``index.html`` and ``comment.md`` under
+    ``out_dir``. Defaults the target to today in America/New_York.
+    """
+    database = Path(database)
+    root = Path(root)
+    out_dir = Path(out_dir)
+    generated = generated_at or datetime.now(timezone.utc)
+    target = target_date or generated.astimezone(ET).date()
+    definition = parse_definition(ledger.read_definition(
+        root / 'definitions' / (DEFINITION_VERSION + '.toml')))
+    features, facts = build_features(database, target)
+    result = stress_forecast(features, definition)
+    receipts = _receipt_listing(root, target)
+    brief = render(result, facts, receipts, generated_at=generated)
+    out_dir.mkdir(parents=True, exist_ok=True)
+    index_path = out_dir / 'index.html'
+    comment_path = out_dir / 'comment.md'
+    index_path.write_text(brief.html, encoding='utf-8')
+    comment_path.write_text(brief.comment_md, encoding='utf-8')
+    return RenderedBrief(forecast=result, facts=facts, brief=brief,
+                         index_path=index_path, comment_path=comment_path)
+
+
+def main(argv=None) -> None:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--database', type=Path, required=True,
+                        help='Built DuckDB warehouse (raw + cleaned/marts).')
+    parser.add_argument('--ledger', type=Path, required=True,
+                        help='Ledger root (holds definitions/ and forecasts/).')
+    parser.add_argument('--out', type=Path, default=Path('site'),
+                        help='Output directory for index.html and comment.md.')
+    parser.add_argument('--target-date', type=date.fromisoformat, default=None,
+                        help='Target date (default: today, America/New_York).')
+    args = parser.parse_args(argv)
+    rendered = render_brief(args.database, args.ledger, args.out,
+                            target_date=args.target_date)
+    result = rendered.forecast
+    summary = (f'no call ({result.no_call_reason})' if result.no_call_reason
+               else f'level {result.level}')
+    print(f'wrote {rendered.index_path} and {rendered.comment_path}: '
+          f'target {result.target_date.isoformat()}, {summary}')
+
+
+if __name__ == '__main__':
+    main()

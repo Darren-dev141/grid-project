@@ -1,1 +1,24 @@
-d2l0aCBwYXJzZWQgYXMgKAogICAgc2VsZWN0CiAgICAgICAge3sgdHJ5X3N0cnB0aW1lKCJyLnBheWxvYWQgLT4+ICdwZXJpb2QnIiwgJyVZLSVtLSVkVCVIJykgfX0gYXMgaG91cl91dGMsCiAgICAgICAgci5wYXlsb2FkIC0+PiAncmVzcG9uZGVudCcgYXMgcmVzcG9uZGVudCwKICAgICAgICByLnBheWxvYWQgLT4+ICdmdWVsdHlwZScgYXMgZnVlbF90eXBlLAogICAgICAgIHt7IHRyeV9jYXN0KCJyLnBheWxvYWQgLT4+ICd2YWx1ZSciLCAnZG91YmxlJykgfX0gYXMgZ2VuZXJhdGlvbl9td2gsCiAgICAgICAgci5wYXlsb2FkIC0+PiAndmFsdWUtdW5pdHMnIGFzIHVuaXRzLAogICAgICAgIGIubG9hZGVkX2F0LCBjb2FsZXNjZShiLm9ic2VydmVkX2F0LCBiLmxvYWRlZF9hdCkgYXMgb2JzZXJ2ZWRfYXQsCiAgICAgICAgci5kaWdlc3QsIHIucm93X251bWJlcgogICAgZnJvbSB7eyBzb3VyY2UoJ3JhdycsICdyZWNvcmRzJykgfX0gcgogICAgam9pbiB7eyBzb3VyY2UoJ3JhdycsICdiYXRjaGVzJykgfX0gYiB1c2luZyAoc291cmNlLCBkYXRhc2V0LCBkaWdlc3QpCiAgICB3aGVyZSByLnNvdXJjZSA9ICdlaWEnIGFuZCByLmRhdGFzZXQgPSAnZWxlY3RyaWNpdHkvcnRvL2Z1ZWwtdHlwZS1kYXRhJwogICAgICAgIGFuZCBiLmNvbW1pdHRlZAopLCByYW5rZWQgYXMgKAogICAgc2VsZWN0ICosIHJvd19udW1iZXIoKSBvdmVyICgKICAgICAgICBwYXJ0aXRpb24gYnkgaG91cl91dGMsIHJlc3BvbmRlbnQsIGZ1ZWxfdHlwZQogICAgICAgIG9yZGVyIGJ5IG9ic2VydmVkX2F0IGRlc2MsIGRpZ2VzdCBkZXNjLCByb3dfbnVtYmVyIGRlc2MKICAgICkgYXMgcmV2aXNpb25fcmFuawogICAgZnJvbSBwYXJzZWQgd2hlcmUgcmVzcG9uZGVudCA9ICdQSk0nCikKc2VsZWN0IGhvdXJfdXRjLCByZXNwb25kZW50LCBmdWVsX3R5cGUsIGdlbmVyYXRpb25fbXdoLCB1bml0cywKICAgIGdlbmVyYXRpb25fbXdoIDwgMCBhcyBuZWdhdGl2ZV9nZW5lcmF0aW9uLAogICAgbG9hZGVkX2F0LCBvYnNlcnZlZF9hdCwgZGlnZXN0CmZyb20gcmFua2VkIHdoZXJlIHJldmlzaW9uX3JhbmsgPSAxCg==
+with parsed as (
+    select
+        {{ try_strptime("r.payload ->> 'period'", '%Y-%m-%dT%H') }} as hour_utc,
+        r.payload ->> 'respondent' as respondent,
+        r.payload ->> 'fueltype' as fuel_type,
+        {{ try_cast("r.payload ->> 'value'", 'double') }} as generation_mwh,
+        r.payload ->> 'value-units' as units,
+        b.loaded_at, coalesce(b.observed_at, b.loaded_at) as observed_at,
+        r.digest, r.row_number
+    from {{ source('raw', 'records') }} r
+    join {{ source('raw', 'batches') }} b using (source, dataset, digest)
+    where r.source = 'eia' and r.dataset = 'electricity/rto/fuel-type-data'
+        and b.committed
+), ranked as (
+    select *, row_number() over (
+        partition by hour_utc, respondent, fuel_type
+        order by observed_at desc, digest desc, row_number desc
+    ) as revision_rank
+    from parsed where respondent = 'PJM'
+)
+select hour_utc, respondent, fuel_type, generation_mwh, units,
+    generation_mwh < 0 as negative_generation,
+    loaded_at, observed_at, digest
+from ranked where revision_rank = 1

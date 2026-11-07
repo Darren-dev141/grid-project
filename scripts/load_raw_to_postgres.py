@@ -1,1 +1,160 @@
-IiIiTWlycm9yIHRoZSBsb2NhbCBEdWNrREIgcmF3IGxhbmRpbmcgem9uZSBpbnRvIHRoZSBQb3N0Z3JlcyBkZXBsb3ltZW50IHRhcmdldC4KClM1IGRlcGxveW1lbnQgbGF5ZXIgKFBMQU4gZGVjaXNpb24gNCk6IGluZ2VzdGlvbiBzdGF5cyBEdWNrREItbG9jYWwgYW5kCmFwcGVuZC1vbmx5OyB0aGlzIHNjcmlwdCBjb3BpZXMgcmF3LmJhdGNoZXMgLyByYXcucmVjb3JkcyBpbnRvIHRoZSBTdXBhYmFzZQpQb3N0Z3JlcyBkYXRhYmFzZSBzbyBgZGJ0IGJ1aWxkIC0tdGFyZ2V0IHN1cGFiYXNlYCByZWFkcyB0aGUgc2FtZSByYXcgc291cmNlcwp0aGUgbG9jYWwgdGFyZ2V0IHJlYWRzLiBJbnNlcnRzIGFyZSBrZXllZCBvbiB0aGUgcmF3IHRhYmxlcycgcHJpbWFyeSBrZXlzIHdpdGgKT04gQ09ORkxJQ1QgRE8gTk9USElORywgc28gcmUtcnVubmluZyBhIHdpbmRvdyBpcyBhIG5vLW9wIGFuZCB0aGUgUG9zdGdyZXMgcmF3CnpvbmUgYWNjdW11bGF0ZXMgaGlzdG9yeSBhY3Jvc3Mgc2NoZWR1bGVkIHJ1bnMuCgpDb25uZWN0aW9uIGNvbWVzIG9ubHkgZnJvbSB0aGUgZW52aXJvbm1lbnQsIHVzaW5nIHRoZSBzYW1lIHZhcmlhYmxlIG5hbWVzIGFzCmRidC9wcm9maWxlcy55bWwncyBgc3VwYWJhc2VgIG91dHB1dCAoU1VQQUJBU0VfREJfSE9TVCAvIF9QT1JUIC8gX1VTRVIgLwpfUEFTU1dPUkQgLyBfTkFNRSksIG9yIGEgc2luZ2xlIFNVUEFCQVNFX0RCX1VSTCBpZiBzZXQuIE5vIGRlZmF1bHRzIGZvcgpjcmVkZW50aWFsczogYSBtaXNzaW5nIHZhcmlhYmxlIGlzIGEgbG91ZCBmYWlsdXJlLCBuZXZlciBhIHNpbGVudCBza2lwLiBBCnBhdXNlZCBTdXBhYmFzZSBwcm9qZWN0IGZhaWxzIHRoZSBjb25uZWN0aW9uIGFuZCB0aGVyZWZvcmUgZmFpbHMgdGhlIHJ1biDigJQKdGhhdCBpcyB0aGUgaW50ZW5kZWQga2VlcC1hbGl2ZSBhbGFybSwgbm90IGEgYnVnLgoKVXNhZ2U6CiAgICBweXRob24gc2NyaXB0cy9sb2FkX3Jhd190b19wb3N0Z3Jlcy5weSBbLS1kYXRhYmFzZSBkYXRhL2dyaWQuZHVja2RiXQogICAgcHl0aG9uIHNjcmlwdHMvbG9hZF9yYXdfdG9fcG9zdGdyZXMucHkgLS1jaGVjayAgICMgY29ubmVjdGl2aXR5IHByb2JlIG9ubHkKIiIiCgppbXBvcnQgYXJncGFyc2UKaW1wb3J0IG9zCmZyb20gcGF0aGxpYiBpbXBvcnQgUGF0aAppbXBvcnQgc3lzCgppbXBvcnQgZHVja2RiCmltcG9ydCBwc3ljb3BnCgoKQkFUQ0hFU19EREwgPSAiIiIKQ1JFQVRFIFRBQkxFIElGIE5PVCBFWElTVFMgcmF3LmJhdGNoZXMgKAogICAgc291cmNlIFZBUkNIQVIgTk9UIE5VTEwsCiAgICBkYXRhc2V0IFZBUkNIQVIgTk9UIE5VTEwsCiAgICBkaWdlc3QgVkFSQ0hBUiBOT1QgTlVMTCwKICAgIHBhdGggVkFSQ0hBUiwKICAgIGxvYWRlZF9hdCBUSU1FU1RBTVBUWiBERUZBVUxUIG5vdygpLAogICAgY29tbWl0dGVkIEJPT0xFQU4gREVGQVVMVCBUUlVFLAogICAgb2JzZXJ2ZWRfYXQgVElNRVNUQU1QVFosCiAgICBQUklNQVJZIEtFWSAoc291cmNlLCBkYXRhc2V0LCBkaWdlc3QpCikKIiIiCgpSRUNPUkRTX0RETCA9ICIiIgpDUkVBVEUgVEFCTEUgSUYgTk9UIEVYSVNUUyByYXcucmVjb3JkcyAoCiAgICBzb3VyY2UgVkFSQ0hBUiBOT1QgTlVMTCwKICAgIGRhdGFzZXQgVkFSQ0hBUiBOT1QgTlVMTCwKICAgIGRpZ2VzdCBWQVJDSEFSIE5PVCBOVUxMLAogICAgcm93X251bWJlciBJTlRFR0VSIE5PVCBOVUxMLAogICAgcGF5bG9hZCBKU09OQiwKICAgIFBSSU1BUlkgS0VZIChzb3VyY2UsIGRhdGFzZXQsIGRpZ2VzdCwgcm93X251bWJlcikKKQoiIiIKCgpkZWYgY29ubmVjdGlvbl9rd2FyZ3MoKSAtPiBkaWN0OgogICAgdXJsID0gb3MuZW52aXJvbi5nZXQoIlNVUEFCQVNFX0RCX1VSTCIpCiAgICBpZiB1cmw6CiAgICAgICAgcmV0dXJuIHsiY29ubmluZm8iOiB1cmx9CiAgICByZXF1aXJlZCA9ICgiU1VQQUJBU0VfREJfSE9TVCIsICJTVVBBQkFTRV9EQl9VU0VSIiwgIlNVUEFCQVNFX0RCX1BBU1NXT1JEIikKICAgIG1pc3NpbmcgPSBbbmFtZSBmb3IgbmFtZSBpbiByZXF1aXJlZCBpZiBub3Qgb3MuZW52aXJvbi5nZXQobmFtZSldCiAgICBpZiBtaXNzaW5nOgogICAgICAgIHJhaXNlIFN5c3RlbUV4aXQoCiAgICAgICAgICAgICJsb2FkX3Jhd190b19wb3N0Z3JlczogbWlzc2luZyByZXF1aXJlZCBlbnZpcm9ubWVudCB2YXJpYWJsZXM6ICIKICAgICAgICAgICAgKyAiLCAiLmpvaW4obWlzc2luZykKICAgICAgICAgICAgKyAiIChzZXQgdGhlbSBhcyByZXBvIHNlY3JldHM7IHNlZSBkYnQvcHJvZmlsZXMueW1sKSIKICAgICAgICApCiAgICByZXR1cm4gewogICAgICAgICJob3N0Ijogb3MuZW52aXJvblsiU1VQQUJBU0VfREJfSE9TVCJdLAogICAgICAgICJwb3J0IjogaW50KG9zLmVudmlyb24uZ2V0KCJTVVBBQkFTRV9EQl9QT1JUIiwgIjU0MzIiKSksCiAgICAgICAgInVzZXIiOiBvcy5lbnZpcm9uWyJTVVBBQkFTRV9EQl9VU0VSIl0sCiAgICAgICAgInBhc3N3b3JkIjogb3MuZW52aXJvblsiU1VQQUJBU0VfREJfUEFTU1dPUkQiXSwKICAgICAgICAiZGJuYW1lIjogb3MuZW52aXJvbi5nZXQoIlNVUEFCQVNFX0RCX05BTUUiLCAicG9zdGdyZXMiKSwKICAgICAgICAiY29ubmVjdF90aW1lb3V0IjogMzAsCiAgICB9CgoKZGVmIGNvbm5lY3RfcG9zdGdyZXMoKSAtPiBwc3ljb3BnLkNvbm5lY3Rpb246CiAgICBrd2FyZ3MgPSBjb25uZWN0aW9uX2t3YXJncygpCiAgICBpZiAiY29ubmluZm8iIGluIGt3YXJnczoKICAgICAgICByZXR1cm4gcHN5Y29wZy5jb25uZWN0KGt3YXJnc1siY29ubmluZm8iXSwgY29ubmVjdF90aW1lb3V0PTMwKQogICAgcmV0dXJuIHBzeWNvcGcuY29ubmVjdCgqKmt3YXJncykKCgpkZWYgY2hlY2soZGF0YWJhc2U6IFBhdGgpIC0+IGludDoKICAgIHdpdGggY29ubmVjdF9wb3N0Z3JlcygpIGFzIGNvbm46CiAgICAgICAgd2l0aCBjb25uLmN1cnNvcigpIGFzIGN1cjoKICAgICAgICAgICAgY3VyLmV4ZWN1dGUoIlNFTEVDVCAxIEZST00gcGdfZGF0YWJhc2UgV0hFUkUgZGF0bmFtZSA9IGN1cnJlbnRfZGF0YWJhc2UoKSIpCiAgICAgICAgICAgIGN1ci5mZXRjaG9uZSgpCiAgICAgICAgICAgIGN1ci5leGVjdXRlKCJTRUxFQ1QgY291bnQoKikgRlJPTSBpbmZvcm1hdGlvbl9zY2hlbWEuc2NoZW1hdGEgV0hFUkUgc2NoZW1hX25hbWUgPSAncmF3JyIpCiAgICAgICAgICAgIGhhc19yYXcgPSBjdXIuZmV0Y2hvbmUoKVswXSA9PSAxCiAgICBwcmludChmImxvYWRfcmF3X3RvX3Bvc3RncmVzOiBQb3N0Z3JlcyByZWFjaGFibGU7IHJhdyBzY2hlbWEgcHJlc2VudDoge2Jvb2woaGFzX3Jhdyl9IikKICAgIHJldHVybiAwCgoKZGVmIHRyYW5zZmVyKGRhdGFiYXNlOiBQYXRoKSAtPiBpbnQ6CiAgICBpZiBub3QgZGF0YWJhc2UuaXNfZmlsZSgpOgogICAgICAgIHJhaXNlIFN5c3RlbUV4aXQoZiJsb2FkX3Jhd190b19wb3N0Z3Jlczogd2FyZWhvdXNlIG5vdCBmb3VuZDoge2RhdGFiYXNlfSIpCiAgICB3aXRoIGR1Y2tkYi5jb25uZWN0KHN0cihkYXRhYmFzZSksIHJlYWRfb25seT1UcnVlKSBhcyBkdWNrOgogICAgICAgIHRhYmxlcyA9IHtyb3dbMF0gZm9yIHJvdyBpbiBkdWNrLmV4ZWN1dGUoCiAgICAgICAgICAgICJTRUxFQ1QgdGFibGVfbmFtZSBGUk9NIGluZm9ybWF0aW9uX3NjaGVtYS50YWJsZXMgV0hFUkUgdGFibGVfc2NoZW1hID0gJ3JhdyciCiAgICAgICAgKS5mZXRjaGFsbCgpfQogICAgICAgIGlmIG5vdCB7ImJhdGNoZXMiLCAicmVjb3JkcyJ9IDw9IHRhYmxlczoKICAgICAgICAgICAgcmFpc2UgU3lzdGVtRXhpdCgKICAgICAgICAgICAgICAgIGYibG9hZF9yYXdfdG9fcG9zdGdyZXM6IHJhdy5iYXRjaGVzL3Jhdy5yZWNvcmRzIG1pc3NpbmcgaW4ge2RhdGFiYXNlfTsgIgogICAgICAgICAgICAgICAgInJ1biBpbmdlc3Rpb24gZmlyc3QiCiAgICAgICAgICAgICkKICAgICAgICBiYXRjaGVzID0gZHVjay5leGVjdXRlKAogICAgICAgICAgICAiU0VMRUNUIHNvdXJjZSwgZGF0YXNldCwgZGlnZXN0LCBwYXRoLCBsb2FkZWRfYXQsIGNvbW1pdHRlZCwgb2JzZXJ2ZWRfYXQgIgogICAgICAgICAgICAiRlJPTSByYXcuYmF0Y2hlcyBPUkRFUiBCWSBzb3VyY2UsIGRhdGFzZXQsIGRpZ2VzdCIKICAgICAgICApLmZldGNoYWxsKCkKICAgICAgICByZWNvcmRzID0gZHVjay5leGVjdXRlKAogICAgICAgICAgICAiU0VMRUNUIHNvdXJjZSwgZGF0YXNldCwgZGlnZXN0LCByb3dfbnVtYmVyLCBwYXlsb2FkOjpWQVJDSEFSICIKICAgICAgICAgICAgIkZST00gcmF3LnJlY29yZHMgT1JERVIgQlkgc291cmNlLCBkYXRhc2V0LCBkaWdlc3QsIHJvd19udW1iZXIiCiAgICAgICAgKS5mZXRjaGFsbCgpCgogICAgd2l0aCBjb25uZWN0X3Bvc3RncmVzKCkgYXMgY29ubjoKICAgICAgICB3aXRoIGNvbm4uY3Vyc29yKCkgYXMgY3VyOgogICAgICAgICAgICBjdXIuZXhlY3V0ZSgiQ1JFQVRFIFNDSEVNQSBJRiBOT1QgRVhJU1RTIHJhdyIpCiAgICAgICAgICAgIGN1ci5leGVjdXRlKEJBVENIRVNfRERMKQogICAgICAgICAgICBjdXIuZXhlY3V0ZShSRUNPUkRTX0RETCkKICAgICAgICAgICAgYmVmb3JlX2IgPSBjdXIuZXhlY3V0ZSgiU0VMRUNUIGNvdW50KCopIEZST00gcmF3LmJhdGNoZXMiKS5mZXRjaG9uZSgpWzBdCiAgICAgICAgICAgIGJlZm9yZV9yID0gY3VyLmV4ZWN1dGUoIlNFTEVDVCBjb3VudCgqKSBGUk9NIHJhdy5yZWNvcmRzIikuZmV0Y2hvbmUoKVswXQogICAgICAgICAgICBjdXIuZXhlY3V0ZW1hbnkoCiAgICAgICAgICAgICAgICAiSU5TRVJUIElOVE8gcmF3LmJhdGNoZXMgKHNvdXJjZSwgZGF0YXNldCwgZGlnZXN0LCBwYXRoLCBsb2FkZWRfYXQsIGNvbW1pdHRlZCwgb2JzZXJ2ZWRfYXQpICIKICAgICAgICAgICAgICAgICJWQUxVRVMgKCVzLCAlcywgJXMsICVzLCAlcywgJXMsICVzKSBPTiBDT05GTElDVCBETyBOT1RISU5HIiwKICAgICAgICAgICAgICAgIGJhdGNoZXMsCiAgICAgICAgICAgICkKICAgICAgICAgICAgY3VyLmV4ZWN1dGVtYW55KAogICAgICAgICAgICAgICAgIklOU0VSVCBJTlRPIHJhdy5yZWNvcmRzIChzb3VyY2UsIGRhdGFzZXQsIGRpZ2VzdCwgcm93X251bWJlciwgcGF5bG9hZCkgIgogICAgICAgICAgICAgICAgIlZBTFVFUyAoJXMsICVzLCAlcywgJXMsICVzOjpqc29uYikgT04gQ09ORkxJQ1QgRE8gTk9USElORyIsCiAgICAgICAgICAgICAgICByZWNvcmRzLAogICAgICAgICAgICApCiAgICAgICAgICAgIGFmdGVyX2IgPSBjdXIuZXhlY3V0ZSgiU0VMRUNUIGNvdW50KCopIEZST00gcmF3LmJhdGNoZXMiKS5mZXRjaG9uZSgpWzBdCiAgICAgICAgICAgIGFmdGVyX3IgPSBjdXIuZXhlY3V0ZSgiU0VMRUNUIGNvdW50KCopIEZST00gcmF3LnJlY29yZHMiKS5mZXRjaG9uZSgpWzBdCiAgICAgICAgY29ubi5jb21taXQoKQoKICAgIHByaW50KAogICAgICAgICJsb2FkX3Jhd190b19wb3N0Z3JlczogIgogICAgICAgIGYiYmF0Y2hlcyB7YmVmb3JlX2J9IC0+IHthZnRlcl9ifSAoK3thZnRlcl9iIC0gYmVmb3JlX2J9IG5ldywge2xlbihiYXRjaGVzKX0gb2ZmZXJlZCk7ICIKICAgICAgICBmInJlY29yZHMge2JlZm9yZV9yfSAtPiB7YWZ0ZXJfcn0gKCt7YWZ0ZXJfciAtIGJlZm9yZV9yfSBuZXcsIHtsZW4ocmVjb3Jkcyl9IG9mZmVyZWQpIgogICAgKQogICAgaWYgYWZ0ZXJfYiA8IGJlZm9yZV9iIG9yIGFmdGVyX3IgPCBiZWZvcmVfcjoKICAgICAgICByYWlzZSBTeXN0ZW1FeGl0KCJsb2FkX3Jhd190b19wb3N0Z3Jlczogcm93IGNvdW50cyB3ZW50IGJhY2t3YXJkczsgcmVmdXNpbmcgdG8gY2FsbCB0aGlzIHN1Y2Nlc3MiKQogICAgcmV0dXJuIDAKCgpkZWYgbWFpbihhcmd2PU5vbmUpIC0+IGludDoKICAgIHBhcnNlciA9IGFyZ3BhcnNlLkFyZ3VtZW50UGFyc2VyKGRlc2NyaXB0aW9uPV9fZG9jX18pCiAgICBwYXJzZXIuYWRkX2FyZ3VtZW50KCItLWRhdGFiYXNlIiwgdHlwZT1QYXRoLAogICAgICAgICAgICAgICAgICAgICAgICBkZWZhdWx0PVBhdGgob3MuZW52aXJvbi5nZXQoIkdSSURfREFUQUJBU0UiLCAiZGF0YS9ncmlkLmR1Y2tkYiIpKSwKICAgICAgICAgICAgICAgICAgICAgICAgaGVscD0iRHVja0RCIHdhcmVob3VzZSB3cml0dGVuIGJ5IGluZ2VzdGlvbiAoZGVmYXVsdDogJEdSSURfREFUQUJBU0Ugb3IgZGF0YS9ncmlkLmR1Y2tkYikiKQogICAgcGFyc2VyLmFkZF9hcmd1bWVudCgiLS1jaGVjayIsIGFjdGlvbj0ic3RvcmVfdHJ1ZSIsCiAgICAgICAgICAgICAgICAgICAgICAgIGhlbHA9Ik9ubHkgcHJvYmUgUG9zdGdyZXMgY29ubmVjdGl2aXR5IChmYWlscyBsb3VkbHkgaWYgdGhlIHByb2plY3QgaXMgcGF1c2VkL3VucmVhY2hhYmxlKSIpCiAgICBhcmdzID0gcGFyc2VyLnBhcnNlX2FyZ3MoYXJndikKICAgIHJldHVybiBjaGVjayhhcmdzLmRhdGFiYXNlKSBpZiBhcmdzLmNoZWNrIGVsc2UgdHJhbnNmZXIoYXJncy5kYXRhYmFzZSkKCgppZiBfX25hbWVfXyA9PSAiX19tYWluX18iOgogICAgc3lzLmV4aXQobWFpbigpKQo=
+"""Mirror the local DuckDB raw landing zone into the Postgres deployment target.
+
+S5 deployment layer (PLAN decision 4): ingestion stays DuckDB-local and
+append-only; this script copies raw.batches / raw.records into the Supabase
+Postgres database so `dbt build --target supabase` reads the same raw sources
+the local target reads. Inserts are keyed on the raw tables' primary keys with
+ON CONFLICT DO NOTHING, so re-running a window is a no-op and the Postgres raw
+zone accumulates history across scheduled runs.
+
+Connection comes only from the environment, using the same variable names as
+dbt/profiles.yml's `supabase` output (SUPABASE_DB_HOST / _PORT / _USER /
+_PASSWORD / _NAME), or a single SUPABASE_DB_URL if set. No defaults for
+credentials: a missing variable is a loud failure, never a silent skip. A
+paused Supabase project fails the connection and therefore fails the run —
+that is the intended keep-alive alarm, not a bug.
+
+Usage:
+    python scripts/load_raw_to_postgres.py [--database data/grid.duckdb]
+    python scripts/load_raw_to_postgres.py --check   # connectivity probe only
+"""
+
+import argparse
+import os
+from pathlib import Path
+import sys
+
+import duckdb
+import psycopg
+
+
+BATCHES_DDL = """
+CREATE TABLE IF NOT EXISTS raw.batches (
+    source VARCHAR NOT NULL,
+    dataset VARCHAR NOT NULL,
+    digest VARCHAR NOT NULL,
+    path VARCHAR,
+    loaded_at TIMESTAMPTZ DEFAULT now(),
+    committed BOOLEAN DEFAULT TRUE,
+    observed_at TIMESTAMPTZ,
+    PRIMARY KEY (source, dataset, digest)
+)
+"""
+
+RECORDS_DDL = """
+CREATE TABLE IF NOT EXISTS raw.records (
+    source VARCHAR NOT NULL,
+    dataset VARCHAR NOT NULL,
+    digest VARCHAR NOT NULL,
+    row_number INTEGER NOT NULL,
+    payload JSONB,
+    PRIMARY KEY (source, dataset, digest, row_number)
+)
+"""
+
+
+def connection_kwargs() -> dict:
+    url = os.environ.get("SUPABASE_DB_URL")
+    if url:
+        return {"conninfo": url}
+    required = ("SUPABASE_DB_HOST", "SUPABASE_DB_USER", "SUPABASE_DB_PASSWORD")
+    missing = [name for name in required if not os.environ.get(name)]
+    if missing:
+        raise SystemExit(
+            "load_raw_to_postgres: missing required environment variables: "
+            + ", ".join(missing)
+            + " (set them as repo secrets; see dbt/profiles.yml)"
+        )
+    return {
+        "host": os.environ["SUPABASE_DB_HOST"],
+        "port": int(os.environ.get("SUPABASE_DB_PORT", "5432")),
+        "user": os.environ["SUPABASE_DB_USER"],
+        "password": os.environ["SUPABASE_DB_PASSWORD"],
+        "dbname": os.environ.get("SUPABASE_DB_NAME", "postgres"),
+        "connect_timeout": 30,
+    }
+
+
+def connect_postgres() -> psycopg.Connection:
+    kwargs = connection_kwargs()
+    if "conninfo" in kwargs:
+        return psycopg.connect(kwargs["conninfo"], connect_timeout=30)
+    return psycopg.connect(**kwargs)
+
+
+def check(database: Path) -> int:
+    with connect_postgres() as conn:
+        with conn.cursor() as cur:
+            cur.execute("SELECT 1 FROM pg_database WHERE datname = current_database()")
+            cur.fetchone()
+            cur.execute("SELECT count(*) FROM information_schema.schemata WHERE schema_name = 'raw'")
+            has_raw = cur.fetchone()[0] == 1
+    print(f"load_raw_to_postgres: Postgres reachable; raw schema present: {bool(has_raw)}")
+    return 0
+
+
+def transfer(database: Path) -> int:
+    if not database.is_file():
+        raise SystemExit(f"load_raw_to_postgres: warehouse not found: {database}")
+    with duckdb.connect(str(database), read_only=True) as duck:
+        tables = {row[0] for row in duck.execute(
+            "SELECT table_name FROM information_schema.tables WHERE table_schema = 'raw'"
+        ).fetchall()}
+        if not {"batches", "records"} <= tables:
+            raise SystemExit(
+                f"load_raw_to_postgres: raw.batches/raw.records missing in {database}; "
+                "run ingestion first"
+            )
+        batches = duck.execute(
+            "SELECT source, dataset, digest, path, loaded_at, committed, observed_at "
+            "FROM raw.batches ORDER BY source, dataset, digest"
+        ).fetchall()
+        records = duck.execute(
+            "SELECT source, dataset, digest, row_number, payload::VARCHAR "
+            "FROM raw.records ORDER BY source, dataset, digest, row_number"
+        ).fetchall()
+
+    with connect_postgres() as conn:
+        with conn.cursor() as cur:
+            cur.execute("CREATE SCHEMA IF NOT EXISTS raw")
+            cur.execute(BATCHES_DDL)
+            cur.execute(RECORDS_DDL)
+            before_b = cur.execute("SELECT count(*) FROM raw.batches").fetchone()[0]
+            before_r = cur.execute("SELECT count(*) FROM raw.records").fetchone()[0]
+            cur.executemany(
+                "INSERT INTO raw.batches (source, dataset, digest, path, loaded_at, committed, observed_at) "
+                "VALUES (%s, %s, %s, %s, %s, %s, %s) ON CONFLICT DO NOTHING",
+                batches,
+            )
+            cur.executemany(
+                "INSERT INTO raw.records (source, dataset, digest, row_number, payload) "
+                "VALUES (%s, %s, %s, %s, %s::jsonb) ON CONFLICT DO NOTHING",
+                records,
+            )
+            after_b = cur.execute("SELECT count(*) FROM raw.batches").fetchone()[0]
+            after_r = cur.execute("SELECT count(*) FROM raw.records").fetchone()[0]
+        conn.commit()
+
+    print(
+        "load_raw_to_postgres: "
+        f"batches {before_b} -> {after_b} (+{after_b - before_b} new, {len(batches)} offered); "
+        f"records {before_r} -> {after_r} (+{after_r - before_r} new, {len(records)} offered)"
+    )
+    if after_b < before_b or after_r < before_r:
+        raise SystemExit("load_raw_to_postgres: row counts went backwards; refusing to call this success")
+    return 0
+
+
+def main(argv=None) -> int:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--database", type=Path,
+                        default=Path(os.environ.get("GRID_DATABASE", "data/grid.duckdb")),
+                        help="DuckDB warehouse written by ingestion (default: $GRID_DATABASE or data/grid.duckdb)")
+    parser.add_argument("--check", action="store_true",
+                        help="Only probe Postgres connectivity (fails loudly if the project is paused/unreachable)")
+    args = parser.parse_args(argv)
+    return check(args.database) if args.check else transfer(args.database)
+
+
+if __name__ == "__main__":
+    sys.exit(main())

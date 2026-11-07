@@ -1,1 +1,20 @@
-c2VsZWN0IHIuZGlnZXN0LCByLnJvd19udW1iZXIsIGIubG9hZGVkX2F0IGFzIGZldGNoZWRfYXRfdXRjLAogICAgY29hbGVzY2Uoe3sganNvbl90ZXh0KCdyLnBheWxvYWQnLCAncHJvcGVydGllcy5pZCcpIH19LCB7eyBqc29uX3RleHQoJ3IucGF5bG9hZCcsICdpZCcpIH19KSBhcyBhbGVydF9pZCwKICAgIHt7IGpzb25fdGV4dCgnci5wYXlsb2FkJywgJ3Byb3BlcnRpZXMuZXZlbnQnKSB9fSBhcyBldmVudCwKICAgIHt7IHRyeV9jYXN0KGpzb25fdGV4dCgnci5wYXlsb2FkJywgJ3Byb3BlcnRpZXMuc2VudCcpLCAndGltZXN0YW1wdHonKSB9fSBhcyBzZW50X2F0X3V0YywKICAgIHt7IHRyeV9jYXN0KGpzb25fdGV4dCgnci5wYXlsb2FkJywgJ3Byb3BlcnRpZXMuZWZmZWN0aXZlJyksICd0aW1lc3RhbXB0eicpIH19IGFzIGVmZmVjdGl2ZV9hdF91dGMsCiAgICB7eyB0cnlfY2FzdChqc29uX3RleHQoJ3IucGF5bG9hZCcsICdwcm9wZXJ0aWVzLm9uc2V0JyksICd0aW1lc3RhbXB0eicpIH19IGFzIG9uc2V0X2F0X3V0YywKICAgIHt7IHRyeV9jYXN0KGpzb25fdGV4dCgnci5wYXlsb2FkJywgJ3Byb3BlcnRpZXMuZXhwaXJlcycpLCAndGltZXN0YW1wdHonKSB9fSBhcyBleHBpcmVzX2F0X3V0YywKICAgIHt7IHRyeV9jYXN0KGpzb25fdGV4dCgnci5wYXlsb2FkJywgJ3Byb3BlcnRpZXMuZW5kcycpLCAndGltZXN0YW1wdHonKSB9fSBhcyBlbmRzX2F0X3V0YywKICAgIHt7IGpzb25fdGV4dCgnci5wYXlsb2FkJywgJ3Byb3BlcnRpZXMuc2V2ZXJpdHknKSB9fSBhcyBzZXZlcml0eSwKICAgIHt7IGpzb25fdGV4dCgnci5wYXlsb2FkJywgJ3Byb3BlcnRpZXMuaGVhZGxpbmUnKSB9fSBhcyBoZWFkbGluZSwKICAgIHt7IGpzb25fdGV4dCgnci5wYXlsb2FkJywgJ3Byb3BlcnRpZXMuZGVzY3JpcHRpb24nKSB9fSBhcyBkZXNjcmlwdGlvbgpmcm9tIHt7IHNvdXJjZSgncmF3JywgJ3JlY29yZHMnKSB9fSByCmpvaW4ge3sgc291cmNlKCdyYXcnLCAnYmF0Y2hlcycpIH19IGIgdXNpbmcgKHNvdXJjZSwgZGF0YXNldCwgZGlnZXN0KQp3aGVyZSByLnNvdXJjZSA9ICdud3MnIGFuZCByLmRhdGFzZXQgPSAnYWxlcnRzJyBhbmQgYi5jb21taXR0ZWQKICAgIGFuZCAoe3sganNvbl90ZXh0KCdyLnBheWxvYWQnLCAncHJvcGVydGllcy5ldmVudCcpIH19KSBpbiAoCiAgICAgICAgJ0hlYXQgQWR2aXNvcnknLCAnRXh0cmVtZSBIZWF0IFdhdGNoJywgJ0V4dHJlbWUgSGVhdCBXYXJuaW5nJywKICAgICAgICAnRXhjZXNzaXZlIEhlYXQgV2F0Y2gnLCAnRXhjZXNzaXZlIEhlYXQgV2FybmluZycsICdDb2xkIFdlYXRoZXIgQWR2aXNvcnknLAogICAgICAgICdFeHRyZW1lIENvbGQgV2F0Y2gnLCAnRXh0cmVtZSBDb2xkIFdhcm5pbmcnLCAnV2luZCBDaGlsbCBBZHZpc29yeScsCiAgICAgICAgJ1dpbmQgQ2hpbGwgV2F0Y2gnLCAnV2luZCBDaGlsbCBXYXJuaW5nJwogICAgKQo=
+select r.digest, r.row_number, b.loaded_at as fetched_at_utc,
+    coalesce({{ json_text('r.payload', 'properties.id') }}, {{ json_text('r.payload', 'id') }}) as alert_id,
+    {{ json_text('r.payload', 'properties.event') }} as event,
+    {{ try_cast(json_text('r.payload', 'properties.sent'), 'timestamptz') }} as sent_at_utc,
+    {{ try_cast(json_text('r.payload', 'properties.effective'), 'timestamptz') }} as effective_at_utc,
+    {{ try_cast(json_text('r.payload', 'properties.onset'), 'timestamptz') }} as onset_at_utc,
+    {{ try_cast(json_text('r.payload', 'properties.expires'), 'timestamptz') }} as expires_at_utc,
+    {{ try_cast(json_text('r.payload', 'properties.ends'), 'timestamptz') }} as ends_at_utc,
+    {{ json_text('r.payload', 'properties.severity') }} as severity,
+    {{ json_text('r.payload', 'properties.headline') }} as headline,
+    {{ json_text('r.payload', 'properties.description') }} as description
+from {{ source('raw', 'records') }} r
+join {{ source('raw', 'batches') }} b using (source, dataset, digest)
+where r.source = 'nws' and r.dataset = 'alerts' and b.committed
+    and ({{ json_text('r.payload', 'properties.event') }}) in (
+        'Heat Advisory', 'Extreme Heat Watch', 'Extreme Heat Warning',
+        'Excessive Heat Watch', 'Excessive Heat Warning', 'Cold Weather Advisory',
+        'Extreme Cold Watch', 'Extreme Cold Warning', 'Wind Chill Advisory',
+        'Wind Chill Watch', 'Wind Chill Warning'
+    )

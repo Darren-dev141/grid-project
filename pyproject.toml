@@ -1,1 +1,29 @@
-W2J1aWxkLXN5c3RlbV0KcmVxdWlyZXMgPSBbInNldHVwdG9vbHM+PTc1Il0KYnVpbGQtYmFja2VuZCA9ICJzZXR1cHRvb2xzLmJ1aWxkX21ldGEiCgpbcHJvamVjdF0KbmFtZSA9ICJncmlkLXByb2plY3QiCnZlcnNpb24gPSAiMC4xLjAiCmRlc2NyaXB0aW9uID0gIkxvY2FsIFBKTSBhbmQgRUlBIGVuZXJneSBkYXRhIHBpcGVsaW5lIgpyZXF1aXJlcy1weXRob24gPSAiPj0zLjExIgpkZXBlbmRlbmNpZXMgPSBbImR1Y2tkYj49MS4yLDwyIiwgImh0dHB4Pj0wLjI4LDwxIiwgInR6ZGF0YT49MjAyNS4xIiwgIm51bXB5Pj0yLDwzIl0KCltwcm9qZWN0Lm9wdGlvbmFsLWRlcGVuZGVuY2llc10KZGV2ID0gWyJweXRlc3Q+PTgsPDEwIiwgImRidC1kdWNrZGI+PTEuOSw8MiIsICJkYnQtcG9zdGdyZXM+PTEuOSw8MiIsICJwc3ljb3BnW2JpbmFyeV0+PTMuMiw8NCJdCgpbcHJvamVjdC5zY3JpcHRzXQpncmlkID0gImdyaWRfcGlwZWxpbmUuY2xpOm1haW4iCmdyaWQtZmV0Y2ggPSAiZ3JpZF9waXBlbGluZS5mZXRjaF9jbGk6bWFpbiIKZ3JpZC1iYWNrZmlsbCA9ICJncmlkX3BpcGVsaW5lLmZldGNoX2NsaTpiYWNrZmlsbF9tYWluIgpncmlkLXB1Ymxpc2ggPSAiZ3JpZF9waXBlbGluZS5wdWJsaXNoOm1haW4iCmdyaWQtZnJlc2huZXNzID0gImdyaWRfcGlwZWxpbmUuZnJlc2huZXNzOm1haW4iCmdyaWQtd2VhdGhlciA9ICJncmlkX3BpcGVsaW5lLm53czptYWluIgpncmlkLXdlYXRoZXItYndpID0gImdyaWRfcGlwZWxpbmUubndzOm1haW5fYndpIgpncmlkLXRlbXBzID0gImdyaWRfcGlwZWxpbmUubmNlaTptYWluIgoKW3Rvb2wuc2V0dXB0b29scy5wYWNrYWdlcy5maW5kXQp3aGVyZSA9IFsic3JjIl0KClt0b29sLnB5dGVzdC5pbmlfb3B0aW9uc10KdGVzdHBhdGhzID0gWyJ0ZXN0cyJdCg==
+[build-system]
+requires = ["setuptools>=75"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "grid-project"
+version = "0.1.0"
+description = "Local PJM and EIA energy data pipeline"
+requires-python = ">=3.11"
+dependencies = ["duckdb>=1.2,<2", "httpx>=0.28,<1", "tzdata>=2025.1", "numpy>=2,<3"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8,<10", "dbt-duckdb>=1.9,<2", "dbt-postgres>=1.9,<2", "psycopg[binary]>=3.2,<4"]
+
+[project.scripts]
+grid = "grid_pipeline.cli:main"
+grid-fetch = "grid_pipeline.fetch_cli:main"
+grid-backfill = "grid_pipeline.fetch_cli:backfill_main"
+grid-publish = "grid_pipeline.publish:main"
+grid-freshness = "grid_pipeline.freshness:main"
+grid-weather = "grid_pipeline.nws:main"
+grid-weather-bwi = "grid_pipeline.nws:main_bwi"
+grid-temps = "grid_pipeline.ncei:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

@@ -1,1 +1,2 @@
-c2VsZWN0ICogZnJvbSB7eyByZWYoJ253c19mb3JlY2FzdF9wZXJpb2RzJykgfX0Kd2hlcmUgbm90IHt7IGlzX2Zpbml0ZSgndGVtcGVyYXR1cmVfZicpIH19Cg==
+select * from {{ ref('nws_forecast_periods') }}
+where not {{ is_finite('temperature_f') }}

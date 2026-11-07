@@ -1,1 +1,28 @@
-d2l0aCBtaXggYXMgKAogICAgc2VsZWN0IGhvdXJfdXRjLAogICAgICAgIHN1bShnZW5lcmF0aW9uX213aCkgYXMgcmVwb3J0ZWRfZ2VuZXJhdGlvbl9td2gsCiAgICAgICAgc3VtKGNhc2Ugd2hlbiBmdWVsX3R5cGUgaW4gKCdTVU4nLCAnV0FUJywgJ1dORCcpCiAgICAgICAgICAgICAgICAgdGhlbiBnZW5lcmF0aW9uX213aCBlbHNlIDAgZW5kKSBhcyByZW5ld2FibGVfZ2VuZXJhdGlvbl9td2gsCiAgICAgICAgY291bnQoKikgYXMgZnVlbF9jb3VudCwKICAgICAgICBjb3VudCgqKSBmaWx0ZXIgKHdoZXJlIGZ1ZWxfdHlwZSBpbiAoCiAgICAgICAgICB7JSBmb3IgZnVlbCBpbiB2YXIoJ2V4cGVjdGVkX2Z1ZWxzJykgJX0ne3sgZnVlbCB9fSd7JSBpZiBub3QgbG9vcC5sYXN0ICV9LCB7JSBlbmRpZiAlfXslIGVuZGZvciAlfQogICAgICAgICkpID0ge3sgdmFyKCdleHBlY3RlZF9mdWVscycpIHwgbGVuZ3RoIH19CiAgICAgICAgYW5kIGNvdW50KCopID0ge3sgdmFyKCdleHBlY3RlZF9mdWVscycpIHwgbGVuZ3RoIH19CiAgICAgICAgYW5kIGJvb2xfYW5kKGNvYWxlc2NlKHt7IGlzX2Zpbml0ZSgnZ2VuZXJhdGlvbl9td2gnKSB9fSBhbmQgZ2VuZXJhdGlvbl9td2ggPj0gMAogICAgICAgICAgICAgICAgICAgICAgICAgICAgIGFuZCB1bml0cyA9ICdtZWdhd2F0dGhvdXJzJywgZmFsc2UpKSBhcyBtaXhfY29tcGxldGUsCiAgICAgICAgbWF4KGxvYWRlZF9hdCkgYXMgZ2VuZXJhdGlvbl9sb2FkZWRfYXQKICAgIGZyb20ge3sgcmVmKCdlaWFfcGptX2hvdXJseV9nZW5lcmF0aW9uJykgfX0KICAgIGdyb3VwIGJ5IGhvdXJfdXRjCikKc2VsZWN0IGNvYWxlc2NlKHAuaG91cl91dGMsIG0uaG91cl91dGMpIGFzIGhvdXJfdXRjLAogICAgcC5wbm9kZV9pZCwgcC5wcmljZV91c2RfcGVyX213aCwKICAgICdCR0UgcHJpY2luZyBub2RlJyBhcyBwcmljZV9nZW9ncmFwaHksCiAgICAnUEpNIGJhbGFuY2luZyBhdXRob3JpdHknIGFzIGdlbmVyYXRpb25fZ2VvZ3JhcGh5LAogICAgbS5yZXBvcnRlZF9nZW5lcmF0aW9uX213aCwgbS5mdWVsX2NvdW50LAogICAgY29hbGVzY2UobS5taXhfY29tcGxldGUsIGZhbHNlKSBhcyBtaXhfY29tcGxldGUsCiAgICBjYXNlIHdoZW4gbS5taXhfY29tcGxldGUgYW5kIG0ucmVwb3J0ZWRfZ2VuZXJhdGlvbl9td2ggPiAwCiAgICAgICAgdGhlbiBtLnJlbmV3YWJsZV9nZW5lcmF0aW9uX213aCAvIG0ucmVwb3J0ZWRfZ2VuZXJhdGlvbl9td2gKICAgIGVuZCBhcyByZW5ld2FibGVfc2hhcmUsCiAgICBwLmxvYWRlZF9hdCBhcyBwcmljZV9sb2FkZWRfYXQsIG0uZ2VuZXJhdGlvbl9sb2FkZWRfYXQKZnJvbSB7eyByZWYoJ3BqbV9iZ2VfaG91cmx5X3ByaWNlJykgfX0gcApmdWxsIG91dGVyIGpvaW4gbWl4IG0gdXNpbmcgKGhvdXJfdXRjKQo=
+with mix as (
+    select hour_utc,
+        sum(generation_mwh) as reported_generation_mwh,
+        sum(case when fuel_type in ('SUN', 'WAT', 'WND')
+                 then generation_mwh else 0 end) as renewable_generation_mwh,
+        count(*) as fuel_count,
+        count(*) filter (where fuel_type in (
+          {% for fuel in var('expected_fuels') %}'{{ fuel }}'{% if not loop.last %}, {% endif %}{% endfor %}
+        )) = {{ var('expected_fuels') | length }}
+        and count(*) = {{ var('expected_fuels') | length }}
+        and bool_and(coalesce({{ is_finite('generation_mwh') }} and generation_mwh >= 0
+                             and units = 'megawatthours', false)) as mix_complete,
+        max(loaded_at) as generation_loaded_at
+    from {{ ref('eia_pjm_hourly_generation') }}
+    group by hour_utc
+)
+select coalesce(p.hour_utc, m.hour_utc) as hour_utc,
+    p.pnode_id, p.price_usd_per_mwh,
+    'BGE pricing node' as price_geography,
+    'PJM balancing authority' as generation_geography,
+    m.reported_generation_mwh, m.fuel_count,
+    coalesce(m.mix_complete, false) as mix_complete,
+    case when m.mix_complete and m.reported_generation_mwh > 0
+        then m.renewable_generation_mwh / m.reported_generation_mwh
+    end as renewable_share,
+    p.loaded_at as price_loaded_at, m.generation_loaded_at
+from {{ ref('pjm_bge_hourly_price') }} p
+full outer join mix m using (hour_utc)

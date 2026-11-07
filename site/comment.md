@@ -1,1 +1,10 @@
-IyMgR3JpZCBicmllZiDigJQgMjAyNi0xMS0wNgoKUEpNLXdpZGUgY2FsbCwgTWFyeWxhbmQgd2VhdGhlci4gRGVmaW5pdGlvbjogc3RyZXNzLWluZGV4LXYxLgpDYWxsOiAqKk5vIGNhbGwqKiDigJQgYHN0YWxlX2xvYWRgClBlYWsgZGVtYW5kIC8gcGVhayBob3VyIC8gbGV2ZWw6IG5vdCBjbGFpbWVkLgpGcmVzaG5lc3M6IGxvYWQgc3RhbGUsIHdlYXRoZXIgc3RhbGUuCkRhdGEgYXMgb2Y6IDIwMjYtMTAtMjEuCgojIyMgUmVjZWlwdHMgZm9yIDIwMjYtMTEtMDYKTm8gcmVjZWlwdHMgaW4gdGhlIGxlZGdlciBmb3IgdGhpcyB0YXJnZXQgZGF0ZS4K
+## Grid brief — 2026-11-06
+
+PJM-wide call, Maryland weather. Definition: stress-index-v1.
+Call: **No call** — `stale_load`
+Peak demand / peak hour / level: not claimed.
+Freshness: load stale, weather stale.
+Data as of: 2026-10-21.
+
+### Receipts for 2026-11-06
+No receipts in the ledger for this target date.

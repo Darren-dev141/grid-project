@@ -1,1 +1,24 @@
-d2l0aCBwYXJzZWQgYXMgKAogICAgc2VsZWN0CiAgICAgICAge3sgdHJ5X3N0cnB0aW1lKCJyLnBheWxvYWQgLT4+ICdkYXRldGltZV9iZWdpbm5pbmdfdXRjJyIsCiAgICAgICAgICAgIFsnJW0vJWQvJVkgJUg6JU06JVMnLCAnJW0vJWQvJVkgJUg6JU0nLCAnJVktJW0tJWRUJUg6JU06JVMnXSkgfX0gYXMgaG91cl91dGMsCiAgICAgICAge3sgdHJ5X2Nhc3QoInIucGF5bG9hZCAtPj4gJ3Bub2RlX2lkJyIsICdiaWdpbnQnKSB9fSBhcyBwbm9kZV9pZCwKICAgICAgICB7eyB0cnlfY2FzdCgici5wYXlsb2FkIC0+PiAndG90YWxfbG1wX3J0JyIsICdkb3VibGUnKSB9fSBhcyBwcmljZV91c2RfcGVyX213aCwKICAgICAgICBiLmxvYWRlZF9hdCwKICAgICAgICBjb2FsZXNjZShiLm9ic2VydmVkX2F0LCBiLmxvYWRlZF9hdCkgYXMgb2JzZXJ2ZWRfYXQsCiAgICAgICAgci5kaWdlc3QsCiAgICAgICAgci5yb3dfbnVtYmVyCiAgICBmcm9tIHt7IHNvdXJjZSgncmF3JywgJ3JlY29yZHMnKSB9fSByCiAgICBqb2luIHt7IHNvdXJjZSgncmF3JywgJ2JhdGNoZXMnKSB9fSBiIHVzaW5nIChzb3VyY2UsIGRhdGFzZXQsIGRpZ2VzdCkKICAgIHdoZXJlIHIuc291cmNlID0gJ3BqbScgYW5kIHIuZGF0YXNldCA9ICdydF9ocmxfbG1wcycgYW5kIGIuY29tbWl0dGVkCiksIHJhbmtlZCBhcyAoCiAgICBzZWxlY3QgKiwgcm93X251bWJlcigpIG92ZXIgKAogICAgICAgIHBhcnRpdGlvbiBieSBob3VyX3V0YywgcG5vZGVfaWQKICAgICAgICBvcmRlciBieSBvYnNlcnZlZF9hdCBkZXNjLCBkaWdlc3QgZGVzYywgcm93X251bWJlciBkZXNjCiAgICApIGFzIHJldmlzaW9uX3JhbmsKICAgIGZyb20gcGFyc2VkCiAgICB3aGVyZSBwbm9kZV9pZCA9IHt7IGJnZV9ub2RlKCkgfX0KKQpzZWxlY3QgaG91cl91dGMsIHBub2RlX2lkLCBwcmljZV91c2RfcGVyX213aCwKICAgICdCR0UgcHJpY2luZyBub2RlJyBhcyBwcmljZV9nZW9ncmFwaHksIGxvYWRlZF9hdCwgb2JzZXJ2ZWRfYXQsIGRpZ2VzdApmcm9tIHJhbmtlZCB3aGVyZSByZXZpc2lvbl9yYW5rID0gMQo=
+with parsed as (
+    select
+        {{ try_strptime("r.payload ->> 'datetime_beginning_utc'",
+            ['%m/%d/%Y %H:%M:%S', '%m/%d/%Y %H:%M', '%Y-%m-%dT%H:%M:%S']) }} as hour_utc,
+        {{ try_cast("r.payload ->> 'pnode_id'", 'bigint') }} as pnode_id,
+        {{ try_cast("r.payload ->> 'total_lmp_rt'", 'double') }} as price_usd_per_mwh,
+        b.loaded_at,
+        coalesce(b.observed_at, b.loaded_at) as observed_at,
+        r.digest,
+        r.row_number
+    from {{ source('raw', 'records') }} r
+    join {{ source('raw', 'batches') }} b using (source, dataset, digest)
+    where r.source = 'pjm' and r.dataset = 'rt_hrl_lmps' and b.committed
+), ranked as (
+    select *, row_number() over (
+        partition by hour_utc, pnode_id
+        order by observed_at desc, digest desc, row_number desc
+    ) as revision_rank
+    from parsed
+    where pnode_id = {{ bge_node() }}
+)
+select hour_utc, pnode_id, price_usd_per_mwh,
+    'BGE pricing node' as price_geography, loaded_at, observed_at, digest
+from ranked where revision_rank = 1

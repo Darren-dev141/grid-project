@@ -1,1 +1,368 @@
-eyMtCiAgQ3Jvc3MtZGlhbGVjdCBtYWNyb3MgKFM1IGRpYWxlY3QgcGFzcywgMjAyNi0xMS0wNikuCgogIFRoZSBtb2RlbHMgYXJlIHNpbmdsZS1zb3VyY2UgZm9yIGJvdGggdGFyZ2V0czogYGxvY2FsYCAoRHVja0RCKSBhbmQKICBgc3VwYWJhc2VgIChQb3N0Z3JlcykuIEV2ZXJ5IG1hY3JvIGhlcmUgZGlzcGF0Y2hlcyBvbiB0aGUgYWRhcHRlcjoKICB0aGUgRHVja0RCIHNpZGUgZW1pdHMgdGhlIG9yaWdpbmFsIER1Y2tEQiBjb25zdHJ1Y3QgdW5jaGFuZ2VkLCB0aGUKICBQb3N0Z3JlcyBzaWRlIGVtaXRzIGVpdGhlciBwb3J0YWJsZSBTUUwgb3IgYSBjYWxsIHRvIGFuIGV4Y2VwdGlvbi1zYWZlCiAgcGxwZ3NxbCBoZWxwZXIgaW5zdGFsbGVkIGJ5IHRoZSBpbnN0YWxsX3BnX2hlbHBlcnMgb24tcnVuLXN0YXJ0IGhvb2sKICAoc2NoZW1hIGdyaWRfZGJ0X2hlbHBlcnMsIHBvc3RncmVzIHRhcmdldCBvbmx5KS4KCiAgU2VtYW50aWMgYmFyIGZvciBldmVyeSBtYWNybzogaWRlbnRpY2FsIHJlc3VsdHMgb24gYm90aCBlbmdpbmVzIGZvciB0aGUKICBzYW1lIGlucHV0LCBpbmNsdWRpbmcgTlVMTC1vbi11bnBhcnNlYWJsZSAobmV2ZXIgYW4gZXJyb3IpIGZvciB0aGUKICB0cnlfKiBmYW1pbHkuIFNlZSBzNS1kZXBsb3ltZW50L2RpYWxlY3QtcGFzcy1sb2cubWQgZm9yIHRoZSBwZXItbWFjcm8KICBwYXJpdHkgYXJndW1lbnQgYW5kIHRoZSBuYW1lZCByZXNpZHVhbCBkaXZlcmdlbmNlcyAoZXhvdGljIHN0cmluZwogIHNoYXBlcyBvdXRzaWRlIHRoZSBwcm92aWRlciBhbHBoYWJldDogaGV4IC8gdW5kZXJzY29yZS1zZXBhcmF0ZWQgLwogIG5vbi1JU08gZGF0ZSBzdHJpbmdzKS4KLSN9Cgp7IyAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0gI30KeyMgdHJ5X2Nhc3QoZXhwciBhcyBUKSDigJQgVCBpbiB7ZG91YmxlLCBkYXRlLCB0aW1lc3RhbXB0eiwgaW50ZWdlciwgICAgICN9CnsjIGJpZ2ludCwgYm9vbGVhbn0uIFBvc3RncmVzIGhhcyBubyB0cnlfY2FzdDsgdGhlIGhlbHBlcnMgcmV0dXJuIE5VTEwgI30KeyMgb24gYW55IGNhc3QgZmFpbHVyZSBhbmQgZW11bGF0ZSBEdWNrREIncyBkb3VibGUtbWVkaWF0ZWQgcm91bmRpbmcgICAjfQp7IyBmb3IgaW50ZWdlci9iaWdpbnQgYW5kIGl0cyBib29sZWFuIGxpdGVyYWwgc2V0LiAgICAgICAgICAgICAgICAgICAgICN9CnsjIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLSAjfQp7JSBtYWNybyB0cnlfY2FzdChleHByLCB0eXBlKSAlfQogIHt7IGFkYXB0ZXIuZGlzcGF0Y2goJ3RyeV9jYXN0JywgJ2dyaWRfcHJvamVjdCcpKGV4cHIsIHR5cGUpIH19CnslIGVuZG1hY3JvICV9Cgp7JSBtYWNybyBkZWZhdWx0X190cnlfY2FzdChleHByLCB0eXBlKSAlfQogIHRyeV9jYXN0KHt7IGV4cHIgfX0gYXMge3sgdHlwZSB9fSkKeyUgZW5kbWFjcm8gJX0KCnslIG1hY3JvIHBvc3RncmVzX190cnlfY2FzdChleHByLCB0eXBlKSAlfQogIGdyaWRfZGJ0X2hlbHBlcnMudHJ5X2Nhc3Rfe3sgdHlwZSB9fSh7eyBleHByIH19KQp7JSBlbmRtYWNybyAlfQoKeyMgLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tICN9CnsjIGpzb25fdGV4dChleHByLCAnYS5iLmMnKSDigJQgdGV4dCBleHRyYWN0aW9uIGF0IGEgZG90IHBhdGguICAgICAgICAgICAjfQp7IyBEdWNrREI6IGV4cHIgLT4+ICckLmEuYi5jJyAob3IgLT4+ICdrZXknIGZvciBhIHNpbmdsZSBrZXkpLiAgICAgICAgICN9CnsjIFBvc3RncmVzIChqc29uYik6IGV4cHIgIz4+ICd7YSxiLGN9JyAob3IgLT4+ICdrZXknKS4gICAgICAgICAgICAgICAgI30KeyMgQm90aCByZXR1cm4gdGV4dCAvIE5VTEwgZm9yIGEgbWlzc2luZyBvciBKU09OLW51bGwgbGVhZi4gICAgICAgICAgICAjfQp7IyAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0gI30KeyUgbWFjcm8ganNvbl90ZXh0KGV4cHIsIHBhdGgpICV9CiAge3sgYWRhcHRlci5kaXNwYXRjaCgnanNvbl90ZXh0JywgJ2dyaWRfcHJvamVjdCcpKGV4cHIsIHBhdGgpIH19CnslIGVuZG1hY3JvICV9Cgp7JSBtYWNybyBkZWZhdWx0X19qc29uX3RleHQoZXhwciwgcGF0aCkgJX0KICB7JS0gaWYgJy4nIGluIHBhdGggLSV9CiAgICB7eyBleHByIH19IC0+PiAnJC57eyBwYXRoIH19JwogIHslLSBlbHNlIC0lfQogICAge3sgZXhwciB9fSAtPj4gJ3t7IHBhdGggfX0nCiAgeyUtIGVuZGlmIC0lfQp7JSBlbmRtYWNybyAlfQoKeyUgbWFjcm8gcG9zdGdyZXNfX2pzb25fdGV4dChleHByLCBwYXRoKSAlfQogIHslLSBpZiAnLicgaW4gcGF0aCAtJX0KICAgIHt7IGV4cHIgfX0gIz4+ICd7IHt7LSBwYXRoLnNwbGl0KCcuJykgfCBqb2luKCcsJykgLX19IH0nCiAgeyUtIGVsc2UgLSV9CiAgICB7eyBleHByIH19IC0+PiAne3sgcGF0aCB9fScKICB7JS0gZW5kaWYgLSV9CnslIGVuZG1hY3JvICV9Cgp7IyAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0gI30KeyMganNvbl9hcnJheV9lbGVtZW50cyhleHByLCAnYS5iJykg4oCUIGxhdGVyYWwgdW5uZXN0IG9mIGEgSlNPTiBhcnJheSAgICN9CnsjIGF0IGEgZG90IHBhdGgsIGFsaWFzZWQgYXMgcCh2YWx1ZSkgc28gcC52YWx1ZSAtPj4gJ2snIHdvcmtzIHZpYSAgICAgI30KeyMganNvbl90ZXh0IG9uIGJvdGggZW5naW5lcyAoanNvbl9lYWNoIG9uIER1Y2tEQiwgICAgICAgICAgICAgICAgICAgICAjfQp7IyBqc29uYl9hcnJheV9lbGVtZW50cyBvbiBQb3N0Z3JlcykuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgI30KeyMgLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tICN9CnslIG1hY3JvIGpzb25fYXJyYXlfZWxlbWVudHMoZXhwciwgcGF0aCkgJX0KICB7eyBhZGFwdGVyLmRpc3BhdGNoKCdqc29uX2FycmF5X2VsZW1lbnRzJywgJ2dyaWRfcHJvamVjdCcpKGV4cHIsIHBhdGgpIH19CnslIGVuZG1hY3JvICV9Cgp7JSBtYWNybyBkZWZhdWx0X19qc29uX2FycmF5X2VsZW1lbnRzKGV4cHIsIHBhdGgpICV9CiAganNvbl9lYWNoKHt7IGV4cHIgfX0sICckLnt7IHBhdGggfX0nKSBhcyBwKGtleSwgdmFsdWUpCnslIGVuZG1hY3JvICV9Cgp7JSBtYWNybyBwb3N0Z3Jlc19fanNvbl9hcnJheV9lbGVtZW50cyhleHByLCBwYXRoKSAlfQogIGpzb25iX2FycmF5X2VsZW1lbnRzKHt7IGV4cHIgfX0gIz4gJ3sge3stIHBhdGguc3BsaXQoJy4nKSB8IGpvaW4oJywnKSAtfX0gfScpIGFzIHAodmFsdWUpCnslIGVuZG1hY3JvICV9Cgp7IyAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0gI30KeyMgdHJ5X3N0cnB0aW1lKGV4cHIsIGZtdCkgLyB0cnlfc3RycHRpbWUoZXhwciwgW2ZtdCwgLi4uXSkgICAgICAgICAgICAjfQp7IyBEdWNrREIgdHJ5X3N0cnB0aW1lIHJldHVybnMgYSBuYWl2ZSBUSU1FU1RBTVAsIE5VTEwgb24gbm8gbWF0Y2gsICAgICN9CnsjIHRyeWluZyBsaXN0IGZvcm1hdHMgaW4gb3JkZXIsIGFuZCByZXF1aXJlcyBhIGZ1bGwtc3RyaW5nIG1hdGNoLiAgICAgI30KeyMgUG9zdGdyZXM6IGdyaWRfZGJ0X2hlbHBlcnMudHJ5X3BhcnNlX3RpbWVzdGFtcCBjaGVja3MgYSByZWdleCAgICAgICAjfQp7IyBmdWxsLW1hdGNoIHBlciBmb3JtYXQgKHRvX3RpbWVzdGFtcCBhbG9uZSBpZ25vcmVzIHRyYWlsaW5nICAgICAgICAgICN9CnsjIGNoYXJhY3RlcnMsIHdoaWNoIHdvdWxkIGRpdmVyZ2UpLCB0aGVuIGNvbnZlcnRzIHdpdGggICAgICAgICAgICAgICAgI30KeyMgdG9fdGltZXN0YW1wKC4uLik6OnRpbWVzdGFtcCDigJQgdGhlIDo6dGltZXN0YW1wIGNhc3QgZHJvcHMgdGhlICAgICAgICN9CnsjIHpvbmUgYnkgY29udmVydGluZyB0byBzZXNzaW9uLWxvY2FsIHdhbGwgdGltZSwgd2hpY2ggaXMgZXhhY3RseSAgICAgI30KeyMgdGhlIHBhcnNlZCBmaWVsZHMsIHNvIHRoZSByZXN1bHQgaXMgdGhlIG5haXZlIHRpbWVzdGFtcCBEdWNrREIgICAgICAjfQp7IyByZXR1cm5zLCBpbmRlcGVuZGVudCBvZiB0aGUgc2Vzc2lvbiBUaW1lWm9uZSBzZXR0aW5nLiAgICAgICAgICAgICAgICN9CnsjIEZvcm1hdCBzdHJpbmdzIGFyZSB0cmFuc2xhdGVkIGF0IGNvbXBpbGUgdGltZTogJVktJW0tJWRUJUggLT4gICAgICAgI30KeyMgWVlZWS1NTS1ERCJUIkhIMjQgKGxpdGVyYWwgbGV0dGVyIHJ1bnMgYXJlIGRvdWJsZS1xdW90ZWQsIGFzICAgICAgICAgI30KeyMgdG9fdGltZXN0YW1wIHJlcXVpcmVzKS4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAjfQp7IyAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0gI30KeyUgbWFjcm8gdHJ5X3N0cnB0aW1lKGV4cHIsIGZvcm1hdHMpICV9CiAge3sgYWRhcHRlci5kaXNwYXRjaCgndHJ5X3N0cnB0aW1lJywgJ2dyaWRfcHJvamVjdCcpKGV4cHIsIGZvcm1hdHMpIH19CnslIGVuZG1hY3JvICV9Cgp7JSBtYWNybyBkZWZhdWx0X190cnlfc3RycHRpbWUoZXhwciwgZm9ybWF0cykgJX0KICB7JS0gc2V0IGZtdHMgPSBbZm9ybWF0c10gaWYgZm9ybWF0cyBpcyBzdHJpbmcgZWxzZSBmb3JtYXRzIC0lfQogIHRyeV9zdHJwdGltZSh7eyBleHByIH19LCBbeyUgZm9yIGYgaW4gZm10cyAlfSd7eyBmIH19J3slIGlmIG5vdCBsb29wLmxhc3QgJX0sIHslIGVuZGlmICV9eyUgZW5kZm9yICV9XSkKeyUgZW5kbWFjcm8gJX0KCnslIG1hY3JvIHBvc3RncmVzX190cnlfc3RycHRpbWUoZXhwciwgZm9ybWF0cykgJX0KICB7JS0gc2V0IGZtdHMgPSBbZm9ybWF0c10gaWYgZm9ybWF0cyBpcyBzdHJpbmcgZWxzZSBmb3JtYXRzIC0lfQogIGdyaWRfZGJ0X2hlbHBlcnMudHJ5X3BhcnNlX3RpbWVzdGFtcCgKICAgIHt7IGV4cHIgfX0sCiAgICBhcnJheVt7JSBmb3IgZiBpbiBmbXRzICV9J3t7IHBnX3N0cnB0aW1lX2Zvcm1hdChmKSB9fSd7JSBpZiBub3QgbG9vcC5sYXN0ICV9LCB7JSBlbmRpZiAlfXslIGVuZGZvciAlfV0sCiAgICBhcnJheVt7JSBmb3IgZiBpbiBmbXRzICV9J3t7IHN0cnB0aW1lX3JlZ2V4KGYpIH19J3slIGlmIG5vdCBsb29wLmxhc3QgJX0sIHslIGVuZGlmICV9eyUgZW5kZm9yICV9XQogICkKeyUgZW5kbWFjcm8gJX0KCnsjIFRyYW5zbGF0ZSBvbmUgc3RycHRpbWUgZm9ybWF0IHRvIGEgUG9zdGdyZXMgdG9fdGltZXN0YW1wIGZvcm1hdC4gI30KeyMgTGl0ZXJhbCBsZXR0ZXIgcnVucyBhcmUgZG91YmxlLXF1b3RlZCAodG9fdGltZXN0YW1wIHJlcXVpcmVtZW50KTsgICAgI30KeyMgb3RoZXIgbGl0ZXJhbCBjaGFyYWN0ZXJzIHBhc3MgdGhyb3VnaC4gbnMuc2tpcCBjb25zdW1lcyB0aGUgc2Vjb25kICAjfQp7IyBjaGFyYWN0ZXIgb2YgZWFjaCB0d28tY2hhciAlIHRva2VuLiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICN9CnslIG1hY3JvIHBnX3N0cnB0aW1lX2Zvcm1hdChmbXQpICV9CiAgeyUtIHNldCB0b2tlbnMgPSB7JyVZJzogJ1lZWVknLCAnJW0nOiAnTU0nLCAnJWQnOiAnREQnLCAnJUgnOiAnSEgyNCcsICclTSc6ICdNSScsICclUyc6ICdTUycsICclJSc6ICclJ30gLSV9CiAgeyUtIHNldCBsZXR0ZXJzID0gJ2FiY2RlZmdoaWprbG1ub3BxcnN0dXZ3eHl6QUJDREVGR0hJSktMTU5PUFFSU1RVVldYWVonIC0lfQogIHslLSBzZXQgbnMgPSBuYW1lc3BhY2Uob3V0PScnLCBsaXRlcmFsPScnLCBza2lwPWZhbHNlKSAtJX0KICB7JS0gZm9yIGkgaW4gcmFuZ2UoZm10IHwgbGVuZ3RoKSAtJX0KICAgIHslLSBpZiBucy5za2lwIC0lfQogICAgICB7JS0gc2V0IG5zLnNraXAgPSBmYWxzZSAtJX0KICAgIHslLSBlbGlmIGZtdFtpOmkrMl0gaW4gdG9rZW5zIC0lfQogICAgICB7JS0gaWYgbnMubGl0ZXJhbCAtJX0KICAgICAgICB7JS0gc2V0IG5zLm91dCA9IG5zLm91dCB+ICciJyB+IG5zLmxpdGVyYWwgfiAnIicgLSV9CiAgICAgICAgeyUtIHNldCBucy5saXRlcmFsID0gJycgLSV9CiAgICAgIHslLSBlbmRpZiAtJX0KICAgICAgeyUtIHNldCBucy5vdXQgPSBucy5vdXQgfiB0b2tlbnNbZm10W2k6aSsyXV0gLSV9CiAgICAgIHslLSBzZXQgbnMuc2tpcCA9IHRydWUgLSV9CiAgICB7JS0gZWxpZiBmbXRbaV0gaW4gbGV0dGVycyAtJX0KICAgICAgeyUtIHNldCBucy5saXRlcmFsID0gbnMubGl0ZXJhbCB+IGZtdFtpXSAtJX0KICAgIHslLSBlbHNlIC0lfQogICAgICB7JS0gaWYgbnMubGl0ZXJhbCAtJX0KICAgICAgICB7JS0gc2V0IG5zLm91dCA9IG5zLm91dCB+ICciJyB+IG5zLmxpdGVyYWwgfiAnIicgLSV9CiAgICAgICAgeyUtIHNldCBucy5saXRlcmFsID0gJycgLSV9CiAgICAgIHslLSBlbmRpZiAtJX0KICAgICAgeyUtIHNldCBucy5vdXQgPSBucy5vdXQgfiBmbXRbaV0gLSV9CiAgICB7JS0gZW5kaWYgLSV9CiAgeyUtIGVuZGZvciAtJX0KICB7JS0gaWYgbnMubGl0ZXJhbCAtJX0KICAgIHslLSBzZXQgbnMub3V0ID0gbnMub3V0IH4gJyInIH4gbnMubGl0ZXJhbCB+ICciJyAtJX0KICB7JS0gZW5kaWYgLSV9CiAge3stIG5zLm91dCAtfX0KeyUgZW5kbWFjcm8gJX0KCnsjIFRyYW5zbGF0ZSBvbmUgc3RycHRpbWUgZm9ybWF0IHRvIGEgZnVsbC1tYXRjaCByZWdleCAodXNlZCBhcyBeLi4uJCkuICN9CnslIG1hY3JvIHN0cnB0aW1lX3JlZ2V4KGZtdCkgJX0KICB7JS0gc2V0IHRva2VucyA9IHsnJVknOiAnWzAtOV17NH0nLCAnJW0nOiAnWzAtOV17MSwyfScsICclZCc6ICdbMC05XXsxLDJ9JywgJyVIJzogJ1swLTldezEsMn0nLCAnJU0nOiAnWzAtOV17MSwyfScsICclUyc6ICdbMC05XXsxLDJ9JywgJyUlJzogJyUnfSAtJX0KICB7JS0gc2V0IG5zID0gbmFtZXNwYWNlKG91dD0nJywgc2tpcD1mYWxzZSkgLSV9CiAgeyUtIGZvciBpIGluIHJhbmdlKGZtdCB8IGxlbmd0aCkgLSV9CiAgICB7JS0gaWYgbnMuc2tpcCAtJX0KICAgICAgeyUtIHNldCBucy5za2lwID0gZmFsc2UgLSV9CiAgICB7JS0gZWxpZiBmbXRbaTppKzJdIGluIHRva2VucyAtJX0KICAgICAgeyUtIHNldCBucy5vdXQgPSBucy5vdXQgfiB0b2tlbnNbZm10W2k6aSsyXV0gLSV9CiAgICAgIHslLSBzZXQgbnMuc2tpcCA9IHRydWUgLSV9CiAgICB7JS0gZWxpZiBmbXRbaV0gaW4gJy4qKz8oKVtde31eJHxcXCcgLSV9CiAgICAgIHslLSBzZXQgbnMub3V0ID0gbnMub3V0IH4gJ1xcJyB+IGZtdFtpXSAtJX0KICAgIHslLSBlbHNlIC0lfQogICAgICB7JS0gc2V0IG5zLm91dCA9IG5zLm91dCB+IGZtdFtpXSAtJX0KICAgIHslLSBlbmRpZiAtJX0KICB7JS0gZW5kZm9yIC0lfQogIHt7LSBucy5vdXQgLX19CnslIGVuZG1hY3JvICV9Cgp7IyAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0gI30KeyMgaXNfZmluaXRlKHgpIOKAlCBEdWNrREIgaXNmaW5pdGUoKTsgUG9zdGdyZXMgaGFzIG5vIHN1Y2ggZnVuY3Rpb24gICAgICN9CnsjIGZvciBkb3VibGUgcHJlY2lzaW9uLiBOYU4gZmFpbHMgeCA9IHg7IGluZmluaXRpZXMgY29tcGFyZSBlcXVhbCAgICAgI30KeyMgdG8gdGhlICdJbmZpbml0eScgbGl0ZXJhbHMuIE5VTEwgaW4gLT4gTlVMTCBvdXQgb24gYm90aCBlbmdpbmVzLiAgICAjfQp7IyAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0gI30KeyUgbWFjcm8gaXNfZmluaXRlKGV4cHIpICV9CiAge3sgYWRhcHRlci5kaXNwYXRjaCgnaXNfZmluaXRlJywgJ2dyaWRfcHJvamVjdCcpKGV4cHIpIH19CnslIGVuZG1hY3JvICV9Cgp7JSBtYWNybyBkZWZhdWx0X19pc19maW5pdGUoZXhwcikgJX0KICBpc2Zpbml0ZSh7eyBleHByIH19KQp7JSBlbmRtYWNybyAlfQoKeyUgbWFjcm8gcG9zdGdyZXNfX2lzX2Zpbml0ZShleHByKSAlfQogICh7eyBleHByIH19ID0ge3sgZXhwciB9fQogICBhbmQge3sgZXhwciB9fSA8PiAnSW5maW5pdHknOjpkb3VibGUgcHJlY2lzaW9uCiAgIGFuZCB7eyBleHByIH19IDw+ICctSW5maW5pdHknOjpkb3VibGUgcHJlY2lzaW9uKQp7JSBlbmRtYWNybyAlfQoKeyMgLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tICN9CnsjIHNoYTI1Nl9oZXgoeCkg4oCUIGxvd2VyY2FzZSBoZXggZGlnZXN0IG9mIHRoZSB0ZXh0J3MgVVRGLTggYnl0ZXMuICAgICAjfQp7IyBEdWNrREIgc2hhMjU2KHZhcmNoYXIpIGFscmVhZHkgcmV0dXJucyBoZXg7IFBvc3RncmVzIHNoYTI1NigpICAgICAgICN9CnsjIHJldHVybnMgYnl0ZWEsIHNvIGVuY29kZSguLi4sICdoZXgnKS4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgI30KeyMgLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tICN9CnslIG1hY3JvIHNoYTI1Nl9oZXgoZXhwcikgJX0KICB7eyBhZGFwdGVyLmRpc3BhdGNoKCdzaGEyNTZfaGV4JywgJ2dyaWRfcHJvamVjdCcpKGV4cHIpIH19CnslIGVuZG1hY3JvICV9Cgp7JSBtYWNybyBkZWZhdWx0X19zaGEyNTZfaGV4KGV4cHIpICV9CiAgc2hhMjU2KHt7IGV4cHIgfX0pCnslIGVuZG1hY3JvICV9Cgp7JSBtYWNybyBwb3N0Z3Jlc19fc2hhMjU2X2hleChleHByKSAlfQogIGVuY29kZShzaGEyNTYoKHt7IGV4cHIgfX0pOjpieXRlYSksICdoZXgnKQp7JSBlbmRtYWNybyAlfQoKeyMgLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tICN9CnsjIGRhdGVfZGlmZl9ob3VyKGEsIGIpIOKAlCB3aG9sZSBob3VycyBmcm9tIGEgdG8gYi4gICAgICAgICAgICAgICAgICAgICAjfQp7IyBEdWNrREIgZGF0ZV9kaWZmKCdob3VyJywgYSwgYikgY291bnRzIGhvdXIgYm91bmRhcmllczsgdGhlIGVwb2NoICAgICN9CnsjIGZvcm0gY291bnRzIHdob2xlIGVsYXBzZWQgaG91cnMuIFRoZXkgYWdyZWUgd2hlbmV2ZXIgYm90aCAgICAgICAgICAgI30KeyMgYXJndW1lbnRzIGFyZSBob3VyLWFsaWduZWQsIHdoaWNoIGhvbGRzIGF0IHRoZSBvbmx5IGNhbGwgc2l0ZSAgICAgICAjfQp7IyAobG9jYWwgbWlkbmlnaHRzIHByb2R1Y2VkIGJ5IHRpbWV6b25lKC4uLikgaW4gbWFydF9kYXlfaGlzdG9yeSwgICAgICN9CnsjIGdpdmluZyBleGFjdCAyMy8yNC8yNS1ob3VyIGRheXMpLiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgI30KeyMgLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tICN9CnslIG1hY3JvIGRhdGVfZGlmZl9ob3VyKHN0YXJ0X2V4cHIsIGVuZF9leHByKSAlfQogIHt7IGFkYXB0ZXIuZGlzcGF0Y2goJ2RhdGVfZGlmZl9ob3VyJywgJ2dyaWRfcHJvamVjdCcpKHN0YXJ0X2V4cHIsIGVuZF9leHByKSB9fQp7JSBlbmRtYWNybyAlfQoKeyUgbWFjcm8gZGVmYXVsdF9fZGF0ZV9kaWZmX2hvdXIoc3RhcnRfZXhwciwgZW5kX2V4cHIpICV9CiAgZGF0ZV9kaWZmKCdob3VyJywge3sgc3RhcnRfZXhwciB9fSwge3sgZW5kX2V4cHIgfX0pCnslIGVuZG1hY3JvICV9Cgp7JSBtYWNybyBwb3N0Z3Jlc19fZGF0ZV9kaWZmX2hvdXIoc3RhcnRfZXhwciwgZW5kX2V4cHIpICV9CiAgY2FzdChleHRyYWN0KGVwb2NoIGZyb20gKHt7IGVuZF9leHByIH19IC0ge3sgc3RhcnRfZXhwciB9fSkpIC8gMzYwMCBhcyBiaWdpbnQpCnslIGVuZG1hY3JvICV9Cgp7IyAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0gI30KeyMgaXNvZG93X29mKGQpIOKAlCBJU08gZGF5IG9mIHdlZWssIE1vbmRheT0xIC4uIFN1bmRheT03LiAgICAgICAgICAgICAgICN9CnsjIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLSAjfQp7JSBtYWNybyBpc29kb3dfb2YoZXhwcikgJX0KICB7eyBhZGFwdGVyLmRpc3BhdGNoKCdpc29kb3dfb2YnLCAnZ3JpZF9wcm9qZWN0JykoZXhwcikgfX0KeyUgZW5kbWFjcm8gJX0KCnslIG1hY3JvIGRlZmF1bHRfX2lzb2Rvd19vZihleHByKSAlfQogIGlzb2Rvdyh7eyBleHByIH19KQp7JSBlbmRtYWNybyAlfQoKeyUgbWFjcm8gcG9zdGdyZXNfX2lzb2Rvd19vZihleHByKSAlfQogIGV4dHJhY3QoaXNvZG93IGZyb20ge3sgZXhwciB9fSkKeyUgZW5kbWFjcm8gJX0KCnsjIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLSAjfQp7IyBpbnN0YWxsX3BnX2hlbHBlcnMg4oCUIG9uLXJ1bi1zdGFydCBob29rIChkYnRfcHJvamVjdC55bWwpLiAgICAgICAgICAgI30KeyMgUG9zdGdyZXMgdGFyZ2V0IG9ubHk6IGluc3RhbGxzIHRoZSBleGNlcHRpb24tc2FmZSBwbHBnc3FsIGhlbHBlcnMgICAjfQp7IyB0aGUgcG9zdGdyZXNfXyBtYWNyb3MgY2FsbC4gSWRlbXBvdGVudCAoQ1JFQVRFIE9SIFJFUExBQ0UpLiAgICAgICAgICN9CnsjIER1Y2tEQiB0YXJnZXQ6IG5vLW9wLiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgI30KeyMgLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tICN9CnslIG1hY3JvIGluc3RhbGxfcGdfaGVscGVycygpICV9CiAgeyUgaWYgZXhlY3V0ZSBhbmQgdGFyZ2V0LnR5cGUgPT0gJ3Bvc3RncmVzJyAlfQogICAgeyUgY2FsbCBzdGF0ZW1lbnQoJ2luc3RhbGxfcGdfaGVscGVycycsIGZldGNoX3Jlc3VsdD1GYWxzZSkgJX0KICAgICAgY3JlYXRlIHNjaGVtYSBpZiBub3QgZXhpc3RzIGdyaWRfZGJ0X2hlbHBlcnM7CgogICAgICBjcmVhdGUgb3IgcmVwbGFjZSBmdW5jdGlvbiBncmlkX2RidF9oZWxwZXJzLnRyeV9jYXN0X2RvdWJsZShwIHRleHQpCiAgICAgIHJldHVybnMgZG91YmxlIHByZWNpc2lvbiBsYW5ndWFnZSBwbHBnc3FsIGltbXV0YWJsZSBhcyAkJAogICAgICBiZWdpbgogICAgICAgIGlmIHAgaXMgbnVsbCB0aGVuIHJldHVybiBudWxsOyBlbmQgaWY7CiAgICAgICAgYmVnaW4KICAgICAgICAgIHJldHVybiBwOjpkb3VibGUgcHJlY2lzaW9uOwogICAgICAgIGV4Y2VwdGlvbiB3aGVuIG90aGVycyB0aGVuCiAgICAgICAgICByZXR1cm4gbnVsbDsKICAgICAgICBlbmQ7CiAgICAgIGVuZCAkJDsKCiAgICAgIGNyZWF0ZSBvciByZXBsYWNlIGZ1bmN0aW9uIGdyaWRfZGJ0X2hlbHBlcnMudHJ5X2Nhc3RfaW50ZWdlcihwIHRleHQpCiAgICAgIHJldHVybnMgaW50ZWdlciBsYW5ndWFnZSBwbHBnc3FsIGltbXV0YWJsZSBhcyAkJAogICAgICBkZWNsYXJlIHYgbnVtZXJpYzsKICAgICAgYmVnaW4KICAgICAgICBpZiBwIGlzIG51bGwgdGhlbiByZXR1cm4gbnVsbDsgZW5kIGlmOwogICAgICAgIGJlZ2luCiAgICAgICAgICByZXR1cm4gcDo6aW50ZWdlcjsKICAgICAgICBleGNlcHRpb24gd2hlbiBvdGhlcnMgdGhlbgogICAgICAgICAgLS0gRHVja0RCIHBhcnNlcyBpbnRlZ2VyIHN0cmluZ3MgdGhyb3VnaCBhIGRvdWJsZSBhbmQgcm91bmRzCiAgICAgICAgICAtLSAoaGFsZiBhd2F5IGZyb20gemVybyk6ICc0Mi4wJyAtPiA0MiwgJzQyLjUnIC0+IDQzLCAnMWU1JyAtPiAxMDAwMDAuCiAgICAgICAgICAtLSByb3VuZChudW1lcmljKSBpcyBoYWxmLWF3YXktZnJvbS16ZXJvLCBtYXRjaGluZyBEdWNrREI7CiAgICAgICAgICAtLSByb3VuZChkb3VibGUpIHdvdWxkIGJlIGJhbmtlcidzIHJvdW5kaW5nIGFuZCBpcyBOT1QgdXNlZC4KICAgICAgICAgIGJlZ2luCiAgICAgICAgICAgIHYgOj0gcm91bmQocDo6bnVtZXJpYyk7CiAgICAgICAgICAgIGlmIHYgPCAtMjE0NzQ4MzY0OCBvciB2ID4gMjE0NzQ4MzY0NyB0aGVuIHJldHVybiBudWxsOyBlbmQgaWY7CiAgICAgICAgICAgIHJldHVybiB2OjppbnRlZ2VyOwogICAgICAgICAgZXhjZXB0aW9uIHdoZW4gb3RoZXJzIHRoZW4KICAgICAgICAgICAgcmV0dXJuIG51bGw7CiAgICAgICAgICBlbmQ7CiAgICAgICAgZW5kOwogICAgICBlbmQgJCQ7CgogICAgICBjcmVhdGUgb3IgcmVwbGFjZSBmdW5jdGlvbiBncmlkX2RidF9oZWxwZXJzLnRyeV9jYXN0X2JpZ2ludChwIHRleHQpCiAgICAgIHJldHVybnMgYmlnaW50IGxhbmd1YWdlIHBscGdzcWwgaW1tdXRhYmxlIGFzICQkCiAgICAgIGRlY2xhcmUgdiBudW1lcmljOwogICAgICBiZWdpbgogICAgICAgIGlmIHAgaXMgbnVsbCB0aGVuIHJldHVybiBudWxsOyBlbmQgaWY7CiAgICAgICAgYmVnaW4KICAgICAgICAgIHJldHVybiBwOjpiaWdpbnQ7CiAgICAgICAgZXhjZXB0aW9uIHdoZW4gb3RoZXJzIHRoZW4KICAgICAgICAgIGJlZ2luCiAgICAgICAgICAgIHYgOj0gcm91bmQocDo6bnVtZXJpYyk7CiAgICAgICAgICAgIGlmIHYgPCAtOTIyMzM3MjAzNjg1NDc3NTgwOCBvciB2ID4gOTIyMzM3MjAzNjg1NDc3NTgwNyB0aGVuIHJldHVybiBudWxsOyBlbmQgaWY7CiAgICAgICAgICAgIHJldHVybiB2OjpiaWdpbnQ7CiAgICAgICAgICBleGNlcHRpb24gd2hlbiBvdGhlcnMgdGhlbgogICAgICAgICAgICByZXR1cm4gbnVsbDsKICAgICAgICAgIGVuZDsKICAgICAgICBlbmQ7CiAgICAgIGVuZCAkJDsKCiAgICAgIGNyZWF0ZSBvciByZXBsYWNlIGZ1bmN0aW9uIGdyaWRfZGJ0X2hlbHBlcnMudHJ5X2Nhc3RfZGF0ZShwIHRleHQpCiAgICAgIHJldHVybnMgZGF0ZSBsYW5ndWFnZSBwbHBnc3FsIGltbXV0YWJsZSBhcyAkJAogICAgICBiZWdpbgogICAgICAgIGlmIHAgaXMgbnVsbCB0aGVuIHJldHVybiBudWxsOyBlbmQgaWY7CiAgICAgICAgLS0gSVNPIHNoYXBlIGd1YXJkOiBQb3N0Z3JlcycgbmF0aXZlIGRhdGUgcGFyc2VyIGFsc28gYWNjZXB0cwogICAgICAgIC0tIE1EWSBzdHJpbmdzIGxpa2UgJzEwLzAxLzIwMjYnIChEYXRlU3R5bGUtZGVwZW5kZW50KSB0aGF0CiAgICAgICAgLS0gRHVja0RCJ3MgdHJ5X2Nhc3QgcmVqZWN0czsgcmVzdHJpY3QgdG8gdGhlIElTTyBhbHBoYWJldCBib3RoCiAgICAgICAgLS0gZW5naW5lcyBwYXJzZSBpZGVudGljYWxseS4gSW1wb3NzaWJsZSBkYXRlcyAobW9udGggMTMsCiAgICAgICAgLS0gRmViIDMwKSBzdGlsbCBmYWlsIHRoZSBjYXN0IGJlbG93IGFuZCBiZWNvbWUgTlVMTC4KICAgICAgICBpZiBwICF+ICdeXHMqWzAtOV17NH0tWzAtOV17MSwyfS1bMC05XXsxLDJ9JyB0aGVuIHJldHVybiBudWxsOyBlbmQgaWY7CiAgICAgICAgYmVnaW4KICAgICAgICAgIHJldHVybiBwOjpkYXRlOwogICAgICAgIGV4Y2VwdGlvbiB3aGVuIG90aGVycyB0aGVuCiAgICAgICAgICByZXR1cm4gbnVsbDsKICAgICAgICBlbmQ7CiAgICAgIGVuZCAkJDsKCiAgICAgIGNyZWF0ZSBvciByZXBsYWNlIGZ1bmN0aW9uIGdyaWRfZGJ0X2hlbHBlcnMudHJ5X2Nhc3RfdGltZXN0YW1wdHoocCB0ZXh0KQogICAgICByZXR1cm5zIHRpbWVzdGFtcCB3aXRoIHRpbWUgem9uZSBsYW5ndWFnZSBwbHBnc3FsIGltbXV0YWJsZSBhcyAkJAogICAgICBiZWdpbgogICAgICAgIGlmIHAgaXMgbnVsbCB0aGVuIHJldHVybiBudWxsOyBlbmQgaWY7CiAgICAgICAgaWYgcCAhfiAnXlxzKlswLTldezR9LVswLTldezEsMn0tWzAtOV17MSwyfScgdGhlbiByZXR1cm4gbnVsbDsgZW5kIGlmOwogICAgICAgIGJlZ2luCiAgICAgICAgICByZXR1cm4gcDo6dGltZXN0YW1wIHdpdGggdGltZSB6b25lOwogICAgICAgIGV4Y2VwdGlvbiB3aGVuIG90aGVycyB0aGVuCiAgICAgICAgICByZXR1cm4gbnVsbDsKICAgICAgICBlbmQ7CiAgICAgIGVuZCAkJDsKCiAgICAgIGNyZWF0ZSBvciByZXBsYWNlIGZ1bmN0aW9uIGdyaWRfZGJ0X2hlbHBlcnMudHJ5X2Nhc3RfYm9vbGVhbihwIHRleHQpCiAgICAgIHJldHVybnMgYm9vbGVhbiBsYW5ndWFnZSBwbHBnc3FsIGltbXV0YWJsZSBhcyAkJAogICAgICBkZWNsYXJlIHYgdGV4dDsKICAgICAgYmVnaW4KICAgICAgICBpZiBwIGlzIG51bGwgdGhlbiByZXR1cm4gbnVsbDsgZW5kIGlmOwogICAgICAgIC0tIER1Y2tEQidzIGJvb2xlYW4gbGl0ZXJhbCBzZXQ7IFBvc3RncmVzIGFkZGl0aW9uYWxseSBhY2NlcHRzCiAgICAgICAgLS0gJ29uJy8nb2ZmJyBhbmQgdW5pcXVlIHByZWZpeGVzIGxpa2UgJ3RyJywgd2hpY2ggRHVja0RCCiAgICAgICAgLS0gcmVqZWN0cywgc28gd2hpdGVsaXN0IGZpcnN0LCB0aGVuIGNhc3QuCiAgICAgICAgdiA6PSBsb3dlcihidHJpbShwKSk7CiAgICAgICAgaWYgdiBub3QgaW4gKCd0cnVlJywgJ2ZhbHNlJywgJ3QnLCAnZicsICd5JywgJ24nLCAneWVzJywgJ25vJywgJzEnLCAnMCcpIHRoZW4KICAgICAgICAgIHJldHVybiBudWxsOwogICAgICAgIGVuZCBpZjsKICAgICAgICByZXR1cm4gdjo6Ym9vbGVhbjsKICAgICAgZW5kICQkOwoKICAgICAgY3JlYXRlIG9yIHJlcGxhY2UgZnVuY3Rpb24gZ3JpZF9kYnRfaGVscGVycy50cnlfcGFyc2VfdGltZXN0YW1wKAogICAgICAgIHAgdGV4dCwgcF9mbXRzIHRleHRbXSwgcF9yZXMgdGV4dFtdKQogICAgICByZXR1cm5zIHRpbWVzdGFtcCBsYW5ndWFnZSBwbHBnc3FsIGltbXV0YWJsZSBhcyAkJAogICAgICBkZWNsYXJlIGkgaW50OyB2IHRpbWVzdGFtcDsKICAgICAgYmVnaW4KICAgICAgICBpZiBwIGlzIG51bGwgdGhlbiByZXR1cm4gbnVsbDsgZW5kIGlmOwogICAgICAgIGZvciBpIGluIDEgLi4gYXJyYXlfbGVuZ3RoKHBfZm10cywgMSkgbG9vcAogICAgICAgICAgLS0gRnVsbC1tYXRjaCByZWdleCBmaXJzdDogdG9fdGltZXN0YW1wIGFsb25lIGlnbm9yZXMgdHJhaWxpbmcKICAgICAgICAgIC0tIGNoYXJhY3RlcnMsIER1Y2tEQiB0cnlfc3RycHRpbWUgZG9lcyBub3QuCiAgICAgICAgICBpZiBwIH4gKCdeJyB8fCBwX3Jlc1tpXSB8fCAnJCcpIHRoZW4KICAgICAgICAgICAgYmVnaW4KICAgICAgICAgICAgICB2IDo9IHRvX3RpbWVzdGFtcChwLCBwX2ZtdHNbaV0pOjp0aW1lc3RhbXA7CiAgICAgICAgICAgICAgcmV0dXJuIHY7CiAgICAgICAgICAgIGV4Y2VwdGlvbiB3aGVuIG90aGVycyB0aGVuCiAgICAgICAgICAgICAgLS0gU2hhcGUgbWF0Y2hlZCBidXQgdGhlIHZhbHVlIGlzIGltcG9zc2libGUgKG1vbnRoIDEzLAogICAgICAgICAgICAgIC0tIEZlYiAzMCk6IGZhbGwgdGhyb3VnaCB0byB0aGUgbmV4dCBmb3JtYXQsIGFzIER1Y2tEQiBkb2VzLgogICAgICAgICAgICBlbmQ7CiAgICAgICAgICBlbmQgaWY7CiAgICAgICAgZW5kIGxvb3A7CiAgICAgICAgcmV0dXJuIG51bGw7CiAgICAgIGVuZCAkJDsKICAgIHslIGVuZGNhbGwgJX0KICB7JSBlbmRpZiAlfQogIHt7IHJldHVybignJykgfX0KeyUgZW5kbWFjcm8gJX0K
+{#-
+  Cross-dialect macros (S5 dialect pass, 2026-11-06).
+
+  The models are single-source for both targets: `local` (DuckDB) and
+  `supabase` (Postgres). Every macro here dispatches on the adapter:
+  the DuckDB side emits the original DuckDB construct unchanged, the
+  Postgres side emits either portable SQL or a call to an exception-safe
+  plpgsql helper installed by the install_pg_helpers on-run-start hook
+  (schema grid_dbt_helpers, postgres target only).
+
+  Semantic bar for every macro: identical results on both engines for the
+  same input, including NULL-on-unparseable (never an error) for the
+  try_* family. See s5-deployment/dialect-pass-log.md for the per-macro
+  parity argument and the named residual divergences (exotic string
+  shapes outside the provider alphabet: hex / underscore-separated /
+  non-ISO date strings).
+-#}
+
+{# ------------------------------------------------------------------ #}
+{# try_cast(expr as T) — T in {double, date, timestamptz, integer,     #}
+{# bigint, boolean}. Postgres has no try_cast; the helpers return NULL #}
+{# on any cast failure and emulate DuckDB's double-mediated rounding   #}
+{# for integer/bigint and its boolean literal set.                     #}
+{# ------------------------------------------------------------------ #}
+{% macro try_cast(expr, type) %}
+  {{ adapter.dispatch('try_cast', 'grid_project')(expr, type) }}
+{% endmacro %}
+
+{% macro default__try_cast(expr, type) %}
+  try_cast({{ expr }} as {{ type }})
+{% endmacro %}
+
+{% macro postgres__try_cast(expr, type) %}
+  grid_dbt_helpers.try_cast_{{ type }}({{ expr }})
+{% endmacro %}
+
+{# ------------------------------------------------------------------ #}
+{# json_text(expr, 'a.b.c') — text extraction at a dot path.           #}
+{# DuckDB: expr ->> '$.a.b.c' (or ->> 'key' for a single key).         #}
+{# Postgres (jsonb): expr #>> '{a,b,c}' (or ->> 'key').                #}
+{# Both return text / NULL for a missing or JSON-null leaf.            #}
+{# ------------------------------------------------------------------ #}
+{% macro json_text(expr, path) %}
+  {{ adapter.dispatch('json_text', 'grid_project')(expr, path) }}
+{% endmacro %}
+
+{% macro default__json_text(expr, path) %}
+  {%- if '.' in path -%}
+    {{ expr }} ->> '$.{{ path }}'
+  {%- else -%}
+    {{ expr }} ->> '{{ path }}'
+  {%- endif -%}
+{% endmacro %}
+
+{% macro postgres__json_text(expr, path) %}
+  {%- if '.' in path -%}
+    {{ expr }} #>> '{ {{- path.split('.') | join(',') -}} }'
+  {%- else -%}
+    {{ expr }} ->> '{{ path }}'
+  {%- endif -%}
+{% endmacro %}
+
+{# ------------------------------------------------------------------ #}
+{# json_array_elements(expr, 'a.b') — lateral unnest of a JSON array   #}
+{# at a dot path, aliased as p(value) so p.value ->> 'k' works via     #}
+{# json_text on both engines (json_each on DuckDB,                     #}
+{# jsonb_array_elements on Postgres).                                 #}
+{# ------------------------------------------------------------------ #}
+{% macro json_array_elements(expr, path) %}
+  {{ adapter.dispatch('json_array_elements', 'grid_project')(expr, path) }}
+{% endmacro %}
+
+{% macro default__json_array_elements(expr, path) %}
+  json_each({{ expr }}, '$.{{ path }}') as p(key, value)
+{% endmacro %}
+
+{% macro postgres__json_array_elements(expr, path) %}
+  jsonb_array_elements({{ expr }} #> '{ {{- path.split('.') | join(',') -}} }') as p(value)
+{% endmacro %}
+
+{# ------------------------------------------------------------------ #}
+{# try_strptime(expr, fmt) / try_strptime(expr, [fmt, ...])            #}
+{# DuckDB try_strptime returns a naive TIMESTAMP, NULL on no match,    #}
+{# trying list formats in order, and requires a full-string match.     #}
+{# Postgres: grid_dbt_helpers.try_parse_timestamp checks a regex       #}
+{# full-match per format (to_timestamp alone ignores trailing          #}
+{# characters, which would diverge), then converts with                #}
+{# to_timestamp(...)::timestamp — the ::timestamp cast drops the       #}
+{# zone by converting to session-local wall time, which is exactly     #}
+{# the parsed fields, so the result is the naive timestamp DuckDB      #}
+{# returns, independent of the session TimeZone setting.               #}
+{# Format strings are translated at compile time: %Y-%m-%dT%H ->       #}
+{# YYYY-MM-DD"T"HH24 (literal letter runs are double-quoted, as         #}
+{# to_timestamp requires).                                             #}
+{# ------------------------------------------------------------------ #}
+{% macro try_strptime(expr, formats) %}
+  {{ adapter.dispatch('try_strptime', 'grid_project')(expr, formats) }}
+{% endmacro %}
+
+{% macro default__try_strptime(expr, formats) %}
+  {%- set fmts = [formats] if formats is string else formats -%}
+  try_strptime({{ expr }}, [{% for f in fmts %}'{{ f }}'{% if not loop.last %}, {% endif %}{% endfor %}])
+{% endmacro %}
+
+{% macro postgres__try_strptime(expr, formats) %}
+  {%- set fmts = [formats] if formats is string else formats -%}
+  grid_dbt_helpers.try_parse_timestamp(
+    {{ expr }},
+    array[{% for f in fmts %}'{{ pg_strptime_format(f) }}'{% if not loop.last %}, {% endif %}{% endfor %}],
+    array[{% for f in fmts %}'{{ strptime_regex(f) }}'{% if not loop.last %}, {% endif %}{% endfor %}]
+  )
+{% endmacro %}
+
+{# Translate one strptime format to a Postgres to_timestamp format. #}
+{# Literal letter runs are double-quoted (to_timestamp requirement);    #}
+{# other literal characters pass through. ns.skip consumes the second  #}
+{# character of each two-char % token.                                 #}
+{% macro pg_strptime_format(fmt) %}
+  {%- set tokens = {'%Y': 'YYYY', '%m': 'MM', '%d': 'DD', '%H': 'HH24', '%M': 'MI', '%S': 'SS', '%%': '%'} -%}
+  {%- set letters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ' -%}
+  {%- set ns = namespace(out='', literal='', skip=false) -%}
+  {%- for i in range(fmt | length) -%}
+    {%- if ns.skip -%}
+      {%- set ns.skip = false -%}
+    {%- elif fmt[i:i+2] in tokens -%}
+      {%- if ns.literal -%}
+        {%- set ns.out = ns.out ~ '"' ~ ns.literal ~ '"' -%}
+        {%- set ns.literal = '' -%}
+      {%- endif -%}
+      {%- set ns.out = ns.out ~ tokens[fmt[i:i+2]] -%}
+      {%- set ns.skip = true -%}
+    {%- elif fmt[i] in letters -%}
+      {%- set ns.literal = ns.literal ~ fmt[i] -%}
+    {%- else -%}
+      {%- if ns.literal -%}
+        {%- set ns.out = ns.out ~ '"' ~ ns.literal ~ '"' -%}
+        {%- set ns.literal = '' -%}
+      {%- endif -%}
+      {%- set ns.out = ns.out ~ fmt[i] -%}
+    {%- endif -%}
+  {%- endfor -%}
+  {%- if ns.literal -%}
+    {%- set ns.out = ns.out ~ '"' ~ ns.literal ~ '"' -%}
+  {%- endif -%}
+  {{- ns.out -}}
+{% endmacro %}
+
+{# Translate one strptime format to a full-match regex (used as ^...$). #}
+{% macro strptime_regex(fmt) %}
+  {%- set tokens = {'%Y': '[0-9]{4}', '%m': '[0-9]{1,2}', '%d': '[0-9]{1,2}', '%H': '[0-9]{1,2}', '%M': '[0-9]{1,2}', '%S': '[0-9]{1,2}', '%%': '%'} -%}
+  {%- set ns = namespace(out='', skip=false) -%}
+  {%- for i in range(fmt | length) -%}
+    {%- if ns.skip -%}
+      {%- set ns.skip = false -%}
+    {%- elif fmt[i:i+2] in tokens -%}
+      {%- set ns.out = ns.out ~ tokens[fmt[i:i+2]] -%}
+      {%- set ns.skip = true -%}
+    {%- elif fmt[i] in '.*+?()[]{}^$|\\' -%}
+      {%- set ns.out = ns.out ~ '\\' ~ fmt[i] -%}
+    {%- else -%}
+      {%- set ns.out = ns.out ~ fmt[i] -%}
+    {%- endif -%}
+  {%- endfor -%}
+  {{- ns.out -}}
+{% endmacro %}
+
+{# ------------------------------------------------------------------ #}
+{# is_finite(x) — DuckDB isfinite(); Postgres has no such function     #}
+{# for double precision. NaN fails x = x; infinities compare equal     #}
+{# to the 'Infinity' literals. NULL in -> NULL out on both engines.    #}
+{# ------------------------------------------------------------------ #}
+{% macro is_finite(expr) %}
+  {{ adapter.dispatch('is_finite', 'grid_project')(expr) }}
+{% endmacro %}
+
+{% macro default__is_finite(expr) %}
+  isfinite({{ expr }})
+{% endmacro %}
+
+{% macro postgres__is_finite(expr) %}
+  ({{ expr }} = {{ expr }}
+   and {{ expr }} <> 'Infinity'::double precision
+   and {{ expr }} <> '-Infinity'::double precision)
+{% endmacro %}
+
+{# ------------------------------------------------------------------ #}
+{# sha256_hex(x) — lowercase hex digest of the text's UTF-8 bytes.     #}
+{# DuckDB sha256(varchar) already returns hex; Postgres sha256()       #}
+{# returns bytea, so encode(..., 'hex').                               #}
+{# ------------------------------------------------------------------ #}
+{% macro sha256_hex(expr) %}
+  {{ adapter.dispatch('sha256_hex', 'grid_project')(expr) }}
+{% endmacro %}
+
+{% macro default__sha256_hex(expr) %}
+  sha256({{ expr }})
+{% endmacro %}
+
+{% macro postgres__sha256_hex(expr) %}
+  encode(sha256(({{ expr }})::bytea), 'hex')
+{% endmacro %}
+
+{# ------------------------------------------------------------------ #}
+{# date_diff_hour(a, b) — whole hours from a to b.                     #}
+{# DuckDB date_diff('hour', a, b) counts hour boundaries; the epoch    #}
+{# form counts whole elapsed hours. They agree whenever both           #}
+{# arguments are hour-aligned, which holds at the only call site       #}
+{# (local midnights produced by timezone(...) in mart_day_history,     #}
+{# giving exact 23/24/25-hour days).                                   #}
+{# ------------------------------------------------------------------ #}
+{% macro date_diff_hour(start_expr, end_expr) %}
+  {{ adapter.dispatch('date_diff_hour', 'grid_project')(start_expr, end_expr) }}
+{% endmacro %}
+
+{% macro default__date_diff_hour(start_expr, end_expr) %}
+  date_diff('hour', {{ start_expr }}, {{ end_expr }})
+{% endmacro %}
+
+{% macro postgres__date_diff_hour(start_expr, end_expr) %}
+  cast(extract(epoch from ({{ end_expr }} - {{ start_expr }})) / 3600 as bigint)
+{% endmacro %}
+
+{# ------------------------------------------------------------------ #}
+{# isodow_of(d) — ISO day of week, Monday=1 .. Sunday=7.               #}
+{# ------------------------------------------------------------------ #}
+{% macro isodow_of(expr) %}
+  {{ adapter.dispatch('isodow_of', 'grid_project')(expr) }}
+{% endmacro %}
+
+{% macro default__isodow_of(expr) %}
+  isodow({{ expr }})
+{% endmacro %}
+
+{% macro postgres__isodow_of(expr) %}
+  extract(isodow from {{ expr }})
+{% endmacro %}
+
+{# ------------------------------------------------------------------ #}
+{# install_pg_helpers — on-run-start hook (dbt_project.yml).           #}
+{# Postgres target only: installs the exception-safe plpgsql helpers   #}
+{# the postgres__ macros call. Idempotent (CREATE OR REPLACE).         #}
+{# DuckDB target: no-op.                                               #}
+{# ------------------------------------------------------------------ #}
+{% macro install_pg_helpers() %}
+  {% if execute and target.type == 'postgres' %}
+    {% call statement('install_pg_helpers', fetch_result=False) %}
+      create schema if not exists grid_dbt_helpers;
+
+      create or replace function grid_dbt_helpers.try_cast_double(p text)
+      returns double precision language plpgsql immutable as $$
+      begin
+        if p is null then return null; end if;
+        begin
+          return p::double precision;
+        exception when others then
+          return null;
+        end;
+      end $$;
+
+      create or replace function grid_dbt_helpers.try_cast_integer(p text)
+      returns integer language plpgsql immutable as $$
+      declare v numeric;
+      begin
+        if p is null then return null; end if;
+        begin
+          return p::integer;
+        exception when others then
+          -- DuckDB parses integer strings through a double and rounds
+          -- (half away from zero): '42.0' -> 42, '42.5' -> 43, '1e5' -> 100000.
+          -- round(numeric) is half-away-from-zero, matching DuckDB;
+          -- round(double) would be banker's rounding and is NOT used.
+          begin
+            v := round(p::numeric);
+            if v < -2147483648 or v > 2147483647 then return null; end if;
+            return v::integer;
+          exception when others then
+            return null;
+          end;
+        end;
+      end $$;
+
+      create or replace function grid_dbt_helpers.try_cast_bigint(p text)
+      returns bigint language plpgsql immutable as $$
+      declare v numeric;
+      begin
+        if p is null then return null; end if;
+        begin
+          return p::bigint;
+        exception when others then
+          begin
+            v := round(p::numeric);
+            if v < -9223372036854775808 or v > 9223372036854775807 then return null; end if;
+            return v::bigint;
+          exception when others then
+            return null;
+          end;
+        end;
+      end $$;
+
+      create or replace function grid_dbt_helpers.try_cast_date(p text)
+      returns date language plpgsql immutable as $$
+      begin
+        if p is null then return null; end if;
+        -- ISO shape guard: Postgres' native date parser also accepts
+        -- MDY strings like '10/01/2026' (DateStyle-dependent) that
+        -- DuckDB's try_cast rejects; restrict to the ISO alphabet both
+        -- engines parse identically. Impossible dates (month 13,
+        -- Feb 30) still fail the cast below and become NULL.
+        if p !~ '^\s*[0-9]{4}-[0-9]{1,2}-[0-9]{1,2}' then return null; end if;
+        begin
+          return p::date;
+        exception when others then
+          return null;
+        end;
+      end $$;
+
+      create or replace function grid_dbt_helpers.try_cast_timestamptz(p text)
+      returns timestamp with time zone language plpgsql immutable as $$
+      begin
+        if p is null then return null; end if;
+        if p !~ '^\s*[0-9]{4}-[0-9]{1,2}-[0-9]{1,2}' then return null; end if;
+        begin
+          return p::timestamp with time zone;
+        exception when others then
+          return null;
+        end;
+      end $$;
+
+      create or replace function grid_dbt_helpers.try_cast_boolean(p text)
+      returns boolean language plpgsql immutable as $$
+      declare v text;
+      begin
+        if p is null then return null; end if;
+        -- DuckDB's boolean literal set; Postgres additionally accepts
+        -- 'on'/'off' and unique prefixes like 'tr', which DuckDB
+        -- rejects, so whitelist first, then cast.
+        v := lower(btrim(p));
+        if v not in ('true', 'false', 't', 'f', 'y', 'n', 'yes', 'no', '1', '0') then
+          return null;
+        end if;
+        return v::boolean;
+      end $$;
+
+      create or replace function grid_dbt_helpers.try_parse_timestamp(
+        p text, p_fmts text[], p_res text[])
+      returns timestamp language plpgsql immutable as $$
+      declare i int; v timestamp;
+      begin
+        if p is null then return null; end if;
+        for i in 1 .. array_length(p_fmts, 1) loop
+          -- Full-match regex first: to_timestamp alone ignores trailing
+          -- characters, DuckDB try_strptime does not.
+          if p ~ ('^' || p_res[i] || '$') then
+            begin
+              v := to_timestamp(p, p_fmts[i])::timestamp;
+              return v;
+            exception when others then
+              -- Shape matched but the value is impossible (month 13,
+              -- Feb 30): fall through to the next format, as DuckDB does.
+            end;
+          end if;
+        end loop;
+        return null;
+      end $$;
+    {% endcall %}
+  {% endif %}
+  {{ return('') }}
+{% endmacro %}

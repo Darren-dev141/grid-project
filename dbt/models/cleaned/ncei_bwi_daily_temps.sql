@@ -1,1 +1,33 @@
-LS0gTkNFSSdzIHJlcG9ydGVkIG9ic2VydmF0aW9uIGRhdGUsIG5vdCB0aGUgTldTIG5pZ2h0LXN0YXJ0IGNvbnZlbnRpb24uCndpdGggcGFyc2VkIGFzICgKICAgIHNlbGVjdCB7eyB0cnlfY2FzdCgici5wYXlsb2FkIC0+PiAnREFURSciLCAnZGF0ZScpIH19IGFzIGxvY2FsX2RhdGUsCiAgICAgICAgci5wYXlsb2FkIC0+PiAnU1RBVElPTicgYXMgc3RhdGlvbiwKICAgICAgICByLnBheWxvYWQgLT4+ICdUTUFYJyBhcyByZXBvcnRlZF9oaWdoLAogICAgICAgIHIucGF5bG9hZCAtPj4gJ1RNSU4nIGFzIHJlcG9ydGVkX2xvdywKICAgICAgICB7eyB0cnlfY2FzdCgici5wYXlsb2FkIC0+PiAnVE1BWCciLCAnZG91YmxlJykgfX0gYXMgaGlnaF9mLAogICAgICAgIHt7IHRyeV9jYXN0KCJyLnBheWxvYWQgLT4+ICdUTUlOJyIsICdkb3VibGUnKSB9fSBhcyBsb3dfZiwKICAgICAgICByLnBheWxvYWQgLT4+ICdUTUFYX0FUVFJJQlVURVMnIGFzIGhpZ2hfYXR0cmlidXRlcywKICAgICAgICByLnBheWxvYWQgLT4+ICdUTUlOX0FUVFJJQlVURVMnIGFzIGxvd19hdHRyaWJ1dGVzLAogICAgICAgIGIubG9hZGVkX2F0LCBjb2FsZXNjZShiLm9ic2VydmVkX2F0LCBiLmxvYWRlZF9hdCkgYXMgb2JzZXJ2ZWRfYXQsCiAgICAgICAgci5kaWdlc3QsIHIucm93X251bWJlcgogICAgZnJvbSB7eyBzb3VyY2UoJ3JhdycsICdyZWNvcmRzJykgfX0gcgogICAgam9pbiB7eyBzb3VyY2UoJ3JhdycsICdiYXRjaGVzJykgfX0gYiB1c2luZyAoc291cmNlLCBkYXRhc2V0LCBkaWdlc3QpCiAgICB3aGVyZSByLnNvdXJjZSA9ICduY2VpJyBhbmQgci5kYXRhc2V0ID0gJ2RhaWx5LXN1bW1hcmllcycgYW5kIGIuY29tbWl0dGVkCiksIHJhbmtlZCBhcyAoCiAgICBzZWxlY3QgKiwgcm93X251bWJlcigpIG92ZXIgKAogICAgICAgIHBhcnRpdGlvbiBieSBzdGF0aW9uLCBsb2NhbF9kYXRlCiAgICAgICAgb3JkZXIgYnkgb2JzZXJ2ZWRfYXQgZGVzYywgZGlnZXN0IGRlc2MsIHJvd19udW1iZXIgZGVzYwogICAgKSBhcyByZXZpc2lvbl9yYW5rIGZyb20gcGFyc2VkCikKc2VsZWN0IGxvY2FsX2RhdGUsIHN0YXRpb24sIGhpZ2hfZiwgbG93X2YsIGhpZ2hfYXR0cmlidXRlcywgbG93X2F0dHJpYnV0ZXMsCiAgICBjYXNlIHdoZW4gKGhpZ2hfZiBpcyBudWxsIGFuZCByZXBvcnRlZF9oaWdoIGlzIG5vdCBudWxsKQogICAgICAgICAgIG9yIChsb3dfZiBpcyBudWxsIGFuZCByZXBvcnRlZF9sb3cgaXMgbm90IG51bGwpIHRoZW4gJ2ludmFsaWQnCiAgICAgICAgIHdoZW4gaGlnaF9mIGlzIG51bGwgb3IgbG93X2YgaXMgbnVsbCB0aGVuICdtaXNzaW5nJwogICAgICAgICB3aGVuIG5vdCB7eyBpc19maW5pdGUoJ2hpZ2hfZicpIH19IG9yIG5vdCB7eyBpc19maW5pdGUoJ2xvd19mJykgfX0KICAgICAgICAgICBvciBoaWdoX2Ygbm90IGJldHdlZW4gLTEwMCBhbmQgMTQwIG9yIGxvd19mIG5vdCBiZXR3ZWVuIC0xMDAgYW5kIDE0MAogICAgICAgICAgIG9yIGxvd19mID4gaGlnaF9mIHRoZW4gJ2ltcGxhdXNpYmxlJwogICAgICAgICB3aGVuIGNvYWxlc2NlKHNwbGl0X3BhcnQoaGlnaF9hdHRyaWJ1dGVzLCAnLCcsIDIpLCAnJykgIT0gJycKICAgICAgICAgICBvciBjb2FsZXNjZShzcGxpdF9wYXJ0KGxvd19hdHRyaWJ1dGVzLCAnLCcsIDIpLCAnJykgIT0gJycgdGhlbiAnZmxhZ2dlZCcKICAgICAgICAgZWxzZSAnb2snIGVuZCBhcyBxdWFsaXR5LAogICAgbG9hZGVkX2F0LCBvYnNlcnZlZF9hdCwgZGlnZXN0CmZyb20gcmFua2VkIHdoZXJlIHJldmlzaW9uX3JhbmsgPSAxCg==
+-- NCEI's reported observation date, not the NWS night-start convention.
+with parsed as (
+    select {{ try_cast("r.payload ->> 'DATE'", 'date') }} as local_date,
+        r.payload ->> 'STATION' as station,
+        r.payload ->> 'TMAX' as reported_high,
+        r.payload ->> 'TMIN' as reported_low,
+        {{ try_cast("r.payload ->> 'TMAX'", 'double') }} as high_f,
+        {{ try_cast("r.payload ->> 'TMIN'", 'double') }} as low_f,
+        r.payload ->> 'TMAX_ATTRIBUTES' as high_attributes,
+        r.payload ->> 'TMIN_ATTRIBUTES' as low_attributes,
+        b.loaded_at, coalesce(b.observed_at, b.loaded_at) as observed_at,
+        r.digest, r.row_number
+    from {{ source('raw', 'records') }} r
+    join {{ source('raw', 'batches') }} b using (source, dataset, digest)
+    where r.source = 'ncei' and r.dataset = 'daily-summaries' and b.committed
+), ranked as (
+    select *, row_number() over (
+        partition by station, local_date
+        order by observed_at desc, digest desc, row_number desc
+    ) as revision_rank from parsed
+)
+select local_date, station, high_f, low_f, high_attributes, low_attributes,
+    case when (high_f is null and reported_high is not null)
+           or (low_f is null and reported_low is not null) then 'invalid'
+         when high_f is null or low_f is null then 'missing'
+         when not {{ is_finite('high_f') }} or not {{ is_finite('low_f') }}
+           or high_f not between -100 and 140 or low_f not between -100 and 140
+           or low_f > high_f then 'implausible'
+         when coalesce(split_part(high_attributes, ',', 2), '') != ''
+           or coalesce(split_part(low_attributes, ',', 2), '') != '' then 'flagged'
+         else 'ok' end as quality,
+    loaded_at, observed_at, digest
+from ranked where revision_rank = 1

@@ -1,1 +1,179 @@
-ZnJvbSBkYXRldGltZSBpbXBvcnQgZGF0ZSwgZGF0ZXRpbWUsIHRpbWUsIHRpbWVkZWx0YSwgdGltZXpvbmUKZnJvbSBoYXNobGliIGltcG9ydCBzaGEyNTYKaW1wb3J0IGpzb24KZnJvbSBwYXRobGliIGltcG9ydCBQYXRoCmZyb20gem9uZWluZm8gaW1wb3J0IFpvbmVJbmZvCgppbXBvcnQgZHVja2RiCgpmcm9tIGdyaWRfcGlwZWxpbmUgaW1wb3J0IGxlZGdlcgpmcm9tIGdyaWRfcGlwZWxpbmUuYnJpZWYgaW1wb3J0IEJyaWVmRmFjdHMsIHJlbmRlciwgcmVuZGVyX2JyaWVmCmZyb20gZ3JpZF9waXBlbGluZS5tb2RlbCBpbXBvcnQgRm9yZWNhc3QKCgpVVEMgPSB0aW1lem9uZS51dGMKTkVXX1lPUksgPSBab25lSW5mbygnQW1lcmljYS9OZXdfWW9yaycpCkVJQV9EQVRBU0VUID0gJ2VsZWN0cmljaXR5L3J0by9yZWdpb24tZGF0YScKTkNFSV9EQVRBU0VUID0gJ2RhaWx5LXN1bW1hcmllcycKTldTX0RBVEFTRVQgPSAnZm9yZWNhc3RfYndpJwoKCmRlZiBtYWtlX2RhdGFiYXNlKHBhdGgpOgogICAgd2l0aCBkdWNrZGIuY29ubmVjdChzdHIocGF0aCkpIGFzIGNvbm5lY3Rpb246CiAgICAgICAgY29ubmVjdGlvbi5leGVjdXRlKCdDUkVBVEUgU0NIRU1BIHJhdycpCiAgICAgICAgY29ubmVjdGlvbi5leGVjdXRlKCcnJ0NSRUFURSBUQUJMRSByYXcuYmF0Y2hlcyAoCiAgICAgICAgICAgIHNvdXJjZSBWQVJDSEFSLCBkYXRhc2V0IFZBUkNIQVIsIGRpZ2VzdCBWQVJDSEFSLCBwYXRoIFZBUkNIQVIsCiAgICAgICAgICAgIGxvYWRlZF9hdCBUSU1FU1RBTVBUWiwgY29tbWl0dGVkIEJPT0xFQU4sIG9ic2VydmVkX2F0IFRJTUVTVEFNUFRaLAogICAgICAgICAgICBQUklNQVJZIEtFWSAoc291cmNlLCBkYXRhc2V0LCBkaWdlc3QpKScnJykKICAgICAgICBjb25uZWN0aW9uLmV4ZWN1dGUoJycnQ1JFQVRFIFRBQkxFIHJhdy5yZWNvcmRzICgKICAgICAgICAgICAgc291cmNlIFZBUkNIQVIsIGRhdGFzZXQgVkFSQ0hBUiwgZGlnZXN0IFZBUkNIQVIsIHJvd19udW1iZXIgSU5URUdFUiwKICAgICAgICAgICAgcGF5bG9hZCBKU09OLCBQUklNQVJZIEtFWSAoc291cmNlLCBkYXRhc2V0LCBkaWdlc3QsIHJvd19udW1iZXIpKScnJykKCgpkZWYgYWRkX2JhdGNoKHBhdGgsIHNvdXJjZSwgZGF0YXNldCwgZGlnZXN0LCBsb2FkZWRfYXQsIHJvd3MsICosIG9ic2VydmVkX2F0PU5vbmUpOgogICAgd2l0aCBkdWNrZGIuY29ubmVjdChzdHIocGF0aCkpIGFzIGNvbm5lY3Rpb246CiAgICAgICAgY29ubmVjdGlvbi5leGVjdXRlKCdJTlNFUlQgSU5UTyByYXcuYmF0Y2hlcyBWQUxVRVMgKD8sID8sID8sID8sID8sID8sID8pJywKICAgICAgICAgICAgICAgICAgICAgICAgICAgW3NvdXJjZSwgZGF0YXNldCwgZGlnZXN0LCAnJywgbG9hZGVkX2F0LCBUcnVlLCBvYnNlcnZlZF9hdF0pCiAgICAgICAgaWYgcm93czoKICAgICAgICAgICAgY29ubmVjdGlvbi5leGVjdXRlbWFueSgnSU5TRVJUIElOVE8gcmF3LnJlY29yZHMgVkFMVUVTICg/LCA/LCA/LCA/LCA/KScsIFsKICAgICAgICAgICAgICAgIChzb3VyY2UsIGRhdGFzZXQsIGRpZ2VzdCwgbnVtYmVyLCBqc29uLmR1bXBzKHJvdykpCiAgICAgICAgICAgICAgICBmb3IgbnVtYmVyLCByb3cgaW4gZW51bWVyYXRlKHJvd3MpCiAgICAgICAgICAgIF0pCgoKZGVmIGhvdXJseV9yb3dzKGRheSwgYmFzZSk6CiAgICBzdGFydCA9IGRhdGV0aW1lLmNvbWJpbmUoZGF5LCB0aW1lLm1pbiwgTkVXX1lPUkspLmFzdGltZXpvbmUoVVRDKQogICAgZW5kID0gZGF0ZXRpbWUuY29tYmluZShkYXkgKyB0aW1lZGVsdGEoZGF5cz0xKSwgdGltZS5taW4sIE5FV19ZT1JLKS5hc3RpbWV6b25lKFVUQykKICAgIGhvdXJzID0gaW50KChlbmQgLSBzdGFydCkudG90YWxfc2Vjb25kcygpIC8vIDM2MDApCiAgICByZXR1cm4gW3sncGVyaW9kJzogKHN0YXJ0ICsgdGltZWRlbHRhKGhvdXJzPWhvdXIpKS5zdHJmdGltZSgnJVktJW0tJWRUJUgnKSwKICAgICAgICAgICAgICdyZXNwb25kZW50JzogJ1BKTScsICd0eXBlJzogJ0QnLCAndmFsdWUnOiBzdHIoYmFzZSArIGhvdXIpLAogICAgICAgICAgICAgJ3ZhbHVlLXVuaXRzJzogJ21lZ2F3YXR0aG91cnMnfQogICAgICAgICAgICBmb3IgaG91ciBpbiByYW5nZSgxLCBob3VycyArIDEpXQoKCmRlZiB0ZW1wZXJhdHVyZV9yb3coZGF5LCBoaWdoPSc3MCcsIGxvdz0nNDAnKToKICAgIHJldHVybiB7J0RBVEUnOiBkYXkuaXNvZm9ybWF0KCksICdTVEFUSU9OJzogJ1VTVzAwMDkzNzIxJywgJ1RNQVgnOiBoaWdoLAogICAgICAgICAgICAnVE1JTic6IGxvdywgJ1RNQVhfQVRUUklCVVRFUyc6ICcsLFcnLCAnVE1JTl9BVFRSSUJVVEVTJzogJywsVyd9CgoKZGVmIG1ha2VfbGVkZ2VyX3Jvb3QodG1wX3BhdGgpOgogICAgcm9vdCA9IHRtcF9wYXRoIC8gJ2xlZGdlcicKICAgIChyb290IC8gJ2RlZmluaXRpb25zJykubWtkaXIocGFyZW50cz1UcnVlKQogICAgcmF3ID0gbGVkZ2VyLnJlYWRfZGVmaW5pdGlvbigKICAgICAgICBQYXRoKF9fZmlsZV9fKS5yZXNvbHZlKCkucGFyZW50c1sxXSAvICdsZWRnZXIvZGVmaW5pdGlvbnMvc3RyZXNzLWluZGV4LXYxLnRvbWwnKQogICAgKHJvb3QgLyAnZGVmaW5pdGlvbnMvc3RyZXNzLWluZGV4LXYxLnRvbWwnKS53cml0ZV9ieXRlcyhyYXcpCiAgICByZXR1cm4gcm9vdAoKCmRlZiB0ZXN0X3JlbmRlcmVkX2JyaWVmX2Zyb21fYnVpbHRfd2FyZWhvdXNlX2hhc19yZWFsX3Njb3JlZF9jb250ZW50KHRtcF9wYXRoKToKICAgIGRhdGFiYXNlID0gdG1wX3BhdGggLyAnZ3JpZC5kdWNrZGInCiAgICBtYWtlX2RhdGFiYXNlKGRhdGFiYXNlKQogICAgaW5kZXggPSAwCiAgICBmb3IgeWVhciBpbiAoMjAyMywgMjAyNCwgMjAyNSwgMjAyNik6CiAgICAgICAgZGF5cyA9IFtkYXRlKHllYXIsIDYsIDI0KSArIHRpbWVkZWx0YShkYXlzPW9mZnNldCkgZm9yIG9mZnNldCBpbiByYW5nZSgyMSldCiAgICAgICAgbG9hZGVkID0gZGF0ZXRpbWUoeWVhciwgNywgMTYsIDEyLCB0emluZm89VVRDKQogICAgICAgIGxvYWRfcm93cyA9IFtdCiAgICAgICAgZm9yIGRheSBpbiBkYXlzOgogICAgICAgICAgICBsb2FkX3Jvd3MgKz0gaG91cmx5X3Jvd3MoZGF5LCA5MDAwMCArIChpbmRleCAqIDEzNykgJSA1MDAwKQogICAgICAgICAgICBpbmRleCArPSAxCiAgICAgICAgYWRkX2JhdGNoKGRhdGFiYXNlLCAnZWlhJywgRUlBX0RBVEFTRVQsIGYnZWlhLXt5ZWFyfScsIGxvYWRlZCwKICAgICAgICAgICAgICAgICAgbG9hZF9yb3dzLCBvYnNlcnZlZF9hdD1sb2FkZWQpCiAgICAgICAgYWRkX2JhdGNoKGRhdGFiYXNlLCAnbmNlaScsIE5DRUlfREFUQVNFVCwgZiduY2VpLXt5ZWFyfScsIGxvYWRlZCwKICAgICAgICAgICAgICAgICAgW3RlbXBlcmF0dXJlX3JvdyhkYXksIHN0cig4MiArIGkgJSA4KSwgc3RyKDU4ICsgaSAlIDQpKQogICAgICAgICAgICAgICAgICAgZm9yIGksIGRheSBpbiBlbnVtZXJhdGUoZGF5cyldLCBvYnNlcnZlZF9hdD1sb2FkZWQpCiAgICBhZGRfYmF0Y2goZGF0YWJhc2UsICdud3MnLCBOV1NfREFUQVNFVCwgJ253cy0yMDI2JywKICAgICAgICAgICAgICBkYXRldGltZSgyMDI2LCA3LCAxNSwgMTAsIHR6aW5mbz1VVEMpLAogICAgICAgICAgICAgIFt7J3Byb3BlcnRpZXMnOiB7J3VwZGF0ZVRpbWUnOiAnMjAyNi0wNy0xNVQwNTowMDowMFonLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgJ2dlbmVyYXRlZEF0JzogJzIwMjYtMDctMTVUMDU6MDA6MDBaJywKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICdwZXJpb2RzJzogWwogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHsnbnVtYmVyJzogMSwgJ3N0YXJ0VGltZSc6ICcyMDI2LTA3LTE1VDAxOjAwOjAwLTA0OjAwJywKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgJ2VuZFRpbWUnOiAnMjAyNi0wNy0xNVQwNjowMDowMC0wNDowMCcsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICdpc0RheXRpbWUnOiBGYWxzZSwgJ3RlbXBlcmF0dXJlJzogNjIsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICd0ZW1wZXJhdHVyZVVuaXQnOiAnRid9LAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHsnbnVtYmVyJzogMiwgJ3N0YXJ0VGltZSc6ICcyMDI2LTA3LTE1VDA2OjAwOjAwLTA0OjAwJywKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgJ2VuZFRpbWUnOiAnMjAyNi0wNy0xNVQxODowMDowMC0wNDowMCcsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICdpc0RheXRpbWUnOiBUcnVlLCAndGVtcGVyYXR1cmUnOiA4OCwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgJ3RlbXBlcmF0dXJlVW5pdCc6ICdGJ31dfX1dLAogICAgICAgICAgICAgIG9ic2VydmVkX2F0PWRhdGV0aW1lKDIwMjYsIDcsIDE1LCAxMCwgdHppbmZvPVVUQykpCiAgICBvdXQgPSB0bXBfcGF0aCAvICdzaXRlJwogICAgcmVuZGVyZWQgPSByZW5kZXJfYnJpZWYoZGF0YWJhc2UsIG1ha2VfbGVkZ2VyX3Jvb3QodG1wX3BhdGgpLCBvdXQsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICB0YXJnZXRfZGF0ZT1kYXRlKDIwMjYsIDcsIDE1KSwKICAgICAgICAgICAgICAgICAgICAgICAgICAgIGdlbmVyYXRlZF9hdD1kYXRldGltZSgyMDI2LCA3LCAxNSwgMTEsIHR6aW5mbz1VVEMpKQogICAgYXNzZXJ0IHJlbmRlcmVkLmZvcmVjYXN0Lm5vX2NhbGxfcmVhc29uIGlzIE5vbmUKICAgIGFzc2VydCByZW5kZXJlZC5mb3JlY2FzdC5sZXZlbCBpbiB7J2NhbG0nLCAnd2F0Y2gnLCAnc3RyYWluZWQnLCAnc2V2ZXJlJ30KICAgIGFzc2VydCByZW5kZXJlZC5mb3JlY2FzdC5wZWFrX213IGlzIG5vdCBOb25lCiAgICBwYWdlID0gcmVuZGVyZWQuaW5kZXhfcGF0aC5yZWFkX3RleHQoZW5jb2Rpbmc9J3V0Zi04JykKICAgIGFzc2VydCAnMjAyNi0wNy0xNScgaW4gcGFnZQogICAgYXNzZXJ0IGYnU3RyZXNzIGxldmVsOiB7cmVuZGVyZWQuZm9yZWNhc3QubGV2ZWx9JyBpbiBwYWdlCiAgICBhc3NlcnQgJ1BlYWsgZGVtYW5kOicgaW4gcGFnZQogICAgYXNzZXJ0ICdQZWFrIGhvdXIgZW5kaW5nOicgaW4gcGFnZQogICAgYXNzZXJ0ICdMb2FkOiBmcmVzaCcgaW4gcGFnZSBhbmQgJ1dlYXRoZXI6IGZyZXNoJyBpbiBwYWdlCiAgICBhc3NlcnQgJ0RhdGEgYXMgb2Y6IDIwMjYtMDctMTQnIGluIHBhZ2UKICAgIGNvbW1lbnQgPSByZW5kZXJlZC5jb21tZW50X3BhdGgucmVhZF90ZXh0KGVuY29kaW5nPSd1dGYtOCcpCiAgICBhc3NlcnQgJzIwMjYtMDctMTUnIGluIGNvbW1lbnQKICAgIGFzc2VydCAnTm8gcmVjZWlwdHMgaW4gdGhlIGxlZGdlciBmb3IgdGhpcyB0YXJnZXQgZGF0ZS4nIGluIGNvbW1lbnQKCgpkZWYgdGVzdF9ub19jYWxsX2JyaWVmX2Zyb21fdGlueV93YXJlaG91c2Vfc2hvd3NfcmVhc29uX2FuZF9ub19jbGFpbXModG1wX3BhdGgpOgogICAgZGF0YWJhc2UgPSB0bXBfcGF0aCAvICdncmlkLmR1Y2tkYicKICAgIG1ha2VfZGF0YWJhc2UoZGF0YWJhc2UpCiAgICBkYXkgPSBkYXRlKDIwMjYsIDEwLCAxKQogICAgbG9hZGVkID0gZGF0ZXRpbWUoMjAyNiwgMTAsIDMsIDEyLCB0emluZm89VVRDKQogICAgYWRkX2JhdGNoKGRhdGFiYXNlLCAnZWlhJywgRUlBX0RBVEFTRVQsICdlaWEnLCBsb2FkZWQsIGhvdXJseV9yb3dzKGRheSwgOTAwMDApLAogICAgICAgICAgICAgIG9ic2VydmVkX2F0PWxvYWRlZCkKICAgIGFkZF9iYXRjaChkYXRhYmFzZSwgJ25jZWknLCBOQ0VJX0RBVEFTRVQsICduY2VpJywgbG9hZGVkLCBbdGVtcGVyYXR1cmVfcm93KGRheSldLAogICAgICAgICAgICAgIG9ic2VydmVkX2F0PWxvYWRlZCkKICAgIG91dCA9IHRtcF9wYXRoIC8gJ3NpdGUnCiAgICByZW5kZXJlZCA9IHJlbmRlcl9icmllZihkYXRhYmFzZSwgbWFrZV9sZWRnZXJfcm9vdCh0bXBfcGF0aCksIG91dCwKICAgICAgICAgICAgICAgICAgICAgICAgICAgIHRhcmdldF9kYXRlPWRhdGUoMjAyNiwgMTAsIDIwKSwKICAgICAgICAgICAgICAgICAgICAgICAgICAgIGdlbmVyYXRlZF9hdD1kYXRldGltZSgyMDI2LCAxMCwgMjAsIDExLCB0emluZm89VVRDKSkKICAgIGFzc2VydCByZW5kZXJlZC5mb3JlY2FzdC5ub19jYWxsX3JlYXNvbiA9PSAnc3RhbGVfbG9hZCcKICAgIHBhZ2UgPSByZW5kZXJlZC5pbmRleF9wYXRoLnJlYWRfdGV4dChlbmNvZGluZz0ndXRmLTgnKQogICAgYXNzZXJ0ICcyMDI2LTEwLTIwJyBpbiBwYWdlCiAgICBhc3NlcnQgJ05vIGNhbGwg4oCUIHN0YWxlX2xvYWQnIGluIHBhZ2UKICAgIGFzc2VydCAnTm8gcGVhayBkZW1hbmQsIHBlYWsgaG91ciwgb3Igc3RyZXNzIGxldmVsIGlzIGNsYWltZWQnIGluIHBhZ2UKICAgIGFzc2VydCAnTG9hZDogc3RhbGUnIGluIHBhZ2UKICAgIGNvbW1lbnQgPSByZW5kZXJlZC5jb21tZW50X3BhdGgucmVhZF90ZXh0KGVuY29kaW5nPSd1dGYtOCcpCiAgICBhc3NlcnQgJyoqTm8gY2FsbCoqIOKAlCBgc3RhbGVfbG9hZGAnIGluIGNvbW1lbnQKCgpkZWYgdGVzdF9wdXJlX3JlbmRlcl9ub19jYWxsX2FuZF9yZWNlaXB0X2xpc3RpbmcoKToKICAgIGZvcmVjYXN0ID0gRm9yZWNhc3QoZGF0ZSgyMDI2LCAxMSwgNiksICdzdHJlc3MtaW5kZXgtdjEnLCAnYScgKiA2NCwKICAgICAgICAgICAgICAgICAgICAgICAgTm9uZSwgTm9uZSwgTm9uZSwgTm9uZSwgJ3N0YWxlX3dlYXRoZXInLCAoKSkKICAgIGZhY3RzID0gQnJpZWZGYWN0cyhsb2FkX2ZyZXNoPVRydWUsIHdlYXRoZXJfZnJlc2g9RmFsc2UsCiAgICAgICAgICAgICAgICAgICAgICAgbGF0ZXN0X2NvbXBsZXRlZF9wZWFrPWRhdGUoMjAyNiwgMTEsIDQpLAogICAgICAgICAgICAgICAgICAgICAgIGxhdGVzdF9jb21wbGV0ZWRfcHJlc2VudD1UcnVlLCBoaXN0b3J5X2RheXM9ODQsCiAgICAgICAgICAgICAgICAgICAgICAgaGlzdG9yeV9sYXN0X2RhdGU9ZGF0ZSgyMDI2LCAxMSwgNCksCiAgICAgICAgICAgICAgICAgICAgICAgZGF0YV9hc19vZj1kYXRlKDIwMjYsIDExLCA0KSwgbG9hZF9sYXN0X2hvdXJfdXRjPU5vbmUsCiAgICAgICAgICAgICAgICAgICAgICAgd2VhdGhlcl91cGRhdGVfdGltZT1Ob25lLCB0YXJnZXRfaGlnaF9mPU5vbmUsCiAgICAgICAgICAgICAgICAgICAgICAgdGFyZ2V0X21vcm5pbmdfbG93X2Y9Tm9uZSkKICAgIGRpZ2VzdCA9ICdiJyAqIDY0CiAgICBwYXRoID0gZidsZWRnZXIvZm9yZWNhc3RzL291cnMvMjAyNi0xMS0wNi97ZGlnZXN0fS5qc29uJwogICAgYnJpZWYgPSByZW5kZXIoZm9yZWNhc3QsIGZhY3RzLCBbKHBhdGgsIGRpZ2VzdCldLAogICAgICAgICAgICAgICAgICAgZ2VuZXJhdGVkX2F0PWRhdGV0aW1lKDIwMjYsIDExLCA2LCAxMiwgdHppbmZvPVVUQykpCiAgICBhc3NlcnQgJ05vIGNhbGwg4oCUIHN0YWxlX3dlYXRoZXInIGluIGJyaWVmLmh0bWwKICAgIGFzc2VydCAnV2VhdGhlcjogc3RhbGUnIGluIGJyaWVmLmh0bWwKICAgIGFzc2VydCBmJ2B7cGF0aH1gIOKAlCBzaGEyNTY6IGB7ZGlnZXN0fWAnIGluIGJyaWVmLmNvbW1lbnRfbWQKCgpkZWYgdGVzdF9jb21tZW50X2xpc3RzX3JlY2VpcHRfcGF0aF9hbmRfZnVsbF9zaGEyNTZfZnJvbV9sZWRnZXIodG1wX3BhdGgpOgogICAgZGF0YWJhc2UgPSB0bXBfcGF0aCAvICdncmlkLmR1Y2tkYicKICAgIG1ha2VfZGF0YWJhc2UoZGF0YWJhc2UpCiAgICBkYXkgPSBkYXRlKDIwMjYsIDEwLCAxKQogICAgbG9hZGVkID0gZGF0ZXRpbWUoMjAyNiwgMTAsIDMsIDEyLCB0emluZm89VVRDKQogICAgYWRkX2JhdGNoKGRhdGFiYXNlLCAnZWlhJywgRUlBX0RBVEFTRVQsICdlaWEnLCBsb2FkZWQsIGhvdXJseV9yb3dzKGRheSwgOTAwMDApLAogICAgICAgICAgICAgIG9ic2VydmVkX2F0PWxvYWRlZCkKICAgIGFkZF9iYXRjaChkYXRhYmFzZSwgJ25jZWknLCBOQ0VJX0RBVEFTRVQsICduY2VpJywgbG9hZGVkLCBbdGVtcGVyYXR1cmVfcm93KGRheSldLAogICAgICAgICAgICAgIG9ic2VydmVkX2F0PWxvYWRlZCkKICAgIHJvb3QgPSBtYWtlX2xlZGdlcl9yb290KHRtcF9wYXRoKQogICAgcmF3ID0gKGpzb24uZHVtcHMoeyd0YXJnZXRfZGF0ZSc6ICcyMDI2LTEwLTIwJywgJ2ZvcmVjYXN0ZXJfaWQnOiAnb3Vycyd9KSArICdcbicpLmVuY29kZSgpCiAgICBkaWdlc3QgPSBzaGEyNTYocmF3KS5oZXhkaWdlc3QoKQogICAgcmVjZWlwdCA9IHJvb3QgLyAnZm9yZWNhc3RzL291cnMvMjAyNi0xMC0yMCcgLyBmJ3tkaWdlc3R9Lmpzb24nCiAgICByZWNlaXB0LnBhcmVudC5ta2RpcihwYXJlbnRzPVRydWUpCiAgICByZWNlaXB0LndyaXRlX2J5dGVzKHJhdykKICAgIHJlbmRlcmVkID0gcmVuZGVyX2JyaWVmKGRhdGFiYXNlLCByb290LCB0bXBfcGF0aCAvICdzaXRlJywKICAgICAgICAgICAgICAgICAgICAgICAgICAgIHRhcmdldF9kYXRlPWRhdGUoMjAyNiwgMTAsIDIwKSwKICAgICAgICAgICAgICAgICAgICAgICAgICAgIGdlbmVyYXRlZF9hdD1kYXRldGltZSgyMDI2LCAxMCwgMjAsIDExLCB0emluZm89VVRDKSkKICAgIGNvbW1lbnQgPSByZW5kZXJlZC5jb21tZW50X3BhdGgucmVhZF90ZXh0KGVuY29kaW5nPSd1dGYtOCcpCiAgICBhc3NlcnQgZidsZWRnZXIvZm9yZWNhc3RzL291cnMvMjAyNi0xMC0yMC97ZGlnZXN0fS5qc29uJyBpbiBjb21tZW50CiAgICBhc3NlcnQgZidzaGEyNTY6IGB7ZGlnZXN0fWAnIGluIGNvbW1lbnQK
+from datetime import date, datetime, time, timedelta, timezone
+from hashlib import sha256
+import json
+from pathlib import Path
+from zoneinfo import ZoneInfo
+
+import duckdb
+
+from grid_pipeline import ledger
+from grid_pipeline.brief import BriefFacts, render, render_brief
+from grid_pipeline.model import Forecast
+
+
+UTC = timezone.utc
+NEW_YORK = ZoneInfo('America/New_York')
+EIA_DATASET = 'electricity/rto/region-data'
+NCEI_DATASET = 'daily-summaries'
+NWS_DATASET = 'forecast_bwi'
+
+
+def make_database(path):
+    with duckdb.connect(str(path)) as connection:
+        connection.execute('CREATE SCHEMA raw')
+        connection.execute('''CREATE TABLE raw.batches (
+            source VARCHAR, dataset VARCHAR, digest VARCHAR, path VARCHAR,
+            loaded_at TIMESTAMPTZ, committed BOOLEAN, observed_at TIMESTAMPTZ,
+            PRIMARY KEY (source, dataset, digest))''')
+        connection.execute('''CREATE TABLE raw.records (
+            source VARCHAR, dataset VARCHAR, digest VARCHAR, row_number INTEGER,
+            payload JSON, PRIMARY KEY (source, dataset, digest, row_number))''')
+
+
+def add_batch(path, source, dataset, digest, loaded_at, rows, *, observed_at=None):
+    with duckdb.connect(str(path)) as connection:
+        connection.execute('INSERT INTO raw.batches VALUES (?, ?, ?, ?, ?, ?, ?)',
+                           [source, dataset, digest, '', loaded_at, True, observed_at])
+        if rows:
+            connection.executemany('INSERT INTO raw.records VALUES (?, ?, ?, ?, ?)', [
+                (source, dataset, digest, number, json.dumps(row))
+                for number, row in enumerate(rows)
+            ])
+
+
+def hourly_rows(day, base):
+    start = datetime.combine(day, time.min, NEW_YORK).astimezone(UTC)
+    end = datetime.combine(day + timedelta(days=1), time.min, NEW_YORK).astimezone(UTC)
+    hours = int((end - start).total_seconds() // 3600)
+    return [{'period': (start + timedelta(hours=hour)).strftime('%Y-%m-%dT%H'),
+             'respondent': 'PJM', 'type': 'D', 'value': str(base + hour),
+             'value-units': 'megawatthours'}
+            for hour in range(1, hours + 1)]
+
+
+def temperature_row(day, high='70', low='40'):
+    return {'DATE': day.isoformat(), 'STATION': 'USW00093721', 'TMAX': high,
+            'TMIN': low, 'TMAX_ATTRIBUTES': ',,W', 'TMIN_ATTRIBUTES': ',,W'}
+
+
+def make_ledger_root(tmp_path):
+    root = tmp_path / 'ledger'
+    (root / 'definitions').mkdir(parents=True)
+    raw = ledger.read_definition(
+        Path(__file__).resolve().parents[1] / 'ledger/definitions/stress-index-v1.toml')
+    (root / 'definitions/stress-index-v1.toml').write_bytes(raw)
+    return root
+
+
+def test_rendered_brief_from_built_warehouse_has_real_scored_content(tmp_path):
+    database = tmp_path / 'grid.duckdb'
+    make_database(database)
+    index = 0
+    for year in (2023, 2024, 2025, 2026):
+        days = [date(year, 6, 24) + timedelta(days=offset) for offset in range(21)]
+        loaded = datetime(year, 7, 16, 12, tzinfo=UTC)
+        load_rows = []
+        for day in days:
+            load_rows += hourly_rows(day, 90000 + (index * 137) % 5000)
+            index += 1
+        add_batch(database, 'eia', EIA_DATASET, f'eia-{year}', loaded,
+                  load_rows, observed_at=loaded)
+        add_batch(database, 'ncei', NCEI_DATASET, f'ncei-{year}', loaded,
+                  [temperature_row(day, str(82 + i % 8), str(58 + i % 4))
+                   for i, day in enumerate(days)], observed_at=loaded)
+    add_batch(database, 'nws', NWS_DATASET, 'nws-2026',
+              datetime(2026, 7, 15, 10, tzinfo=UTC),
+              [{'properties': {'updateTime': '2026-07-15T05:00:00Z',
+                               'generatedAt': '2026-07-15T05:00:00Z',
+                               'periods': [
+                                   {'number': 1, 'startTime': '2026-07-15T01:00:00-04:00',
+                                    'endTime': '2026-07-15T06:00:00-04:00',
+                                    'isDaytime': False, 'temperature': 62,
+                                    'temperatureUnit': 'F'},
+                                   {'number': 2, 'startTime': '2026-07-15T06:00:00-04:00',
+                                    'endTime': '2026-07-15T18:00:00-04:00',
+                                    'isDaytime': True, 'temperature': 88,
+                                    'temperatureUnit': 'F'}]}}],
+              observed_at=datetime(2026, 7, 15, 10, tzinfo=UTC))
+    out = tmp_path / 'site'
+    rendered = render_brief(database, make_ledger_root(tmp_path), out,
+                            target_date=date(2026, 7, 15),
+                            generated_at=datetime(2026, 7, 15, 11, tzinfo=UTC))
+    assert rendered.forecast.no_call_reason is None
+    assert rendered.forecast.level in {'calm', 'watch', 'strained', 'severe'}
+    assert rendered.forecast.peak_mw is not None
+    page = rendered.index_path.read_text(encoding='utf-8')
+    assert '2026-07-15' in page
+    assert f'Stress level: {rendered.forecast.level}' in page
+    assert 'Peak demand:' in page
+    assert 'Peak hour ending:' in page
+    assert 'Load: fresh' in page and 'Weather: fresh' in page
+    assert 'Data as of: 2026-07-14' in page
+    comment = rendered.comment_path.read_text(encoding='utf-8')
+    assert '2026-07-15' in comment
+    assert 'No receipts in the ledger for this target date.' in comment
+
+
+def test_no_call_brief_from_tiny_warehouse_shows_reason_and_no_claims(tmp_path):
+    database = tmp_path / 'grid.duckdb'
+    make_database(database)
+    day = date(2026, 10, 1)
+    loaded = datetime(2026, 10, 3, 12, tzinfo=UTC)
+    add_batch(database, 'eia', EIA_DATASET, 'eia', loaded, hourly_rows(day, 90000),
+              observed_at=loaded)
+    add_batch(database, 'ncei', NCEI_DATASET, 'ncei', loaded, [temperature_row(day)],
+              observed_at=loaded)
+    out = tmp_path / 'site'
+    rendered = render_brief(database, make_ledger_root(tmp_path), out,
+                            target_date=date(2026, 10, 20),
+                            generated_at=datetime(2026, 10, 20, 11, tzinfo=UTC))
+    assert rendered.forecast.no_call_reason == 'stale_load'
+    page = rendered.index_path.read_text(encoding='utf-8')
+    assert '2026-10-20' in page
+    assert 'No call — stale_load' in page
+    assert 'No peak demand, peak hour, or stress level is claimed' in page
+    assert 'Load: stale' in page
+    comment = rendered.comment_path.read_text(encoding='utf-8')
+    assert '**No call** — `stale_load`' in comment
+
+
+def test_pure_render_no_call_and_receipt_listing():
+    forecast = Forecast(date(2026, 11, 6), 'stress-index-v1', 'a' * 64,
+                        None, None, None, None, 'stale_weather', ())
+    facts = BriefFacts(load_fresh=True, weather_fresh=False,
+                       latest_completed_peak=date(2026, 11, 4),
+                       latest_completed_present=True, history_days=84,
+                       history_last_date=date(2026, 11, 4),
+                       data_as_of=date(2026, 11, 4), load_last_hour_utc=None,
+                       weather_update_time=None, target_high_f=None,
+                       target_morning_low_f=None)
+    digest = 'b' * 64
+    path = f'ledger/forecasts/ours/2026-11-06/{digest}.json'
+    brief = render(forecast, facts, [(path, digest)],
+                   generated_at=datetime(2026, 11, 6, 12, tzinfo=UTC))
+    assert 'No call — stale_weather' in brief.html
+    assert 'Weather: stale' in brief.html
+    assert f'`{path}` — sha256: `{digest}`' in brief.comment_md
+
+
+def test_comment_lists_receipt_path_and_full_sha256_from_ledger(tmp_path):
+    database = tmp_path / 'grid.duckdb'
+    make_database(database)
+    day = date(2026, 10, 1)
+    loaded = datetime(2026, 10, 3, 12, tzinfo=UTC)
+    add_batch(database, 'eia', EIA_DATASET, 'eia', loaded, hourly_rows(day, 90000),
+              observed_at=loaded)
+    add_batch(database, 'ncei', NCEI_DATASET, 'ncei', loaded, [temperature_row(day)],
+              observed_at=loaded)
+    root = make_ledger_root(tmp_path)
+    raw = (json.dumps({'target_date': '2026-10-20', 'forecaster_id': 'ours'}) + '\n').encode()
+    digest = sha256(raw).hexdigest()
+    receipt = root / 'forecasts/ours/2026-10-20' / f'{digest}.json'
+    receipt.parent.mkdir(parents=True)
+    receipt.write_bytes(raw)
+    rendered = render_brief(database, root, tmp_path / 'site',
+                            target_date=date(2026, 10, 20),
+                            generated_at=datetime(2026, 10, 20, 11, tzinfo=UTC))
+    comment = rendered.comment_path.read_text(encoding='utf-8')
+    assert f'ledger/forecasts/ours/2026-10-20/{digest}.json' in comment
+    assert f'sha256: `{digest}`' in comment

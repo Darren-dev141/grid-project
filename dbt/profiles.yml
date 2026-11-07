@@ -1,1 +1,29 @@
-Z3JpZF9wcm9qZWN0OgogIHRhcmdldDogbG9jYWwKICBvdXRwdXRzOgogICAgbG9jYWw6CiAgICAgIHR5cGU6IGR1Y2tkYgogICAgICBwYXRoOiAie3sgZW52X3ZhcignR1JJRF9EQVRBQkFTRScpIH19IgogICAgICBzY2hlbWE6IG1haW4KICAgICAgdGhyZWFkczogMQogICAgICBzZXR0aW5nczoKICAgICAgICBUaW1lWm9uZTogVVRDCiAgICAjIFM1IGRlcGxveW1lbnQgdGFyZ2V0IChQTEFOIGRlY2lzaW9uIDQpOiBTdXBhYmFzZSBob3N0ZWQgUG9zdGdyZXMgdmlhCiAgICAjIGRidC1wb3N0Z3Jlcy4gQ3JlZGVudGlhbHMgY29tZSBvbmx5IGZyb20gdGhlIGVudmlyb25tZW50IOKAlCBpbiBHaXRIdWIKICAgICMgQWN0aW9ucyB0aGVzZSBhcmUgcmVwbyBzZWNyZXRzIChTVVBBQkFTRV9EQl8qKTsgbmV2ZXIgcHV0IHZhbHVlcyBoZXJlLgogICAgIyBDb25uZWN0aW9uIGd1aWRhbmNlOiB1c2UgdGhlIFN1cGFiYXNlICpkaXJlY3QqIGNvbm5lY3Rpb24gb3IgdGhlCiAgICAjICpzZXNzaW9uKiBwb29sZXIgKHBvcnQgNTQzMikuIERvIE5PVCB1c2UgdGhlIHRyYW5zYWN0aW9uIHBvb2xlcgogICAgIyAocG9ydCA2NTQzKTogZGJ0LXBvc3RncmVzIHJlbGllcyBvbiBzZXNzaW9uIHN0YXRlLiBXaXRoIHRoZSBwb29sZXIgdGhlCiAgICAjIHVzZXIgaXMgInBvc3RncmVzLjxwcm9qZWN0LXJlZj4iOyB3aXRoIHRoZSBkaXJlY3QgY29ubmVjdGlvbiBpdCBpcwogICAgIyAicG9zdGdyZXMiLiBTVVBBQkFTRV9EQl9OQU1FIGlzIHRoZSBwcm9qZWN0IGRhdGFiYXNlIG5hbWUgKCJwb3N0Z3JlcyIpLgogICAgc3VwYWJhc2U6CiAgICAgIHR5cGU6IHBvc3RncmVzCiAgICAgIGhvc3Q6ICJ7eyBlbnZfdmFyKCdTVVBBQkFTRV9EQl9IT1NUJykgfX0iCiAgICAgIHBvcnQ6ICJ7eyBlbnZfdmFyKCdTVVBBQkFTRV9EQl9QT1JUJywgJzU0MzInKSB8IGludCB9fSIKICAgICAgdXNlcjogInt7IGVudl92YXIoJ1NVUEFCQVNFX0RCX1VTRVInKSB9fSIKICAgICAgcGFzc3dvcmQ6ICJ7eyBlbnZfdmFyKCdTVVBBQkFTRV9EQl9QQVNTV09SRCcpIH19IgogICAgICBkYm5hbWU6ICJ7eyBlbnZfdmFyKCdTVVBBQkFTRV9EQl9OQU1FJywgJ3Bvc3RncmVzJykgfX0iCiAgICAgIHNjaGVtYTogcHVibGljCiAgICAgIHRocmVhZHM6IDQKICAgICAgY29ubmVjdF90aW1lb3V0OiAzMAogICAgICBrZWVwYWxpdmVzX2lkbGU6IDAK
+grid_project:
+  target: local
+  outputs:
+    local:
+      type: duckdb
+      path: "{{ env_var('GRID_DATABASE') }}"
+      schema: main
+      threads: 1
+      settings:
+        TimeZone: UTC
+    # S5 deployment target (PLAN decision 4): Supabase hosted Postgres via
+    # dbt-postgres. Credentials come only from the environment — in GitHub
+    # Actions these are repo secrets (SUPABASE_DB_*); never put values here.
+    # Connection guidance: use the Supabase *direct* connection or the
+    # *session* pooler (port 5432). Do NOT use the transaction pooler
+    # (port 6543): dbt-postgres relies on session state. With the pooler the
+    # user is "postgres.<project-ref>"; with the direct connection it is
+    # "postgres". SUPABASE_DB_NAME is the project database name ("postgres").
+    supabase:
+      type: postgres
+      host: "{{ env_var('SUPABASE_DB_HOST') }}"
+      port: "{{ env_var('SUPABASE_DB_PORT', '5432') | int }}"
+      user: "{{ env_var('SUPABASE_DB_USER') }}"
+      password: "{{ env_var('SUPABASE_DB_PASSWORD') }}"
+      dbname: "{{ env_var('SUPABASE_DB_NAME', 'postgres') }}"
+      schema: public
+      threads: 4
+      connect_timeout: 30
+      keepalives_idle: 0

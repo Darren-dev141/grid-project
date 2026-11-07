@@ -1,1 +1,3 @@
-c2VsZWN0IGhvdXJfdXRjLCByZXNwb25kZW50LCBmdWVsX3R5cGUKZnJvbSB7eyByZWYoJ2VpYV9wam1faG91cmx5X2dlbmVyYXRpb24nKSB9fQpncm91cCBieSBob3VyX3V0YywgcmVzcG9uZGVudCwgZnVlbF90eXBlIGhhdmluZyBjb3VudCgqKSA+IDEK
+select hour_utc, respondent, fuel_type
+from {{ ref('eia_pjm_hourly_generation') }}
+group by hour_utc, respondent, fuel_type having count(*) > 1

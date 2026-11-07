@@ -1,1 +1,58 @@
-LS0gRUlBIHRpbWVzdGFtcHMgZW5kIGFuIGhvdXJseSBpbnRlcnZhbC4gTWlkbmlnaHQgYmVsb25ncyB0byB0aGUgcHJlY2VkaW5nIGRheS4Kd2l0aCBkZW1hbmQgYXMgKAogICAgc2VsZWN0ICosCiAgICAgICAgY2FzdCh0aW1lem9uZSgnQW1lcmljYS9OZXdfWW9yaycsIHRpbWV6b25lKCdVVEMnLCBob3VyX3V0YykKICAgICAgICAgICAgLSBpbnRlcnZhbCAnMSBtaWNyb3NlY29uZCcpIGFzIGRhdGUpIGFzIGxvY2FsX2RhdGUsCiAgICAgICAgdGltZXpvbmUoJ0FtZXJpY2EvTmV3X1lvcmsnLCB0aW1lem9uZSgnVVRDJywgaG91cl91dGMpKSBhcyBsb2NhbF9lbmQsCiAgICAgICAgcXVhbGl0eSA9ICdvaycgYW5kIHt7IGlzX2Zpbml0ZSgnZGVtYW5kX213aCcpIH19IGFuZCBkZW1hbmRfbXdoID49IDAgYXMgdXNhYmxlCiAgICBmcm9tIHt7IHJlZignZWlhX3BqbV9ob3VybHlfZGVtYW5kJykgfX0KKSwgdGVtcGVyYXR1cmVzIGFzICgKICAgIHNlbGVjdCAqIGZyb20ge3sgcmVmKCduY2VpX2J3aV9kYWlseV90ZW1wcycpIH19CiAgICB3aGVyZSBzdGF0aW9uID0gJ1VTVzAwMDkzNzIxJwopLCBkYXRlcyBhcyAoCiAgICBzZWxlY3QgbG9jYWxfZGF0ZSBmcm9tIGRlbWFuZAogICAgdW5pb24gYWxsCiAgICBzZWxlY3QgbG9jYWxfZGF0ZSBmcm9tIHRlbXBlcmF0dXJlcwopLCBib3VuZHMgYXMgKAogICAgc2VsZWN0IG1pbihsb2NhbF9kYXRlKSBhcyBmaXJzdF9kYXRlLCBtYXgobG9jYWxfZGF0ZSkgYXMgbGFzdF9kYXRlIGZyb20gZGF0ZXMKKSwgY2FsZW5kYXIgYXMgKAogICAgc2VsZWN0IGNhc3QoZGF5IGFzIGRhdGUpIGFzIGxvY2FsX2RhdGUKICAgIGZyb20gYm91bmRzLCBsYXRlcmFsIGdlbmVyYXRlX3NlcmllcyhjYXN0KGZpcnN0X2RhdGUgYXMgdGltZXN0YW1wKSwKICAgICAgICBjYXN0KGxhc3RfZGF0ZSBhcyB0aW1lc3RhbXApLCBpbnRlcnZhbCAnMSBkYXknKSBzKGRheSkKKSwgY291bnRzIGFzICgKICAgIHNlbGVjdCBsb2NhbF9kYXRlLCBjb3VudCgqKSBhcyBvYnNlcnZlZF9ob3VycywKICAgICAgICBjb3VudCgqKSBmaWx0ZXIgKHdoZXJlIHVzYWJsZSkgYXMgb2tfaG91cnMKICAgIGZyb20gZGVtYW5kIGdyb3VwIGJ5IGxvY2FsX2RhdGUKKSwgcGVha3MgYXMgKAogICAgLS0gUVVBTElGWSBpcyBEdWNrREItb25seTsgdGhlIHJhbmtlZC1zdWJxdWVyeSBmb3JtIGlzIHRoZSBwb3J0YWJsZQogICAgLS0gc3BlbGxpbmcgb2YgdGhlIHNhbWUgcm93X251bWJlcigpID0gMSBzZWxlY3Rpb24uCiAgICBzZWxlY3QgbG9jYWxfZGF0ZSwgcGVha19tdywgcGVha19ob3VyX3V0YywgcGVha19ob3VyX2VuZGluZwogICAgZnJvbSAoCiAgICAgICAgc2VsZWN0IGxvY2FsX2RhdGUsIGRlbWFuZF9td2ggYXMgcGVha19tdywgaG91cl91dGMgYXMgcGVha19ob3VyX3V0YywKICAgICAgICAgICAgY2FzZSB3aGVuIGV4dHJhY3QoaG91ciBmcm9tIGxvY2FsX2VuZCkgPSAwIHRoZW4gMjQKICAgICAgICAgICAgICAgICBlbHNlIGV4dHJhY3QoaG91ciBmcm9tIGxvY2FsX2VuZCkgZW5kIGFzIHBlYWtfaG91cl9lbmRpbmcsCiAgICAgICAgICAgIHJvd19udW1iZXIoKSBvdmVyICgKICAgICAgICAgICAgICAgIHBhcnRpdGlvbiBieSBsb2NhbF9kYXRlIG9yZGVyIGJ5IGRlbWFuZF9td2ggZGVzYywgaG91cl91dGMKICAgICAgICAgICAgKSBhcyByZXZpc2lvbl9yYW5rCiAgICAgICAgZnJvbSBkZW1hbmQgd2hlcmUgdXNhYmxlCiAgICApIHJhbmtlZF9wZWFrcwogICAgd2hlcmUgcmV2aXNpb25fcmFuayA9IDEKKSwgZGF5cyBhcyAoCiAgICBzZWxlY3QgbG9jYWxfZGF0ZSwKICAgICAgICB7eyBkYXRlX2RpZmZfaG91cigidGltZXpvbmUoJ0FtZXJpY2EvTmV3X1lvcmsnLCBjYXN0KGxvY2FsX2RhdGUgYXMgdGltZXN0YW1wKSkiLAogICAgICAgICAgICAidGltZXpvbmUoJ0FtZXJpY2EvTmV3X1lvcmsnLCBjYXN0KGxvY2FsX2RhdGUgKyAxIGFzIHRpbWVzdGFtcCkpIikgfX0gYXMgZXhwZWN0ZWRfaG91cnMKICAgIGZyb20gY2FsZW5kYXIKKQpzZWxlY3QgZC5sb2NhbF9kYXRlLAogICAgY2FzZSB3aGVuIHt7IGlzb2Rvd19vZignZC5sb2NhbF9kYXRlJykgfX0gaW4gKDYsIDcpIHRoZW4gJ3dlZWtlbmQnIGVsc2UgJ3dlZWtkYXknIGVuZCBhcyBkYXlfdHlwZSwKICAgIHAucGVha19tdywgcC5wZWFrX2hvdXJfZW5kaW5nLCBwLnBlYWtfaG91cl91dGMsCiAgICBkLmV4cGVjdGVkX2hvdXJzLCBjb2FsZXNjZShjLm9ic2VydmVkX2hvdXJzLCAwKSBhcyBvYnNlcnZlZF9ob3VycywKICAgIGNvYWxlc2NlKGMub2tfaG91cnMsIDApIGFzIG9rX2hvdXJzLAogICAgY29hbGVzY2UoYy5va19ob3VycywgMCkgPSBkLmV4cGVjdGVkX2hvdXJzIGFzIGNvbXBsZXRlLAogICAgY2FzZSB3aGVuIHQucXVhbGl0eSA9ICdvaycgdGhlbiB0LmhpZ2hfZiBlbmQgYXMgdG1heF9mLAogICAgY2FzZSB3aGVuIHQucXVhbGl0eSA9ICdvaycgdGhlbiB0Lmxvd19mIGVuZCBhcyB0bWluX2YsCiAgICB0LnF1YWxpdHkgYXMgdGVtcGVyYXR1cmVfcXVhbGl0eQpmcm9tIGRheXMgZApsZWZ0IGpvaW4gY291bnRzIGMgdXNpbmcgKGxvY2FsX2RhdGUpCmxlZnQgam9pbiBwZWFrcyBwIHVzaW5nIChsb2NhbF9kYXRlKQpsZWZ0IGpvaW4gdGVtcGVyYXR1cmVzIHQgdXNpbmcgKGxvY2FsX2RhdGUpCg==
+-- EIA timestamps end an hourly interval. Midnight belongs to the preceding day.
+with demand as (
+    select *,
+        cast(timezone('America/New_York', timezone('UTC', hour_utc)
+            - interval '1 microsecond') as date) as local_date,
+        timezone('America/New_York', timezone('UTC', hour_utc)) as local_end,
+        quality = 'ok' and {{ is_finite('demand_mwh') }} and demand_mwh >= 0 as usable
+    from {{ ref('eia_pjm_hourly_demand') }}
+), temperatures as (
+    select * from {{ ref('ncei_bwi_daily_temps') }}
+    where station = 'USW00093721'
+), dates as (
+    select local_date from demand
+    union all
+    select local_date from temperatures
+), bounds as (
+    select min(local_date) as first_date, max(local_date) as last_date from dates
+), calendar as (
+    select cast(day as date) as local_date
+    from bounds, lateral generate_series(cast(first_date as timestamp),
+        cast(last_date as timestamp), interval '1 day') s(day)
+), counts as (
+    select local_date, count(*) as observed_hours,
+        count(*) filter (where usable) as ok_hours
+    from demand group by local_date
+), peaks as (
+    -- QUALIFY is DuckDB-only; the ranked-subquery form is the portable
+    -- spelling of the same row_number() = 1 selection.
+    select local_date, peak_mw, peak_hour_utc, peak_hour_ending
+    from (
+        select local_date, demand_mwh as peak_mw, hour_utc as peak_hour_utc,
+            case when extract(hour from local_end) = 0 then 24
+                 else extract(hour from local_end) end as peak_hour_ending,
+            row_number() over (
+                partition by local_date order by demand_mwh desc, hour_utc
+            ) as revision_rank
+        from demand where usable
+    ) ranked_peaks
+    where revision_rank = 1
+), days as (
+    select local_date,
+        {{ date_diff_hour("timezone('America/New_York', cast(local_date as timestamp))",
+            "timezone('America/New_York', cast(local_date + 1 as timestamp))") }} as expected_hours
+    from calendar
+)
+select d.local_date,
+    case when {{ isodow_of('d.local_date') }} in (6, 7) then 'weekend' else 'weekday' end as day_type,
+    p.peak_mw, p.peak_hour_ending, p.peak_hour_utc,
+    d.expected_hours, coalesce(c.observed_hours, 0) as observed_hours,
+    coalesce(c.ok_hours, 0) as ok_hours,
+    coalesce(c.ok_hours, 0) = d.expected_hours as complete,
+    case when t.quality = 'ok' then t.high_f end as tmax_f,
+    case when t.quality = 'ok' then t.low_f end as tmin_f,
+    t.quality as temperature_quality
+from days d
+left join counts c using (local_date)
+left join peaks p using (local_date)
+left join temperatures t using (local_date)

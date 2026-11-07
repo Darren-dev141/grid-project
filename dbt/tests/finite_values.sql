@@ -1,1 +1,2 @@
-c2VsZWN0IGhvdXJfdXRjIGZyb20ge3sgcmVmKCdwam1fYmdlX2hvdXJseV9wcmljZScpIH19CndoZXJlIG5vdCB7eyBpc19maW5pdGUoJ3ByaWNlX3VzZF9wZXJfbXdoJykgfX0K
+select hour_utc from {{ ref('pjm_bge_hourly_price') }}
+where not {{ is_finite('price_usd_per_mwh') }}

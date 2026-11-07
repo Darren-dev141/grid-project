@@ -1,1 +1,4 @@
-c2VsZWN0ICogZnJvbSB7eyByZWYoJ2dyaWRfaG91cmx5JykgfX0Kd2hlcmUgcmVuZXdhYmxlX3NoYXJlIDwgMCBvciByZW5ld2FibGVfc2hhcmUgPiAxCiAgIG9yIG5vdCB7eyBpc19maW5pdGUoJ3JlbmV3YWJsZV9zaGFyZScpIH19CiAgIG9yIChub3QgbWl4X2NvbXBsZXRlIGFuZCByZW5ld2FibGVfc2hhcmUgaXMgbm90IG51bGwpCg==
+select * from {{ ref('grid_hourly') }}
+where renewable_share < 0 or renewable_share > 1
+   or not {{ is_finite('renewable_share') }}
+   or (not mix_complete and renewable_share is not null)
