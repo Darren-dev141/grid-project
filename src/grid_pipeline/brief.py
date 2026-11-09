@@ -359,6 +359,9 @@ def _warehouse_facts(database: Path) -> tuple[date | None, datetime | None]:
             row = connection.execute(
                 'SELECT max(hour_utc) FROM cleaned.eia_pjm_hourly_demand').fetchone()
             load_last_hour = row[0] if row else None
+            if load_last_hour is not None and load_last_hour.tzinfo is None:
+                # hour_utc is stored as a timezone-naive UTC timestamp by dbt.
+                load_last_hour = load_last_hour.replace(tzinfo=timezone.utc)
         except duckdb.Error:
             pass
     return data_as_of, load_last_hour

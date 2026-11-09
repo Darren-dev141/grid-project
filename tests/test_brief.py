@@ -7,7 +7,7 @@ from zoneinfo import ZoneInfo
 import duckdb
 
 from grid_pipeline import ledger
-from grid_pipeline.brief import BriefFacts, render, render_brief
+from grid_pipeline.brief import BriefFacts, _fmt_time, _warehouse_facts, render, render_brief
 from grid_pipeline.model import Forecast
 
 
@@ -137,6 +137,17 @@ def test_no_call_brief_from_tiny_warehouse_shows_reason_and_no_claims(tmp_path):
     assert 'Load: stale' in page
     comment = rendered.comment_path.read_text(encoding='utf-8')
     assert '**No call** — `stale_load`' in comment
+
+
+def test_warehouse_naive_hour_is_utc_regardless_of_host_timezone(tmp_path):
+    database = tmp_path / 'grid.duckdb'
+    with duckdb.connect(str(database)) as connection:
+        connection.execute('CREATE SCHEMA cleaned')
+        connection.execute('CREATE TABLE cleaned.eia_pjm_hourly_demand (hour_utc TIMESTAMP)')
+        connection.execute("INSERT INTO cleaned.eia_pjm_hourly_demand VALUES ('2026-11-08 22:00:00')")
+    _, hour = _warehouse_facts(database)
+    assert hour == datetime(2026, 11, 8, 22, tzinfo=UTC)
+    assert _fmt_time(hour) == '2026-11-08 22:00 UTC'
 
 
 def test_pure_render_no_call_and_receipt_listing():
