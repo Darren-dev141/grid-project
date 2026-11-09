@@ -257,6 +257,8 @@ function Page({ route }) {
       e(Heading, { level: 1 }, label + " — " + target),
       e("div", S("call"), e(Text, null, call)),
       noCall && e("p", null, text(".noclaim")),
+      route !== "/dashboard" &&
+        e("p", null, "The brief above is a separate retrospective reconstruction, not a prospective issuance."),
       route === "/" &&
         e(
           "section",
