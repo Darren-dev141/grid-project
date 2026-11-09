@@ -76,7 +76,7 @@ footer { margin-top: 1rem; color: var(--dim); font-size: 0.85rem; }
 </section>
 <section class="panel">
 <h2>Recent issuance record</h2>
-<p class="note">Every morning's issuance is receipted in the ledger — call or no call. The 07:00 prospective issuances run from the warehouse copy whose data feed stopped after 2026-10-28, so each of these mornings no-called on stale load; the published brief above is rendered separately from the full warehouse (1,409 history days, through 2026-11-08).</p>
+<p class="note">These issuance records are stored in docs/s3c, not the forecasts ledger. Their warehouse feed stopped after 2026-10-28, so every record below no-called on stale load. Times are shown to the minute: the November 2–9 records were written seconds after 07:00 ET, not at the cutoff. The brief above is a separate retrospective reconstruction from the full warehouse (1,409 history days, through 2026-11-08), not a prospective issuance.</p>
 <table class="issuance">
 <tr><th>Target date</th><th>Issued (ET)</th><th>Latest completed peak</th><th>Issuance outcome</th></tr>
 <tr><td>2026-11-09</td><td>2026-11-09 07:00</td><td>2026-11-07</td><td>No call — stale load</td></tr>
