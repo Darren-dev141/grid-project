@@ -5,7 +5,9 @@ from pathlib import Path
 from zoneinfo import ZoneInfo
 
 import duckdb
+import pytest
 
+import grid_pipeline.brief as brief_module
 from grid_pipeline import ledger
 from grid_pipeline.brief import BriefFacts, _fmt_time, _warehouse_facts, render, render_brief
 from grid_pipeline.model import Forecast
@@ -137,6 +139,19 @@ def test_no_call_brief_from_tiny_warehouse_shows_reason_and_no_claims(tmp_path):
     assert 'Load: stale' in page
     comment = rendered.comment_path.read_text(encoding='utf-8')
     assert '**No call** — `stale_load`' in comment
+
+
+@pytest.mark.parametrize('subdirectory', ['', 'archive'])
+def test_unverified_warehouse_cannot_render_to_production_site(tmp_path, monkeypatch, subdirectory):
+    database = tmp_path / 'grid.duckdb'
+    make_database(database)
+    monkeypatch.setattr(brief_module, '__file__', str(tmp_path / 'src/grid_pipeline/brief.py'))
+    output = tmp_path / 'site' / subdirectory
+    with pytest.raises(RuntimeError, match='publication blocked'):
+        render_brief(database, make_ledger_root(tmp_path), output,
+                     target_date=date(2026, 10, 20),
+                     generated_at=datetime(2026, 10, 20, 11, tzinfo=UTC))
+    assert not output.exists()
 
 
 def test_warehouse_naive_hour_is_utc_regardless_of_host_timezone(tmp_path):

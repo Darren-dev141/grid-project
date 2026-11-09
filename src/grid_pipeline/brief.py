@@ -411,6 +411,11 @@ def render_brief(database: Path, root: Path, out_dir: Path, *,
     database = Path(database)
     root = Path(root)
     out_dir = Path(out_dir)
+    public_site = (Path(__file__).resolve().parents[2] / 'site').resolve()
+    if out_dir.resolve().is_relative_to(public_site):
+        raise RuntimeError(
+            'publication blocked: warehouse provenance cannot yet be verified; '
+            'render only outside the production site for review')
     generated = generated_at or datetime.now(timezone.utc)
     target = target_date or generated.astimezone(ET).date()
     definition = parse_definition(ledger.read_definition(

@@ -16,12 +16,14 @@ import {
 } from "node:fs";
 import { resolve, dirname } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
+import { rejectUnverifiedSiteOutput } from "./publication-guard.mjs";
 const here = dirname(fileURLToPath(import.meta.url));
 const [source, receiptDir, dest] = process.argv.slice(2);
 if (!source || !receiptDir || !dest)
   throw Error(
     "Usage: node render.mjs LEGACY_BRIEF_HTML RECEIPTS_DIR OUTPUT_DIR",
   );
+rejectUnverifiedSiteOutput(dest);
 if (resolve(source) === resolve(dest, "index.html"))
   throw Error("Stage brief separately from output");
 const compiled = transformSync(

@@ -12,10 +12,13 @@ and prints the real freshness dates from the warehouse.
 
 EIA-930, NCEI, and NWS land as raw JSON in a DuckDB file. dbt builds the
 cleaned views and `marts.mart_day_history`. `stress-index-v1` forecasts from
-first-recorded history. `python -m grid_pipeline.brief` writes `site/index.html`
-and `site/comment.md`. Vercel serves the `site/` directory (`vercel.json`
-sets `outputDirectory` to `site`, with no build step). A push to `main`
-publishes the page. `.github/workflows/ci.yml` runs the tests.
+first-recorded history. The renderer can write a review brief outside `site/`.
+Direct renderer writes to `site/` are blocked until warehouse provenance can
+be verified, including for genuine inputs without such proof. Vercel serves
+the committed `site/` directory (`vercel.json` sets `outputDirectory` to
+`site`, with no build step). A push to `main` publishes the page.
+`.github/workflows/ci.yml` runs the tests. Manually copying review output to
+`site/` bypasses the hold and does not establish provenance.
 
 | Source | What it supplies | Access |
 | --- | --- | --- |
@@ -66,7 +69,7 @@ grid-weather-bwi --root data
 
 export GRID_DATABASE="$PWD/data/grid.duckdb"
 dbt build --project-dir dbt --profiles-dir dbt --exclude 'pjm_bge_hourly_price+'
-python -m grid_pipeline.brief --database "$GRID_DATABASE" --ledger ledger --out site
+python -m grid_pipeline.brief --database "$GRID_DATABASE" --ledger ledger --out review-brief
 ```
 
 `grid-fetch` loads one dataset for at most 31 days (`pjm-demand`, `bge-demand`,
@@ -91,7 +94,7 @@ grid-weather-bwi --root data
 
 $env:GRID_DATABASE = (Resolve-Path data/grid.duckdb).Path
 dbt build --project-dir dbt --profiles-dir dbt --exclude 'pjm_bge_hourly_price+'
-python -m grid_pipeline.brief --database $env:GRID_DATABASE --ledger ledger --out site
+python -m grid_pipeline.brief --database $env:GRID_DATABASE --ledger ledger --out review-brief
 ```
 
 `--target-date YYYY-MM-DD` overrides the brief's default, which is today in
