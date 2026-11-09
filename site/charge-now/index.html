@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Beat the Grid — Charge now — 2026-11-09</title>
+<style>
+:root { --bg: #0a0a0f; --glass: rgba(12,12,20,0.72); --border: rgba(255,255,255,0.08);
+  --accent: #00d4ff; --text: #e8eaed; --secondary: rgba(232,234,237,0.5); --dim: rgba(232,234,237,0.3);
+  --level: #00d4ff; --mono: 'JetBrains Mono','SF Mono','Fira Code',monospace;
+  --sans: 'Inter',-apple-system,BlinkMacSystemFont,system-ui,sans-serif; }
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--text); font-family: var(--sans); line-height: 1.5; }
+.wrap { max-width: 68rem; margin: 0 auto; padding: 1.25rem 1rem 3rem; }
+header.hud { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.5rem 1.25rem; padding: 0.75rem 0 1rem; }
+.wordmark { font-family: var(--mono); font-weight: 600; font-size: 0.8rem; letter-spacing: 0.22em;
+  text-transform: uppercase; color: var(--accent); text-shadow: 0 0 12px rgba(0,212,255,0.4); }
+h1 { font-size: 1.35rem; margin: 0; font-weight: 650; }
+.meta { color: var(--secondary); font-size: 0.9rem; }
+.sitenav a { color: var(--accent); }
+.stats { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 0.9rem; }
+.stat { flex: 1 1 12rem; background: var(--glass); border: 1px solid var(--border); border-radius: 12px; padding: 0.7rem 1rem; }
+.stat-label { display: block; font-family: var(--mono); font-size: 0.62rem; font-weight: 600;
+  letter-spacing: 0.14em; text-transform: uppercase; color: var(--dim); }
+.stat-value { font-family: var(--mono); font-size: 1.02rem; }
+.bar-wrap { margin-top: 0.9rem; background: var(--glass); border: 1px solid var(--border); border-radius: 12px; padding: 0.8rem 1rem; }
+.bar { position: relative; display: flex; height: 10px; border-radius: 5px; overflow: visible; }
+.seg-calm { background: #00d4ff; border-radius: 5px 0 0 5px; }
+.seg-watch { background: #ffb800; }
+.seg-strained { background: #ff7a1a; }
+.seg-severe { background: #ff4545; border-radius: 0 5px 5px 0; }
+.peak-marker { position: absolute; top: -5px; width: 2px; height: 20px; background: #fff;
+  box-shadow: 0 0 8px rgba(255,255,255,0.8); }
+.thresholds { margin: 0.5rem 0 0; color: var(--secondary); font-size: 0.85rem; font-family: var(--mono); }
+.panel { margin-top: 0.9rem; background: var(--glass); border: 1px solid var(--border); border-radius: 16px; padding: 0.9rem 1.1rem; }
+.panel h2 { font-family: var(--mono); font-size: 0.68rem; font-weight: 600; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--secondary); margin: 0 0 0.5rem; }
+.panel ul { margin: 0; padding-left: 1.1rem; }
+.panel p { margin: 0.4rem 0; }
+.level-line { font-family: var(--mono); font-size: 1.25rem; font-weight: 700; margin: 0; color: var(--level);
+  text-shadow: 0 0 14px color-mix(in srgb, var(--level) 55%, transparent); }
+.pill { font-family: var(--mono); font-size: 0.82rem; }
+footer { margin-top: 1rem; color: var(--dim); font-size: 0.85rem; }
+.repo-link { margin-top: 0.5rem; font-size: 0.9rem; color: var(--secondary); }
+.repo-link a { color: var(--accent); }
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="hud">
+<span class="wordmark">Beat the Grid</span>
+<h1>Charge now — 2026-11-09</h1>
+<span class="meta">PJM-wide call, Maryland weather. Definition: stress-index-v1.</span>
+</header>
+<p class="meta sitenav"><a href="/">Brief</a> · <a href="/charge-now">Charge now</a> · <a href="/dashboard">Dashboard</a></p>
+<section class="panel">
+<h2>Today's call</h2>
+<p class="level-line">Stress level: calm</p>
+<p>No peak-avoidance action is called for today. The day's peak demand — 92,139.4 MW, expected in the hour ending 19:00 local — sits below the watch threshold (95,692.5 MW). Charge, run, and schedule as normal.</p>
+<p>If discretionary load can move anyway, the hour ending 19:00 local is the day's highest-demand hour — the window this page names on a watch, strained, or severe day, when shifting load out of the peak hour is what reduces exposure to peak-driven capacity charges.</p>
+</section>
+<div class="stats">
+<div class="stat"><span class="stat-label">Peak demand</span><span class="stat-value">Peak demand: 92,139.4 MW</span></div>
+<div class="stat"><span class="stat-label">Peak hour</span><span class="stat-value">Peak hour ending: 19 (local)</span></div>
+<div class="stat"><span class="stat-label">Watch threshold</span><span class="stat-value">Watch at: 95,692.5 MW</span></div>
+</div>
+<div class="bar-wrap"><div class="bar"><div class="seg seg-calm" style="width:77.6%"></div><div class="seg seg-watch" style="width:5.1%"></div><div class="seg seg-strained" style="width:4.3%"></div><div class="seg seg-severe" style="width:13.0%"></div><div class="peak-marker" style="left:74.8%"></div></div><p class="thresholds">Thresholds: watch 95,692.5 MW, strained 101,926.4 MW, severe 107,168.4 MW</p></div>
+<section class="panel">
+<h2>The paid audit</h2>
+<p>Next year's capacity charge is set by your load during last summer's five coincident-peak (5CP) hours — already decided, already on the record. The founding-pilot audit reconstructs a site's demand in those five hours and prices the exposure before the bill does: one paid document per site, founding terms $499 with a $100 deposit.</p>
+<p class="repo-link">Code, receipts ledger, and method: <a href="https://github.com/Darren-dev141/grid-project">open on GitHub</a>.</p>
+</section>
+<footer>Data as of: 2026-11-08 (last load hour: 2026-11-08 22:00 UTC). Generated: 2026-11-08 23:26 UTC.</footer>
+<p class="repo-link">Code, receipts ledger, and method: <a href="https://github.com/Darren-dev141/grid-project">open on GitHub</a>.</p>
+</div>
+</body>
+</html>

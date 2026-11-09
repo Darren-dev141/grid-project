@@ -18,6 +18,7 @@ header.hud { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.5rem 
   text-transform: uppercase; color: var(--accent); text-shadow: 0 0 12px rgba(0,212,255,0.4); }
 h1 { font-size: 1.35rem; margin: 0; font-weight: 650; }
 .meta { color: var(--secondary); font-size: 0.9rem; }
+.sitenav a { color: var(--accent); }
 .map-panel { position: relative; border: 1px solid var(--border); border-radius: 16px; overflow: hidden;
   background: var(--glass); box-shadow: 0 0 42px color-mix(in srgb, var(--level) 22%, transparent); }
 #map { height: min(62vh, 560px); min-height: 340px; background: #0a0a0f; }
@@ -64,6 +65,7 @@ footer { margin-top: 1rem; color: var(--dim); font-size: 0.85rem; }
 <h1>Grid brief — 2026-11-09</h1>
 <span class="meta">PJM-wide call, Maryland weather. Definition: stress-index-v1.</span>
 </header>
+<p class="meta sitenav"><a href="/">Brief</a> · <a href="/charge-now">Charge now</a> · <a href="/dashboard">Dashboard</a></p>
 <div class="map-panel">
 <div id="map"></div>
 <div class="hero">

@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Beat the Grid — Dashboard — 2026-11-09</title>
+<style>
+:root { --bg: #0a0a0f; --glass: rgba(12,12,20,0.72); --border: rgba(255,255,255,0.08);
+  --accent: #00d4ff; --text: #e8eaed; --secondary: rgba(232,234,237,0.5); --dim: rgba(232,234,237,0.3);
+  --level: #00d4ff; --mono: 'JetBrains Mono','SF Mono','Fira Code',monospace;
+  --sans: 'Inter',-apple-system,BlinkMacSystemFont,system-ui,sans-serif; }
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--text); font-family: var(--sans); line-height: 1.5; }
+.wrap { max-width: 68rem; margin: 0 auto; padding: 1.25rem 1rem 3rem; }
+header.hud { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.5rem 1.25rem; padding: 0.75rem 0 1rem; }
+.wordmark { font-family: var(--mono); font-weight: 600; font-size: 0.8rem; letter-spacing: 0.22em;
+  text-transform: uppercase; color: var(--accent); text-shadow: 0 0 12px rgba(0,212,255,0.4); }
+h1 { font-size: 1.35rem; margin: 0; font-weight: 650; }
+.meta { color: var(--secondary); font-size: 0.9rem; }
+.sitenav a { color: var(--accent); }
+.stats { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 0.9rem; }
+.stat { flex: 1 1 12rem; background: var(--glass); border: 1px solid var(--border); border-radius: 12px; padding: 0.7rem 1rem; }
+.stat-label { display: block; font-family: var(--mono); font-size: 0.62rem; font-weight: 600;
+  letter-spacing: 0.14em; text-transform: uppercase; color: var(--dim); }
+.stat-value { font-family: var(--mono); font-size: 1.02rem; }
+.bar-wrap { margin-top: 0.9rem; background: var(--glass); border: 1px solid var(--border); border-radius: 12px; padding: 0.8rem 1rem; }
+.bar { position: relative; display: flex; height: 10px; border-radius: 5px; overflow: visible; }
+.seg-calm { background: #00d4ff; border-radius: 5px 0 0 5px; }
+.seg-watch { background: #ffb800; }
+.seg-strained { background: #ff7a1a; }
+.seg-severe { background: #ff4545; border-radius: 0 5px 5px 0; }
+.peak-marker { position: absolute; top: -5px; width: 2px; height: 20px; background: #fff;
+  box-shadow: 0 0 8px rgba(255,255,255,0.8); }
+.thresholds { margin: 0.5rem 0 0; color: var(--secondary); font-size: 0.85rem; font-family: var(--mono); }
+.panel { margin-top: 0.9rem; background: var(--glass); border: 1px solid var(--border); border-radius: 16px; padding: 0.9rem 1.1rem; }
+.panel h2 { font-family: var(--mono); font-size: 0.68rem; font-weight: 600; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--secondary); margin: 0 0 0.5rem; }
+.panel ul { margin: 0; padding-left: 1.1rem; }
+.panel p { margin: 0.4rem 0; }
+.level-line { font-family: var(--mono); font-size: 1.25rem; font-weight: 700; margin: 0; color: var(--level);
+  text-shadow: 0 0 14px color-mix(in srgb, var(--level) 55%, transparent); }
+.pill { font-family: var(--mono); font-size: 0.82rem; }
+table.issuance { border-collapse: collapse; width: 100%; font-family: var(--mono); font-size: 0.85rem; }
+table.issuance th, table.issuance td { text-align: left; padding: 0.3rem 0.5rem; border-bottom: 1px solid var(--border); }
+table.issuance th { color: var(--dim); font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; }
+.note { color: var(--secondary); font-size: 0.88rem; }
+footer { margin-top: 1rem; color: var(--dim); font-size: 0.85rem; }
+.repo-link { margin-top: 0.5rem; font-size: 0.9rem; color: var(--secondary); }
+.repo-link a { color: var(--accent); }
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="hud">
+<span class="wordmark">Beat the Grid</span>
+<h1>Dashboard — 2026-11-09</h1>
+<span class="meta">PJM-wide call, Maryland weather. Definition: stress-index-v1.</span>
+</header>
+<p class="meta sitenav"><a href="/">Brief</a> · <a href="/charge-now">Charge now</a> · <a href="/dashboard">Dashboard</a></p>
+<section class="panel">
+<h2>Current brief</h2>
+<p class="level-line">Stress level: calm</p>
+<div class="stats">
+<div class="stat"><span class="stat-label">Peak demand</span><span class="stat-value">Peak demand: 92,139.4 MW</span></div>
+<div class="stat"><span class="stat-label">Peak hour</span><span class="stat-value">Peak hour ending: 19 (local)</span></div>
+</div>
+<div class="bar-wrap"><div class="bar"><div class="seg seg-calm" style="width:77.6%"></div><div class="seg seg-watch" style="width:5.1%"></div><div class="seg seg-strained" style="width:4.3%"></div><div class="seg seg-severe" style="width:13.0%"></div><div class="peak-marker" style="left:74.8%"></div></div><p class="thresholds">Thresholds: watch 95,692.5 MW, strained 101,926.4 MW, severe 107,168.4 MW</p></div>
+</section>
+<section class="panel"><h2>Freshness</h2>
+<ul>
+<li class="pill">Load: fresh (latest completed peak 2026-11-07: present)</li>
+<li class="pill">Weather: fresh (pinned NWS BWI issuance: 2026-11-08 20:52 UTC)</li>
+<li>Forecast high: 62.0 F; morning low: 45.0 F</li>
+<li>History days loaded: 1409 (last: 2026-11-08)</li>
+</ul>
+</section>
+<section class="panel">
+<h2>Recent issuance record</h2>
+<p class="note">Every morning's issuance is receipted in the ledger — call or no call. The 07:00 prospective issuances run from the warehouse copy whose data feed stopped after 2026-10-28, so each of these mornings no-called on stale load; the published brief above is rendered separately from the full warehouse (1,409 history days, through 2026-11-08).</p>
+<table class="issuance">
+<tr><th>Target date</th><th>Issued (ET)</th><th>Latest completed peak</th><th>Issuance outcome</th></tr>
+<tr><td>2026-11-09</td><td>2026-11-09 07:00</td><td>2026-11-07</td><td>No call — stale load</td></tr>
+<tr><td>2026-11-08</td><td>2026-11-08 07:00</td><td>2026-11-06</td><td>No call — stale load</td></tr>
+<tr><td>2026-11-07</td><td>2026-11-07 07:00</td><td>2026-11-05</td><td>No call — stale load</td></tr>
+<tr><td>2026-11-06</td><td>2026-11-06 07:00</td><td>2026-11-04</td><td>No call — stale load</td></tr>
+<tr><td>2026-11-05</td><td>2026-11-05 07:00</td><td>2026-11-03</td><td>No call — stale load</td></tr>
+<tr><td>2026-11-04</td><td>2026-11-04 07:00</td><td>2026-11-02</td><td>No call — stale load</td></tr>
+<tr><td>2026-11-03</td><td>2026-11-03 07:00</td><td>2026-11-01</td><td>No call — stale load</td></tr>
+<tr><td>2026-11-02</td><td>2026-11-02 07:00</td><td>2026-10-31</td><td>No call — stale load</td></tr>
+<tr><td>2026-11-01</td><td>2026-11-01 11:15</td><td>2026-10-30</td><td>No call — stale load</td></tr>
+<tr><td>2026-10-31</td><td>2026-10-31 14:21</td><td>2026-10-29</td><td>No call — stale load</td></tr>
+</table>
+</section>
+<footer>Data as of: 2026-11-08 (last load hour: 2026-11-08 22:00 UTC). Generated: 2026-11-08 23:26 UTC.</footer>
+<p class="repo-link">Code, receipts ledger, and method: <a href="https://github.com/Darren-dev141/grid-project">open on GitHub</a>.</p>
+</div>
+</body>
+</html>
