@@ -166,7 +166,7 @@ var glow = L.geoJSON(counties, {{ style: function(f) {{
 var layer = L.geoJSON(counties, {{ style: countyStyle,
   onEachFeature: function(f, l) {{ l.bindTooltip(f.properties.name + (f.properties.bge === 'core' ? ' — BGE' : f.properties.bge === 'partial' ? ' — BGE (part)' : '')); }}
 }}).addTo(map);
-L.circleMarker([39.1774, -76.6684], {{ radius: 5, color: '#e8eaed', weight: 1.5, fillColor: '#00d4ff', fillOpacity: 0.9 }})
+L.circleMarker([39.1754, -76.6684], {{ radius: 5, color: '#e8eaed', weight: 1.5, fillColor: '#00d4ff', fillOpacity: 0.9 }})
   .addTo(map).bindTooltip('BWI — weather point');
 map.fitBounds(layer.getBounds().pad(0.04));
 </script>'''
