@@ -154,6 +154,24 @@ def test_unverified_warehouse_cannot_render_to_production_site(tmp_path, monkeyp
     assert not output.exists()
 
 
+@pytest.mark.parametrize(('update_time', 'expected'), [
+    (datetime(2026, 7, 14, 22, 59, 59, tzinfo=UTC), False),
+    (datetime(2026, 7, 14, 23, tzinfo=UTC), True),
+    (datetime(2026, 7, 15, 11, 0, 1, tzinfo=UTC), False),
+    (None, False),
+])
+def test_brief_weather_age_uses_generation_time(tmp_path, monkeypatch, update_time, expected):
+    monkeypatch.setattr(brief_module, 'load_first_recorded_history', lambda *args: ())
+    monkeypatch.setattr(brief_module, 'load_nws_bwi_forecast', lambda *args: {
+        'high_f': 88.0, 'morning_low_f': 62.0, 'update_time': update_time})
+    monkeypatch.setattr(brief_module, '_warehouse_facts', lambda *args: (None, None))
+    rendered = render_brief(tmp_path / 'unused.duckdb', make_ledger_root(tmp_path),
+                            tmp_path / 'review', target_date=date(2026, 7, 15),
+                            generated_at=datetime(2026, 7, 15, 11, tzinfo=UTC))
+    assert rendered.facts.weather_fresh is expected
+    assert f"Weather: {'fresh' if expected else 'stale'}" in rendered.brief.html
+
+
 def test_warehouse_naive_hour_is_utc_regardless_of_host_timezone(tmp_path):
     database = tmp_path / 'grid.duckdb'
     with duckdb.connect(str(database)) as connection:

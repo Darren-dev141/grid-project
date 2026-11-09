@@ -15,7 +15,8 @@ code that actually exists today:
   ``scripts/issue_stress.py`` uses: load is fresh when the latest completed
   peak (target - 2 days, per the Nov 5 same-day ruling) is present, complete,
   first-recorded and finite; weather is fresh when a pinned NWS BWI issuance
-  for the target date carries a complete high/low pair.
+  for the target date carries a complete high/low pair and is no more than
+  12 hours old at brief generation.
 - There is no ``features.load``; history and target weather come from
   ``stress_inputs.load_first_recorded_history`` and
   ``stress_inputs.load_nws_bwi_forecast``.
@@ -367,8 +368,10 @@ def _warehouse_facts(database: Path) -> tuple[date | None, datetime | None]:
     return data_as_of, load_last_hour
 
 
-def build_features(database: Path, target_date: date) -> tuple[Features, BriefFacts]:
+def build_features(database: Path, target_date: date, *,
+                   generated_at: datetime | None = None) -> tuple[Features, BriefFacts]:
     """Assemble forecast features and freshness facts from the warehouse."""
+    generated_at = generated_at or datetime.now(timezone.utc)
     history = load_first_recorded_history(database, database)
     weather = load_nws_bwi_forecast(database, target_date)
     high_f = _weather_field(weather, 'high_f')
@@ -381,7 +384,9 @@ def build_features(database: Path, target_date: date) -> tuple[Features, BriefFa
         and day.peak_mw is not None and isfinite(day.peak_mw)
         for day in history)
     weather_fresh = (high_f is not None and morning_low_f is not None
-                     and isfinite(high_f) and isfinite(morning_low_f))
+                     and isfinite(high_f) and isfinite(morning_low_f)
+                     and update_time is not None
+                     and timedelta(0) <= generated_at - update_time <= timedelta(hours=12))
     features = Features(target_date=target_date, high_f=high_f,
                         morning_low_f=morning_low_f, history=history,
                         load_fresh=latest_present, weather_fresh=weather_fresh,
@@ -420,7 +425,7 @@ def render_brief(database: Path, root: Path, out_dir: Path, *,
     target = target_date or generated.astimezone(ET).date()
     definition = parse_definition(ledger.read_definition(
         root / 'definitions' / (DEFINITION_VERSION + '.toml')))
-    features, facts = build_features(database, target)
+    features, facts = build_features(database, target, generated_at=generated)
     result = stress_forecast(features, definition)
     receipts = _receipt_listing(root, target)
     brief = render(result, facts, receipts, generated_at=generated)
