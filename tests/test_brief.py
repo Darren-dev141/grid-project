@@ -109,6 +109,8 @@ def test_rendered_brief_from_built_warehouse_has_real_scored_content(tmp_path):
     assert 'Peak hour ending:' in page
     assert 'Load: fresh' in page and 'Weather: fresh' in page
     assert 'Data as of: 2026-07-14' in page
+    assert 'tile.openstreetmap.org' in page
+    assert page.index('map.addLayer(renderer)') < page.index('L.geoJSON')
     comment = rendered.comment_path.read_text(encoding='utf-8')
     assert '2026-07-15' in comment
     assert 'No receipts in the ledger for this target date.' in comment

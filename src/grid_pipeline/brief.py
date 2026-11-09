@@ -131,15 +131,26 @@ def _map_script(level: str | None) -> str:
     The call is PJM-wide; the lit counties are the BGE home territory at
     county resolution (md_geo). Zoom goes to street level so a reader can
     find their own neighborhood inside (or outside) the lit area.
+
+    CARTO's dark basemap now serves an "API key required" tile without a
+    key. OpenStreetMap tiles need no key; the tile pane is inverted so the
+    page stays dark. Zoom sits on the right so it does not cover the call.
     """
     color, fill = LEVEL_STYLE.get(level or '', (NO_CALL_COLOR, 0.12))
     counties = json.dumps(md_geo.MD_COUNTIES, separators=(',', ':'))
     return f'''<script>
-var map = L.map('map', {{ scrollWheelZoom: true, minZoom: 7, maxZoom: 16 }});
-L.tileLayer('https://{{s}}.basemaps.cartocdn.com/dark_all/{{z}}/{{x}}/{{y}}{{r}}.png', {{
-  attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>',
-  subdomains: 'abcd', maxZoom: 19
+var renderer = L.svg();
+var map = L.map('map', {{ scrollWheelZoom: true, minZoom: 7, maxZoom: 16, zoomControl: false, renderer: renderer }});
+L.control.zoom({{ position: 'topright' }}).addTo(map);
+L.tileLayer('https://tile.openstreetmap.org/{{z}}/{{x}}/{{y}}.png', {{
+  attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+  maxZoom: 19
 }}).addTo(map);
+// Give the SVG renderer clip bounds before any county polygon is projected.
+// Adding polygons in the same turn as the first fitBounds leaves the renderer
+// off-map and Leaflet throws in _clipPoints, so the counties never draw.
+map.setView([39.05, -76.75], 8);
+map.addLayer(renderer);
 var counties = {counties};
 var levelColor = '{color}', levelFill = {fill};
 function countyStyle(feature) {{
@@ -252,7 +263,9 @@ h1 {{ font-size: 1.35rem; margin: 0; font-weight: 650; }}
 .map-caption {{ position: absolute; right: 14px; bottom: 14px; z-index: 500; max-width: 19rem;
   background: var(--glass); border: 1px solid var(--border); border-radius: 12px; padding: 0.55rem 0.8rem;
   color: var(--secondary); font-size: 0.8rem; backdrop-filter: blur(8px); }}
-.leaflet-container {{ font-family: var(--sans); }}
+.leaflet-container {{ font-family: var(--sans); background: #0a0a0f; }}
+.leaflet-tile-pane {{ filter: invert(100%) hue-rotate(180deg) brightness(0.9) contrast(0.95); }}
+.leaflet-top.leaflet-right {{ margin-top: 8px; }}
 .stats {{ display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 0.9rem; }}
 .stat {{ flex: 1 1 12rem; background: var(--glass); border: 1px solid var(--border); border-radius: 12px; padding: 0.7rem 1rem; }}
 .stat-label {{ display: block; font-family: var(--mono); font-size: 0.62rem; font-weight: 600;
@@ -273,6 +286,8 @@ h1 {{ font-size: 1.35rem; margin: 0; font-weight: 650; }}
 .panel ul {{ margin: 0; padding-left: 1.1rem; }}
 .pill {{ font-family: var(--mono); font-size: 0.82rem; }}
 footer {{ margin-top: 1rem; color: var(--dim); font-size: 0.85rem; }}
+.repo-link {{ margin-top: 0.5rem; font-size: 0.9rem; color: var(--secondary); }}
+.repo-link a {{ color: var(--accent); }}
 @media (max-width: 640px) {{ .map-caption {{ display: none; }} #map {{ min-height: 300px; }} }}
 </style>
 </head>
@@ -300,6 +315,7 @@ footer {{ margin-top: 1rem; color: var(--dim); font-size: 0.85rem; }}
 </ul>
 </section>
 <footer>Data as of: {facts.data_as_of or "—"} (last load hour: {_fmt_time(facts.load_last_hour_utc)}). Generated: {generated}.</footer>
+<p class="repo-link">Code, receipts ledger, and method: <a href="https://github.com/Darren-dev141/grid-project">open on GitHub</a>.</p>
 </div>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 {map_html}
