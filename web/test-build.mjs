@@ -41,6 +41,15 @@ for (const page of [home, charge, dash]) {
   );
   assert.ok(page("footer").text().includes("Data as of:"));
 }
+for (const [page, route] of [[home, "/"], [charge, "/charge-now"], [dash, "/dashboard"]]) {
+  assert.equal(page('link[rel="canonical"]').attr("href"), `https://beat-the-grid.vercel.app${route}`);
+  const data = JSON.parse(page('script[type="application/ld+json"]').html());
+  assert.ok(route === "/" ? data["@graph"].some((entry) => entry["@type"] === "WebSite") : data["@type"] === "WebPage");
+}
+for (const page of [home, charge])
+  assert.ok(page("body").text().includes("The brief above is a separate retrospective reconstruction, not a prospective issuance."));
+for (const name of ["robots.txt", "llms.txt", "sitemap.xml"])
+  assert.equal(readFileSync(resolve(out, name), "utf8"), readFileSync(resolve(root, "public", name), "utf8"));
 assert.ok(home("#map").length);
 assert.ok(
   home("script")

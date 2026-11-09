@@ -1,0 +1,9 @@
+# Beat the Grid
+
+A PJM-wide grid-stress brief using Maryland weather and a 5CP capacity-charge exposure audit.
+
+- https://beat-the-grid.vercel.app/ — grid brief and Maryland service-territory map.
+- https://beat-the-grid.vercel.app/charge-now — call and paid capacity-charge audit.
+- https://beat-the-grid.vercel.app/dashboard — freshness and recent issuance records.
+
+The dashboard shows published issuance records and their outcomes. The published brief is a separate retrospective reconstruction, not a prospective issuance. Code, receipts ledger, and method are available at https://github.com/Darren-dev141/grid-project.

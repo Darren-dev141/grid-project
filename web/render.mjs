@@ -316,6 +316,8 @@ for (const [name, pkg] of [
   ["theme.css", "@astryxdesign/theme-neutral/theme.css"],
 ])
   copy(fileURLToPath(import.meta.resolve(pkg)), resolve(dest, name));
+for (const name of ["robots.txt", "llms.txt", "sitemap.xml"])
+  copy(resolve(here, "public", name), resolve(dest, name));
 write(resolve(dest, "grid-stylex.css"), atomic + "\n");
 write(
   resolve(dest, "grid.css"),
@@ -337,7 +339,15 @@ for (const route of ["/", "/charge-now", "/dashboard"]) {
           mapScript +
           "</script>"
         : "";
-  const html = `<!doctype html><html lang="en" data-astryx-theme="neutral"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>${esc(title)}</title>${og}<link rel="stylesheet" href="/reset.css"><link rel="stylesheet" href="/astryx.css"><link rel="stylesheet" href="/theme.css"><link rel="stylesheet" href="/grid-stylex.css"><link rel="stylesheet" href="/grid.css">${mh}</head><body>${renderToStaticMarkup(e(Page, { route }))}${mt}</body></html>`;
+  const canonical = `https://beat-the-grid.vercel.app${route}`;
+  const structured = route === "/"
+    ? { "@context": "https://schema.org", "@graph": [
+        { "@type": "Organization", "@id": `${canonical}#organization`, name: "Beat the Grid", url: canonical },
+        { "@type": "WebSite", "@id": `${canonical}#website`, name: "Beat the Grid", url: canonical },
+      ] }
+    : { "@context": "https://schema.org", "@type": "WebPage", name: route === "/dashboard" ? "Dashboard" : "Charge now", url: canonical };
+  const seo = `<link rel="canonical" href="${canonical}"><script type="application/ld+json">${JSON.stringify(structured).replaceAll("<", "\\u003c")}</script>`;
+  const html = `<!doctype html><html lang="en" data-astryx-theme="neutral"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>${esc(title)}</title>${og}${seo}<link rel="stylesheet" href="/reset.css"><link rel="stylesheet" href="/astryx.css"><link rel="stylesheet" href="/theme.css"><link rel="stylesheet" href="/grid-stylex.css"><link rel="stylesheet" href="/grid.css">${mh}</head><body>${renderToStaticMarkup(e(Page, { route }))}${mt}</body></html>`;
   const path =
     route === "/"
       ? resolve(dest, "index.html")
