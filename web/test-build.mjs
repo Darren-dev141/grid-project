@@ -5,6 +5,7 @@ import {
   writeFileSync,
   mkdirSync,
   rmSync,
+  readdirSync,
 } from "node:fs";
 import { resolve, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -48,9 +49,12 @@ assert.ok(
 );
 assert.ok(charge("body").text().includes("$499"));
 assert.ok(charge("body").text().includes("$100"));
-const original = JSON.parse(
-  readFileSync(resolve(receipts, "S3C-FIRST-ISSUANCE-2026-11-09.json"), "utf8"),
-);
+const latestReceipt = readdirSync(receipts)
+  .filter((name) => /^S3C-FIRST-ISSUANCE-\d{4}-\d{2}-\d{2}\.json$/.test(name))
+  .sort()
+  .at(-1);
+assert.ok(latestReceipt, "The supplied receipt directory must contain a receipt");
+const original = JSON.parse(readFileSync(resolve(receipts, latestReceipt), "utf8"));
 assert.equal(
   dash("tbody tr").first().find("td").first().text(),
   original.target_date,
@@ -60,7 +64,7 @@ mkdirSync(copyDir);
 const changed = structuredClone(original);
 changed.forecast.no_call_reason = "stale_weather";
 writeFileSync(
-  resolve(copyDir, "S3C-FIRST-ISSUANCE-2026-11-09.json"),
+  resolve(copyDir, latestReceipt),
   JSON.stringify(changed),
 );
 const changedPage = get(
