@@ -1,0 +1,24 @@
+{
+  "name": "beat-the-grid-astryx-ui",
+  "version": "1.0.0",
+  "scripts": {
+    "test": "node test-build.mjs",
+    "build": "node render.mjs"
+  },
+  "license": "MIT",
+  "description": "Static Astryx pages for Beat the Grid",
+  "dependencies": {
+    "@astryxdesign/core": "^0.7.11",
+    "@astryxdesign/theme-neutral": "^0.7.11",
+    "@stylexjs/stylex": "^0.19.1",
+    "cheerio": "^1.2.0",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1"
+  },
+  "devDependencies": {
+    "@astryxdesign/cli": "^0.7.11",
+    "@babel/core": "^7.29.13",
+    "@stylexjs/babel-plugin": "^0.19.1"
+  },
+  "private": true
+}

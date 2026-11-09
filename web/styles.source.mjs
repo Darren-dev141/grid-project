@@ -1,0 +1,52 @@
+import * as stylex from "@stylexjs/stylex";
+
+export const styles = stylex.create({
+  shell: {
+    maxWidth: "1080px",
+    marginInline: "auto",
+    paddingInline: { default: "24px", "@media (max-width: 600px)": "16px" },
+    paddingBlock: "24px",
+  },
+  header: {
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    gap: "20px",
+    flexWrap: "wrap",
+    borderBottomWidth: "1px",
+    borderBottomStyle: "solid",
+    borderBottomColor: "#aabcb2",
+    paddingBottom: "20px",
+  },
+  brand: { fontWeight: 800, color: "#13251e", textDecoration: "none" },
+  nav: { display: "flex", flexWrap: "wrap", gap: "20px" },
+  navlink: { display: "inline-block", paddingBlock: "12px", color: "#075d48" },
+  context: { marginTop: "44px", marginBottom: "14px", color: "#3c574c" },
+  call: { fontSize: "1.35rem", fontWeight: 700, marginBlock: "18px" },
+  metrics: {
+    display: "flex",
+    gap: "24px",
+    flexWrap: "wrap",
+    fontVariantNumeric: "tabular-nums",
+  },
+  section: {
+    borderTopWidth: "1px",
+    borderTopStyle: "solid",
+    borderTopColor: "#b7c9bf",
+    marginTop: "40px",
+    paddingTop: "24px",
+  },
+  footer: {
+    borderTopWidth: "1px",
+    borderTopStyle: "solid",
+    borderTopColor: "#aabcb2",
+    marginTop: "48px",
+    paddingTop: "16px",
+    color: "#3c574c",
+  },
+  tablewrap: { overflowX: "auto" },
+  map: {
+    height: { default: "480px", "@media (max-width: 600px)": "340px" },
+    backgroundColor: "#dde7e2",
+  },
+});
