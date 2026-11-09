@@ -166,7 +166,7 @@ const links = [
   ["/dashboard", "Dashboard"],
 ];
 function Section({ title, children }) {
-  return e("section", S("section"), e(Heading, { level: 2 }, title), children);
+  return e("section", S("section"), e(Heading, { level: 2, ...S("text") }, title), children);
 }
 function List({ items }) {
   return e("ul", null, ...items.map((v, i) => e("li", { key: i }, v)));
@@ -175,7 +175,7 @@ function Table() {
   return e(
     Section,
     { title: "Recent issuance record" },
-    e("p", null, note),
+    e("p", S("text"), note),
     receipts.length
       ? e(
           "div",
@@ -211,7 +211,7 @@ function Table() {
             ),
           ),
         )
-      : e("p", null, "No issuance records available."),
+      : e("p", S("text"), "No issuance records available."),
   );
 }
 function Page({ route }) {
@@ -254,17 +254,17 @@ function Page({ route }) {
       "main",
       null,
       e("p", S("context"), context),
-      e(Heading, { level: 1 }, label + " — " + target),
-      e("div", S("call"), e(Text, null, call)),
-      noCall && e("p", null, text(".noclaim")),
+      e(Heading, { level: 1, ...S("text") }, label + " — " + target),
+      e("div", S("call"), e(Text, S("text"), call)),
+      noCall && e("p", S("text"), text(".noclaim")),
       route !== "/dashboard" &&
-        e("p", null, "The brief above is a separate retrospective reconstruction, not a prospective issuance."),
+        e("p", S("text"), "The brief above is a separate retrospective reconstruction, not a prospective issuance."),
       route === "/" &&
         e(
           "section",
           { "aria-label": "Maryland service territory" },
           e("div", { id: "map", ...S("map") }),
-          e("p", null, caption),
+          e("p", S("text"), caption),
         ),
       !noCall &&
         e(
@@ -284,19 +284,19 @@ function Page({ route }) {
           e(List, { items: alerts }),
         ),
       route === "/charge-now" &&
-        e(Section, { title: "Today's call" }, e("p", null, action)),
+        e(Section, { title: "Today's call" }, e("p", S("text"), action)),
       route !== "/charge-now" &&
         e(Section, { title: "Freshness" }, e(List, { items: fresh })),
       route === "/dashboard" && e(Table),
       route === "/charge-now" &&
-        e(Section, { title: "The paid audit" }, e("p", null, audit)),
+        e(Section, { title: "The paid audit" }, e("p", S("text"), audit)),
       e(
         "footer",
         S("footer"),
-        e("p", null, footer),
+        e("p", S("mutedText"), footer),
         e(
           "p",
-          null,
+          S("mutedText"),
           "Code, receipts ledger, and method: ",
           e(
             "a",

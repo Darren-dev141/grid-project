@@ -23,7 +23,10 @@ export const styles = stylex.create({
   navlink: { display: "inline-block", paddingBlock: "12px", color: "#075d48" },
   context: { marginTop: "44px", marginBottom: "14px", color: "#3c574c" },
   call: { fontSize: "1.35rem", fontWeight: 700, marginBlock: "18px" },
+  text: { color: "#13251e" },
+  mutedText: { color: "#3c574c" },
   metrics: {
+    color: "#f6f8f7",
     display: "flex",
     gap: "24px",
     flexWrap: "wrap",
