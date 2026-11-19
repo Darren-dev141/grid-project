@@ -1,0 +1,22 @@
+{
+  "name": "grid-project",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Root task runner. Python package metadata stays in pyproject.toml.",
+  "scripts": {
+    "lint": "python3 -m compileall -q src tests scripts world-model synthetic-twin && node --check web/render.mjs && node --check web/publication-guard.mjs && node --check web/styles.source.mjs && node --check web/test-build.mjs && node --check web/test-publication-guard.mjs",
+    "typecheck": "pyright"
+  },
+  "devDependencies": {
+    "pyright": "1.1.414",
+    "turbo": "2.11.13"
+  },
+  "packageManager": "npm@10.9.9",
+  "devEngines": {
+    "packageManager": {
+      "name": "npm",
+      "version": "10.9.9",
+      "onFail": "warn"
+    }
+  }
+}
