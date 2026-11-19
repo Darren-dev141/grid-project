@@ -31,3 +31,27 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ github.token }}
         run: python -m grid_pipeline.ledger verify --witness
+
+  lint-and-typecheck:
+    name: lint-and-typecheck
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - name: Lint and typecheck
+        env:
+          TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+          TURBO_TEAM: ${{ secrets.TURBO_TEAM }}
+          PR_FROM_FORK: ${{ github.event.pull_request.head.repo.fork == true }}
+        run: |
+          if [ "$PR_FROM_FORK" = "true" ] || [ -z "$TURBO_TOKEN" ] || [ -z "$TURBO_TEAM" ]; then
+            unset TURBO_TOKEN TURBO_TEAM
+            echo "Turborepo remote cache skipped."
+          fi
+          npx turbo run lint typecheck
