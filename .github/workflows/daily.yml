@@ -79,8 +79,8 @@ jobs:
         env:
           EIA_API_KEY: ${{ secrets.EIA_API_KEY }}
         run: |
-          end=$(date -u +%Y-%m-%dT%H)
-          start=$(date -u -d '4 days ago' +%Y-%m-%dT%H)
+          end=$(date -u +%Y-%m-%dT%H:00Z)
+          start=$(date -u -d '4 days ago' +%Y-%m-%dT%H:00Z)
           for dataset in fuel-mix pjm-demand bge-demand; do
             python -m grid_pipeline.fetch_cli "$dataset" --start "$start" --end "$end" --root data
           done
