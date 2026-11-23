@@ -78,6 +78,7 @@ jobs:
       - name: Fetch latest windows into the runner-local raw zone
         env:
           EIA_API_KEY: ${{ secrets.EIA_API_KEY }}
+          NWS_USER_AGENT: "grid-project (https://github.com/Darren-dev141/grid-project)"
         run: |
           end=$(date -u +%Y-%m-%dT%H:00Z)
           start=$(date -u -d '4 days ago' +%Y-%m-%dT%H:00Z)
